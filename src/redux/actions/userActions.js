@@ -44,10 +44,9 @@ export const handleUserRegister = (data) => dispatch => {
       sessionStorage.setItem('__gct__ac__', response.data.access);
       sessionStorage.setItem('__gct__rf__', response.data.refresh);
       console.log(`at least we went: ${response.data}`)
-      return { status: true, message: 'Registeration successfully'};
+      return { status: true, payload: response.data};
     }).catch((error) => {
     //   dispatch({ type: type.ERROR_IN_REG, payload: error});
-    
       return { status: false, message: error.message }
     })
   }

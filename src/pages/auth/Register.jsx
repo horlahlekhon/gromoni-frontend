@@ -4,17 +4,18 @@ import {Container,Row,Col,CardBody,Form,FormGroup,Input,Label,Button} from 'reac
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router';
+import { validateRegisterForm } from './validator';
 
 
 class Register extends React.Component {
   state = {
-    fullName: '',
-    username: '',
-    email: '',
-    phone: '',
-    gender: '',
-    password: '',
-    agree: false,
+      fullName: '',
+      username: '',
+      email: '',
+      phone: '',
+      gender: '',
+      password: '',
+      agree: false,
     showFormErrors: false,
     errors: [],
     alertData: {}
@@ -24,65 +25,28 @@ class Register extends React.Component {
     "Female": "F",
     "Prefer not to say": "None"
   }
+  fields = {
+    fullName: '',
+    username: '',
+    email: '',
+    phone: '',
+    gender: '',
+    password: '',
+    agree: false,
+  }
   handleSetFormStateValue(key, value) { 
     return this.setState({ [key]: value })
   }
 
-  handleValidateForm() {
-    let errors = [];
-    let idx;
-    if (!this.state.username) {
-      errors.push({ item: 'username', message: 'Username cannot be empty'})
-    } else {
-      idx = errors.findIndex((data) => data.item === 'username');
-      errors.splice(0, idx)
-    }
-    if (!this.state.email) {
-      errors.push({ item: 'email', message: 'Email cannot be empty'})
-    } else {
-      idx = errors.findIndex((data) => data.item === 'email');
-      errors.splice(0, idx)
-    }
-    if (!this.state.phone) {
-      errors.push({ item: 'phone', message: 'Phone cannot be empty'})
-    } else {
-      idx = errors.findIndex((data) => data.item === 'phone');
-      errors.splice(0, idx)
-    }
-    if (!this.state.gender) {
-      
-      errors.push({ item: 'gender', message: 'Gender cannot be empty'})
-    } else {
-      idx = errors.findIndex((data) => data.item === 'gender');
-      errors.splice(0, idx)
-    }
-    if (!this.state.password) {
-      errors.push({ item: 'password', message: 'Password cannot be empty'})
-    } else {
-      idx = errors.findIndex((data) => data.item === 'password');
-      errors.splice(0, idx)
-    }
-    if (!this.state.agree) {
-      errors.push({ item: 'agree', message: 'Please agree to continue'})
-    } else {
-      idx = errors.findIndex((data) => data.item === 'agree');
-      errors.splice(0, idx)
-    }
-    if (errors.length <= 0) {
-      return { isErrors: false, errors: []}
-    } else {
-      return { isErrors: true, errors};
-    }
-  }
+
   async handleRegisterUser(e) {
     e.preventDefault();
   
-    const errorObj = this.handleValidateForm();
+    const errorObj = validateRegisterForm(this.state, this.fields);
     if(errorObj.isErrors) {
       this.setState({ showFormErrors: true, errors: errorObj.errors })
-      errorObj.errors.forEach((errorObj) => toast.error(errorObj.message))
       setTimeout(() => {
-        this.setState({ showFormErrors: false, errors: [] })
+        errorObj.errors.forEach((errorObj) => toast.error(errorObj.message))
       }, 3000)
     } else {
       const form = new FormData();
@@ -96,24 +60,18 @@ class Register extends React.Component {
       form.append('email', this.state.email)
       console.log(`inside handle register: ${this.state}`)
       const res_data = await this.props.register(form);
+      //  FIXME res_Data now returns a payload object of the error or success, destructure the json to proper Js object and throw errors in case of errors.
       if (res_data.status) {
+        setTimeout(() => {
+          toast.info('Registeration successful')
+        }, 200)
         this.props.history.push('/dashboard');
       }else {
-        this.setState({alertData: {
-					title: 'Error',
-					message: res_data.message
-        }});
-        
-        // Swal.fire({
-				// 	title: 'Error',
-				// 	icon: 'error',
-				// 	text: 'Registration Error',
-				// 	confirmButtonText: 'Ok',
-				// 	showCloseButton: true,
-				// })
+        setTimeout(() => {
+          toast.error(res_data.message)
+        }, 300);
       }
     }
-
   }
 
   render(){
@@ -145,7 +103,7 @@ class Register extends React.Component {
           <Row>
             <Col md="6">
                 <FormGroup>
-                  <Input className="form-control" type="text" placeholder="Email"
+                  <Input className="form-control"  type="email" placeholder="Email"
                   value={this.state.email}
                   onChange={e => this.handleSetFormStateValue('email', e.target.value)}
                   required
@@ -154,7 +112,7 @@ class Register extends React.Component {
             </Col>
             <Col md="6">
                 <FormGroup>
-                  <Input className="form-control" type="text" placeholder="Phone"
+                <Input className="form-control" type="tel" placeholder="Phone"
                   value={this.state.phone}
                   onChange={e => this.handleSetFormStateValue('phone', e.target.value)}
                   required
@@ -172,13 +130,14 @@ class Register extends React.Component {
             </Col>
             <Col md="6">
               <FormGroup>
-                <Input className="form-control" type="select" placeholder="Gender"
+                <Input className="custom-select" type="select" placeholder="Gender"
                   value={this.state.gender}
                   onChange={e => this.handleSetFormStateValue('gender', e.target.value)}
                   required
                   >
+                    <option value="">select gender</option>
                   {Object.keys(this.genderOpts).map((opt, idx) => (
-                    <option key={idx}>{opt}</option>
+                    <option value={this.genderOpts[opt]} key={idx}>{opt}</option>
                   ))}
                 </Input>
              </FormGroup>
@@ -188,16 +147,14 @@ class Register extends React.Component {
             <Col sm="4">
               <Button color="primary" type="submit"
               onClick={e => this.handleRegisterUser(e)}
-              >{this.props.requestingLog ? 'Loading...' : 'Sign Up'}</Button>
+              >{this.props.requestingReg ? 'Loading...' : 'Sign Up'}</Button>
             </Col>
             <Col sm="4">
-              <FormGroup>
-                <div className="radio radio-primary">
-                  <Input id="radioinline1" type="radio" name="radio1" value="option1" 
-                  value={this.state.agree}
-                  onClick={(e) => this.handleSetFormStateValue('agree', !this.state.agree)} 
-                  /> 
-                  <Label className="mb-5" for="radioinline1">I agree to the  <a href="javascript:void(0);">Terms and Conditions</a></Label>
+              <FormGroup >
+                <div className="checkbox p-0 checkbox-primary">
+                  <Input id="checkbox2" type="checkbox"  value={this.state.agree}
+                  onChange={(e) => this.handleSetFormStateValue('agree', !this.state.agree)}  />
+                  <Label className="mb-1" for="checkbox2"> <a href="#">Terms and Conditions</a></Label>
                 </div>
               </FormGroup>
             </Col>
@@ -223,7 +180,7 @@ class Register extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  requestingLog: state.USER.isRequestingReg
+  requestingReg: state.USER.isRequestingReg
 })
 
 const actions = {
