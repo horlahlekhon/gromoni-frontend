@@ -8,23 +8,17 @@ const handleSetUser = (payload) => ({
 })
 
 
-export const handleUserLogin = (data) => dispatch => {
+export const handleUserLogin = (data) => async dispatch => {
     dispatch({type: type.LOGIN})
-
-    return HTTP.growthApi()
-        .post('/users/login/', data)
-        .then(response => {
-            dispatch({ type: type.SUCCESSFUL_LOG})
-            sessionStorage.setItem('__gct__ac__', response.data.access);
-            sessionStorage.setItem('__gct__rf__', response.data.refresh);
-            console.log(`respspspspspsps: ${response.data.access}`)
-           return { status: true, message: 'Login successfully'};
-          })
-          .catch((error) => {
-            // dispatch({ type: type.ERROR_IN_LOG, payload: error});
-            console.log(error.message)
-           return { status: false, message: 'Username or password not correct' }
-          })
+    const response =  await HTTP.growthApi().post('/users/login/', data)
+    dispatch({ type: type.SUCCESSFUL_LOG})
+    // TODO put user's business in local storage
+    if(response.status === 200){
+      return { status: true, payload: response};
+    }else {
+      return  { status: false, payload: 'Username or password not correct', business: undefined }
+    }
+   
 }
 
 
@@ -41,12 +35,9 @@ export const handleUserRegister = (data) => dispatch => {
     .post('/users/register/', data)
     .then((response) => {
       dispatch({ type: type.SUCCESSFUL_REG})
-      sessionStorage.setItem('__gct__ac__', response.data.access);
-      sessionStorage.setItem('__gct__rf__', response.data.refresh);
-      console.log(`at least we went: ${response.data}`)
-      return { status: true, payload: response.data};
+      return { status: response.status === 201, payload: response};
     }).catch((error) => {
     //   dispatch({ type: type.ERROR_IN_REG, payload: error});
-      return { status: false, message: error.message }
+      return { status: false, payload: error.message }
     })
   }

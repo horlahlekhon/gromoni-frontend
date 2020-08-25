@@ -1,5 +1,6 @@
 import { handleUserLogin, handleUserRegister } from './userActions';
 import { SearchBarToggle, MobileRightToggle, RightSidebarToggle, SwitchToggle} from './CommonActions'
+import { getBusiness } from "./businessActions";
 
 export { 
   handleUserLogin, 
@@ -7,5 +8,6 @@ export {
   SearchBarToggle,
   MobileRightToggle,
   RightSidebarToggle,
-  SwitchToggle
+  SwitchToggle,
+  getBusiness
 }

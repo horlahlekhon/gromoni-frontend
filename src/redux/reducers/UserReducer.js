@@ -5,6 +5,7 @@ const initialState = {
     errorInLog: false,
     successfulReg: false,
     successfulLog: false,
+    userHaveNoBusiness: false,
     errorData: {},
   }
   
@@ -50,6 +51,11 @@ const initialState = {
           successfulLog: true,
           isRequestingLog: false,
         }
+      case 'USER_HAVE_NO_BUSINESS':
+          return {
+            ...state,
+            userHaveNoBusiness: true
+          }
   
       default:
         return state
