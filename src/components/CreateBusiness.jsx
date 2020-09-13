@@ -29,6 +29,7 @@ const CreateBusiness = (props) => {
     //   h.Date created
     //   i.Tax percentage (not requirement )
 
+    const [isCreatingBusiness, setIsCreatingBusiness]  = useState(false)
 
 
     const [businessName, setBusinessName] = useState('')
@@ -58,6 +59,7 @@ const CreateBusiness = (props) => {
 
     const handleCreateBusiness = async (e) => {
         e.preventDefault()
+        setIsCreatingBusiness(true)
         const requestPayload = {
             business_name: businessName,
             business_mail: businessMail,
@@ -70,6 +72,7 @@ const CreateBusiness = (props) => {
         }
         const errors = validateForm(requestPayload, fields)
         if (errors.isErrors) {
+            setIsCreatingBusiness(false)
             setTimeout(() => {
                 errors.errors.forEach(e => toast.error(e.message))
             }, 400);
@@ -82,6 +85,7 @@ const CreateBusiness = (props) => {
                 localStorage.setItem('__grm__act__biz__', currentBusiness.toString())
                 history.push('/dashboard')
             } else {
+                setIsCreatingBusiness(false)
                 const payload = response.payload
                 const errs = responseErrorParser(payload.data)
                 setTimeout(() => {
@@ -172,7 +176,10 @@ const CreateBusiness = (props) => {
                                                     <FormGroup className="form-row mt-3 mb-0">
                                                         <Button color="primary btn-block"
                                                             onClick={e => handleCreateBusiness(e)}
-                                                        >{props.requestingCreateBusiness ? 'Loading...' : 'Create business'}</Button>
+                                                        >
+                                                            {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}
+                                                            {isCreatingBusiness ? 'Loading...' : 'Create business'}
+                                                            </Button>
                                                     </FormGroup>
 
                                                 </Form>

@@ -26,7 +26,7 @@ const AuthenticatedRoute = (props) =>  {
             // <Route exact path={pathname} component={component} />
             <TransitionGroup>
                 {routes.map(({ path, Component }) => (
-                    <Route key={path} exact path={path}>
+                    <Route key={path} exact path={`business/:id/${path}`} >
                     {({ match }) => (
                         <CSSTransition 
                             in={match != null}

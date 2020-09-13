@@ -47,14 +47,18 @@ const SignIn = (props) => {
             if (res_data.status) {
                 setAccessToken(res_data.payload.data.access)
                 setRefreshToken(res_data.payload.data.refresh)
-                const currentBusiness = res_data.payload.data.businesses.find(e => e.is_subscribed === true)
-                if (currentBusiness === undefined) {
+                const businesses = res_data.payload.data.businesses
+                const currentBusiness = businesses.find(e => e.is_subscribed === true)
+                if (businesses.length === 0) {
                     toast.info('Sorry, You currently dont have any business, take time to create one')
                     history.push('/user/business/')
+                    // TODO what should happen if a user has a business but the business is not subscribed,?, show them some user specific pages ? or what.
+                } else if(businesses.length > 0 && !currentBusiness){
+                    toast.info("You have not subscribe to any business, please subscribe.")
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
                     toast.info('Welcom back!')
-                    history.push('/dashboard');
+                    history.push(`/business/${currentBusiness.id}/dashboard`);
                 }
             } else {
                 const payload = res_data.payload
