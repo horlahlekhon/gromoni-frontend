@@ -45,16 +45,16 @@ const SignIn = (props) => {
             form.append('password', password);
             const res_data = await props.login(form);
             if (res_data.status) {
-                setAccessToken(res_data.payload.data.access)
-                setRefreshToken(res_data.payload.data.refresh)
+                setAccessToken(res_data.payload.data.access_token)
+                setRefreshToken(res_data.payload.data.refresh_token)
                 const businesses = res_data.payload.data.businesses
-                const currentBusiness = businesses.find(e => e.is_subscribed === true)
+                const currentBusiness = businesses[0]
                 if (businesses.length === 0) {
                     toast.info('Sorry, You currently dont have any business, take time to create one')
                     history.push('/user/business/')
                     // TODO what should happen if a user has a business but the business is not subscribed,?, show them some user specific pages ? or what.
-                } else if(businesses.length > 0 && !currentBusiness){
-                    toast.info("You have not subscribe to any business, please subscribe.")
+                // } else if(businesses.length > 0 && !currentBusiness){
+                //     toast.info("You have not subscribe to any business, please subscribe.")
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
                     toast.info('Welcom back!')
@@ -78,6 +78,7 @@ const SignIn = (props) => {
         <div className="page-wrapper">
             <Container fluid={true} className="p-0">
                 <div className="authentication-main m-0">
+                    
                     <Row>
                         <Col md="12">
                             <div className="auth-innerright">
