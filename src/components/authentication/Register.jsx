@@ -9,42 +9,50 @@ import { validateForm, responseErrorParser } from './validator';
 import {useCookie} from '@shopify/react-cookie';
 
 
+
 const Register = (props) => {
-  const [accessToken, setAccessToken] = useCookie('accessToken');
+    useHistory();
+    const [accessToken, setAccessToken] = useCookie('accessToken');
     const [refreshToken, setRefreshToken] = useCookie('refreshToken')
-    const history = useHistory()
     const [fullName, setFullName] = useState('')
-    const [username, setUserName] = useState('')
+    const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [gender, setGender] = useState('')
-    const [password, setPassword] = useState('')
+    const [password1, setPassword1] = useState('')
+    const [password2, setpassword2] = useState('')
     const [agree, setAgree] = useState(false)
 
+    // console.log(password2);
     const genderOpts = {
         "Male": "M",
         "Female": "F",
         "Prefer not to say": "None"
       }
+
+      // NEW USER REGISTER FORM INPUTS AND ERROR MESSAGE
+
       const fields = {
-        fullName: {default: '', message: 'Please enter a full name seprated by space'},
-        username: {default: '', message: 'Please enter a username'},
-        email: {default: '', message: 'Please enter an email'},
+        fullName: {default: '', message: 'Please enter your full name seprated by space'},
+        userName: {default: '', message: 'Please enter a username'},
+        email: {default: '', message: 'Please enter a valid email address'},
         phone: {default: '', message: 'Please enter a valid phone with standard format'},
-        gender: {default: '', message: 'Please select a gender'},
-        password: {default: '', message: 'Please enter a password'},
-        agree: {default: false, message: 'Please Agree to continueu'},
+        gender: {default: '', message: 'Please select your gender'},
+        password1: {default: '', message: 'Please enter a password'},
+        password2: {default: '', message: 'Passwords do not match, please check the password again'},
+        agree: {default: false, message: 'Please Agree to continue'},
       }
 
      const handleRegisterUser = async (e) => {
         e.preventDefault();
         const sta = {
             fullName: fullName,
-            username: username,
+            userName: userName,
             email: email,
             phone: phone,
             gender: gender,
-            password: password,
+            password1: password1,
+            password2: password2,
             agree: agree,
         }
         const errorObj = validateForm(sta, fields);
@@ -58,10 +66,11 @@ const Register = (props) => {
           const name = fullName.split(' ');
           form.append('firstName', name[0]);
           form.append('lastName', name[1] ? name[1] : '');
-          form.append('username', username);
+          form.append('userName', userName);
           form.append('phone', phone);
           form.append('gender', gender);
-          form.append('password', password);
+          form.append('password1', password1);
+          form.append('password2', password2);
           form.append('email', email);
           const res_data = await props.register(form);
           if (res_data.status) {
@@ -100,16 +109,16 @@ const Register = (props) => {
               </Col>
               <Col md="12">
                 <FormGroup>
-                  <Input className="form-control" type="text" placeholder="Username"
-                  value={username}
+                  <Input className="form-control" type="text" placeholder="UserName"
+                  value={userName}
                   onChange={e => setUserName(e.target.value)}
                   required
                   />
                 </FormGroup>
               </Col>
             </Row>
-            <Row>
-              <Col md="6">
+            <Row form>
+              <Col md="12">
                   <FormGroup>
                     <Input className="form-control"  type="email" placeholder="Email"
                     value={email}
@@ -118,6 +127,8 @@ const Register = (props) => {
                     />
                   </FormGroup>
               </Col>
+              </Row>
+              <Row form>
               <Col md="6">
                   <FormGroup>
                   <Input className="form-control" type="tel" placeholder="Phone"
@@ -126,15 +137,6 @@ const Register = (props) => {
                     required
                     />
                   </FormGroup>
-              </Col>
-              <Col md="6">
-                <FormGroup>
-                  <Input className="form-control" type="password" placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    required
-                    />
-               </FormGroup>
               </Col>
               <Col md="6">
                 <FormGroup>
@@ -148,6 +150,26 @@ const Register = (props) => {
                       <option value={genderOpts[opt]} key={idx}>{opt}</option>
                     ))}
                   </Input>
+               </FormGroup>
+              </Col>
+              </Row>
+              <Row form>
+              <Col md="12">
+                <FormGroup>
+                  <Input className="form-control" type="password" placeholder="Password"
+                    value={password1}
+                    onChange={e => setPassword1(e.target.value)}
+                    required
+                    />
+               </FormGroup>
+              </Col>
+              <Col md="12">
+                <FormGroup>
+                  <Input className="form-control" type="password" placeholder="verify Password"
+                    value={password2}
+                    onChange={e => setpassword2(e.target.value)}
+                    required
+                    />
                </FormGroup>
               </Col>
             </Row>

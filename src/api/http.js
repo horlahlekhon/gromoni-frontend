@@ -10,7 +10,7 @@ import axios from "axios";
 export default (() => {
     const growthApi = (token = false) => axios.create({
         baseURL: 'https://growthapi-staging.herokuapp.com/api/v1',
-        timeout: 4000,
+        timeout: 5000,
         [token ? 'headers' : ''] : token ? {Authorization: `Bearer ${token}`} : '',
         validateStatus: function () {
             return true;

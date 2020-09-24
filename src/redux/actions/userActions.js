@@ -39,5 +39,6 @@ export const handleUserRegister = (data) => dispatch => {
     }).catch((error) => {
     //   dispatch({ type: type.ERROR_IN_REG, payload: error});
       return { status: false, payload: error.message }
+      console.log(error.message);
     })
   }
