@@ -13,6 +13,7 @@ import ScrollToTop from './components/common/ScrollToTop';
 // import Register from './pages/auth/Register';
 import CommingSoon from './pages/miscellaneous/CommingSoon'
 import SignInAndRegister from './pages/auth/SignInAndRegister';
+import HomePage from './pages/HomePage';
 import NewBusiness from './pages/NewBusiness';
 
 import { CookieUniversalProvider } from '@shopify/react-cookie';
@@ -47,10 +48,12 @@ const Root = (props) => {
 
               <Fragment>
                 <App>
-                  {/* <Route exact path="/" render={() => {
-                        return (<Redirect to={`${process.env.PUBLIC_URL}/starter-kit/default-page`} />)
+                  { /* <Route exact path="/" render={() => {
+                        return (<Redirect to={`${process.env.PUBLIC_URL}/Home`} />)
                     }} /> */}
-                  {/* <TransitionGroup>
+
+                  {/* THISSECTIN LOOPS THROUGH ARRAY FRON ContentRoutes AND CREATES ROUTES FOR EACH Component
+                    <TransitionGroup>
                     {routes.map(({ path, Component }) => (
                       <Route key={path} exact path={path}>
                         {({ match }) => (
@@ -66,6 +69,7 @@ const Root = (props) => {
                       </Route>
                     ))}
                   </TransitionGroup> */}
+                  
                   <AuthenticatedRoute/>
                 </App>
               </Fragment>

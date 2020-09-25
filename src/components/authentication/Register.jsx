@@ -15,7 +15,7 @@ const Register = (props) => {
     const [accessToken, setAccessToken] = useCookie('accessToken');
     const [refreshToken, setRefreshToken] = useCookie('refreshToken')
     const [fullName, setFullName] = useState('')
-    const [userName, setUserName] = useState('')
+    const [username, setusername] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [gender, setGender] = useState('')
@@ -34,7 +34,7 @@ const Register = (props) => {
 
       const fields = {
         fullName: {default: '', message: 'Please enter your full name seprated by space'},
-        userName: {default: '', message: 'Please enter a username'},
+        username: {default: '', message: 'Please enter a username'},
         email: {default: '', message: 'Please enter a valid email address'},
         phone: {default: '', message: 'Please enter a valid phone with standard format'},
         gender: {default: '', message: 'Please select your gender'},
@@ -47,7 +47,7 @@ const Register = (props) => {
         e.preventDefault();
         const sta = {
             fullName: fullName,
-            userName: userName,
+            username: username,
             email: email,
             phone: phone,
             gender: gender,
@@ -66,7 +66,7 @@ const Register = (props) => {
           const name = fullName.split(' ');
           form.append('firstName', name[0]);
           form.append('lastName', name[1] ? name[1] : '');
-          form.append('userName', userName);
+          form.append('username', username);
           form.append('phone', phone);
           form.append('gender', gender);
           form.append('password1', password1);
@@ -109,9 +109,9 @@ const Register = (props) => {
               </Col>
               <Col md="12">
                 <FormGroup>
-                  <Input className="form-control" type="text" placeholder="UserName"
-                  value={userName}
-                  onChange={e => setUserName(e.target.value)}
+                  <Input className="form-control" type="text" placeholder="username"
+                  value={username}
+                  onChange={e => setusername(e.target.value)}
                   required
                   />
                 </FormGroup>

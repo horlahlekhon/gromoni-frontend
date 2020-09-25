@@ -16,7 +16,7 @@ const AuthenticatedRoute = (props) =>  {
     const business = props.getBusiness(accessToken)
         .then((business) => {
             if (!business.status) {
-                history.push('/login')
+                history.push(`${process.env.PUBLIC_URL}/login`)
                 toast.error(business.payload.data.detail)
             }
         })
@@ -24,9 +24,11 @@ const AuthenticatedRoute = (props) =>  {
         const { location: { pathname }, component } = props;
         return (
             // <Route exact path={pathname} component={component} />
+                    // previous  version of url with the business id
+                    //<Route key={path} exact path={`${process.env.PUBLIC_URL}/business/:id/${path}`} >
             <TransitionGroup>
                 {routes.map(({ path, Component }) => (
-                    <Route key={path} exact path={`business/:id/${path}`} >
+                    <Route key={path} exact path={`${process.env.PUBLIC_URL}/${path}`} >
                     {({ match }) => (
                         <CSSTransition 
                             in={match != null}
