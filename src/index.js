@@ -47,36 +47,10 @@ const Root = (props) => {
               <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} />
 
               <Fragment>
-                <App>
-                  { /* <Route exact path="/" render={() => {
-                        return (<Redirect to={`${process.env.PUBLIC_URL}/Home`} />)
-                    }} /> */}
-
-                  {/* THISSECTIN LOOPS THROUGH ARRAY FRON ContentRoutes AND CREATES ROUTES FOR EACH Component
-                    <TransitionGroup>
-                    {routes.map(({ path, Component }) => (
-                      <Route key={path} exact path={path}>
-                        {({ match }) => (
-                          <CSSTransition
-                            in={match != null}
-                            timeout={500}
-                            classNames={anim}
-                            unmountOnExit
-                          >
-                            <div><Component /></div>
-                          </CSSTransition>
-                        )}
-                      </Route>
-                    ))}
-                  </TransitionGroup> */}
-                  
-                  <AuthenticatedRoute/>
-                </App>
+                <AuthenticatedRoute />
               </Fragment>
-          :
-          <Redirect to={`${process.env.PUBLIC_URL}/login`} />
-        }
-        </Switch>
+              <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+            </Switch>
           </BrowserRouter>
         </Provider>
       </CookieUniversalProvider>

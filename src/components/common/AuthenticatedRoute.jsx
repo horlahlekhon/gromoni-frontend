@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Children, Fragment } from 'react';
 import { getBusiness } from "../../redux/actions";
-import {routes} from '../../route/ContentRoutes'
-import { CSSTransition,TransitionGroup } from 'react-transition-group'
-import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom'
+import { routes } from '../../route/ContentRoutes'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom'
-import {useCookie} from '@shopify/react-cookie';
+import { useCookie } from '@shopify/react-cookie';
+import App from '../../components/app';
 
-
-const AuthenticatedRoute = (props) =>  {
+const AuthenticatedRoute = (props) => {
     const [accessToken, setAccessToken] = useCookie('accessToken');
     const history = useHistory()
     const business = props.getBusiness(accessToken)
@@ -20,30 +20,32 @@ const AuthenticatedRoute = (props) =>  {
                 toast.error(business.payload.data.detail)
             }
         })
-    
-        const { location: { pathname }, component } = props;
-        return (
-            // <Route exact path={pathname} component={component} />
-                    // previous  version of url with the business id
-                    //<Route key={path} exact path={`${process.env.PUBLIC_URL}/business/:id/${path}`} >
+
+    const { location: { pathname }, component } = props;
+    return (
+        <App>
+            <Route exact path="/" render={() => {
+                return (<Redirect to={`${process.env.PUBLIC_URL}/Home`} />)
+            }} />
             <TransitionGroup>
                 {routes.map(({ path, Component }) => (
-                    <Route key={path} exact path={`${process.env.PUBLIC_URL}/${path}`} >
-                    {({ match }) => (
-                        <CSSTransition 
-                            in={match != null}
-                            timeout={500}
-                            classNames="zoomout"
-                            unmountOnExit
+                    <Route key={path} exact path={path}>
+                        {({ match }) => (
+                            <CSSTransition
+                                in={match != null}
+                                timeout={500}
+                                classNames="zoomout"
+                                unmountOnExit
                             >
-                            <div><Component/></div>
-                        </CSSTransition> 
-                    )}
+                                <div><Component /></div>
+                            </CSSTransition>
+                        )}
                     </Route>
                 ))}
             </TransitionGroup>
-        )
-    
+        </App>
+    )
+
 
 }
 

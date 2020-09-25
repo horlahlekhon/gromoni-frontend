@@ -5,9 +5,9 @@ import React, {useHistory} from 'react'
 
  const ProductsPage = (props) => {
     return (
-    	<div>
+    	<section>
     		<h1> this is Products page </h1>
-        </div>
+      </section>
     )
 }
 

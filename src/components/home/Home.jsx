@@ -8,7 +8,7 @@ import SalesCashBalanceChart from './SalesCashBalanceChart';
 const  Home = (props) => {
 	
 	return (
-		<div ClassName="homePage">
+		<div className="homePage">
 			<SalesCashBalanceChart />
 			<SalesCashBalance />
 			<CreateNewButtons />

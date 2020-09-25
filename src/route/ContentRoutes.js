@@ -6,11 +6,11 @@ import CustomersPage from '../pages/CustomersPage'
 // import Samplepage from '../pages/samplepage'
 
 export const routes = [   
-    { path:"/Home", Component: HomePage },
-    { path:"/Customers", Component: CustomersPage },
-    { path:"/Sales", Component: SalesPage },
-    { path:"/Products", Component: ProductsPage },
-    { path:"/Reports", Component: ReportsPage },
+    { path:"/home", Component: HomePage },
+    { path:"/customers", Component: CustomersPage },
+    { path:"/sales", Component: SalesPage },
+    { path:"/products", Component: ProductsPage },
+    { path:"/reports", Component: ReportsPage },
     // { path:"/starter-kit/sample-page", Component: Samplepage }, 
 ]
 
