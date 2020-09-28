@@ -17,6 +17,7 @@ import NewBusiness from './pages/NewBusiness';
 
 import { CookieUniversalProvider } from '@shopify/react-cookie';
 import AuthenticatedRoute from './components/common/AuthenticatedRoute';
+import WelcomePage from './pages/miscellaneous/WelcomePage';
 const Root = (props) => {
   const [anim, setAnim] = useState("");
   const animation = localStorage.getItem("animation") || ConfigDB.data.router_animation || 'fade'
@@ -44,6 +45,7 @@ const Root = (props) => {
               <Route exact path={`${process.env.PUBLIC_URL}/login`} component={SignInAndRegister} />
               {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
               <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} />
+              <Route path="/welcomepage"><WelcomePage/></Route>
 
               <Fragment>
                 <App>
@@ -71,7 +73,6 @@ const Root = (props) => {
               </Fragment>
           :
           <Redirect to={`${process.env.PUBLIC_URL}/login`} />
-        }
         </Switch>
           </BrowserRouter>
         </Provider>
