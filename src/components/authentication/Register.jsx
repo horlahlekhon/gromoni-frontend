@@ -64,9 +64,9 @@ const Register = (props) => {
         } else {
           const form = new FormData();
           const name = fullName.split(' ');
-          form.append('firstName', name[0]);
-          form.append('lastName', name[1] ? name[1] : '');
-          form.append('userName', userName);
+          form.append('first_name', name[0]);
+          form.append('last_name', name[1] ? name[1] : '');
+          form.append('username', userName);
           form.append('phone', phone);
           form.append('gender', gender);
           form.append('password1', password1);
