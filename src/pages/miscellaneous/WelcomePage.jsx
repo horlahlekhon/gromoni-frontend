@@ -9,7 +9,7 @@ const WelcomePage = () => {
                 <Container fluid={true}>
                     <div className="welcomepage-inner">
                         <div className="welcomepage-sub">
-                            <h1>Welcome to Gromoni</h1>
+                            <h1>Welcome to Gromoni!</h1>
                             <p>Please take a moment to complete your business account</p>
                         </div>
                     </div>
