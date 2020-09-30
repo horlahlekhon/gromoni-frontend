@@ -79,7 +79,7 @@ const Register = (props) => {
             setTimeout(() => {
               toast.info('Registeration successful')
             }, 200)
-            props.history.push('/user/business/');
+            props.history.push('/welcomepage');
           }else {
             const payload = res_data.payload
             const errs = responseErrorParser(payload.data)
