@@ -71,7 +71,6 @@ const Root = (props) => {
               </Fragment>
           :
           <Redirect to={`${process.env.PUBLIC_URL}/login`} />
-        }
         </Switch>
           </BrowserRouter>
         </Provider>
