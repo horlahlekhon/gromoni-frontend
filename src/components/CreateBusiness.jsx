@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Container, Row, Col, Card, CardHeader, CardBody, CardFooter, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap'
+import { Container, Row, Col, CardBody, Button, Form, FormGroup, Input } from 'reactstrap'
 
 import { withRouter } from 'react-router';
 import { useHistory } from 'react-router-dom'
@@ -18,16 +18,6 @@ import { useCookie } from '@shopify/react-cookie';
 const CreateBusiness = (props) => {
     const history = useHistory();
     const [accessToken, setAccessToken] = useCookie('accessToken')
-
-    //     a.Business Name
-    //     b.Business email
-    //      c.Company type
-    //  d.Phone Number
-    //  e.Business Location
-    //  f.Country.
-    //   g.Fiscal period type
-    //   h.Date created
-    //   i.Tax percentage (not requirement )
 
     const [isCreatingBusiness, setIsCreatingBusiness]  = useState(false)
 

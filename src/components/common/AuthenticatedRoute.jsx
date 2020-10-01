@@ -2,7 +2,7 @@ import React from 'react';
 import { getBusiness } from "../../redux/actions";
 import {routes} from '../../route/ContentRoutes'
 import { CSSTransition,TransitionGroup } from 'react-transition-group'
-import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router';
 import { toast } from 'react-toastify';
