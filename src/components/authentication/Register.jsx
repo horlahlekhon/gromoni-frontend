@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { handleUserRegister } from '../../redux/actions/userActions';
-import {Container,Row,Col,CardBody,Form,FormGroup,Input,Label,Button} from 'reactstrap'
+import {Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router';
@@ -8,7 +8,9 @@ import { useHistory } from 'react-router-dom'
 import { validateForm, responseErrorParser } from './validator';
 import {useCookie} from '@shopify/react-cookie';
 
+import {Eye} from 'react-feather'
 
+const eye = <Eye />
 
 const Register = (props) => {
     useHistory();
@@ -22,6 +24,7 @@ const Register = (props) => {
     const [password1, setPassword1] = useState('')
     const [password2, setpassword2] = useState('')
     const [agree, setAgree] = useState(false)
+    const [passwordShown, setPasswordShown] = useState(false)
 
     // console.log(password2);
     const genderOpts = {
@@ -41,6 +44,10 @@ const Register = (props) => {
         password1: {default: '', message: 'Please enter a password'},
         password2: {default: '', message: 'Passwords do not match, please check the password again'},
         agree: {default: false, message: 'Please Agree to continue'},
+      }
+
+      const togglePasswordVisibility = () => {
+        setPasswordShown(passwordShown ? false : true )
       }
 
      const handleRegisterUser = async (e) => {
@@ -109,7 +116,7 @@ const Register = (props) => {
               </Col>
               <Col md="12">
                 <FormGroup>
-                  <Input className="form-control" type="text" placeholder="UserName"
+                  <Input className="form-control" type="text" placeholder="Username"
                   value={userName}
                   onChange={e => setUserName(e.target.value)}
                   required
@@ -156,16 +163,19 @@ const Register = (props) => {
               <Row form>
               <Col md="12">
                 <FormGroup>
-                  <Input className="form-control" type="password" placeholder="Password"
+                <div className="pass-wrapper">
+                  <Input className="form-control" type={passwordShown ? "text":"password"} placeholder="Password"
                     value={password1}
                     onChange={e => setPassword1(e.target.value)}
                     required
                     />
+                    <i className="eye" onClick={togglePasswordVisibility}>{eye}</i>
+                    </div>
                </FormGroup>
               </Col>
               <Col md="12">
                 <FormGroup>
-                  <Input className="form-control" type="password" placeholder="verify Password"
+                  <Input className="form-control" type={passwordShown ? "text":"password"} placeholder="verify Password"
                     value={password2}
                     onChange={e => setpassword2(e.target.value)}
                     required

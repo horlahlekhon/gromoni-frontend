@@ -1,28 +1,4 @@
-// FIXME ideally we want to change this to an object that has the field and ots corresponding error passed into the function and index the error this way we have configurable errors
-// TODO make this function more general for all validations
 
-// UNUSED FORM VALIDATOR 22-09-2020
-// function validateFormV1(state, fields) {
-//     let errors = [];
-//     let idx;
-//     Object.keys(fields).forEach(e => {
-//         if (state[e] === fields[e] || !regexValidate(e, state[e])) {
-//             if (e === 'agree') {
-//                 errors.push({ item: e, message: 'Please agree to continue' })
-//             } else {
-//                 errors.push({ item: e, message: `Please enter a valid ${e}` })
-//             }
-//         }
-//     });
-
-//     if (errors.length <= 0) {
-//         return { isErrors: false, errors: [] }
-//     } else {
-//         return { isErrors: true, errors };
-//     }
-// };
-
-// currently used form validator ---readone22-09-2020
 const validateForm = (state, fields) => {
     let errors = [];
     Object.keys(fields).map(e => {
@@ -38,13 +14,7 @@ const validateForm = (state, fields) => {
         }
 
     });
-    // Object.keys(state.verifyPassword) () => {
-    //     //  making sure passowrd and verify password inputs are the same
-        // if (state.verifyPassword !== state.password) {
-        //     // pushing error to the "errors array"
-        //     return errors.push({ item: state.verifyPassword, message: fields.verifyPassword.message })
-        // }
-    // }
+
      
 //  CHECKING IF ANY ERROR OCCURRED
     if (errors.length <= 0) {

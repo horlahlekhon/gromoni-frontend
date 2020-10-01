@@ -6,8 +6,6 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import store from './store/index'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { routes } from './route/ContentRoutes'
 import ConfigDB from './data/customizer/config'
 import ScrollToTop from './components/common/ScrollToTop';
 // import Register from './pages/auth/Register';
