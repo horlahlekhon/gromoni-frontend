@@ -14,6 +14,10 @@ import { validateForm, responseErrorParser } from './validator';
 
 import {useCookie} from '@shopify/react-cookie';
 
+import {Eye} from 'react-feather'
+
+const eye = <Eye />
+
 
 const fields = {
     username: {default: '', message: 'Please enter a valid username'},
@@ -26,6 +30,7 @@ const SignIn = (props) => {
     const [refreshToken, setRefreshToken] = useCookie('refreshToken')
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
+    const [passwordShown, setPasswordShown] = useState(false)
 
     const handleLoginUser = async (e) => {
         e.preventDefault();
@@ -70,6 +75,11 @@ const SignIn = (props) => {
         }
 
     }
+
+    const togglePasswordVisibility = () => {
+        setPasswordShown(passwordShown ? false : true )
+    }
+
     const toggleform = () => {
         document.querySelector('.cont').classList.toggle('s--signup');
     }
@@ -99,10 +109,13 @@ const SignIn = (props) => {
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label className="col-form-label">Password</Label>
-                                                        <Input
-                                                            className="form-control" type="password" required=""
-                                                            value={password}
-                                                            onChange={e => setPassword(e.target.value)} />
+                                                        <div className="pass-wrapper">
+                                                            <Input
+                                                                className="form-control" type={passwordShown ? "text":"password"} required=""
+                                                                value={password}
+                                                                onChange={e => setPassword(e.target.value)} />
+                                                            <i className="eye" onClick={togglePasswordVisibility}>{eye}</i>
+                                                        </div>
                                                     </FormGroup>
                                                     <div className="checkbox p-0">
                                                         <Input id="checkbox1" type="checkbox" />
