@@ -59,8 +59,8 @@ const SignIn = (props) => {
                     history.push('/user/business/')
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
-                    toast.info('Welcom back!')
-                    history.push(`/business/${currentBusiness.id}/dashboard`);
+                    toast.info('Welcome Back!')
+                    history.push(`/business/${currentBusiness.id}/home`);
                 }
             } else {
                 const payload = res_data.payload
