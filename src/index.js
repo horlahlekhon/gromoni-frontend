@@ -11,6 +11,7 @@ import ScrollToTop from './components/common/ScrollToTop';
 // import Register from './pages/auth/Register';
 import CommingSoon from './pages/miscellaneous/CommingSoon'
 import SignInAndRegister from './pages/auth/SignInAndRegister';
+import HomePage from './pages/HomePage';
 import NewBusiness from './pages/NewBusiness';
 
 import { CookieUniversalProvider } from '@shopify/react-cookie';
@@ -44,33 +45,10 @@ const Root = (props) => {
               <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} />
 
               <Fragment>
-                <App>
-                  {/* <Route exact path="/" render={() => {
-                        return (<Redirect to={`${process.env.PUBLIC_URL}/starter-kit/default-page`} />)
-                    }} /> */}
-                  {/* <TransitionGroup>
-                    {routes.map(({ path, Component }) => (
-                      <Route key={path} exact path={path}>
-                        {({ match }) => (
-                          <CSSTransition
-                            in={match != null}
-                            timeout={500}
-                            classNames={anim}
-                            unmountOnExit
-                          >
-                            <div><Component /></div>
-                          </CSSTransition>
-                        )}
-                      </Route>
-                    ))}
-                  </TransitionGroup> */}
-                  <AuthenticatedRoute/>
-                </App>
+                <AuthenticatedRoute />
               </Fragment>
-          :
-          <Redirect to={`${process.env.PUBLIC_URL}/login`} />
-        }
-        </Switch>
+              <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+            </Switch>
           </BrowserRouter>
         </Provider>
       </CookieUniversalProvider>
