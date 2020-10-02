@@ -1,8 +1,16 @@
-import Defaultpage from '../pages/samplepage'
-import Samplepage from '../pages/samplepage'
+import HomePage from '../pages/HomePage'
+import SalesPage from '../pages/SalesPage'
+import ProductsPage from '../pages/ProductsPage'
+import ReportsPage from '../pages/ReportsPage'
+import CustomersPage from '../pages/CustomersPage'
+// import Samplepage from '../pages/samplepage'
 
 export const routes = [   
-    { path:"/starter-kit/default-page", Component: Defaultpage },
-    { path:"/starter-kit/sample-page", Component: Samplepage }, 
+    { path:"/home", Component: HomePage },
+    { path:"/customers", Component: CustomersPage },
+    { path:"/sales", Component: SalesPage },
+    { path:"/products", Component: ProductsPage },
+    { path:"/reports", Component: ReportsPage },
+    // { path:"/starter-kit/sample-page", Component: Samplepage }, 
 ]
 
