@@ -1,9 +1,6 @@
 name: CI
 
-on: 
-  push:
-    branches:
-      - staging
+on: [push]
 
 jobs:
 
@@ -13,7 +10,7 @@ jobs:
   deployCommitDraft:
     name: Deploy draft to Netlify
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref != 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref != 'refs/heads/master' && github.ref != 'refs/heads/staging'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
@@ -37,7 +34,7 @@ jobs:
   publishMasterCommit:
     name: Publish to Netlify
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1

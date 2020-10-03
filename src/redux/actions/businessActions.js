@@ -1,7 +1,6 @@
 import { type } from '../actionTypes'
 
 import { HTTP } from '../../api'
-import data from '../../data/chat/chatMember'
 
 // TODO apparently we need to change this action name because this cant be as a default action for frtching a business
 export const getBusiness = (token) => dispatch => {

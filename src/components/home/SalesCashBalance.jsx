@@ -1,7 +1,7 @@
 // this component displays trade BALACES
 // such as account TOTAL SALES AMOUNT, AMOUNT RECIEVED, AMOUNT RECIEVABLE
 
-import React, {useState} from 'react';
+import React from 'react';
 
 
 const SalesCashBalance = (props) => {

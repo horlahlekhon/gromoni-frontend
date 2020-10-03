@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { handleUserLogin } from '../../redux/actions/userActions';
+import React, {useState} from 'react'
+import {handleUserLogin} from '../../redux/actions/userActions';
 
-import { Container, Row, Col, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import {Button, CardBody, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap'
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom'
-import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom'
+import {connect} from 'react-redux';
 import Register from './Register';
-import { validateForm, responseErrorParser } from './validator';
+import {responseErrorParser, validateForm} from './validator';
 
 import {useCookie} from '@shopify/react-cookie';
 
@@ -26,8 +26,8 @@ const fields = {
 
 const SignIn = (props) => {
     const history = useHistory();
-    const [accessToken, setAccessToken] = useCookie('accessToken');
-    const [refreshToken, setRefreshToken] = useCookie('refreshToken')
+    const [, setAccessToken] = useCookie('accessToken');
+    const [, setRefreshToken] = useCookie('refreshToken')
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordShown, setPasswordShown] = useState(false)

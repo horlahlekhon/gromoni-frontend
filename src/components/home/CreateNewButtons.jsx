@@ -1,6 +1,6 @@
 //create new sales Button, NEW PRODUCTS BUTTON, NEW CUSTOMER BUTTON
 
-import React, {useState} from 'react';
+import React from 'react';
 
 
 const CreateNewButtons = (props) => {

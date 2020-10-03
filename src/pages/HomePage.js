@@ -1,9 +1,8 @@
-import React, {useHistory} from 'react'
+import React from 'react'
 import Home from '../components/home/Home'
 
 
-
- const HomePage = (props) => {
+const HomePage = (props) => {
     return (
         <Home />
     )
