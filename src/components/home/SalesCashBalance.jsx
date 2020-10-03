@@ -13,9 +13,6 @@ const SalesCashBalance = (props) => {
 	                <Row>
 	                    <Col md="12" sm="12">
 	                        <Card>
-	                            <CardHeader className="b-l-primary">
-	                                <h2> Balance Overview</h2>
-	                            </CardHeader>
 	                            <CardBody>
 	                               <Row>
 	                               		<Col xs="12" md="4">
