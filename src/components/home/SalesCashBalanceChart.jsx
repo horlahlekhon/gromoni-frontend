@@ -3,13 +3,7 @@ import React, { Fragment, useState} from 'react';
 import {Container,  Row, Col ,Card, CardHeader,CardBody,TabContent,TabPane,Nav,NavItem,NavLink,Button,ButtonGroup} from 'reactstrap';
 import Chart from 'react-apexcharts';
 import { apexColumnChartsone } from "./ApexData";
-
-    //const [weeklyTab, setWeeklyTab] = useState('1');
-    //const [monthlyTab, setMonthlyTab] = useState('1');
-    //const [yearlyTab, setYearlyTab] = useState('1');
-
-
-    
+  
 
  const SalesCashBalanceChart = (props) => {
 	
@@ -31,25 +25,7 @@ import { apexColumnChartsone } from "./ApexData";
                             </CardHeader>
                             <CardBody>
                                 <div className="tabbed-card">
-                                {/* <Nav tabs className="pull-left  nav-pills nav-primary">
-		                                <NavItem>
-		                                    <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-		                                        Home
-		                                    </NavLink>
-		                                </NavItem>
-		                                <NavItem>
-		                                    <NavLink className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-		                                        Profile
-		                                    </NavLink>
-		                                </NavItem>
-		                                <NavItem>
-		                                    <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-		                                        Contact
-		                                    </NavLink>
-		                                </NavItem>
-		                            </Nav> */}
-
-                                
+                               
                                 <TabContent activeTab={activeTab}>
                                     <TabPane tabId="1">
                                         <div id="column-chart">
