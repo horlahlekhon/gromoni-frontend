@@ -4,7 +4,7 @@ import BellDropdown from './BellDropdown'
 import UserActivity from './UserActivity'
 import DropletHeader from './Droplet'
 import Search from './Search'
-import {RightSidebarToggle} from '../../redux/common/actions'
+import {RightSidebarToggle} from '../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
 
 const Rightbar = () => {

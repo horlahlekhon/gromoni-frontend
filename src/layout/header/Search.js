@@ -1,5 +1,5 @@
 import React from 'react';
-import {SearchBarToggle} from '../../redux/common/actions'
+import {SearchBarToggle} from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux';
 
 const Search = () => {

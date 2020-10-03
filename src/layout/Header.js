@@ -4,7 +4,7 @@ import creativeLogo from '../assets/images/creative-logo1.png';
 import Leftbar from './header/Leftbar'
 import Rightbar from './header/Rightbar'
 import { MoreHorizontal } from 'react-feather';
-import {SearchBarToggle, MobileRightToggle, SwitchToggle} from '../redux/common/actions'
+import {SearchBarToggle, MobileRightToggle, SwitchToggle} from '../redux/actions'
 import { Label, Input } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {MENUITEMS} from './sidebar/menu'

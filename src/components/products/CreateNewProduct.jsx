@@ -1,0 +1,1 @@
+//this component Creates new products to existing products to the customer
