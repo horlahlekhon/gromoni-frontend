@@ -25,7 +25,7 @@ const AuthenticatedRoute = (props) => {
     return (
         <App>
             <Route exact path="/" render={() => {
-                return (<Redirect to={`${process.env.PUBLIC_URL}/Home`} />)
+                return (<Redirect to={`${process.env.PUBLIC_URL}/home`} />)
             }} />
             <TransitionGroup>
                 {routes.map(({ path, Component }) => (

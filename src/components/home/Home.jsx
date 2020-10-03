@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import CreateNewButtons from './CreateNewButtons';
 import SalesCashBalance from './SalesCashBalance';
 import SalesCashBalanceChart from './SalesCashBalanceChart';
+import CreateNewButtons from './CreateNewButtons';
 
 
 
@@ -9,8 +9,8 @@ const  Home = (props) => {
 	
 	return (
 		<div className="homePage">
-			<SalesCashBalanceChart />
 			<SalesCashBalance />
+			<SalesCashBalanceChart />
 			<CreateNewButtons />
 		</div>
 	)

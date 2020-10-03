@@ -4,25 +4,27 @@
 import {Home,Headphones,Anchor,List,BarChart,PieChart,Users} from 'react-feather';
 // import {Sack} from 'reactstrap';
 
+const businessID = localStorage.getItem('__grm__act__biz__');
+
 export const MENUITEMS = [
    {
-      path: `${process.env.PUBLIC_URL}/home`, title: "Home", icon: Home, type: "link", active: true,
+      path: `${process.env.PUBLIC_URL}/business/${businessID}/home`, title: "Home", icon: Home, type: "link", active: true,
    },
 
    {
-      path: `${process.env.PUBLIC_URL}/customers`,  title: "Customers", icon: Users, type: "link", active: false,
+      path: `${process.env.PUBLIC_URL}/business/${businessID}/customers`,  title: "Customers", icon: Users, type: "link", active: false,
    },
 
    {
-      path: `${process.env.PUBLIC_URL}/products`,  title: "Products", icon: List, type: "link", active: false,
+      path: `${process.env.PUBLIC_URL}/business/${businessID}/products`,  title: "Products", icon: List, type: "link", active: false,
    },
 
    {
-      path: `${process.env.PUBLIC_URL}/sales`,  title: "Sales", icon: BarChart, type: "link", active: false,
+      path: `${process.env.PUBLIC_URL}/business/${businessID}/sales`,  title: "Sales", icon: BarChart, type: "link", active: false,
    },
 
    {
-      path: `${process.env.PUBLIC_URL}/reports`,  title: "Reports", icon: PieChart, type: "link", active: false,
+      path: `${process.env.PUBLIC_URL}/business/${businessID}/reports`,  title: "Reports", icon: PieChart, type: "link", active: false,
    },
     
     {
