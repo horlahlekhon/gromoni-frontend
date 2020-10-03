@@ -1,1 +1,0 @@
-# gromoni-frontend
