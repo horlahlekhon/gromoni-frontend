@@ -8,7 +8,6 @@ import ThemeCustomize from '../components/common/ThemeCustomize'
 import { ToastContainer } from 'react-toastify';
 
 const AppLayout = ({children}) =>  {
-
     return(
         <Fragment> 
         <Loader/>
