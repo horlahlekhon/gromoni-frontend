@@ -29,7 +29,7 @@ export const apexColumnChartsone = {
         dataLabels: {
           enabled: false
         },
-        colors:[primary, '#f10342', '#51bc25'],
+        colors:['#51bc25', primary, '#f10342'],
         stroke: {
           show: true,
           width: 2,
