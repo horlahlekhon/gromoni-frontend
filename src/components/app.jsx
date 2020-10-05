@@ -17,7 +17,7 @@ const AppLayout = ({children}) =>  {
             <Header/>
             <Sidebar/>
             <RightSidebar/>
-            <div className="page-body">
+            <div className="page-body ">
                 {children}
             </div>
             <Footer/>

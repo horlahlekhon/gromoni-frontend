@@ -10,42 +10,39 @@ import { apexColumnChartsone } from "./ApexData";
 	const [activeTab, setActiveTab] = useState('1');
 
  return (
-        <Fragment>
+        <Fragment style={{ backgroundColor: 'gray'}}>
       
-            <Container fluid={true}>
+            <Container fluid={true} >
                 <Row>
                     <Col lg="12 box-col-12" xl="6 xl-100 ">
-                        <Card>
-                             <CardHeader className="text-center">
+                       <div className="text-center">
                                   <ButtonGroup >
-	                                    <Button className={ activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')} color="light" >Left</Button>
-	                                    <Button className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')} color="light">Middle</Button>
-	                                    <Button className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')} color="light">Right</Button>
+	                                    <Button className={ activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')} color="light" >Weekly</Button>
+	                                    <Button className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')} color="light">Monthly</Button>
+	                                    <Button className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')} color="light">Yearly</Button>
 	                                </ButtonGroup>
-                            </CardHeader>
-                            <CardBody>
+                            </div>
                                 <div className="tabbed-card">
                                
                                 <TabContent activeTab={activeTab}>
                                     <TabPane tabId="1">
                                         <div id="column-chart">
-						               		 <Chart options={apexColumnChartsone.options} series={apexColumnChartsone.series} type="bar" height={350} />
+						               		 <Chart options={apexColumnChartsone.options} series={apexColumnChartsone.series} type="bar" height={400} />
 						                </div>
                                     </TabPane>
                                     <TabPane tabId="2">
                                         <div id="column-chart">
-						               		 <Chart options={apexColumnChartsone.options} series={apexColumnChartsone.series} type="bar" height={350} />
+						               		 <Chart options={apexColumnChartsone.options} series={apexColumnChartsone.series} type="bar" height={400} />
 						                </div>
                                     </TabPane>
                                     <TabPane tabId="3">
                                         <div id="column-chart">
-						               		 <Chart options={apexColumnChartsone.options} series={apexColumnChartsone.series} type="bar" height={350} />
+						               		 <Chart options={apexColumnChartsone.options} series={apexColumnChartsone.series} type="bar" height={400} />
 						                </div>
                                     </TabPane>
                                 </TabContent>
                                 </div>
-                            </CardBody>
-                        </Card>
+                          
                     </Col>
                     
                 </Row>

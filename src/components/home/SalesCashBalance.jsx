@@ -9,14 +9,16 @@ const SalesCashBalance = (props) => {
 
 	return(
 			 <Fragment>
-	            <Container fluid={true}>
+	            <Container fluid={true} >
 	                <Row>
-	                    <Col md="12" sm="12">
-	                        <Card>
-	                            <CardBody>
+	                    <Col md="12" sm="hidde">
+	                        <div style={{ backgroundColor: 'white'}} className="mb-20 ">
 	                               <Row>
 	                               		<Col xs="12" md="4">
-	                               			<h5> Total Sales Cash </h5>
+	 
+	                               			<h5>
+	                               				Total Sales Cash
+	                               			</h5>
 	                               			<p> #3,459 909.2124 </p>
 	                               		</Col>
 
@@ -30,8 +32,7 @@ const SalesCashBalance = (props) => {
 	                               			<p> #959 123.2124 </p>
 	                               		</Col>
 	                               </Row>
-	                            </CardBody>
-	                        </Card>
+	                        </div>
 	                    </Col>
 	                </Row>
 	            </Container>
