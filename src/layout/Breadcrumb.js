@@ -1,9 +1,10 @@
-import React, { useState,useCallback,useEffect } from 'react'
+import React, { useState,useCallback,useEffect, Fragment } from 'react'
 import {Row, Col,Input, Container,Breadcrumb,BreadcrumbItem} from 'reactstrap'
 import { Star } from 'react-feather'
 import {MENUITEMS} from './sidebar/menu'
 import {Link} from 'react-router-dom'
 import { Tooltip } from 'reactstrap';
+import TopStatBar from '../components/sales/TopStatBar'
 const Breadcrumbs = (props) => {
   // eslint-disable-next-line
   const [breadcrumb, setBreadcrumb] = useState(props);
@@ -138,20 +139,23 @@ const removeOffcanvas = () => {
   SetBookmarkSearch(!bookmarkSearch)
 }
 
+const AdditionalBar = <Fragment/> ? !props.additionalBar: props.additionalBar
+
+
     return (
         <Container fluid={true}>
         <div className="page-header">
           <Row>
             <Col lg='6'>
               <h3>{breadcrumb.title}</h3>
-              <Breadcrumb>
+              <Breadcrumb >
                 <BreadcrumbItem>{breadcrumb.parent}</BreadcrumbItem>
                 <BreadcrumbItem>{breadcrumb.subparent}</BreadcrumbItem>
                 <BreadcrumbItem active>{breadcrumb.title}</BreadcrumbItem>
               </Breadcrumb>
+              
             </Col>
-            <Col lg='6'>
-              {/* <!-- Bookmark Start--> */}
+            {/* <Col lg='6'>
               <div className="bookmark pull-right">
                 <ul>
                 {
@@ -220,8 +224,7 @@ const removeOffcanvas = () => {
                   </li>
                 </ul>
               </div>
-              {/* <!-- Bookmark Ends--> */}
-            </Col>
+            </Col> */}
           </Row>
         </div>
       </Container>

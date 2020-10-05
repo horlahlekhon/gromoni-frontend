@@ -3,8 +3,8 @@ import { type } from '../actionTypes'
 import { HTTP } from '../../api'
 
 // TODO apparently we need to change this action name because this cant be as a default action for frtching a business
-export const getBusiness = (token) => dispatch => {
-    const thisBusiness = localStorage.getItem('__grm__act__biz__')
+export const getBusiness = (token, thisBusiness) => dispatch => {
+    
     // TODO user must have a business for this call to work, so what happens if a user doesnt have a business, 
     // TODO what we should do is that, we check if the user has business which can be 
     //checked as thisBusiness !== undefined, we just call the business and log in to the biz,
@@ -12,8 +12,8 @@ export const getBusiness = (token) => dispatch => {
     // state to notify the component that the user doesnt have a business so that 
     // the AuthenticatedRoute can just send him to either create a new business or select another
     // business(when we implement multiple business), this will navigate a user going from register pgase and hasnt create a business
-    if (thisBusiness === undefined) {
-        return { status: false, payload: 'User does not have any business ' }
+    if (thisBusiness === undefined || thisBusiness === null) {
+        return Promise.resolve({ status: false, payload: 'User does not have any business ' })
     } else {
         return HTTP.growthApi(token)
             .get(`/business/${thisBusiness}/`)

@@ -34,7 +34,6 @@ const SignIn = (props) => {
 
     const handleLoginUser = async (e) => {
         e.preventDefault();
-        console.log(`Username: ${username}, pass:${password} `)
         const state = {
             username,
             password,
@@ -56,7 +55,7 @@ const SignIn = (props) => {
                 const currentBusiness = businesses[0]
                 if (businesses.length === 0) {
                     toast.info('Sorry, You currently do not have any business, take time to create one')
-                    history.push('/user/business/')
+                    history.push('/business/')
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
                     toast.info('Welcom back!')

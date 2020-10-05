@@ -10,15 +10,29 @@ import {useCookie} from '@shopify/react-cookie';
 import App from '../../components/app';
 
 const AuthenticatedRoute = (props) => {
-    const [accessToken, ] = useCookie('accessToken');
+    const thisBusiness = localStorage.getItem('__grm__act__biz__')
+    const [accessToken, setAccessToken] = useCookie('accessToken');
     const history = useHistory()
-   props.getBusiness(accessToken)
+    if (thisBusiness) {
+        props.getBusiness(accessToken, thisBusiness)
         .then((business) => {
             if (!business.status) {
                 history.push(`${process.env.PUBLIC_URL}/login`)
-                toast.error(business.payload.data.detail)
+                if(business.payload.data){
+                    // whats happening here is the difference between axios error and api error, api error has detail
+                    //while axios error doesnt have detail but a string represented by the payload.
+                    //TODO find a more clever way to resolve the error than nested ifs
+                    toast.error(business.payload.data.detail)
+                }else{
+                    toast.error(business.payload)
+                }
             }
         })
+    }else {
+        toast.error("User does not have any business kindly create a business")
+        history.push(`${process.env.PUBLIC_URL}/business/`)
+    }
+    
 
     // const { location: {  },  } = props;
     return (
