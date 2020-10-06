@@ -18,14 +18,7 @@ const AuthenticatedRoute = (props) => {
         .then((business) => {
             if (!business.status) {
                 history.push(`${process.env.PUBLIC_URL}/login`)
-                if(business.payload.data){
-                    // whats happening here is the difference between axios error and api error, api error has detail
-                    //while axios error doesnt have detail but a string represented by the payload.
-                    //TODO find a more clever way to resolve the error than nested ifs
-                    toast.error(business.payload.data.detail)
-                }else{
-                    toast.error(business.payload)
-                }
+                toast.error(business.errorMsg)
             }
         })
     }else {

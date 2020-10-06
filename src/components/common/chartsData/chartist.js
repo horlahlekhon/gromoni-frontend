@@ -253,11 +253,11 @@ export const sassUserChartOptions = {
     stackBars: true,
     fullWidth: true,
     height: 358,
-    axisX: {
-        showGrid: false,
-        showLabel: false,
-        offset: 0
-    },
+    // axisX: {
+    //     showGrid: true,
+    //     showLabel: true,
+    //     offset: 0
+    // },
     axisY: {
       labelInterpolationFnc: function(value) {
       return (value / 1000) + 'k';
