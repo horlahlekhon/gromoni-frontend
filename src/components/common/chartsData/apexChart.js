@@ -19,7 +19,7 @@ export const apexBarChart = {
                 columnWidth: '25px'
             }
         },
-        dataLabels: { enabled: false },
+        dataLabels: { enabled: true },
         stroke: { show: true, width: 8, colors: ['transparent'] },
         xaxis: {
             categories: [0], labels: { low: 0, offsetX: 0, show: false },
@@ -77,10 +77,12 @@ export const apexBarChart = {
           }
         ]
     }, 
-    series: [{ name: '<b>ICU</b> (intensive care unit)', data: [80, 45, 114, 20, 80, 40, 55, 40] }, {
-        name: '<b>OPD</b> (out patient Department)',
-        data: [35, 65, 80, 68, 60, 70, 20, 80]
-    }]
+    series: [{ name: '<b>ICU</b> (intensive care unit)', data: [80, 45, 114, 20, 80, 40, 55, 40] }
+    // , {
+    //     name: '<b>OPD</b> (out patient Department)',
+    //     data: [35, 65, 80, 68, 60, 70, 20, 80]
+    // }
+  ]
 }
 
 // Apex Small Chart

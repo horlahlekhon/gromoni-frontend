@@ -30,39 +30,60 @@ const SalesGraph = (props) => {
             [400, 100]
         ]
     }
+
+
     return (
         <Fragment>
             <Row>
                 <Col sm="12 box-col-6">
                     <Card>
                         <CardHeader className="crypto-header">
-                            <h5>Sales Chart</h5>
-                            {/* <div className="chart-value-box pull-right">
-                                <div className="value-square-box-secondary"></div><span className="f-12 f-w-600">Current</span>
-                                <div className="value-square-box-light ml-3"></div><span className="f-12 f-w-600">Highest</span>
-                            </div> */}
+                            <Row>
+                                <Col xl="2" md="2" sm="1">
+                                    <div>
+                                        <h5 className="p-t-20"> Sales Chart</h5>
+                                    </div>
+
+                                </Col>
+                                <Col xl="10" md="10" sm="11">
+                                    <Nav tabs className=" nav-tabs border-tab nav-primary justify-content-center">
+                                        <NavItem>
+                                            <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
+                                            <span className={activeTab === '1' ? 'tab-active' : 'tab-inactive'}  >Week</span> 
+                                        </NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
+                                                <span className={activeTab === '2' ? 'tab-active' : 'tab-inactive'}  >Month</span> 
+                                        </NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
+                                            <span className={activeTab ==='3' ? 'tab-active' : 'tab-inactive'}  >Year</span> 
+                                        </NavLink>
+                                        </NavItem>
+                                    </Nav>
+                                </Col>
+                            </Row>
                         </CardHeader>
                         <CardBody className="tabbed-card">
-                            <Nav tabs className="pull-right middle nav-tabs border-tab nav-primary">
+                            {/* <Nav tabs className=" nav-tabs border-tab nav-primary ">
                                 <NavItem>
                                     <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                                        {/* <i className="fas icofont-ui-home"></i> */}
                                          Week
                                         </NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-                                        {/* <i className="icofont icofont-man-in-glasses"></i> */}
                                         Month
                                         </NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-                                        {/* <i className="icofont icofont-contacts"></i> */}
                                         Year
                                         </NavLink>
                                 </NavItem>
-                            </Nav>
+                            </Nav> */}
                             <TabContent activeTab={activeTab}>
                                 <TabPane tabId="1">
                                     <div className="apex-chart-container chart-data">
@@ -72,13 +93,13 @@ const SalesGraph = (props) => {
                                     </div>
                                 </TabPane>
                                 <TabPane tabId="2">
-                                    <div className="ct-10 chartist-sass-container">
-                                        <ChartistGraph data={salesMonthlyChart} listener={sassUserChartListener} options={sassUserChartOptions} type={'Bar'} />
+                                    <div className="apex-chart-container chart-data">
+                                        <Chart options={apexBarChart.options} series={apexBarChart.series} height="280" type="line" />
                                     </div>
                                 </TabPane>
                                 <TabPane tabId="3">
-                                    <div className="ct-10 chartist-sass-container">
-                                        <ChartistGraph data={salesYearlyChart} listener={sassUserChartListener} options={sassUserChartOptions} type={'Bar'} />
+                                    <div className="apex-chart-container chart-data">
+                                        <Chart options={apexBarChart.options} series={apexBarChart.series} height="280" type="bar" />
                                     </div>
                                 </TabPane>
                             </TabContent>
