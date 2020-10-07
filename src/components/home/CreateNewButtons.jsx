@@ -1,102 +1,128 @@
 //create new sales Button, NEW PRODUCTS BUTTON, NEW CUSTOMER BUTTON
 
 import React, {Fragment,useState} from 'react';
-import {Container,Row,Col,Card,CardHeader,CardBody,Button, ButtonGroup, } from 'reactstrap';
-import {UserPlus,FolderPlus,ShoppingCart,Users,Database} from 'react-feather';
+import {Container,Row,Col,Card,CardHeader,CardBody,Button, ButtonGroup} from 'reactstrap';
+import {UserPlus,ShoppingBag,ShoppingCart,Users,Database,Layers} from 'react-feather';
 
 
 const CreateNewButtons = (props) => {
 	
 
 	return (
-	<div>
-		<Fragment>
+		<Fragment classname="m-10">
 			<Container fluid={true}>
-			<h3> this section is for companies without data</h3>
 	      <Row>
-	      	<Col md="4" sm="12">
-	  			<Button className="col  btn-square btn-air-light" size="lg" block color="light" >
-	  				<div>
-	  					<ShoppingCart />
-	  				</div>
-  					Create New Sales
-	  				
-	  			</Button>
-	  		</Col>
 
-	  		<Col md="4" sm="12">
-	  			<Button className="col  btn-square btn-air-light" size="lg" block color="light" >
-	  				<div>
-	  					<UserPlus />
-	  				</div>
-  					Create New Customer
-	  			</Button>
-	  		</Col>
+	      	<Col sm="12" xl="4" lg="6">
+            <Card className="o-hidden">
+              <CardBody className="bg-primary b-r-4 card-body">
+                <div className="media static-top-widget">
+                  <div className="align-self-center text-center">
+                  	<Database/>
+                  </div>
+                  <div className="media-body">
+                  	<span className="m-0">Products</span>
+                    <h4 className="mb-0 counter">6659</h4>
+                    <Database className="icon-bg"/>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
 
-	  		<Col md="4" sm="12">
-	  			<Button className="col  btn-square btn-air-light" size="lg" block color="light" >
-  					<div>
-  						<FolderPlus />
-  					</div>
-  					Create New Product
-	  			</Button>
-	  		</Col>
-	  	
+
+          <Col sm="12" xl="4" lg="6">
+                <Card className="o-hidden">
+                  <div className="bg-secondary b-r-4 card-body">
+                    <div className="media static-top-widget">
+                      <div className="align-self-center text-center">
+                      	<ShoppingBag/>
+                      </div>
+                      <div className="media-body">
+                      	<span className="m-0">Sales</span>
+                        <h4 className="mb-0 counter">9856</h4>
+                        <ShoppingBag className="icon-bg"/>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+
+
+          <Col sm="12" xl="4" lg="6">
+            <Card className="o-hidden">
+                <CardBody className="bg-primary b-r-4">
+                <div className="media static-top-widget">
+                    <div className="align-self-center text-center">
+                    	<ShoppingCart/>
+                    </div>
+                    <div className="media-body">
+                    	<span className="m-0"> Create New sales</span>
+                    	
+                    	<ShoppingCart className="icon-bg"/>
+                    </div>
+                </div>
+                </CardBody>
+            </Card>
+            </Col>
+
+
+          <Col sm="12" xl="4" lg="6">
+            <Card className="o-hidden">
+                <CardBody className="bg-primary b-r-4">
+                <div className="media static-top-widget">
+                    <div className="align-self-center text-center">
+                    	<UserPlus/>
+                    </div>
+                    <div className="media-body">
+                    	<span className="m-0"> Add New Customer</span>
+                    	
+                    	<UserPlus className="icon-bg"/>
+                    </div>
+                </div>
+                </CardBody>
+            </Card>
+            </Col>
+
+             <Col sm="12" xl="4" lg="6">
+            <Card className="o-hidden">
+                <CardBody className="bg-primary b-r-4">
+                <div className="media static-top-widget">
+                    <div className="align-self-center text-center">
+                    	<Users/>
+                    </div>
+                    <div className="media-body">
+                    	<span className="m-0">Customers</span>
+                    	<h4 className="mb-0 counter">45631</h4>
+                    	<Users className="icon-bg"/>
+                    </div>
+                </div>
+                </CardBody>
+            </Card>
+            </Col>
+
+
+            <Col sm="12" xl="4" lg="6">
+            <Card className="o-hidden">
+                <CardBody className="bg-primary b-r-4">
+                <div className="media static-top-widget">
+                    <div className="align-self-center text-center">
+                    	<Layers/>
+                    </div>
+                    <div className="media-body">
+                    	<span className="m-0">Add New Products</span>
+                    	
+                    	<Layers className="icon-bg"/>
+                    </div>
+                </div>
+                </CardBody>
+            </Card>
+            </Col>
+
+
 	      </Row> 
 	    	</Container>         
 		</Fragment>
-
-		<Fragment>
-			<Container fluid={true}>
-			<h3> this section is for companies with data</h3>
-	      <Row>
-	      	<Col md="4" sm="12">
-	  			<Button className="col  btn-square btn-air-light" size="lg" block color="light" >
-	  				<div>
-	  					<i>
-	  						<ShoppingCart />
-	  					</i>
-	  					<span>
-	  						Total Sales
-	  					</span>
-	  				</div>
-	  				<p>10,900</p>
-	  			</Button>
-	  		</Col>
-
-	  		<Col md="4" sm="12">
-	  			<Button className="col  btn-square btn-air-light" size="lg" block color="light" >
-	  				<div>
-		  				<i>
-		  					<Users />
-		  				</i>
-	  					<span>
-	  						Customers
-	  					</span>
-	  				</div>
-	  				<p> 2,567</p>
-	  			</Button>
-	  		</Col>
-
-	  		<Col md="4" sm="12">
-	  			<Button className="col  btn-square btn-air-light" size="lg" block color="light" >
-  					<div>
-  						<i> 
-  							<Database />
-  						</i>
-  						<span>
-  							Products
-  						</span>
-  					</div>
-  					<p>320</p>
-	  			</Button>
-	  		</Col>
-	  	
-	      </Row> 
-	    	</Container>         
-		</Fragment>
-
-	</div>
 	)
 } 
 

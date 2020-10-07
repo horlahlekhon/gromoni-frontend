@@ -10,7 +10,7 @@ import { apexColumnChartsone } from "./ApexData";
 	const [activeTab, setActiveTab] = useState('1');
 
  return (
-        <Fragment style={{ backgroundColor: 'gray'}}>
+        <Fragment style={{ backgroundColor: 'gray'}}  className="m-10">
       
             <Container fluid={true} >
                 <Row>
