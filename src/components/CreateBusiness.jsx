@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Container, Row, Col, CardBody, Button, Form, FormGroup, Input } from 'reactstrap'
+import { Container, Row, Col, Button, Form, FormGroup, Input } from 'reactstrap'
 
 import { withRouter } from 'react-router';
 import { useHistory } from 'react-router-dom'
@@ -47,6 +47,8 @@ const CreateBusiness = (props) => {
 
     }
 
+    // No authentication token on the header
+
     const handleCreateBusiness = async (e) => {
         e.preventDefault()
         setIsCreatingBusiness(true)
@@ -88,17 +90,16 @@ const CreateBusiness = (props) => {
 
 
     return (
-        <div className="page-wrapper">
-            <Container fluid={true} className="p-0">
-                <div className="authentication-main m-0">
+        <div>      {/*className="page-wrapper" */}
+            <Container> {/*fluid={true} className="p-0" */}
+                <div > {/*className="authentication-main m-0" */}
                     <Row>
-                        <Col md="12">
-                            <div className="auth-innerright">
-                                <div className="authentication-box">
-                                    <CardBody className="h-100-d-center">
-                                        <div className="cont text-center b-light">
+                        <Col> {/*md="12" */}
+                            <div > {/*className="auth-innerright" */}
+                                <div > {/*className="authentication-box" */}
+                                        <div>  {/*className="cont text-center b-light" */}
                                             <div>
-                                                <Form className="theme-form" onSubmit={e => e.preventDefault()}>
+                                                <Form  onSubmit={e => e.preventDefault()}> {/*className="theme-form" */}
                                                     <ToastContainer />
                                                     <h4>Create business</h4>
                                                     <FormGroup className=" m-form__group">
@@ -174,16 +175,7 @@ const CreateBusiness = (props) => {
 
                                                 </Form>
                                             </div>
-                                            <div className="sub-cont">
-                                                <div className="img">
-                                                    <div className="img__text m--up">
-                                                        <h2>Gromoni</h2>
-                                                        <p>Lets take you on a journey of Growth!</p>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
-                                    </CardBody>
                                 </div>
                             </div>
                         </Col>

@@ -1,0 +1,40 @@
+// $layout-breakpoint-small: 500px;
+
+.message-enter,
+.message-exit
+{
+  transition: transform 1000ms ease-out;
+}
+.message-enter{
+  transform: translateX(100%);
+}
+.message-enter.alert-enter-active {
+  transform: translateX(0%);
+}
+.message-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateX(0%);
+}
+.message-exit-active {
+  transform: translateX(100%);
+}
+.major{
+  padding-top: 6.25rem;
+}
+.second-col{
+  background-color: white;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+}
+.form-button{
+  position: absolute;
+  right: 300px;
+  top: 6.25rem;
+  background-color: #ffffff;
+  height: 100vh;
+}
