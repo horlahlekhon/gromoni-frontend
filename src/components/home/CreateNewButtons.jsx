@@ -1,122 +1,135 @@
 //create new sales Button, NEW PRODUCTS BUTTON, NEW CUSTOMER BUTTON
 
 import React, {Fragment,useState} from 'react';
+import {NavLink} from 'react-router-dom';
 import {Container,Row,Col,Card,CardHeader,CardBody,Button, ButtonGroup} from 'reactstrap';
 import {UserPlus,ShoppingBag,ShoppingCart,Users,Database,Layers} from 'react-feather';
 
 
 const CreateNewButtons = (props) => {
-	
+	const businessID = localStorage.getItem('__grm__act__biz__');
 
 	return (
 		<Fragment classname="m-10">
 			<Container fluid={true}>
 	      <Row>
+            <Col sm="12" xl="4" lg="6">
+	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allcustomers`}>
+		            <Card className="o-hidden">
+		                <CardBody className="bg-primary b-r-4">
+		                <div className="media static-top-widget">
+		                    <div className="align-self-center text-center">
+		                    	<Users/>
+		                    </div>
+		                    <div className="media-body">
+		                    	<span className="m-0">Customers</span>
+		                    	<h4 className="mb-0 counter">45631</h4>
+		                    	<Users className="icon-bg"/>
+		                    </div>
+		                </div>
+		                </CardBody>
+		            </Card>
+	            </NavLink>
+            </Col>
+
+
+	        <Col sm="12" xl="4" lg="6">
+		  		<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allsales`}>
+		            <Card className="o-hidden">
+		              <CardBody className="bg-secondary b-r-4 card-body">
+		                <div className="media static-top-widget">
+		                  <div className="align-self-center text-center">
+		                  	<ShoppingBag/>
+		                  </div>
+		                  <div className="media-body">
+		                  	<span className="m-0">Sales</span>
+		                    <h4 className="mb-0 counter">9856</h4>
+		                    <ShoppingBag className="icon-bg"/>
+		                  </div>
+		                </div>
+		              </CardBody>
+		            </Card>
+		        </NavLink>
+	        </Col>
+
+
 
 	      	<Col sm="12" xl="4" lg="6">
-            <Card className="o-hidden">
-              <CardBody className="bg-primary b-r-4 card-body">
-                <div className="media static-top-widget">
-                  <div className="align-self-center text-center">
-                  	<Database/>
-                  </div>
-                  <div className="media-body">
-                  	<span className="m-0">Products</span>
-                    <h4 className="mb-0 counter">6659</h4>
-                    <Database className="icon-bg"/>
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
+		      	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allproducts`}>
+		            <Card className="o-hidden">
+		              <CardBody className="bg-primary b-r-4 card-body">
+		                <div className="media static-top-widget">
+		                  <div className="align-self-center text-center">
+		                  	<Database/>
+		                  </div>
+		                  <div className="media-body">
+		                  	<span className="m-0">Products</span>
+		                    <h4 className="mb-0 counter">6659</h4>
+		                    <Database className="icon-bg"/>
+		                  </div>
+		                </div>
+		              </CardBody>
+		            </Card>
+	            </NavLink>
+        	</Col>
 
 
-          <Col sm="12" xl="4" lg="6">
-                <Card className="o-hidden">
-                  <div className="bg-secondary b-r-4 card-body">
-                    <div className="media static-top-widget">
-                      <div className="align-self-center text-center">
-                      	<ShoppingBag/>
-                      </div>
-                      <div className="media-body">
-                      	<span className="m-0">Sales</span>
-                        <h4 className="mb-0 counter">9856</h4>
-                        <ShoppingBag className="icon-bg"/>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              </Col>
+	        <Col sm="12" xl="4" lg="6">
+	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addsale`}>
+		            <Card className="o-hidden">
+		                <CardBody className="bg-primary b-r-4">
+		                <div className="media static-top-widget">
+		                    <div className="align-self-center text-center">
+		                    	<ShoppingCart/>
+		                    </div>
+		                    <div className="media-body">
+		                    	<span className="m-0"> Create New sale</span>
+		                    	
+		                    	<ShoppingCart className="icon-bg"/>
+		                    </div>
+		                </div>
+		                </CardBody>
+		            </Card>
+	            </NavLink>
+	        </Col>
 
 
-          <Col sm="12" xl="4" lg="6">
-            <Card className="o-hidden">
-                <CardBody className="bg-primary b-r-4">
-                <div className="media static-top-widget">
-                    <div className="align-self-center text-center">
-                    	<ShoppingCart/>
-                    </div>
-                    <div className="media-body">
-                    	<span className="m-0"> Create New sales</span>
-                    	
-                    	<ShoppingCart className="icon-bg"/>
-                    </div>
-                </div>
-                </CardBody>
-            </Card>
+          	<Col sm="12" xl="4" lg="6">
+	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addcustomer`}>
+		            <Card className="o-hidden">
+		                <CardBody className="bg-primary b-r-4">
+		                <div className="media static-top-widget">
+		                    <div className="align-self-center text-center">
+		                    	<UserPlus/>
+		                    </div>
+		                    <div className="media-body">
+		                    	<span className="m-0"> Add New Customer</span>
+		                    	
+		                    	<UserPlus className="icon-bg"/>
+		                    </div>
+		                </div>
+		                </CardBody>
+		            </Card>
+	            </NavLink>
             </Col>
-
-
-          <Col sm="12" xl="4" lg="6">
-            <Card className="o-hidden">
-                <CardBody className="bg-primary b-r-4">
-                <div className="media static-top-widget">
-                    <div className="align-self-center text-center">
-                    	<UserPlus/>
-                    </div>
-                    <div className="media-body">
-                    	<span className="m-0"> Add New Customer</span>
-                    	
-                    	<UserPlus className="icon-bg"/>
-                    </div>
-                </div>
-                </CardBody>
-            </Card>
-            </Col>
-
-             <Col sm="12" xl="4" lg="6">
-            <Card className="o-hidden">
-                <CardBody className="bg-primary b-r-4">
-                <div className="media static-top-widget">
-                    <div className="align-self-center text-center">
-                    	<Users/>
-                    </div>
-                    <div className="media-body">
-                    	<span className="m-0">Customers</span>
-                    	<h4 className="mb-0 counter">45631</h4>
-                    	<Users className="icon-bg"/>
-                    </div>
-                </div>
-                </CardBody>
-            </Card>
-            </Col>
-
 
             <Col sm="12" xl="4" lg="6">
-            <Card className="o-hidden">
-                <CardBody className="bg-primary b-r-4">
-                <div className="media static-top-widget">
-                    <div className="align-self-center text-center">
-                    	<Layers/>
-                    </div>
-                    <div className="media-body">
-                    	<span className="m-0">Add New Products</span>
-                    	
-                    	<Layers className="icon-bg"/>
-                    </div>
-                </div>
-                </CardBody>
-            </Card>
+	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addproduct`}>
+		            <Card className="o-hidden">
+		                <CardBody className="bg-primary b-r-4">
+		                <div className="media static-top-widget">
+		                    <div className="align-self-center text-center">
+		                    	<Layers/>
+		                    </div>
+		                    <div className="media-body">
+		                    	<span className="m-0">Create New Product</span>
+		                    	
+		                    	<Layers className="icon-bg"/>
+		                    </div>
+		                </div>
+		                </CardBody>
+		            </Card>
+	            </NavLink>
             </Col>
 
 
