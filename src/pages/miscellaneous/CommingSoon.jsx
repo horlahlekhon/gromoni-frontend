@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import CountdownComponent from './CountdownData';
-import {Container} from 'reactstrap' 
+import {Container} from 'reactstrap'
+
 const ComingSoon = () => {
     return (
         <Fragment>

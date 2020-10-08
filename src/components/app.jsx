@@ -1,14 +1,13 @@
-import React, { Fragment, } from 'react'
+import React, {Fragment,} from 'react'
 import Header from '../layout/Header'
 import Sidebar from '../layout/Sidebar'
 import RightSidebar from '../layout/RightSidebar'
 import Footer from '../layout/Footer'
 import Loader from '../layout/Loader'
 import ThemeCustomize from '../components/common/ThemeCustomize'
-import { ToastContainer } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 
 const AppLayout = ({children}) =>  {
-
     return(
         <Fragment> 
         <Loader/>

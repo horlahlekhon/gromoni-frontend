@@ -1,7 +1,7 @@
 // this includes all the menu in the left side bar also the main navigation component
 // this is can contain a nexted array,  which are the sub menus
 
-import {Home,Headphones,Anchor,List,BarChart,PieChart,Users} from 'react-feather';
+import {Home,Headphones,List,BarChart,PieChart,Users} from 'react-feather';
 // import {Sack} from 'reactstrap';
 
 const businessID = localStorage.getItem('__grm__act__biz__');

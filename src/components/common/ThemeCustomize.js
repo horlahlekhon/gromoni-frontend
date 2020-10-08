@@ -1,19 +1,32 @@
-import React, { Fragment,useState,useEffect,useLayoutEffect } from 'react';
-import {Container,Row} from 'reactstrap'
-import {Nav,NavItem,NavLink,TabContent,TabPane,Button,Modal, ModalHeader, ModalBody, ModalFooter,Input} from 'reactstrap'
-import {useDispatch,useSelector} from 'react-redux'
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { toast } from 'react-toastify';
+import React, {Fragment, useEffect, useLayoutEffect, useState} from 'react';
 import {
-        ADD_LAYOUT,
-        ADD_SIDEBAR_TYPES,
-        ADD_SIDEBAR_SETTINGS,
-        ADD_COLOR,
-        ADD_COSTOMIZER,
-        ADD_MIX_BACKGROUND_LAYOUT,
-        ADD_SIDEBAR_BACKGROUND,
-        ROUTER_ANIMATION
-         } from '../../redux/actionTypes'
+    Button,
+    Container,
+    Input,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    Nav,
+    NavItem,
+    NavLink,
+    Row,
+    TabContent,
+    TabPane
+} from 'reactstrap'
+import {useDispatch, useSelector} from 'react-redux'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {toast} from 'react-toastify';
+import {
+    ADD_COLOR,
+    ADD_COSTOMIZER,
+    ADD_LAYOUT,
+    ADD_MIX_BACKGROUND_LAYOUT,
+    ADD_SIDEBAR_BACKGROUND,
+    ADD_SIDEBAR_SETTINGS,
+    ADD_SIDEBAR_TYPES,
+    ROUTER_ANIMATION
+} from '../../redux/actionTypes'
 
 const ThemeCustomize = (props) => {
     const [rightSidebar, setRightSidebar] = useState(true);

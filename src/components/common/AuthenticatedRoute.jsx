@@ -1,27 +1,33 @@
-import React, { Children, Fragment } from 'react';
-import { getBusiness } from "../../redux/actions";
-import { routes } from '../../route/ContentRoutes'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom'
-import { useCookie } from '@shopify/react-cookie';
+import React from 'react';
+import {getBusiness} from "../../redux/actions";
+import {routes} from '../../route/ContentRoutes'
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
+import {Redirect, Route, useHistory} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router';
+import {toast} from 'react-toastify';
+import {useCookie} from '@shopify/react-cookie';
 import App from '../../components/app';
 
 const AuthenticatedRoute = (props) => {
+    const thisBusiness = localStorage.getItem('__grm__act__biz__')
     const [accessToken, setAccessToken] = useCookie('accessToken');
     const history = useHistory()
-    const business = props.getBusiness(accessToken)
+    if (thisBusiness) {
+        props.getBusiness(accessToken, thisBusiness)
         .then((business) => {
             if (!business.status) {
                 history.push(`${process.env.PUBLIC_URL}/login`)
-                toast.error(business.payload.data.detail)
+                toast.error(business.errorMsg)
             }
         })
+    }else {
+        toast.error("User does not have any business kindly create a business")
+        history.push(`${process.env.PUBLIC_URL}/business/`)
+    }
+    
 
-    const { location: { pathname }, component } = props;
+    // const { location: {  },  } = props;
     return (
         <App>
             <Route exact path="/" render={() => {

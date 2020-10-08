@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { handleUserLogin } from '../../redux/actions/userActions';
+import React, {useState} from 'react'
+import {handleUserLogin} from '../../redux/actions/userActions';
 
-import { Container, Row, Col, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import {Button, CardBody, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap'
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom'
-import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom'
+import {connect} from 'react-redux';
 import Register from './Register';
-import { validateForm, responseErrorParser } from './validator';
+import {responseErrorParser, validateForm} from './validator';
 
 import {useCookie} from '@shopify/react-cookie';
 
@@ -26,15 +26,14 @@ const fields = {
 
 const SignIn = (props) => {
     const history = useHistory();
-    const [accessToken, setAccessToken] = useCookie('accessToken');
-    const [refreshToken, setRefreshToken] = useCookie('refreshToken')
+    const [, setAccessToken] = useCookie('accessToken');
+    const [, setRefreshToken] = useCookie('refreshToken')
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordShown, setPasswordShown] = useState(false)
 
     const handleLoginUser = async (e) => {
         e.preventDefault();
-        console.log(`Username: ${username}, pass:${password} `)
         const state = {
             username,
             password,
@@ -56,7 +55,7 @@ const SignIn = (props) => {
                 const currentBusiness = businesses[0]
                 if (businesses.length === 0) {
                     toast.info('Sorry, You currently do not have any business, take time to create one')
-                    history.push('/user/business/')
+                    history.push('/business/')
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
                     toast.info('Welcome Back!')

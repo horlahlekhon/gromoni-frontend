@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './components/app';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
@@ -11,13 +10,12 @@ import ScrollToTop from './components/common/ScrollToTop';
 // import Register from './pages/auth/Register';
 import CommingSoon from './pages/miscellaneous/CommingSoon'
 import SignInAndRegister from './pages/auth/SignInAndRegister';
-import HomePage from './pages/HomePage';
 import NewBusiness from './pages/NewBusiness';
 
 import { CookieUniversalProvider } from '@shopify/react-cookie';
 import AuthenticatedRoute from './components/common/AuthenticatedRoute';
 const Root = (props) => {
-  const [anim, setAnim] = useState("");
+  const [, setAnim] = useState("");
   const animation = localStorage.getItem("animation") || ConfigDB.data.router_animation || 'fade'
   const abortController = new AbortController();
 
@@ -40,14 +38,14 @@ const Root = (props) => {
             <ScrollToTop />
             <Switch>
               <Route exact path={`${process.env.PUBLIC_URL}/`} component={CommingSoon} />
-              <Route exact path={`${process.env.PUBLIC_URL}/login`} component={SignInAndRegister} />
+              <Route exact path={`${process.env.PUBLIC_URL}/login/`} component={SignInAndRegister} />
               {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
-              <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} />
+              <Route exact path={`${process.env.PUBLIC_URL}/business/`} component={NewBusiness} />
 
               <Fragment>
                 <AuthenticatedRoute />
               </Fragment>
-              <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+              <Redirect to={`${process.env.PUBLIC_URL}/login/`} />
             </Switch>
           </BrowserRouter>
         </Provider>
