@@ -72,7 +72,6 @@ const SignIn = (props) => {
                     }else{
                         history.push(`/business/${currentBusiness.id}/dashboard`);
                     }
-
                 }
             } else {
                 const payload = res_data.payload
