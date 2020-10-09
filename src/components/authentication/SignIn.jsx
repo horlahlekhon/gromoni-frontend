@@ -31,7 +31,9 @@ const SignIn = (props) => {
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordShown, setPasswordShown] = useState(false)
-
+    if(typeof props.location.state === 'object' && props.location.state.isRedirect){
+        toast.error(props.location.state.error)
+    }
     const handleLoginUser = async (e) => {
         e.preventDefault();
         const state = {
@@ -58,8 +60,19 @@ const SignIn = (props) => {
                     history.push('/business/')
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
-                    toast.info('Welcom back!')
-                    history.push(`/business/${currentBusiness.id}/dashboard`);
+                    toast.info('Welcome back!')
+                    // automatic redirection to the page that was errored is needed, we can create a small function that format the paths and
+                    // add required variables like businessId. i.e if we encounter a business not found on a page, or the user deleted cookies
+                    // we will redirect back to login, and we must also redirect back to where the user was before getting redirected to login.
+                    // so the business id will be injected into the path passed down from the redirecting page, and after we log them in successfully
+                    // we just inject the business variable into the formatted string passed from the redirected page, and redirect the user
+                    // back.
+                    if(typeof props.location.state === 'object' && props.location.state.isRedirect){
+                        history.push(props.location.state.redirectRoute) // change to use the FQP(fully qualified path)
+                    }else{
+                        history.push(`/business/${currentBusiness.id}/dashboard`);
+                    }
+
                 }
             } else {
                 const payload = res_data.payload
@@ -81,6 +94,7 @@ const SignIn = (props) => {
     }
 
     return (
+
         <div className="page-wrapper">
             <Container fluid={true} className="p-0">
                 <div className="authentication-main m-0">

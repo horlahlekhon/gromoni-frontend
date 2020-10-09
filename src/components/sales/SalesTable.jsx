@@ -6,7 +6,7 @@ import DataTable from 'react-data-table-component'
 import { tableData } from '../../data/dummyTableData'
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 
-const SalesTable = () => {
+const SalesTable = (props) => {
 
     const [selectedRows, setSelectedRows] = useState([]);
     const [toggleCleared, setToggleCleared] = useState(false);
@@ -64,10 +64,13 @@ const SalesTable = () => {
 
     return (
         <DataTable
+            title={props.title}
             data={data}
             columns={tableColumns}
             striped={true}
             center={true}
+            fixedHeader={true}
+            highlightOnHover={true}
             selectableRows
             persistTableHead
             contextActions={contextActions}

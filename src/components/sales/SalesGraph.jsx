@@ -39,13 +39,8 @@ const SalesGraph = (props) => {
                     <Card>
                         <CardHeader className="crypto-header">
                             <Row>
-                                <Col xl="2" md="2" sm="1">
-                                    <div>
-                                        <h5 className="p-t-20"> Sales Chart</h5>
-                                    </div>
 
-                                </Col>
-                                <Col xl="10" md="10" sm="11">
+                                <Col xl="12" md="12" sm="12">
                                     <Nav tabs className=" nav-tabs border-tab nav-primary justify-content-center">
                                         <NavItem>
                                             <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>

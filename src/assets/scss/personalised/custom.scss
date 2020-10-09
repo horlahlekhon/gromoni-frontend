@@ -28,6 +28,7 @@
     }
 }
 
+/// Sales stats  badge starts
 .sales-stat-badge {
     background-color: #FFFFFF;
     height: 58px;
@@ -39,10 +40,16 @@
     border: 1px solid #FFFFFF;
 }
 
-.sales-stat-badge > :first-child {
-    background-color: #4BFFC2;
-    border: 1px solid #4BFFC2;
-    border-radius: 10px;
+.sales-stat-badge-icon-name-grp{
+        display: flex;
+        flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+}
+.sales-stat-badge-icon-name-grp > :first-child {
+    // background-color: #4BFFC2;
+    // border: 1px solid;
+    // border-radius: 10px;
     height: 33px;
     width: 32px;
     display: flex;
@@ -51,6 +58,43 @@
     justify-content: center;
 }
 
+.sales-stat-icon-wrapper{
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.sales-stat-icon-pending{
+        background-color: #A80909;
+        color: #F9F9F9;
+        border: 1px solid #FBA2AC
+}
+
+.sales-stat-icon-cleared{
+    background-color:#0A7D51;
+    color: #F9F9F9;
+    border: 1px solid 
+}
+
+.sales-stat-icon-archive{
+    background-color: #4BB8F2;
+        color: #F9F9F9;
+        border: 1px solid 
+}
+
+.sales-stat-icon-cleared > :first-child {
+    border-radius: 100%;
+}
+
+.sales-stat-icon-pending > :first-child {
+    border-radius: 100%;
+    background-color: #A80909;
+}
+
+// .sales-stat-icon-archive > :first-child {
+    
+// }
+
+/// Sales stats  badge ends
 
 /*== start of code for tooltips ==*/
 .tool {
@@ -102,12 +146,19 @@
     transform-origin: top;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .tool::after { 
         font-size: .75em;
-        margin-left: -5em;
-        width: 10em; 
+        // margin-left: -5em;
+        // width: 10em; 
   }
 }
 
 // tooltip end
+
+
+.horizontal-alignmet {
+display: flex;
+    flex-direction: row;
+  justify-content: space-evenly;
+}

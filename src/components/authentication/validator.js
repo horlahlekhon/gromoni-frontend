@@ -26,6 +26,7 @@ const validateForm = (state, fields) => {
         return { isErrors: true, errors };
     }
 }
+// use the one in ../common/utitilityFunctions
 function responseErrorParser(payload) {
     if (typeof payload === 'undefined') {
         return [{ message: 'Sorry, an unexpected error occured, please Check your Internet Network or contact support center' }]

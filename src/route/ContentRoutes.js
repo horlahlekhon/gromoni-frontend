@@ -1,5 +1,5 @@
 import HomePage from '../pages/HomePage'
-import SalesPage from '../pages/SalesPage'
+import SalesPage from '../pages/sales/SalesPage'
 import ProductsPage from '../pages/ProductsPage'
 import ReportsPage from '../pages/ReportsPage'
 import CustomersPage from '../pages/CustomersPage'
