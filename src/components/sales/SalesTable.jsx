@@ -1,75 +1,102 @@
-import React, { Fragment, useState, useCallback, useMemo } from 'react';
-import BreadCrumb from '../../layout/Breadcrumb'
+import React, {Fragment, useCallback, useEffect, useMemo, useState} from 'react';
 import differenceBy from 'lodash/differenceBy';
-import { toast } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import DataTable from 'react-data-table-component'
-import { tableData } from '../../data/dummyTableData'
-import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
-import Badge from "react-bootstrap/Badge";
+import {useCookie} from "@shopify/react-cookie";
+import {HTTP} from '../../api'
+import {responseErrorParser} from "../common/utilityFUnctions";
+import {parseData} from "./utils";
+import {CardBody} from "reactstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+
 
 const SalesTable = (props) => {
 
     const [selectedRows, setSelectedRows] = useState([]);
     const [toggleCleared, setToggleCleared] = useState(false);
-    const [data, setData] = useState(tableData);
-
+    const [data, setData] = useState(parseData(props.data.results));
+    const [loading, setLoading] = useState(false);
+    const [totalRows, setTotalRows] = useState(props.data.totalRow);
+    const [apiError, setApiError] = useState(undefined)
+    const [perPage, setPerPage] = useState(10);
+    const [accessToken,] = useCookie("accessToken")
+    const [searchKey, setSearchKey] = useState("")
+    const currentBusiness = localStorage.getItem("__grm__act__biz__")
     const tableColumns = [
         {
             name: 'Product name',
-            selector: 'name', 
+            selector: 'name',
             sortable: true,
-            center:true,
+            center: true,
         },
         {
             name: 'Purchased By',
             selector: 'customer',
             sortable: true,
-            center:true,
+            center: true,
         },
         {
             name: 'Status',
             selector: 'status',
             sortable: true,
-            center:true,
+            center: true,
         },
         {
             name: 'Price',
             selector: 'price',
             sortable: true,
-            center:true,
+            center: true,
         },
         {
-          name: 'Discount',
-          selector: 'discount',
-          sortable: true,
-          center:true,
-      },
-      ]
-    const decideStatus = (status) => {
-        switch (status) {
-            case "PENDING":
-                return <span className={`badge badge-pill pill-badge-info`}>Pending</span>
-            case "CREDITED":
-                return <span className={`badge badge-pill pill-badge-danger`}>Credited</span>
-            case "CLEARED":
-                return <span className={`badge badge-pill pill-badge-success`}>Cleared</span>
-            default:
-                return ""
-        }
+            name: 'Discount',
+            selector: 'discount',
+            sortable: true,
+            center: true,
+        },
+        {
+            name: 'Date',
+            selector: 'ts_created',
+            sortable: true,
+            center: true,
+        },
+    ]
+
+
+    const fetchData = async (page) => {
+        setLoading(true)
+        const response = await HTTP.growthApi(accessToken)
+            .get(`/report/${currentBusiness}/dashboards/sales/?page=${page}&page_size=${perPage}`)
+            .catch((error) => {
+                setLoading(false)
+                setApiError(responseErrorParser(error.message))
+            })
+        setData(parseData(response.data.results))
+        setTotalRows(response.data.count)
+        setLoading(false)
     }
-    const parseData = props.data === undefined ? {} : props.data.map(payload => {
-        return {
-            id: payload.id,
-            name: payload.product.name,
-            customer: payload.customer.name,
-            price: new Intl.NumberFormat('en-NG', {
-                style: 'currency',
-                currency: 'NGN'
-            }).format(payload.sales_order.total_cost),
-            discount: `${payload.product.discount.percentage_discounted}%`,
-            status: decideStatus(payload.sales_order.status)
-        }
-    })
+    const handlePageChange = (page) => {
+        fetchData(page)
+    }
+
+    const handlePerRowsChange = async (newPerPage, page) => {
+        setLoading(true)
+        const response = await HTTP.growthApi(accessToken)
+            .get(`/report/${currentBusiness}/dashboards/sales/?page=${page}&page_size${newPerPage}`)
+            .catch((error) => {
+                setLoading(false)
+                setApiError(responseErrorParser(error.message))
+            })
+        setData(parseData(response.data.results))
+        setTotalRows(response.data.count)
+        setPerPage(newPerPage)
+        setLoading(false)
+    }
+    useEffect(() => {
+        fetchData(1)
+    }, [])
+
 
     const handleRowSelected = useCallback(state => {
         setSelectedRows(state.selectedRows);
@@ -79,7 +106,7 @@ const SalesTable = (props) => {
 
             if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.name)}?`)) {
                 setToggleCleared(!toggleCleared);
-                setData(differenceBy(props.data, selectedRows, 'name'));
+                setData(differenceBy(props.data.results, selectedRows, 'name'));
                 toast.success("Successfully Deleted !")
             }
         };
@@ -87,21 +114,59 @@ const SalesTable = (props) => {
         return <button key="delete" className="btn btn-danger" onClick={handleDelete}>Delete</button>;
     }, [data, selectedRows, toggleCleared]);
 
+    const paging = {persistSelectedOnPageChange: false, persistSelectedOnSort: false}
+
+    const Header = (props) => {
+
+        const handle = (e) => {
+            e.preventDefault()
+            setSearchKey(e.target.value)
+            const res = !searchKey ? data:  data.filter(e => e.name.toLowerCase().includes(searchKey.toLocaleLowerCase()))
+            setData(res)
+        }
+        return (
+            <Row className="">
+                <Col xl="4">
+                    <div className="form-group pull-right">
+                        <input
+                            type="text"
+                            className="search form-control"
+                            placeholder="search"
+                            value={searchKey}
+                            onChange={(e) => handle(e)}
+                        />
+                    </div>
+                </Col>
+            </Row>
+        )
+    }
     return (
-        <DataTable
-            title={props.title}
-            data={parseData}
-            columns={tableColumns}
-            striped={true}
-            center={true}
-            fixedHeader={true}
-            highlightOnHover={true}
-            selectableRows
-            persistTableHead
-            contextActions={contextActions}
-            onSelectedRowsChange={handleRowSelected}
-            clearSelectedRows={toggleCleared}
-        />
+        <Fragment>
+            <ToastContainer/>
+            {apiError === undefined ? '' : apiError.forEach(e => toast.error(e.message))}
+
+            <DataTable
+                title={<Header/>}
+                data={data}
+                columns={tableColumns}
+                striped={true}
+                center={true}
+                fixedHeader={true}
+                highlightOnHover={true}
+                // selectableRows
+                persistTableHead
+                pagination
+                paginationServer
+                contextActions={contextActions}
+                onSelectedRowsChange={handleRowSelected}
+                clearSelectedRows={toggleCleared}
+                paginationServerOptions={paging}
+                paginationTotalRows={totalRows}
+                onChangePage={handlePageChange}
+                onChangeRowsPerPage={handlePerRowsChange}
+            />
+        </Fragment>
+
 
     );
 
