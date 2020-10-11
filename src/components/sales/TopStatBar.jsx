@@ -13,7 +13,7 @@ const TopStatBar = (props) => {
 
   const data = { id: 1, cardBg: '', title: "Total Sale", scorr: '841,162', color: 'primary', bdgeFont: '', bdgeValue: '3.56%', progress: '75%' }
 
-  const overallSales = new Intl.NumberFormat('en-US', {
+  const overallSales = new Intl.NumberFormat('en-NG', {
     style: 'currency',
     currency: 'NGN'
   }).format(props.data.overallSales)

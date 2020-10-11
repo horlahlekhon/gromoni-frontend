@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import DataTable from 'react-data-table-component'
 import { tableData } from '../../data/dummyTableData'
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
+import Badge from "react-bootstrap/Badge";
 
 const SalesTable = (props) => {
 
@@ -39,12 +40,36 @@ const SalesTable = (props) => {
         },
         {
           name: 'Discount',
-          selector: 'discounnt',
+          selector: 'discount',
           sortable: true,
           center:true,
       },
       ]
-
+    const decideStatus = (status) => {
+        switch (status) {
+            case "PENDING":
+                return <span className={`badge badge-pill pill-badge-info`}>Pending</span>
+            case "CREDITED":
+                return <span className={`badge badge-pill pill-badge-danger`}>Credited</span>
+            case "CLEARED":
+                return <span className={`badge badge-pill pill-badge-success`}>Cleared</span>
+            default:
+                return ""
+        }
+    }
+    const parseData = props.data === undefined ? {} : props.data.map(payload => {
+        return {
+            id: payload.id,
+            name: payload.product.name,
+            customer: payload.customer.name,
+            price: new Intl.NumberFormat('en-NG', {
+                style: 'currency',
+                currency: 'NGN'
+            }).format(payload.sales_order.total_cost),
+            discount: `${payload.product.discount.percentage_discounted}%`,
+            status: decideStatus(payload.sales_order.status)
+        }
+    })
 
     const handleRowSelected = useCallback(state => {
         setSelectedRows(state.selectedRows);
@@ -54,7 +79,7 @@ const SalesTable = (props) => {
 
             if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.name)}?`)) {
                 setToggleCleared(!toggleCleared);
-                setData(differenceBy(data, selectedRows, 'name'));
+                setData(differenceBy(props.data, selectedRows, 'name'));
                 toast.success("Successfully Deleted !")
             }
         };
@@ -65,7 +90,7 @@ const SalesTable = (props) => {
     return (
         <DataTable
             title={props.title}
-            data={data}
+            data={parseData}
             columns={tableColumns}
             striped={true}
             center={true}
