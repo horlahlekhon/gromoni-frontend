@@ -8,9 +8,9 @@ const SalesCashBalance = (props) => {
 
 
 	return(
-			 <Fragment>
+			 <Fragment  >
 	            <Container fluid={true} >
-	                <Row>
+	                <Row >
 	                    
 	                    <Col xl="12" className="xl-100 box-col-12">
 							<Card className="o-hidden">

@@ -10,9 +10,9 @@ const CreateNewButtons = (props) => {
 	const businessID = localStorage.getItem('__grm__act__biz__');
 
 	return (
-		<Fragment classname="m-10">
+		<Fragment >
 			<Container fluid={true}>
-	      <Row>
+	      <Row >
             <Col sm="12" xl="4" lg="6">
 	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allcustomers`}>
 		            <Card className="o-hidden">

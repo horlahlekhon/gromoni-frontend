@@ -2,8 +2,8 @@
 @import "style";
 html {
     &.color-1 {
-		$primary-color: #30ACF2;
-        $secondary-color :#CB67F5;
+		$primary-color: #158df7;
+        $secondary-color :#fb2e63;
         $gradient-primary: linear-gradient(#1693f8, #0d67e9);
         $gradient-primary-direction: linear-gradient(to right, lighten($primary-color, 10%), darken($primary-color, 8%));
         $gradient-secondary-direction: linear-gradient(to right, lighten($secondary-color, 10%),  darken($secondary-color, 5%));

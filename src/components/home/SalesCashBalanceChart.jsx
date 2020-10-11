@@ -10,19 +10,20 @@ import { apexColumnChartsone } from "./ApexData";
 	const [activeTab, setActiveTab] = useState('1');
 
  return (
-        <Fragment style={{ backgroundColor: 'gray'}}  className="m-10">
+        <Fragment style={{ backgroundColor: 'gray'}}  >
       
             <Container fluid={true} >
-                <Row>
+            
+                <Row >
                     <Col lg="12 box-col-12" xl="6 xl-100 ">
-                       <div className="text-center">
-                                  <ButtonGroup >
-	                                    <Button className={ activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')} color="light" >Weekly</Button>
-	                                    <Button className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')} color="light">Monthly</Button>
-	                                    <Button className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')} color="light">Yearly</Button>
-	                                </ButtonGroup>
-                            </div>
-                                <div className="tabbed-card">
+                        <div className="text-center">
+                            <ButtonGroup >
+                                <Button className={ activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')} color="light" >Weekly</Button>
+                                <Button className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')} color="light">Monthly</Button>
+                                <Button className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')} color="light">Yearly</Button>
+                            </ButtonGroup>
+                        </div>
+                        <div className="tabbed-card">
                                
                                 <TabContent activeTab={activeTab}>
                                     <TabPane tabId="1">
@@ -41,11 +42,12 @@ import { apexColumnChartsone } from "./ApexData";
 						                </div>
                                     </TabPane>
                                 </TabContent>
-                                </div>
+                            </div>
                           
                     </Col>
                     
                 </Row>
+            
             </Container>
         </Fragment>
     );

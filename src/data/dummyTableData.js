@@ -38,7 +38,3 @@ export const tableData =[
         creat_on:"2018-04-18T00:00:00"
     }
 ]
-
-
-
-
