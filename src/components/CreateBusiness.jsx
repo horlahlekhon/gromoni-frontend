@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Container, Row, Col, Button, Form, FormGroup, Input } from 'reactstrap'
+import { Container, Row, Col, Button, Form, FormGroup, Input, Label} from 'reactstrap'
 
 import { withRouter } from 'react-router';
 import { useHistory } from 'react-router-dom'
@@ -21,7 +21,7 @@ const CreateBusiness = (props) => {
 
     const [isCreatingBusiness, setIsCreatingBusiness]  = useState(false)
 
-
+    const [showMessage, setShowMessage] = useState(false)
     const [businessName, setBusinessName] = useState('')
     const [businessMail, setBusinessMail] = useState('')
     const [companyType, setCompanyType] = useState('I')
@@ -90,93 +90,78 @@ const CreateBusiness = (props) => {
 
 
     return (
-        <div>      {/*className="page-wrapper" */}
-            <Container> {/*fluid={true} className="p-0" */}
-                <div > {/*className="authentication-main m-0" */}
+        <div style={{fontFamily:"'Poppins', sans-serif"}}>    
+            <Container> 
+                <div > 
                     <Row>
-                        <Col> {/*md="12" */}
-                            <div > {/*className="auth-innerright" */}
-                                <div > {/*className="authentication-box" */}
-                                        <div>  {/*className="cont text-center b-light" */}
-                                            <div>
-                                                <Form  onSubmit={e => e.preventDefault()}> {/*className="theme-form" */}
-                                                    <ToastContainer />
-                                                    <h4>Create business</h4>
-                                                    <FormGroup className=" m-form__group">
-
-                                                        <Input className="form-control"
-                                                            type="text"
-                                                            placeholder="Business name i.e JC LTD"
-                                                            value={businessName}
-                                                            onChange={e => setBusinessName(e.target.value)} />
-                                                    </FormGroup>
-                                                    <FormGroup className=" input-group-solid">
-
-                                                        <Input className="form-control"
-                                                            type="email"
-                                                            placeholder="Email"
-                                                            value={businessMail}
-                                                            onChange={e => setBusinessMail(e.target.value)} />
-                                                    </FormGroup>
-                                                    {/* <div className="checkbox p-0">
-                                                        <Input id="checkbox1" type="checkbox" />
-                                                        <Label for="checkbox1">Remember me</Label>
-                                                    </div> */}
-                                                    <FormGroup>
-
-                                                        <Input className="custom-select" type="select" placeholder="Company type"
-                                                            value={companyType}
-                                                            onChange={e => setCompanyType(e.target.value)}
-                                                            required
-                                                        >
-                                                            <option value="">select company type</option>
-                                                            {Object.keys(companyTypes).map((opt, idx) => (
-                                                                <option value={companyTypes[opt]} key={idx}>{opt}</option>
-                                                            ))}
-                                                        </Input>
-                                                    </FormGroup>
-                                                    <FormGroup className=" m-form__group">
-
-                                                        <Input className="form-control"
-                                                            type="tel"
-                                                            placeholder="Telephone"
-                                                            value={phone}
-                                                            onChange={e => setPhone(e.target.value)} />
-                                                    </FormGroup>
-                                                    <FormGroup className=" input-group-solid">
-
-                                                        <Input className="form-control"
-                                                            type="text"
-                                                            placeholder="Business Location"
-                                                            value={location}
-                                                            onChange={e => setLocation({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})} />
-                                                    </FormGroup>
-                                                    <FormGroup className=" input-group-solid">
-
-                                                        <Input className="form-control"
-                                                            type="select"
-                                                            placeholder="Country of operation"
-                                                            value={country}
-                                                            onChange={e => setCountry(e.target.value)} >
-                                                            <option value="">select country</option>
-                                                            {countries.map((opt, idx) => (
-                                                                <option value={opt} key={idx}>{opt}</option>
-                                                            ))}
-                                                        </Input>
-                                                    </FormGroup>
-                                                    <FormGroup className="form-row mt-3 mb-0">
-                                                        <Button color="primary btn-block"
-                                                            onClick={e => handleCreateBusiness(e)}
-                                                        >
-                                                            {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}
-                                                            {isCreatingBusiness ? 'Loading...' : 'Create business'}
-                                                            </Button>
-                                                    </FormGroup>
-
-                                                </Form>
-                                            </div>
-                                        </div>
-                                </div>
+                        <Col> 
+                            <div >  
+                                <Form  onSubmit={e => e.preventDefault()}>
+                                    <ToastContainer />
+                                    <h3>Business Registration</h3>
+                                    <FormGroup className=" m-form__group">
+                                        <Label for="businessName">Business Name</Label>
+                                        <Input className="form-control" id="businessName"
+                                            type="text"
+                                            placeholder="Business name i.e JC LTD"
+                                            value={businessName}
+                                            onChange={e => setBusinessName(e.target.value)} style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}/>
+                                    </FormGroup>
+                                    <FormGroup className=" input-group-solid">
+                                        <Label for="businessEmail">Business Email</Label>
+                                        <Input className="form-control" id="businessEmail"
+                                            type="email"
+                                            placeholder="Email"
+                                            value={businessMail}
+                                            onChange={e => setBusinessMail(e.target.value)} style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}/>
+                                    </FormGroup>
+                                    {/* <div className="checkbox p-0">
+                                        <Input id="checkbox1" type="checkbox" />
+                                        <Label for="checkbox1">Remember me</Label>
+                                    </div> */}
+                                    <FormGroup>
+                                        <Label for="companyType">Company Type</Label>
+                                        <Input className="custom-select" type="select" placeholder="Company type" id="companyType"
+                                            value={companyType}
+                                            onChange={e => setCompanyType(e.target.value)}
+                                            required
+                                            style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}
+                                        >
+                                            <option value="">select company type</option>
+                                            {Object.keys(companyTypes).map((opt, idx) => (
+                                                <option value={companyTypes[opt]} key={idx}>{opt}</option>
+                                            ))}
+                                        </Input>
+                                    </FormGroup>
+                                    <FormGroup className=" m-form__group">
+                                        <Label for="phoneNumber">Phone Number</Label>
+                                        <Input className="form-control" id="phoneNumber"
+                                            type="tel"
+                                            placeholder="Telephone"
+                                            value={phone}
+                                            onChange={e => setPhone(e.target.value)} style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}/>
+                                    </FormGroup>
+                                    <FormGroup className=" input-group-solid">
+                                        <Label for="businessLocation">Business Location</Label>
+                                        <Input className="form-control"
+                                            style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db",}}
+                                            type="select"
+                                            placeholder="Country of operation"
+                                            value={country}
+                                            onChange={e => setCountry(e.target.value)} >
+                                            <option value="">select country</option>
+                                            {countries.map((opt, idx) => (
+                                            <option value={opt} key={idx}>{opt}</option>
+                                            ))}
+                                        </Input>
+                                    </FormGroup>
+                                    <Button color="primary "
+                                        onClick={e => handleCreateBusiness(e)}
+                                    >
+                                        {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}
+                                        {isCreatingBusiness ? 'Loading...' : 'Done'}
+                                    </Button>
+                                </Form>
                             </div>
                         </Col>
                     </Row>
