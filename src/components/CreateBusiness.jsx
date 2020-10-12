@@ -1,23 +1,22 @@
-import React, { useState } from 'react'
-
+import React, {useState} from 'react'
 // import { Container, Row, Col, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Container, Row, Col, Button, Form, FormGroup, Input, Label} from 'reactstrap'
 
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom'
-import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom'
+import {connect} from 'react-redux';
 import countryList from 'country-list'
-import { validateForm, responseErrorParser } from '../components/authentication/validator';
-import { createBusiness } from '../redux/actions/businessActions';
-import { useCookie } from '@shopify/react-cookie';
+import {responseErrorParser, validateForm} from '../components/authentication/validator';
+import {createBusiness} from '../redux/actions/businessActions';
+import {useCookie} from '@shopify/react-cookie';
 
 
 const CreateBusiness = (props) => {
     const history = useHistory();
-    const [accessToken, setAccessToken] = useCookie('accessToken')
+    const [accessToken, ] = useCookie('accessToken')
 
     const [isCreatingBusiness, setIsCreatingBusiness]  = useState(false)
 
@@ -28,8 +27,8 @@ const CreateBusiness = (props) => {
     const [phone, setPhone] = useState('')
     const [location, setLocation] = useState({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})
     const [country, setCountry] = useState('Nigeria')
-    const [dateCreated, setDateCreated] = useState('2020-01-01')
-    const [taxPercentage, setTaxPercentage] = useState(7.5)
+    const [dateCreated, ] = useState('2020-01-01')
+    const [taxPercentage, ] = useState(7.5)
 
     const companyTypes = {
         "Corporate": "C",
@@ -71,7 +70,6 @@ const CreateBusiness = (props) => {
         } else {
             const response = await props.createBusiness(accessToken, requestPayload)
             if (response.status) {
-                console.log(`datattatattat: ${response.payload}`)
                 const currentBusiness = response.payload.data.id
                 localStorage.removeItem('__grm__act__biz__')
                 localStorage.setItem('__grm__act__biz__', currentBusiness.toString())

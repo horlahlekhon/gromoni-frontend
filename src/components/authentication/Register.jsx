@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { handleUserRegister } from '../../redux/actions/userActions';
-import {Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
-import { toast } from 'react-toastify';
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom'
-import { validateForm, responseErrorParser } from './validator';
+import React, {useState} from 'react'
+import {handleUserRegister} from '../../redux/actions/userActions';
+import {Button, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap'
+import {toast} from 'react-toastify';
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom'
+import {responseErrorParser, validateForm} from './validator';
 import {useCookie} from '@shopify/react-cookie';
 
 import {Eye} from 'react-feather'
@@ -14,10 +14,10 @@ const eye = <Eye />
 
 const Register = (props) => {
     useHistory();
-    const [accessToken, setAccessToken] = useCookie('accessToken');
-    const [refreshToken, setRefreshToken] = useCookie('refreshToken')
+    const [, setAccessToken] = useCookie('accessToken');
+    const [, setRefreshToken] = useCookie('refreshToken')
     const [fullName, setFullName] = useState('')
-    const [userName, setUserName] = useState('')
+    const [username, setusername] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [gender, setGender] = useState('')
@@ -37,7 +37,7 @@ const Register = (props) => {
 
       const fields = {
         fullName: {default: '', message: 'Please enter your full name seprated by space'},
-        userName: {default: '', message: 'Please enter a username'},
+        username: {default: '', message: 'Please enter a username'},
         email: {default: '', message: 'Please enter a valid email address'},
         phone: {default: '', message: 'Please enter a valid phone with standard format'},
         gender: {default: '', message: 'Please select your gender'},
@@ -54,7 +54,7 @@ const Register = (props) => {
         e.preventDefault();
         const sta = {
             fullName: fullName,
-            userName: userName,
+            username: username,
             email: email,
             phone: phone,
             gender: gender,
@@ -73,7 +73,7 @@ const Register = (props) => {
           const name = fullName.split(' ');
           form.append('first_name', name[0]);
           form.append('last_name', name[1] ? name[1] : '');
-          form.append('username', userName);
+          form.append('username', username);
           form.append('phone', phone);
           form.append('gender', gender);
           form.append('password1', password1);
@@ -81,8 +81,8 @@ const Register = (props) => {
           form.append('email', email);
           const res_data = await props.register(form);
           if (res_data.status) {
-            setAccessToken(res_data.payload.data.access)
-              setRefreshToken(res_data.payload.data.refresh)
+            setAccessToken(res_data.payload.data.access_token)
+              setRefreshToken(res_data.payload.data.refresh_token)
             setTimeout(() => {
               toast.info('Registeration successful')
             }, 200)
@@ -116,9 +116,9 @@ const Register = (props) => {
               </Col>
               <Col md="12">
                 <FormGroup>
-                  <Input className="form-control" type="text" placeholder="Username"
-                  value={userName}
-                  onChange={e => setUserName(e.target.value)}
+                  <Input className="form-control" type="text" placeholder="username"
+                  value={username}
+                  onChange={e => setusername(e.target.value)}
                   required
                   />
                 </FormGroup>
@@ -193,13 +193,13 @@ const Register = (props) => {
                 <FormGroup >
                   <div className="checkbox p-0 checkbox-primary">
                     <Input id="checkbox2" type="checkbox"  value={agree}
-                    onChange={(e) => setAgree(!agree)}  />
-                    <Label className="mb-1" for="checkbox2"> <a href="#">Terms and Conditions</a></Label>
+                    onChange={() => setAgree(!agree)}  />
+                    <Label className="mb-1" for="checkbox2"> <a href="http://www.google.com">Terms and Conditions</a></Label>
                   </div>
                 </FormGroup>
               </Col>
             </Row>
-            <div className="form-divider"></div>
+            <div className="form-divider"/>
             <div className="social mt-3">
               <div className="form-row btn-showcase">
                 <Col sm="4">

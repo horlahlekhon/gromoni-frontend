@@ -1,47 +1,57 @@
 import React from 'react';
-import { getBusiness } from "../../redux/actions";
+import {getBusiness} from "../../redux/actions";
 import {routes} from '../../route/ContentRoutes'
-import { CSSTransition,TransitionGroup } from 'react-transition-group'
-import {Route} from 'react-router-dom'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom'
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
+import {Redirect, Route, useHistory} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router';
+import {toast} from 'react-toastify';
 import {useCookie} from '@shopify/react-cookie';
+import App from '../../components/app';
 
-
-const AuthenticatedRoute = (props) =>  {
+const AuthenticatedRoute = (props) => {
+    const thisBusiness = localStorage.getItem('__grm__act__biz__')
     const [accessToken, setAccessToken] = useCookie('accessToken');
     const history = useHistory()
-    const business = props.getBusiness(accessToken)
+    if (thisBusiness) {
+        props.getBusiness(accessToken, thisBusiness)
         .then((business) => {
             if (!business.status) {
-                history.push('/login')
-                toast.error(business.payload.data.detail)
+                history.push(`${process.env.PUBLIC_URL}/login`)
+                toast.error(business.errorMsg)
             }
         })
+    }else {
+        toast.error("User does not have any business kindly create a business")
+        history.push(`${process.env.PUBLIC_URL}/business/`)
+    }
     
-        const { location: { pathname }, component } = props;
-        return (
-            // <Route exact path={pathname} component={component} />
+
+    // const { location: {  },  } = props;
+    return (
+        <App>
+            <Route exact path="/" render={() => {
+                return (<Redirect to={`${process.env.PUBLIC_URL}/Home`} />)
+            }} />
             <TransitionGroup>
                 {routes.map(({ path, Component }) => (
-                    <Route key={path} exact path={`business/:id/${path}`} >
-                    {({ match }) => (
-                        <CSSTransition 
-                            in={match != null}
-                            timeout={500}
-                            classNames="zoomout"
-                            unmountOnExit
+                    <Route key={path} exact path={path}>
+                        {({ match }) => (
+                            <CSSTransition
+                                in={match != null}
+                                timeout={500}
+                                classNames="zoomout"
+                                unmountOnExit
                             >
-                            <div><Component/></div>
-                        </CSSTransition> 
-                    )}
+                                <div><Component /></div>
+                            </CSSTransition>
+                        )}
                     </Route>
                 ))}
             </TransitionGroup>
-        )
-    
+        </App>
+    )
+
 
 }
 

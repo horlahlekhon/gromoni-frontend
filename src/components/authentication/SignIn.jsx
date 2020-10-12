@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { handleUserLogin } from '../../redux/actions/userActions';
+import React, {useState} from 'react'
+import {handleUserLogin} from '../../redux/actions/userActions';
 
-import { Container, Row, Col, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import {Button, CardBody, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap'
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom'
-import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom'
+import {connect} from 'react-redux';
 import Register from './Register';
-import { validateForm, responseErrorParser } from './validator';
+import {responseErrorParser, validateForm} from './validator';
 
 import {useCookie} from '@shopify/react-cookie';
 

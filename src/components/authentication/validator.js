@@ -12,7 +12,7 @@ const validateForm = (state, fields) => {
             // pushing error to the "errors array"
             return errors.push({ item: state.password2, message: fields.password2.message })
         }
-
+        return []
     });
 
      
@@ -26,6 +26,7 @@ const validateForm = (state, fields) => {
         return { isErrors: true, errors };
     }
 }
+// use the one in ../common/utitilityFunctions
 function responseErrorParser(payload) {
     if (typeof payload === 'undefined') {
         return [{ message: 'Sorry, an unexpected error occured, please Check your Internet Network or contact support center' }]
@@ -33,7 +34,6 @@ function responseErrorParser(payload) {
         const keys = Object.keys(payload)
         const errors = []
         keys.forEach(e => {
-            console.log(`eeeeeeeeeee: ${e}`)
              errors.push({ message: `${e}: ${payload[e][0]}` })
         })
         return errors
@@ -49,7 +49,7 @@ export {
 
 function regexValidate(type, data) {
     const phoneRGEX = /^[0-9()+\\s-]*$/;
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     switch (type) {
         case 'phone':
             return phoneRGEX.test(data)

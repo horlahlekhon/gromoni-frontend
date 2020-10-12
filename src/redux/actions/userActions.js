@@ -2,10 +2,10 @@ import {type} from '../actionTypes'
 
 import {HTTP} from '../../api'
 
-const handleSetUser = (payload) => ({
-    type: type.LOGIN,
-     payload
-})
+// const handleSetUser = (payload) => ({
+//     type: type.LOGIN,
+//      payload
+// })
 
 
 export const handleUserLogin = (data) => async dispatch => {
@@ -39,6 +39,5 @@ export const handleUserRegister = (data) => dispatch => {
     }).catch((error) => {
     //   dispatch({ type: type.ERROR_IN_REG, payload: error});
       return { status: false, payload: error.message }
-      console.log(error.message);
     })
   }
