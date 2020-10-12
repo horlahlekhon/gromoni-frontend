@@ -41,24 +41,15 @@ const Root = (props) => {
               <Route exact path={`${process.env.PUBLIC_URL}/`} component={CommingSoon} />
               <Route exact path={`${process.env.PUBLIC_URL}/login/`} component={SignInAndRegister} />
               {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
-<<<<<<< HEAD
               {/* <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} /> */}
               <Route path="/welcomepage"><WelcomePage/></Route>
-=======
               <Route exact path={`${process.env.PUBLIC_URL}/business/`} component={NewBusiness} />
->>>>>>> develop
 
               <Fragment>
                 <AuthenticatedRoute />
               </Fragment>
-<<<<<<< HEAD
-          :
-          <Redirect to={`${process.env.PUBLIC_URL}/login`} />
-        </Switch>
-=======
               <Redirect to={`${process.env.PUBLIC_URL}/login/`} />
             </Switch>
->>>>>>> develop
           </BrowserRouter>
         </Provider>
       </CookieUniversalProvider>

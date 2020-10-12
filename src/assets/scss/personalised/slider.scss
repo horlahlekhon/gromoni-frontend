@@ -1,5 +1,4 @@
-// $layout-breakpoint-small: 500px;
-
+// css transition
 .message-enter,
 .message-exit
 {
@@ -8,8 +7,9 @@
 .message-enter{
   transform: translateX(100%);
 }
-.message-enter.alert-enter-active {
+.message-enter.message-enter-active {
   transform: translateX(0%);
+  transition: transform 1000ms ease-out;
 }
 .message-exit {
   position: absolute;
@@ -24,19 +24,59 @@
 @media (min-width: 768px) {
   .h-md-100 { height: 100vh; }
 }
-// .major{
-//   padding-top: 6.25rem;
-// }
-// .second-col{
-//   background-color: white;
-//   margin: 0 !important;
-//   padding: 0 !important;
+.transition-message{
+  background-color: #fff; 
+  position: absolute;
+  top: 0; 
+  z-index:1; 
+  padding-top:2rem;
+}
+.transition-message-btn{
+  margin-left: 15px;
+}
 
-// }
-// .form-button{
-//   position: absolute;
-//   right: 300px;
-//   top: 6.25rem;
-//   background-color: #ffffff;
-//   height: 100vh;
-// }
+// welcomePage styles
+.welcome-pg-cont{
+  padding-left: 72px
+}
+.welcome-pg-second-inner{
+  background-color: #fff;
+  position:relative;
+}
+.welcome-pg-second-logo{
+  margin: 155.56px auto 63.44px;
+  text-align: center;
+}
+.welcome-pg-second-heading{
+  font-size: 42px;
+  font-family: 'Quicksand', sans-serif;
+  margin-bottom:30px;
+  max-width:278pt;
+  width:100%;
+}
+.welcome-pg-second-text{
+  font-family: 'Poppins', sans-serif;
+  margin-bottom:24px; 
+  font-size: 16px;
+  max-width:347px; 
+  width:100%;
+}
+.welcome-pg-second-btn{
+  font-family: 'Poppins', sans-serif;
+  max-width:310pt;
+  width:100%; 
+  height:60pt;
+}
+// createBusiness Styles
+.main-title{
+  margin: 20px 0 40px 0;
+}
+.input-container{
+  background-color: #a9c3db;
+  height: 44px;
+  color: #30acf2;
+  border: 1px solid #a9c3db;
+}
+.create-business-btn{
+  width:179px;
+}

@@ -96,34 +96,29 @@ const CreateBusiness = (props) => {
                             <div >  
                                 <Form  onSubmit={e => e.preventDefault()}>
                                     <ToastContainer />
-                                    <h3>Business Registration</h3>
+                                    <h3 className="main-title">Business Registration</h3>
                                     <FormGroup className=" m-form__group">
                                         <Label for="businessName">Business Name</Label>
-                                        <Input className="form-control" id="businessName"
+                                        <Input className="form-control input-container" id="businessName"
                                             type="text"
                                             placeholder="Business name i.e JC LTD"
                                             value={businessName}
-                                            onChange={e => setBusinessName(e.target.value)} style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}/>
+                                            onChange={e => setBusinessName(e.target.value)}/>
                                     </FormGroup>
                                     <FormGroup className=" input-group-solid">
                                         <Label for="businessEmail">Business Email</Label>
-                                        <Input className="form-control" id="businessEmail"
+                                        <Input className="form-control input-container" id="businessEmail"
                                             type="email"
                                             placeholder="Email"
                                             value={businessMail}
-                                            onChange={e => setBusinessMail(e.target.value)} style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}/>
+                                            onChange={e => setBusinessMail(e.target.value)} />
                                     </FormGroup>
-                                    {/* <div className="checkbox p-0">
-                                        <Input id="checkbox1" type="checkbox" />
-                                        <Label for="checkbox1">Remember me</Label>
-                                    </div> */}
                                     <FormGroup>
                                         <Label for="companyType">Company Type</Label>
-                                        <Input className="custom-select" type="select" placeholder="Company type" id="companyType"
+                                        <Input className="custom-select input-container" type="select" placeholder="Company type" id="companyType"
                                             value={companyType}
                                             onChange={e => setCompanyType(e.target.value)}
                                             required
-                                            style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}
                                         >
                                             <option value="">select company type</option>
                                             {Object.keys(companyTypes).map((opt, idx) => (
@@ -133,16 +128,15 @@ const CreateBusiness = (props) => {
                                     </FormGroup>
                                     <FormGroup className=" m-form__group">
                                         <Label for="phoneNumber">Phone Number</Label>
-                                        <Input className="form-control" id="phoneNumber"
+                                        <Input className="form-control input-container" id="phoneNumber"
                                             type="tel"
                                             placeholder="Telephone"
                                             value={phone}
-                                            onChange={e => setPhone(e.target.value)} style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db"}}/>
+                                            onChange={e => setPhone(e.target.value)}/>
                                     </FormGroup>
                                     <FormGroup className=" input-group-solid">
                                         <Label for="businessLocation">Business Location</Label>
-                                        <Input className="form-control"
-                                            style={{backgroundColor:"#a9c3db", height:"44px", color:"#30acf2", border:"1px solid #a9c3db",}}
+                                        <Input className="form-control input-container"
                                             type="select"
                                             placeholder="Country of operation"
                                             value={country}
@@ -153,7 +147,7 @@ const CreateBusiness = (props) => {
                                             ))}
                                         </Input>
                                     </FormGroup>
-                                    <Button color="primary "
+                                    <Button color="primary " className=" create-business-btn"
                                         onClick={e => handleCreateBusiness(e)}
                                     >
                                         {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}

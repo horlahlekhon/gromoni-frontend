@@ -1,0 +1,4 @@
+Fix: welcome page
+  * removed whitespace from the welcome page
+  * enable transition to be slide in
+  * transferred the styles from inline to the sass file `slider.scss`
