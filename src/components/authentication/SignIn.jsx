@@ -70,7 +70,7 @@ const SignIn = (props) => {
                     if(typeof props.location.state === 'object' && props.location.state.isRedirect){
                         history.push(props.location.state.redirectRoute) // change to use the FQP(fully qualified path)
                     }else{
-                        history.push(`/business/${currentBusiness.id}/dashboard`);
+                        history.push(`/business/${currentBusiness.id}/home`);
                     }
                 }
             } else {
