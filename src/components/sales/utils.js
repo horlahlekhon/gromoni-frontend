@@ -1,14 +1,49 @@
-import { HTTP } from '../../api'
+import React from "react";
 import configDB from "../../data/customizer/config";
+
 const primary = localStorage.getItem('primary_color') || configDB.data.color.primary_color;
 const secondary = localStorage.getItem('secondary_color') || configDB.data.color.secondary_color;
-export const salesDashboardData = (token, business) => {
-    return HTTP.growthApi(token)
-        .get(`/report/${business}/dashboards/sales/?page_size=10`)
+
+export const decideStatus = (status) => {
+    switch (status) {
+        case "PENDING":
+            return <span className={`badge badge-pill pill-badge-info`}>Pending</span>
+        case "CREDITED":
+            return <span className={`badge badge-pill pill-badge-danger`}>Credited</span>
+        case "CLEARED":
+            return <span className={`badge badge-pill pill-badge-success`}>Cleared</span>
+        default:
+            return ""
+    }
+}
+export const parseData = (data) => {
+    if (data !== undefined) {
+        const res = data.map(payload => {
+            return {
+                id: payload.id,
+                name: payload.product.name,
+                customer: payload.customer.name,
+                price: new Intl.NumberFormat('en-NG', {
+                    style: 'currency',
+                    currency: 'NGN'
+                }).format(payload.sales_order.total_cost),
+                discount: `${payload.product.discount.percentage_discounted}%`,
+                status: decideStatus(payload.sales_order.status),
+                date: payload.ts_created
+            }
+        })
+        return res
+    } else {
+        return {}
+    }
 }
 
-export const chartOptions = (series, labels) => {
-    const data = {
+export const convertDateToMonthNames = (dates) => {
+    return dates.map(e => new Date(e).toLocaleString('default', {month: 'long'}))
+}
+export const dataOptions = (series, labels, name) => {
+
+    return {
         options: {
             chart: {
                 toolbar: {show: false}
@@ -24,8 +59,13 @@ export const chartOptions = (series, labels) => {
             dataLabels: {enabled: true},
             stroke: {show: true, width: 8, colors: ['transparent']},
             xaxis: {
-                categories: [0], labels: {low: 0, offsetX: 0, show: false},
-                axisBorder: {low: 0, offsetX: 0, show: false}
+                categories: labels === undefined ? [0] : labels,
+                tickPlacement: 'on',
+                labels: {
+                    low: labels === undefined ? 0 : labels[0],
+                    offsetX: 0, show: labels !== undefined
+                },
+                // axisBorder: {low: 0, offsetX: 0, show: false}
             },
             fill: {
                 colors: [primary, secondary],
@@ -40,7 +80,7 @@ export const chartOptions = (series, labels) => {
                 {
                     y: {
                         formatter: function (val) {
-                            return "$ " + val + " thousands"
+                            return  val + " Units"
                         }
                     }
                 },
@@ -48,7 +88,7 @@ export const chartOptions = (series, labels) => {
                 {
                     borderColor: "#f5f8fd", clipMarkers: false, yaxis: {lines: {show: true}}
                 },
-            yaxis: {tickAmount: 6, min: 0, max: 120, labels: {style: {color: '#6e7e96'}}},
+            yaxis: {tickAmount: series === undefined ? 5 : Math.max(...series) / 5, min: 0, max: series === undefined ? 0 : Math.max(...series), labels: {style: {color: '#6e7e96'}}},
             responsive: [
                 {
                     breakpoint: 992,
@@ -79,11 +119,10 @@ export const chartOptions = (series, labels) => {
                 }
             ]
         },
-        series: [{name: '<b>ICU</b> (intensive care unit)', data: [80, 45, 114, 20, 80, 40, 55, 40]}
-            // , {
-            //     name: '<b>OPD</b> (out patient Department)',
-            //     data: [35, 65, 80, 68, 60, 70, 20, 80]
-            // }
-        ]
+        series: series === undefined ? [{
+            name: name,
+            data: [0, 0, 0, 0, 0, 0, 0, 0]
+        }] : [{name: name, data: series}]
+
     }
 }

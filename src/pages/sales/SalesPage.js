@@ -12,6 +12,8 @@ import {responseErrorParser} from "../../components/common/utilityFUnctions";
 import {toast, ToastContainer} from 'react-toastify';
 import {useHistory} from 'react-router-dom'
 import data from "../../data/chat/chatMember";
+import {tableData} from "../../data/dummyTableData";
+import {convertDateToMonthNames} from "../../components/sales/utils";
 
 const SalesPage = (props) => {
     const history = useHistory()
@@ -22,7 +24,7 @@ const SalesPage = (props) => {
     const [weeklyChartData, setWeeklyChartData] = useState({})
     const [monthlyChartData, setMonthlyChartData] = useState({})
     const [yearlyChartData, setYearlyChartData] = useState({})
-    const [salesTableData, setSalesTableData] = useState([])
+    const [salesTableData, setSalesTableData] = useState({})
     const [chartData, setChartData] = useState( {})
     const [salesList, setSalesList] = useState([])
     const [topBarData, setTopBarData] = useState({})
@@ -60,13 +62,21 @@ const SalesPage = (props) => {
                 setLoading(false)
                 setApiError(responseErrorParser(response.data))
             } else {
-                const data = response.data.analytics
-                setWeeklyChartData(data.weekly_data)
-                setMonthlyChartData({
-                    labels: data.monthly_data.labels,
-                    series: [{name: "<b>ICU</b> (Sales for the week)", data: data.monthly_data.series}]
+                setWeeklyChartData({
+                    labels: response.data.analytics.weekly_data.labels,
+                    series: response.data.analytics.weekly_data.series,
+                    name: "<b>sales</b> (Sales for the Day)"
                 })
-                setYearlyChartData(data.yearly_data)
+                setMonthlyChartData({
+                    labels: convertDateToMonthNames(response.data.analytics.monthly_data.labels),
+                    series: response.data.analytics.monthly_data.series,
+                    name: "<b>sales</b> (Sales for the Month)"
+                })
+                setYearlyChartData({
+                    labels: response.data.analytics.monthly_data.labels,
+                    series: response.data.analytics.yearly_data.series,
+                    name: "<b>sales</b> (Sales for the Year)"
+                })
                 // setChartData(response.data.analytics)
                 setSalesList(response.data.results)
                 setSavedSales(response.data.analytics.saved)
@@ -76,7 +86,12 @@ const SalesPage = (props) => {
                     NosOfSales: response.data.analytics.sales_total_count,
                     overallSales: response.data.analytics.overall_sales_amount
                 })
-                setSalesTableData(response.data.results)
+                setSalesTableData({
+                    results: response.data.results,
+                    totalRow: response.data.count,
+                    nextPageUrl: response.data.next,
+                    previousPageUrl: response.data.previous
+                })
             }
 
         }
@@ -102,8 +117,6 @@ const SalesPage = (props) => {
 
     }
 
-    console.log(`monthly datatattatta: ${monthlyChartData}`)
-
     const topBarDataDummy = {NosOfSales: 350, overallSales: 450}
     return (
 
@@ -113,14 +126,19 @@ const SalesPage = (props) => {
                 <ToastContainer/>
                 {apiError.length > 0 ? apiError.forEach(e => toast.error(e.message)) : ''}
                 <TopStatBar data={topBarData}/>
-                {/*{*/}
-                {/*    console.log(`monthly chart daya: ${monthlyChartData.labels}`)*/}
-
-                {/*}*/}
-                {console.log(`top bar  data: ${topBarData}`)}
-                <SalesGraph salesWeekChart={weeklyChartData} salesMonthlyChart={monthlyChartData}
-                            salesYearlyChart={yearlyChartData}/>
-                <StatusBadges data={salesUpdateStatDummy}/>
+                {/*<div>{*/}
+                {/*    monthlyChartData.labels.map((e, idx) =>*/}
+                {/*        <p key={idx}>{e.toString()}</p>*/}
+                {/*    )*/}
+                {/*}</div>*/}
+                <SalesGraph
+                    salesWeeklyChart={weeklyChartData}
+                    salesMonthlyChart={monthlyChartData}
+                    salesYearlyChart={yearlyChartData}
+                />
+                <StatusBadges
+                    data={salesUpdateStatDummy}
+                />
                 <Row>
                     <Col sm="12">
                         <Card>

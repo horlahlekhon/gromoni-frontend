@@ -1,16 +1,16 @@
-import React, { useState, Fragment } from 'react'
-import { Row, Col } from 'reactstrap'
+import React, {Fragment} from 'react'
+import {Col, Row} from 'reactstrap'
 
-import { Clock, CheckCircle, Archive } from 'react-feather'
+import {Archive, CheckCircle, Clock} from 'react-feather'
 
 export const StatusBadge = (props) => {
 
     const Icon = props.icon
     return (
         <Fragment>
-            <div className="mb-4 b-r-10 shadow shadow-showcase tool sales-stat-badge" data-tip={props.tip} >
+            <div className="mb-4 b-r-10 shadow shadow-showcase tool sales-stat-badge" data-tip={props.tip}>
                 <div className='sales-stat-badge-icon-name-grp'>
-                    <Icon />
+                    <Icon/>
                     <div>{props.text}</div>
                 </div>
                 <div>{props.count}</div>
@@ -23,16 +23,16 @@ export const StatusBadge = (props) => {
 const clearedIcon = (props) => {
     return (
         <div className="sales-stat-icon-wrapper sales-stat-icon-cleared">
-            <CheckCircle />
+            <CheckCircle/>
         </div>
     )
 }
 
 const archiveIcon = (props) => {
-    
+
     return (
         <div className="sales-stat-icon-wrapper sales-stat-icon-archive">
-            <Archive />
+            <Archive/>
         </div>
     )
 }
@@ -40,7 +40,7 @@ const archiveIcon = (props) => {
 const pendingIcon = (props) => {
     return (
         <div className="sales-stat-icon-wrapper sales-stat-icon-pending">
-            <Clock  />
+            <Clock/>
         </div>
     )
 }
@@ -48,15 +48,18 @@ const pendingIcon = (props) => {
 const StatusBadges = (props) => {
     return (
         <Fragment>
-            <Row  >
-                <Col xl='4' md="4" className="horizontal-alignmet" >
-                    <StatusBadge  icon={clearedIcon} text="Cleared" count={props.data.cleared.count} tip={props.data.cleared.tip} />
+            <Row>
+                <Col xl='4' md="4" className="horizontal-alignmet">
+                    <StatusBadge icon={clearedIcon} text="Cleared" count={props.data.cleared.count}
+                                 tip={props.data.cleared.tip}/>
                 </Col>
                 <Col xl='4' md="4" className="horizontal-alignmet">
-                    <StatusBadge icon={pendingIcon} text="Pending" count={props.data.pending.count} tip={props.data.pending.tip}/>
+                    <StatusBadge icon={pendingIcon} text="Pending" count={props.data.pending.count}
+                                 tip={props.data.pending.tip}/>
                 </Col>
                 <Col xl='4' md="4" className="horizontal-alignmet">
-                    <StatusBadge icon={archiveIcon} text="Archived" count={props.data.archive.count} tip={props.data.archive.tip} />
+                    <StatusBadge icon={archiveIcon} text="Archived" count={props.data.archive.count}
+                                 tip={props.data.archive.tip}/>
                 </Col>
             </Row>
         </Fragment>
