@@ -28,7 +28,8 @@ export const parseData = (data) => {
                     currency: 'NGN'
                 }).format(payload.sales_order.total_cost),
                 discount: `${payload.product.discount.percentage_discounted}%`,
-                status: decideStatus(payload.sales_order.status)
+                status: decideStatus(payload.sales_order.status),
+                date: payload.ts_created
             }
         })
         return res

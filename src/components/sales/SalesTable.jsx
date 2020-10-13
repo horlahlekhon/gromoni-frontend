@@ -23,6 +23,8 @@ const SalesTable = (props) => {
     const [perPage, setPerPage] = useState(10);
     const [accessToken,] = useCookie("accessToken")
     const [searchKey, setSearchKey] = useState("")
+    const [searchResult, setSearchResult] =  useState([])
+    const initialResults = parseData(props.data.results)
     const currentBusiness = localStorage.getItem("__grm__act__biz__")
     const tableColumns = [
         {
@@ -118,11 +120,20 @@ const SalesTable = (props) => {
 
     const Header = (props) => {
 
-        const handle = (e) => {
-            e.preventDefault()
+        const handleChange = (e) => {
             setSearchKey(e.target.value)
-            const res = !searchKey ? data:  data.filter(e => e.name.toLowerCase().includes(searchKey.toLocaleLowerCase()))
-            setData(res)
+        }
+        const handleBlur = () => {
+            const res = !searchKey ? searchResult:  initialResults.filter(e => e.name.toLowerCase().includes(searchKey.toLocaleLowerCase()))
+            setSearchResult(res)
+            console.log("search result", res)
+            console.log("initial result", initialResults)
+            console.log("search key::", searchKey)
+            if(searchKey === "" || searchKey === undefined){
+                setData(initialResults)
+            }else{
+                setData(searchResult)
+            }
         }
         return (
             <Row className="">
@@ -133,7 +144,8 @@ const SalesTable = (props) => {
                             className="search form-control"
                             placeholder="search"
                             value={searchKey}
-                            onChange={(e) => handle(e)}
+                            onChange={(e) => handleChange(e)}
+                            onBlur={handleBlur}
                         />
                     </div>
                 </Col>
