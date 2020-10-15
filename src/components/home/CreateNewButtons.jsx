@@ -13,7 +13,7 @@ const CreateNewButtons = (props) => {
 		<Fragment >
 			<Container fluid={true}>
 	      <Row >
-            <Col sm="12" xl="4" lg="6">
+            <Col sm="12" xl="3">
 	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allcustomers`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-primary b-r-4">
@@ -33,7 +33,7 @@ const CreateNewButtons = (props) => {
             </Col>
 
 
-	        <Col sm="12" xl="4" lg="6">
+	        <Col sm="12" xl="3">
 		  		<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allsales`}>
 		            <Card className="o-hidden">
 		              <CardBody className="bg-secondary b-r-4 card-body">
@@ -54,7 +54,7 @@ const CreateNewButtons = (props) => {
 
 
 
-	      	<Col sm="12" xl="4" lg="6">
+	      	<Col sm="12" xl="3">
 		      	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allproducts`}>
 		            <Card className="o-hidden">
 		              <CardBody className="bg-primary b-r-4 card-body">
@@ -74,7 +74,7 @@ const CreateNewButtons = (props) => {
         	</Col>
 
 
-	        <Col sm="12" xl="4" lg="6">
+	        <Col sm="12" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addsale`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-primary b-r-4">
@@ -94,7 +94,7 @@ const CreateNewButtons = (props) => {
 	        </Col>
 
 
-          	<Col sm="12" xl="4" lg="6">
+          	<Col sm="12" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addcustomer`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-primary b-r-4">
@@ -113,7 +113,7 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
             </Col>
 
-            <Col sm="12" xl="4" lg="6">
+            <Col sm="12" xl="3">
 	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addproduct`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-primary b-r-4">

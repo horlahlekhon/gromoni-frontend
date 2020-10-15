@@ -1,19 +1,28 @@
+import React from 'ract';
 import configDB from '../../data/customizer/config'
 const primary = localStorage.getItem('primary_color') || configDB.data.color.primary_color;
 const secondary = localStorage.getItem('secondary_color') || configDB.data.color.secondary_color;
 
 export const apexColumnChartsone = {
 
-    series: [{
-        name: 'Recieved Cash',
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-      }, {
-        name: 'Total Sales Cash',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-      }, {
-        name: 'Recievable Cash',
-        data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-      }],
+
+     series: series === undefined ? [{
+            name: name,
+            data: [0, 0, 0, 0, 0, 0, 0, 0]
+        }] : [{
+
+          name: "Total Sales",
+          data: sales_total
+        }, {
+
+          name: "Products Sold",
+          data: Product_sold
+        }, {
+
+          name: "Debts",
+          data: debt
+
+        }],
       options: {
         chart: {
           type: 'bar',
@@ -36,7 +45,12 @@ export const apexColumnChartsone = {
           colors: ['transparent']
         },
         xaxis: {
-          categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          categories: labels === undefined ? [0] : labels,
+          tickPlacement: 'on',
+                labels: {
+                    low: labels === undefined ? 0 : labels[0],
+                    offsetX: 0, show: labels !== undefined
+                }
         },
         yaxis: {
           title: {
@@ -57,3 +71,4 @@ export const apexColumnChartsone = {
     
     
     };
+ 

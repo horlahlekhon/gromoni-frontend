@@ -1,16 +1,16 @@
-import React, {Fragment, useCallback, useEffect, useMemo, useState} from 'react'
+import React, {Fragment, useCallback, useEffect, useMemo, useState} from 'react';
 // import Home from '../components/home/Home'
-import BreadCrumb from '../../layout/Breadcrumb'
-import TopStatBar from '../../components/sales/TopStatBar'
-import SalesGraph from '../../components/sales/SalesGraph'
-import StatusBadges from '../../components/sales/StatusBadge'
+import BreadCrumb from '../../layout/Breadcrumb';
+import TopStatBar from '../../components/sales/TopStatBar';
+import SalesGraph from '../../components/sales/SalesGraph';
+import StatusBadges from '../../components/sales/StatusBadge';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
-import SalesTable from '../../components/sales/SalesTable'
-import {salesDashboardData} from './pageUtility'
+import SalesTable from '../../components/sales/SalesTable';
+import {salesDashboardData} from './pageUtility';
 import {useCookie} from "@shopify/react-cookie";
 import {responseErrorParser} from "../../components/common/utilityFUnctions";
 import {toast, ToastContainer} from 'react-toastify';
-import {useHistory} from 'react-router-dom'
+import {useHistory,NavLinK} from 'react-router-dom';
 import data from "../../data/chat/chatMember";
 
 const SalesPage = (props) => {
@@ -108,7 +108,7 @@ const SalesPage = (props) => {
     return (
 
         <Fragment>
-            <BreadCrumb parent="Home" subparent="Sales" title="Sales"/>
+            <BreadCrumb parent={<NavLink to="/">Home</NavLink>} subparent="Sales" title="Sales"/>
             <Container fluid={true}>
                 <ToastContainer/>
                 {apiError.length > 0 ? apiError.forEach(e => toast.error(e.message)) : ''}

@@ -37,14 +37,14 @@ const SalesCashBalance = (props) => {
 							      </Col>
 
 
-							      <Col xl="4" sm="6">
+							      <Col xl="4" sm="12">
 							        <div className="current-balance">
-							        	<span className="f-12 f-w-600">Recieved Cash</span>
+							        	<span className="f-12 f-w-600">Products Sold</span>
 							          <h2>
 							          	<span className="mr-2">
 							          		<i className="icofont icofont-cur-dollar"></i>
 							          	</span>
-							          	<span>2,567 900.000</span>
+							          	<span>2,5679</span>
 							          </h2>
 							          <div className="btn-vertical-align d-flex">
 							            <button className="btn btn-pill btn-gradient-custom" style={{ backgroundColor: "#51bc25" }}>
@@ -58,9 +58,9 @@ const SalesCashBalance = (props) => {
 							      </Col>
 
 
-							      <Col xl="4" sm="6">
+							      <Col xl="4" sm="12">
 							       	 <div className="current-balance">
-							        	<span className="f-12 f-w-600">Recievable Cash</span>
+							        	<span className="f-12 f-w-600">Debts</span>
 							          <h2>
 							          	<span className="mr-2">
 							          		<i className="icofont icofont-cur-dollar"></i>
@@ -68,7 +68,7 @@ const SalesCashBalance = (props) => {
 							          	<span>959 123.2124</span>
 							          </h2>
 							          <div className="btn-vertical-align d-flex">
-							            <button className="btn btn-pill btn-gradient-custom btn-sucess" style={{ backgroundColor: "#f10342" }}>
+							            <button className="btn btn-pill btn-danger btn-gradient-custom" style={{ backgroundColor: "#f10342" }}>
 							            	Details
 							            	<span className="round-shape">
 							            		<i className="icofont icofont-arrow-right"></i>
