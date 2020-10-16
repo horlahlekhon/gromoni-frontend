@@ -42,10 +42,10 @@ const WelcomePage = () => {
 							onExited={() => setShowButton(true)}
 							>	
 								<div className="transition-message" dismissible onClose={() => setShowButton(false)}>
-									<i variant="outline-primary" style={{color:"#72b3f9", float:"right", marginRight:"20px"}} onClick={() => setShowMessage(false)}>
-										{xSquare}
-									</i>
-									<CreateBusiness/>
+									{/*<i variant="outline-primary" style={{color:"#72b3f9", float:"right", marginRight:"20px"}} onClick={() => setShowMessage(false)}>*/}
+									{/*	{xSquare}*/}
+									{/*</i>*/}
+									<CreateBusiness showMessageAction={setShowMessage}/>
 								</div>
 							</CSSTransition>		
 						</div>		

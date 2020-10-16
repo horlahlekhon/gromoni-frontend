@@ -155,12 +155,23 @@ const CreateBusiness = (props) => {
                                             </Input>
                                         </div>
                                     </FormGroup>
-                                    <Button color="primary " block className=" create-business-btn" style={{ height:"44px", marginTop:"30px"}}
-                                        onClick={e => handleCreateBusiness(e)}
-                                    >
-                                        {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}
-                                        {isCreatingBusiness ? 'Loading...' : 'Done'}
-                                    </Button>
+                                    <Row>
+                                        <Col xl={`4`}>
+                                            <Button color=" btn-outline-primary" block className=" create-business-btn" style={{ height:"44px", marginTop:"30px"}} onClick={() => props.showMessageAction(false)}>
+                                                cancel
+                                            </Button>
+                                        </Col>
+                                        <Col xl={`8`}>
+                                            <Button color="primary " block className=" create-business-btn" style={{ height:"44px", marginTop:"30px"}}
+                                                    onClick={e => handleCreateBusiness(e)}
+                                            >
+                                                {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}
+                                                {isCreatingBusiness ? 'Loading...' : 'Done'}
+                                            </Button>
+                                        </Col>
+
+                                    </Row>
+
                                 </Form>
                             </div>
                         </Col>
