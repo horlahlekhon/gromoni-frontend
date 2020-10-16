@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-// import { Container, Row, Col, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 import { Container, Row, Col, Button, Form, FormGroup, Input, Label} from 'reactstrap'
 
@@ -13,14 +15,15 @@ import {responseErrorParser, validateForm} from '../components/authentication/va
 import {createBusiness} from '../redux/actions/businessActions';
 import {useCookie} from '@shopify/react-cookie';
 
+import {MapPin} from 'react-feather'
+const mapPin = <MapPin/>
+
 
 const CreateBusiness = (props) => {
     const history = useHistory();
     const [accessToken, ] = useCookie('accessToken')
 
     const [isCreatingBusiness, setIsCreatingBusiness]  = useState(false)
-
-    const [showMessage, setShowMessage] = useState(false)
     const [businessName, setBusinessName] = useState('')
     const [businessMail, setBusinessMail] = useState('')
     const [companyType, setCompanyType] = useState('I')
@@ -128,15 +131,19 @@ const CreateBusiness = (props) => {
                                     </FormGroup>
                                     <FormGroup className=" m-form__group">
                                         <Label for="phoneNumber">Phone Number</Label>
-                                        <Input className="form-control input-container" id="phoneNumber"
+                                        <PhoneInput className="form-control input-container" id="phoneNumber"
                                             type="tel"
+                                            defaultCountry="NG"
                                             placeholder="Telephone"
                                             value={phone}
-                                            onChange={e => setPhone(e.target.value)}/>
+                                            onChange={setPhone}
+                                            fullWidth/>
                                     </FormGroup>
                                     <FormGroup className=" input-group-solid">
                                         <Label for="businessLocation">Business Location</Label>
-                                        <Input className="form-control input-container"
+                                        <div style={{position:"relative", }}>
+                                            <i className="mapPin" style={{position: "absolute", zIndex:"2", top:"10px", left:"16px"}}>{mapPin}</i>
+                                            <Input className="form-control input-container" style={{paddingLeft: "40px"}}
                                             type="select"
                                             placeholder="Country of operation"
                                             value={country}
@@ -145,9 +152,10 @@ const CreateBusiness = (props) => {
                                             {countries.map((opt, idx) => (
                                             <option value={opt} key={idx}>{opt}</option>
                                             ))}
-                                        </Input>
+                                            </Input>
+                                        </div>
                                     </FormGroup>
-                                    <Button color="primary " className=" create-business-btn"
+                                    <Button color="primary " block className=" create-business-btn" style={{ height:"44px", marginTop:"30px"}}
                                         onClick={e => handleCreateBusiness(e)}
                                     >
                                         {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}

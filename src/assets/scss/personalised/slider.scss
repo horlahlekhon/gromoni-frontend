@@ -38,7 +38,7 @@
 // welcomePage styles
 .welcome-pg-cont{
   padding-left: 72px;
-  background-color: #ededff;
+  background-color: #f0e7ff;
 }
 .welcome-pg-second-inner{
   background-color: #fff;
@@ -71,13 +71,13 @@
 // createBusiness Styles
 .main-title{
   margin: 20px 0 40px 0;
+  font-weight: 400;
 }
 .input-container{
-  background-color: #a9c3db;
+  background-color: #d5deee;
+  border: 1px solid #d5deee;
   height: 44px;
-  color: #30acf2;
-  border: 1px solid #a9c3db;
 }
-.create-business-btn{
-  width:179px;
-}
+// .create-business-btn{
+//   width:179px;
+// }
