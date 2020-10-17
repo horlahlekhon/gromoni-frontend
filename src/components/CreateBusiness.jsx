@@ -97,7 +97,7 @@ const CreateBusiness = (props) => {
                     <Row>
                         <Col> 
                             <div >  
-                                <Form  onSubmit={e => e.preventDefault()} className="create-business-form">
+                                <Form  onSubmit={e => e.preventDefault()}className="create-business-form" >
                                     <ToastContainer />
                                     <h3 className="main-title">Business Registration</h3>
                                     <FormGroup className=" m-form__group">
@@ -118,7 +118,7 @@ const CreateBusiness = (props) => {
                                     </FormGroup>
                                     <FormGroup className=" input-group-solid">
                                         <Label for="businessLocation" >Business Location</Label>
-                                        <div style={{position:"relative"}}>
+                                        <div className="business-location-cont">
                                             <i className="map-pin">{mapPin}</i>
                                             <Input className="form-control input-container business-location" id="businessLocation"
                                             type="text"
@@ -130,7 +130,7 @@ const CreateBusiness = (props) => {
                                     <FormGroup className=" m-form__group">
                                         <Label for="phoneNumber">Phone Number</Label>
                                         <PhoneInput
-                                            inputStyle={{maxWidth:"400px", width:"100%", height: "44px"}}
+                                            inputStyle={{maxWidth:"400px", width:"100%", height: "44px", baackgroundColor:"#d5deee"}}
                                             buttonStyle={{backgroundColor: "#d5deee"}}
                                             id="phoneNumber"
                                             country={"ng"}
@@ -154,7 +154,7 @@ const CreateBusiness = (props) => {
                                     </FormGroup>
                                     <Row>
                                         <Col xl={`4`}>
-                                            <Button color=" btn-outline-primary" block className=" create-business-btn" onClick={() => props.showMessageAction(false)}>
+                                            <Button color=" btn-outline-primary" block className=" create-business-btn cancel-btn" onClick={() => props.showMessageAction(false)}>
                                                 cancel
                                             </Button>
                                         </Col>
@@ -168,7 +168,7 @@ const CreateBusiness = (props) => {
                                         </Col>
 
                                     </Row>
-                                    <div className="help-link-cont" style={{}}>
+                                    <div className="help-link-cont">
                                         <div>
                                             <a href="#" className="help-link" style={{}}>Need Help?</a>
                                         </div>

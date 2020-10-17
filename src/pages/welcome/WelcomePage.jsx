@@ -3,8 +3,6 @@ import {Button} from 'react-bootstrap'
 import { CSSTransition} from "react-transition-group";
 import CreateBusiness from '../../components/CreateBusiness';
 
-import {XSquare} from 'react-feather'
-
 
 const WelcomePage = () => {
 

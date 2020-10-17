@@ -68,23 +68,20 @@
   width:100%; 
   height:60pt;
 }
+
 // createBusiness Styles
+.form-control{
+  background-color: #d5deee !important;
+}
 .main-cont{
   font-family:'Poppins', sans-serif;
+}
+.create-business-form{
+  padding-left: 40px;
 }
 .main-title{
   margin: 20px 0 40px 0;
   font-weight: 400;
-}
-.create-business-form{
-  padding-left:50px;
-}
-.form-control{
-  background-color: #d5deee !important;
-}
-.input-container{
-  border: 1px solid #d5deee;
-  height: 44px;
 }
 .map-pin{
   position: absolute;
@@ -92,12 +89,22 @@
   top:10px;
   left:16px;
 }
+.input-container{
+  border: 1px solid #d5deee;
+  height:44px;
+}
+.business-location-cont{
+  position:relative;
+}
 .business-location{
   padding-left: 40px;
 }
 .create-business-btn{
   height:44px;
   margin-top:30px;
+}
+.cancel-btn{
+  text-align: center;
 }
 .help-link-cont{
   display: flex;
