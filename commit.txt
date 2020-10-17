@@ -1,5 +1,0 @@
-Fix: welcome page
-  * added phone number input with flag
-  * transferred styles to scss folder
-  * added 'need help' link
-  * changed location to dummy long and lat

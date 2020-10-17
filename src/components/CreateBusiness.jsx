@@ -91,13 +91,13 @@ const CreateBusiness = (props) => {
 
 
     return (
-        <div style={{fontFamily:"'Poppins', sans-serif"}}>    
+        <div className="main-cont">    
             <Container> 
                 <div > 
                     <Row>
                         <Col> 
                             <div >  
-                                <Form  onSubmit={e => e.preventDefault()}>
+                                <Form  onSubmit={e => e.preventDefault()} className="create-business-form">
                                     <ToastContainer />
                                     <h3 className="main-title">Business Registration</h3>
                                     <FormGroup className=" m-form__group">

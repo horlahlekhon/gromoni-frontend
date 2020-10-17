@@ -69,9 +69,18 @@
   height:60pt;
 }
 // createBusiness Styles
+.main-cont{
+  font-family:'Poppins', sans-serif;
+}
 .main-title{
   margin: 20px 0 40px 0;
   font-weight: 400;
+}
+.create-business-form{
+  padding-left:50px;
+}
+.form-control{
+  background-color: #d5deee !important;
 }
 .input-container{
   border: 1px solid #d5deee;
