@@ -1,28 +1,35 @@
 /**=====================
      15. Alert CSS start
 ==========================**/
-.alert{
+.alert {
   border-radius: $alert-border-radious;
   padding: 15px;
-  svg{
+
+  svg {
     vertical-align: middle;
   }
-  .progress{
+
+  .progress {
     margin-top: $alert-padding;
   }
-  [data-notify = 'message']{
+
+  [data-notify = 'message'] {
     display: block;
   }
-  i{
+
+  i {
     margin-right: 5px;
     font-size: $alert-msg-icon-size;
   }
-  p{
+
+  p {
     margin-bottom: 0;
   }
-  .close{
+
+  .close {
     opacity: 1;
-    span{
+
+    span {
       font-size: 24px;
       font-weight: 400;
       display: inline-block;
@@ -33,41 +40,48 @@
     }
   }
 }
+
 .alert-dismissible {
   .close {
     padding: 10px 1.25rem;
-    top:4px;
+    top: 4px;
     padding-right: 13px;
-    &:hover{
+
+    &:hover {
       color: $alert-hover-color;
     }
   }
 }
-.card-body{
-  .alert{
-    &:last-child{
+
+.card-body {
+  .alert {
+    &:last-child {
       margin-bottom: 0;
     }
-    svg{
+
+    svg {
       width: 14px;
       height: 14px;
       margin-right: 4px;
       position: absolute;
-      top:18px;
-      &~p{
+      top: 18px;
+
+      & ~ p {
         padding-left: 20px;
       }
     }
   }
 }
-strong{
+
+strong {
   display: inline-block;
-  &~p{
+
+  & ~ p {
     display: inline-block;
   }
 }
 
-$alert-name:primary,
+$alert-name: primary,
 secondary,
 success,
 danger,
@@ -76,7 +90,7 @@ info,
 light,
 dark;
 
-$alert-color :$primary-color,
+$alert-color: $primary-color,
 $secondary-color,
 $success-color,
 $danger-color,
@@ -87,57 +101,63 @@ $dark-color;
 
 @each $var in $alert-name {
   $i: index($alert-name, $var);
-  .alert-#{$var}{
+  .alert-#{$var} {
     background-color: rgba(nth($alert-color, $i), 0.8);
     border-color: rgba(nth($alert-color, $i), 0.9) !important;
     color: $white;
+
     .progress {
       height: 5px;
       background-color: darken(nth($alert-color, $i), 1%);
       border-radius: 0;
     }
-    .progress-bar{
+
+    .progress-bar {
       background-color: lighten(nth($alert-color, $i), 50%);
     }
-    .alert-link{
+
+    .alert-link {
       color: nth($alert-color, $i);
-      @if($var == "light"){
+      @if ($var == "light") {
         color: $dark-color;
       }
     }
-    @if($var == "light"){
+
+    @if ($var == "light") {
       color: $dark-color;
       background-color: $light-color;
     }
-    hr{
+
+    hr {
       border-top-color: nth($alert-color, $i);
     }
   }
   .alert-#{$var}.dark {
-    .alert-link{
+    .alert-link {
       color: $white;
-      @if($var == "light"){
+      @if ($var == "light") {
         color: $dark-color;
       }
     }
+
     background-color: nth($alert-color, $i) !important;
     border-color: nth($alert-color, $i) !important;
     color: $auth-bg-color;
 
-    @if($var == "light"){
+    @if ($var == "light") {
       color: $dark-color;
     }
   }
-  .alert-#{$var}.outline,.alert-#{$var}.outline-2x {
+  .alert-#{$var}.outline, .alert-#{$var}.outline-2x {
     background-color: $transparent-color !important;
     border-color: nth($alert-color, $i) !important;
     color: nth($alert-color, $i);
-    @if($var == "light"){
+    @if ($var == "light") {
       color: $dark-color;
     }
   }
-  .alert-#{$var}.inverse{
-    &:before{
+  .alert-#{$var}.inverse {
+    &:before {
       top: 16px;
       content: "";
       position: absolute;
@@ -148,11 +168,13 @@ $dark-color;
       border-top: 7px solid transparent;
       border-bottom: 7px solid transparent;
     }
+
     background-color: transparent;
     padding: 13px 20px 13px 65px;
     border-color: nth($alert-color, $i);
     color: $theme-body-font-color;
-    i{
+
+    i {
       padding: 17px 20px;
       display: inline-block;
       background-color: nth($alert-color, $i) !important;
@@ -161,11 +183,12 @@ $dark-color;
       position: absolute;
       left: 0;
       top: 0;
-      height:100%;
+      height: 100%;
     }
   }
 }
-.outline-2x{
+
+.outline-2x {
   border-width: 2px;
   padding: 11px 1.25rem;
 }

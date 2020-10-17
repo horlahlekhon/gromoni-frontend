@@ -29,7 +29,7 @@ export const parseData = (data) => {
                 }).format(payload.sales_order.total_cost),
                 discount: `${payload.product.discount.percentage_discounted}%`,
                 status: decideStatus(payload.sales_order.status),
-                date: payload.ts_created
+                ts_created: payload.ts_created
             }
         })
         return res
@@ -38,9 +38,6 @@ export const parseData = (data) => {
     }
 }
 
-export const convertDateToMonthNames = (dates) => {
-    return dates.map(e => new Date(e).toLocaleString('default', {month: 'long'}))
-}
 export const dataOptions = (series, labels, name) => {
 
     return {
@@ -80,7 +77,7 @@ export const dataOptions = (series, labels, name) => {
                 {
                     y: {
                         formatter: function (val) {
-                            return  val + " Units"
+                            return val + " Units"
                         }
                     }
                 },
@@ -88,7 +85,12 @@ export const dataOptions = (series, labels, name) => {
                 {
                     borderColor: "#f5f8fd", clipMarkers: false, yaxis: {lines: {show: true}}
                 },
-            yaxis: {tickAmount: series === undefined ? 5 : Math.max(...series) / 5, min: 0, max: series === undefined ? 0 : Math.max(...series), labels: {style: {color: '#6e7e96'}}},
+            yaxis: {
+                tickAmount: series === undefined ? 5 : Math.max(...series) / 5,
+                min: 0,
+                max: series === undefined ? 0 : Math.max(...series),
+                labels: {style: {color: '#6e7e96'}}
+            },
             responsive: [
                 {
                     breakpoint: 992,

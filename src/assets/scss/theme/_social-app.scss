@@ -1,20 +1,23 @@
 /**=====================
      81. social app css start
 ==========================**/
-.user-profile{
+.user-profile {
   .hovercard {
     .socialheader {
       background: url("../../images/social-app/social-image.png") !important;
     }
-    .user-image{
-      .share-icons{
+
+    .user-image {
+      .share-icons {
         position: absolute;
         right: 100px;
         top: -27px;
-        li{
+
+        li {
           display: inline-block;
           margin-right: 10px;
-          .social-icon{
+
+          .social-icon {
             width: 50px;
             height: 50px;
             text-align: center;
@@ -23,12 +26,14 @@
             vertical-align: middle;
             justify-content: center;
             border-radius: 100%;
-            i{
+
+            i {
               color: $white;
               font-size: 25px;
             }
           }
-          &:last-child{
+
+          &:last-child {
             margin-right: 0;
           }
         }
@@ -36,15 +41,18 @@
     }
   }
 }
-.market-tabs{
-  .nav{
+
+.market-tabs {
+  .nav {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     border-bottom: none;
-    .nav-item{
+
+    .nav-item {
       width: 100%;
-      .nav-link{
+
+      .nav-link {
         height: 81px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
@@ -54,20 +62,24 @@
     }
   }
 }
-.tabs-scoial{
+
+.tabs-scoial {
   border-bottom: none;
   margin-bottom: 20px !important;
   margin-top: 20px;
-  li{
-    a{
+
+  li {
+    a {
       font-weight: 600;
-      svg{
-        circle{
+
+      svg {
+        circle {
           color: $light-text;
         }
       }
     }
   }
+
   &.border-tab.nav-tabs {
     .nav-item {
       .nav-link {
@@ -76,98 +88,120 @@
     }
   }
 }
-.social-network{
-  span{
+
+.social-network {
+  span {
     margin-bottom: 30px;
     display: block;
   }
 }
+
 .social-list {
-  .media{
+  .media {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    &:last-child{
+
+    &:last-child {
       margin-bottom: 0;
     }
-    .media-body{
-      a{
+
+    .media-body {
+      a {
         color: $light-text;
       }
-      span{
+
+      span {
         font-weight: 600;
       }
-      &:hover{
-        a{
+
+      &:hover {
+        a {
           color: $primary-color;
         }
       }
     }
   }
 }
-.photos{
+
+.photos {
   margin-bottom: -15px;
-  ul{
-    li{
+
+  ul {
+    li {
       display: inline-block;
       margin-right: 15px;
       margin-bottom: 15px;
-      &:nth-child(3n){
+
+      &:nth-child(3n) {
         margin-right: 0;
       }
     }
   }
 }
+
 .new-users-social {
   margin-bottom: 30px;
+
   .media {
     img {
       width: 58px;
     }
+
     .media-body {
       margin-top: 10px;
     }
   }
-  svg{
-    circle{
+
+  svg {
+    circle {
       color: $light-text;
     }
   }
 }
-.like-content{
-  span{
-    i{
+
+.like-content {
+  span {
+    i {
       font-size: 14px;
     }
   }
 }
-.timeline-content{
-  p{
+
+.timeline-content {
+  p {
     margin-top: 30px;
     color: $light-text;
   }
-  .comment-number{
-    i{
+
+  .comment-number {
+    i {
       color: $light-text;
       margin-right: 20px;
     }
   }
-  .comments-box{
+
+  .comments-box {
     margin-top: 30px;
-    .input-group{
+
+    .input-group {
       margin-top: 6px;
-      .input-txt-bx{
+
+      .input-txt-bx {
         background-color: $light-color;
         border: none;
-        &::placeholder{
+
+        &::placeholder {
           color: $light-text;
         }
       }
-      .input-group-append{
+
+      .input-group-append {
         background-color: $light-color;
-        .btn{
-          i{
+
+        .btn {
+          i {
             font-size: 20px;
             display: flex;
             color: $light-text;
@@ -177,23 +211,28 @@
     }
   }
 }
-.social-chat{
+
+.social-chat {
   margin-top: 30px;
-  span{
-    span{
+
+  span {
+    span {
       font-weight: normal;
       color: $light-text;
       font-size: 12px;
     }
   }
-  .media-body{
+
+  .media-body {
     padding: 30px;
     border: 1px solid $light-color;
     position: relative;
-    p{
+
+    p {
       margin-top: 5px;
     }
-    &:before{
+
+    &:before {
       content: '';
       position: absolute;
       top: 19px;
@@ -201,6 +240,7 @@
       border: 7px solid transparent;
       border-right: 7px solid $semi-dark;
     }
+
     &:after {
       content: '';
       position: absolute;
@@ -210,58 +250,70 @@
       border-right: 7px solid $white;
     }
   }
-  .your-msg, .other-msg{
+
+  .your-msg, .other-msg {
     margin-bottom: 30px;
   }
-  .other-msg{
+
+  .other-msg {
     margin-left: 40px;
   }
 }
-.socialprofile{
-  span{
+
+.socialprofile {
+  span {
     color: $light-text;
   }
+
   .social-btngroup {
     margin: 30px 0;
   }
-  .likes-profile{
-    h5{
-      span{
+
+  .likes-profile {
+    h5 {
+      span {
         color: $theme-body-font-color;
       }
     }
   }
-  .social-group{
+
+  .social-group {
     margin-top: 30px;
-    ul{
-      li{
-        &:nth-child(4){
+
+    ul {
+      li {
+        &:nth-child(4) {
           margin-left: -22px;
         }
       }
     }
   }
 }
-.social-status{
-  form{
-    .form-group{
-      .form-control-social{
+
+.social-status {
+  form {
+    .form-group {
+      .form-control-social {
         border: 1px solid $light-color;
         padding-left: 15px;
         margin-bottom: 30px;
       }
     }
   }
-  .media{
+
+  .media {
     position: relative;
     margin-bottom: 30px;
+
     .media {
       margin-bottom: 0;
     }
-    &:last-child{
+
+    &:last-child {
       margin-bottom: 0;
     }
-    .social-status{
+
+    .social-status {
       content: '';
       position: absolute;
       width: 12px;
@@ -271,72 +323,85 @@
       left: 35px;
       border-radius: 100%;
     }
-    .social-online{
+
+    .social-online {
       border: 3px solid $success-color;
     }
-    .social-busy{
+
+    .social-busy {
       border: 3px solid $warning-color;
     }
-    .social-offline{
+
+    .social-offline {
       border: 3px solid $semi-dark;
     }
-    .media-body{
-      p{
+
+    .media-body {
+      p {
         color: $light-text;
         margin-bottom: 5px;
       }
-      span{
-        + span{
+
+      span {
+        + span {
           color: $light-text;
         }
       }
-      .light-span{
+
+      .light-span {
         color: $light-text;
       }
     }
   }
 }
-.social-header{
-  h5{
-    span{
+
+.social-header {
+  h5 {
+    span {
       &:first-child {
         line-height: 1.48;
       }
-      svg{
-        circle{
+
+      svg {
+        circle {
           color: $light-text;
         }
       }
     }
   }
 }
-.details-about{
-  + .details-about{
+
+.details-about {
+  + .details-about {
     margin-top: 30px;
   }
-  .your-details{
-    p{
+
+  .your-details {
+    p {
       color: $light-text;
     }
   }
 }
 
-.avatar-showcase{
-  .friend-pic{
+.avatar-showcase {
+  .friend-pic {
     margin-right: 8px;
     margin-bottom: 10px;
   }
-  .pepole-knows{
-    ul{
-      li{
+
+  .pepole-knows {
+    ul {
+      li {
         display: inline-block;
         margin-right: 21px;
         margin-bottom: 10px;
-        &:last-child{
+
+        &:last-child {
           margin-right: 0;
         }
-        .add-friend{
-          h6{
+
+        .add-friend {
+          h6 {
             margin-top: 3px;
           }
         }
@@ -345,15 +410,17 @@
   }
 }
 
-.activity-log{
-  .my-activity{
-    + .my-activity{
+.activity-log {
+  .my-activity {
+    + .my-activity {
       margin-top: 30px;
     }
-    p{
+
+    p {
       margin-bottom: 5px;
-      span{
-        svg{
+
+      span {
+        svg {
           width: 15px;
           height: 15px;
         }
@@ -361,6 +428,7 @@
     }
   }
 }
+
 /**=====================
      81. social app CSS end
 ==========================**/

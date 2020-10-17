@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {Col, Row} from 'reactstrap'
-
+import PropTypes from 'prop-types';
 import {Archive, CheckCircle, Clock} from 'react-feather'
 
 export const StatusBadge = (props) => {
@@ -48,7 +48,7 @@ const pendingIcon = (props) => {
 const StatusBadges = (props) => {
     return (
         <Fragment>
-            <Row>
+            <Row  className="m-t-30 m-b-40">
                 <Col xl='4' md="4" className="horizontal-alignmet">
                     <StatusBadge icon={clearedIcon} text="Cleared" count={props.data.cleared.count}
                                  tip={props.data.cleared.tip}/>
@@ -65,5 +65,17 @@ const StatusBadges = (props) => {
         </Fragment>
     )
 }
-
+StatusBadge.prototype = {
+    text: PropTypes.string,
+    count: PropTypes.number,
+    icon: PropTypes.oneOf([archiveIcon, pendingIcon, clearedIcon]),
+    tip: PropTypes.string
+}
+StatusBadges.prototype = {
+    data: PropTypes.exact({
+        pending: PropTypes.object,
+        cleared: PropTypes.object,
+        archive: PropTypes.object
+    })
+}
 export default StatusBadges

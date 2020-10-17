@@ -1,20 +1,12 @@
 import React, {Fragment, useState} from 'react'
 import {Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from 'reactstrap'
-import {apexBarChart} from '../common/chartsData/apexChart'
 import Chart from 'react-apexcharts'
 import {dataOptions} from "./utils";
-
+import PropTypes from 'prop-types';
 const SalesGraph = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
-    // const salesWeekChart = {...props.salesWeekChart, name: '<b>ICU</b> (Sales for the week)'}
-    // const salesMonthlyChart = props.salesMonthlyChart
-    // const salesYearlyChart = {...props.salesYearlyChart, name: '<b>ICU</b> (Sales for the year)'}
-
-
-    // console.log(`serieisieirisiis: ${salesMonthlyChart}`)
-    // //
-    const salesMonthlyChart = dataOptions(props.salesMonthlyChart.series, props.salesMonthlyChart.labels, props.salesMonthlyChart.name )
+    const salesMonthlyChart = dataOptions(props.salesMonthlyChart.series, props.salesMonthlyChart.labels, props.salesMonthlyChart.name)
     const salesWeeklyChart = dataOptions(props.salesWeeklyChart.series, props.salesWeeklyChart.labels, props.salesWeeklyChart.name)
     const salesYearlyChart = dataOptions(props.salesYearlyChart.series, props.salesYearlyChart.labels, props.salesYearlyChart.name)
 
@@ -77,7 +69,8 @@ const SalesGraph = (props) => {
                                 <TabPane tabId="3">
                                     <div className="apex-chart-container chart-data">
                                         <div className='column-chart'>
-                                            <Chart options={salesYearlyChart.options} series={salesYearlyChart.series} height="280"
+                                            <Chart options={salesYearlyChart.options} series={salesYearlyChart.series}
+                                                   height="280"
                                                    type="bar"/>
                                         </div>
 
@@ -91,6 +84,23 @@ const SalesGraph = (props) => {
             </Row>
         </Fragment>
     )
+}
+SalesGraph.prototype = {
+    salesWeeklyChart: PropTypes.exact({
+        labels: PropTypes.array,
+        series: PropTypes.array,
+        name:PropTypes.string
+    }),
+    salesMonthlyChart: PropTypes.exact({
+        labels: PropTypes.array,
+        series: PropTypes.array,
+        name:PropTypes.string
+    }),
+    salesYearlyChart: PropTypes.exact({
+        labels: PropTypes.array,
+        series: PropTypes.array,
+        name:PropTypes.string
+    })
 }
 
 export default SalesGraph

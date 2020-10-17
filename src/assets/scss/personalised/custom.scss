@@ -1,156 +1,156 @@
 .pass-wrapper {
-    position: relative;
-    display: flex;
+  position: relative;
+  display: flex;
 }
-  
+
 .eye {
-    position: absolute;
-    top: 20%;
-    right: 5%;
+  position: absolute;
+  top: 20%;
+  right: 5%;
 
 
-    &:hover {
-        color: #30adf2;
-        cursor: pointer;
-    }
+  &:hover {
+    color: #30adf2;
+    cursor: pointer;
+  }
 }
 
-.tab-inactive{
-    color: #A9C3DB !important;
-}
-.tab-active{
-    color:#083854 !important;
+.tab-inactive {
+  color: #A9C3DB !important;
 }
 
-.nav-tabs{
-    &:hover{
-        cursor: pointer;
-    }
+.tab-active {
+  color: #083854 !important;
+}
+
+.nav-tabs {
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 /// Sales stats  badge starts
 .sales-stat-badge {
-    background-color: #FFFFFF;
-    height: 58px;
-    width: 212px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    border: 1px solid #FFFFFF;
+  background-color: #FFFFFF;
+  height: 58px;
+  width: 212px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid #FFFFFF;
 }
 
-.sales-stat-badge-icon-name-grp{
-        display: flex;
-        flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+.sales-stat-badge-icon-name-grp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .sales-stat-badge-icon-name-grp > :first-child {
-    // background-color: #4BFFC2;
-    // border: 1px solid;
-    // border-radius: 10px;
-    height: 33px;
-    width: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  // background-color: #4BFFC2;
+  // border: 1px solid;
+  // border-radius: 10px;
+  height: 33px;
+  width: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.sales-stat-icon-wrapper{
-    border-radius: 10px;
-    margin-right: 10px;
+.sales-stat-icon-wrapper {
+  border-radius: 10px;
+  margin-right: 10px;
 }
 
-.sales-stat-icon-pending{
-        background-color: #A80909;
-        color: #F9F9F9;
-        border: 1px solid #FBA2AC
+.sales-stat-icon-pending {
+  background-color: #A80909;
+  color: #F9F9F9;
+  border: 1px solid #FBA2AC
 }
 
-.sales-stat-icon-cleared{
-    background-color:#0A7D51;
-    color: #F9F9F9;
-    border: 1px solid 
+.sales-stat-icon-cleared {
+  background-color: #0A7D51;
+  color: #F9F9F9;
+  border: 1px solid
 }
 
-.sales-stat-icon-archive{
-    background-color: #4BB8F2;
-        color: #F9F9F9;
-        border: 1px solid 
+.sales-stat-icon-archive {
+  background-color: #4BB8F2;
+  color: #F9F9F9;
+  border: 1px solid
 }
 
 .sales-stat-icon-cleared > :first-child {
-    border-radius: 100%;
+  border-radius: 100%;
 }
 
 .sales-stat-icon-pending > :first-child {
-    border-radius: 100%;
-    background-color: #A80909;
+  border-radius: 100%;
+  background-color: #A80909;
 }
 
-// .sales-stat-icon-archive > :first-child {
-    
-// }
 
 /// Sales stats  badge ends
 
 /*== start of code for tooltips ==*/
 .tool {
-    cursor: help;
-    position: relative;
+  cursor: help;
+  position: relative;
 }
 
 
 /*== common styles for both parts of tool tip ==*/
 .tool::before,
 .tool::after {
-    left: 50%;
-    opacity: 0;
-    position: absolute;
-    z-index: -100;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  z-index: -100;
 }
 
 .tool:hover::before,
 .tool:focus::before,
 .tool:hover::after,
 .tool:focus::after {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    z-index: 100; 
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  z-index: 100;
 }
 
 .tool:hover::before,
 .tool:focus::before {
-    transition: all .65s ease-in .2s;
-    transform-origin: top;
+  transition: all .65s ease-in .2s;
+  transform-origin: top;
 }
+
 .tool::after {
-    background: #F9F9F9;
-    border-radius: .25em;
-    top: 92%;
-    color: #333333;
-    content: attr(data-tip);
-    margin-left:-50%;
-    padding: 1em;
-    transition: all .65s ease-in .2s;
-    transform: scale(1,0);
-    transform-origin: top;  
-    width: 100%;
+  background: #F9F9F9;
+  border-radius: .25em;
+  top: 92%;
+  color: #333333;
+  content: attr(data-tip);
+  margin-left: -50%;
+  padding: 1em;
+  transition: all .65s ease-in .2s;
+  transform: scale(1, 0);
+  transform-origin: top;
+  width: 100%;
 }
 
 .tool:hover::after,
-.tool:focus::after  {
-    transition: all .65s ease-in;
-    transform-origin: top;
+.tool:focus::after {
+  transition: all .65s ease-in;
+  transform-origin: top;
 }
 
 @media (max-width: 768px) {
-  .tool::after { 
-        font-size: .75em;
-        // margin-left: -5em;
-        // width: 10em; 
+  .tool::after {
+    font-size: .75em;
+    // margin-left: -5em;
+    // width: 10em;
   }
 }
 
@@ -158,7 +158,11 @@
 
 
 .horizontal-alignmet {
-display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
+}
+
+.bg-statBar{
+  background-image: url(../../images/other-images/salesStatBar.jpg);
 }

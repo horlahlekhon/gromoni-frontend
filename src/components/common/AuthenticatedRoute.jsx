@@ -11,7 +11,7 @@ import App from '../../components/app';
 
 const AuthenticatedRoute = (props) => {
     const thisBusiness = localStorage.getItem('__grm__act__biz__')
-    const [accessToken, setAccessToken] = useCookie('accessToken');
+    const [accessToken, ] = useCookie('accessToken');
     const history = useHistory()
     if (thisBusiness) {
         props.getBusiness(accessToken, thisBusiness)
@@ -25,26 +25,34 @@ const AuthenticatedRoute = (props) => {
         toast.error("User does not have any business kindly create a business")
         history.push(`${process.env.PUBLIC_URL}/business/`)
     }
-    
+    // eslint-disable-next-line
+    const uuidRegex = new RegExp("business/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}")
 
     // const { location: {  },  } = props;
     return (
         <App>
             <Route exact path="/" render={() => {
-                return (<Redirect to={`${process.env.PUBLIC_URL}/Home`} />)
+                return (<Redirect to={`${process.env.PUBLIC_URL}/${thisBusiness}/Home`} />)
             }} />
             <TransitionGroup>
-                {routes.map(({ path, Component }) => (
+                {routes(thisBusiness).map(({ path, Component }) => (
                     <Route key={path} exact path={path}>
                         {({ match }) => (
                             <CSSTransition
                                 in={match != null}
                                 timeout={500}
                                 classNames="zoomout"
-                                unmountOnExit
-                            >
-                                <div><Component /></div>
+                                unmountOnExit>
+                                <div>
+                                    {
+                                        uuidRegex.test(window.location.pathname) ?
+                                        <Component />
+                                            // TODO send to 404
+                                        : history.push(`${process.env.PUBLIC_URL}/login`)
+                                    }
+                                </div>
                             </CSSTransition>
+
                         )}
                     </Route>
                 ))}

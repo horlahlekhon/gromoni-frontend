@@ -1,85 +1,102 @@
-
-
 /**=====================
      73. Faq CSS start
 ==========================**/
-.faq-widgets{
+.faq-widgets {
   align-items: center;
-  .media-body{
-    h5{
+
+  .media-body {
+    h5 {
       font-weight: 600;
     }
-    p{
+
+    p {
       padding-right: 20px;
     }
   }
-  svg{
+
+  svg {
     width: 50px;
     height: 50px;
     opacity: 0.5;
   }
 }
-.header-faq{
-  h5{
+
+.header-faq {
+  h5 {
     font-weight: 600;
   }
+
   margin-bottom: 30px;
 }
-.features-faq{
-  .faq-image{
-    img{
+
+.features-faq {
+  .faq-image {
+    img {
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       width: 100%;
     }
   }
-  .card-body{
-    h6{
+
+  .card-body {
+    h6 {
       font-weight: 600;
     }
   }
 }
-.faq-accordion{
+
+.faq-accordion {
   margin-bottom: 30px;
-  .card{
-    .btn-link{
+
+  .card {
+    .btn-link {
       display: flex;
-      svg{
+
+      svg {
         width: 20px;
         height: 20px;
         margin-right: 10px;
       }
     }
   }
-  .faq-header{
+
+  .faq-header {
     position: relative;
     padding: 30px !important;
-    svg{
+
+    svg {
       position: absolute;
       right: 30px;
       top: 30px;
     }
-    span{
+
+    span {
       margin-top: 3px;
     }
   }
-  .faq-body{
+
+  .faq-body {
     padding: 20px !important;
   }
-  .card-mb-faq{
+
+  .card-mb-faq {
     margin-bottom: 30px;
   }
 }
-.faq-title{
+
+.faq-title {
   margin: 30px 0;
-  h6{
+
+  h6 {
     color: $light-text;
     font-weight: 600;
   }
 }
-.faq-form{
+
+.faq-form {
   position: relative;
-  .search-icon{
+
+  .search-icon {
     position: absolute;
     right: 12px;
     top: 9px;
@@ -87,30 +104,37 @@
     height: 20px;
   }
 }
-.navigation-btn{
-  a{
+
+.navigation-btn {
+  a {
     display: flex;
     align-items: center;
     justify-content: center;
-    svg{
+
+    svg {
       width: 15px;
       height: 15px;
     }
   }
+
   margin-bottom: 30px;
 }
-.navigation-option{
-  ul{
-    li{
+
+.navigation-option {
+  ul {
+    li {
       position: relative;
       padding: 15px 15px 15px 0;
-      &:hover{
+
+      &:hover {
         background-color: $light;
       }
-      a{
+
+      a {
         padding-left: 40px;
         color: $theme-body-font-color;
-        svg{
+
+        svg {
           position: absolute;
           width: 15px;
           height: 15px;
@@ -121,7 +145,8 @@
     }
   }
 }
-.updates-faq{
+
+.updates-faq {
   width: 40px;
   height: 40px;
   border: 2px solid $primary-color;
@@ -130,34 +155,42 @@
   align-items: center;
   justify-content: center;
   margin-right: 30px;
-  svg{
+
+  svg {
     width: 18px;
     height: 18px;
   }
 }
-.updates-bottom-time{
-  p{
+
+.updates-bottom-time {
+  p {
     margin-bottom: 2px;
-    + p{
+
+    + p {
       color: $light-text;
     }
   }
 }
-.updates-faq-main{
+
+.updates-faq-main {
   margin-bottom: 30px;
-  &:last-child{
+
+  &:last-child {
     margin-bottom: 0;
   }
 }
-@media only screen and (max-width: 1199px){
-  .faq-accordion{
+
+@media only screen and (max-width: 1199px) {
+  .faq-accordion {
     margin-bottom: 30px;
   }
 }
-@media only screen and  (max-width: 991px){
-  .faq-accordion{
+
+@media only screen and (max-width: 991px) {
+  .faq-accordion {
     .faq-header {
       padding: 20px !important;
+
       svg {
         right: 20px;
         top: 20px;
@@ -167,10 +200,11 @@
     }
   }
   .navigation-option {
-    ul{
+    ul {
       li {
         padding: 10px 10px 10px 0;
-        a{
+
+        a {
           svg {
             top: 12px;
           }
@@ -178,17 +212,19 @@
       }
     }
   }
-  .navigation-btn, .updates-faq-main{
+  .navigation-btn, .updates-faq-main {
     margin-bottom: 20px;
   }
 }
-@media only screen and (max-width: 767px){
-  .xs-mt-search{
-     margin-top: 30px;
+
+@media only screen and (max-width: 767px) {
+  .xs-mt-search {
+    margin-top: 30px;
   }
 }
-@media only screen and  (max-width: 575px){
-  .xs-mt-search{
+
+@media only screen and (max-width: 575px) {
+  .xs-mt-search {
     margin-top: 0px;
   }
   .faq-widgets {
@@ -203,23 +239,27 @@
   .header-faq {
     margin-bottom: 15px;
   }
-  .faq-accordion{
+  .faq-accordion {
     margin-bottom: 0px;
+
     .faq-header {
       padding: 15px !important;
-      .pull-right{
+
+      .pull-right {
         float: right;
       }
+
       svg {
         right: 15px;
         top: 15px;
       }
     }
   }
-  .navigation-btn, .updates-faq-main{
+  .navigation-btn, .updates-faq-main {
     margin-bottom: 15px;
   }
 }
+
 /**=====================
      73. Faq CSS end
 ==========================**/

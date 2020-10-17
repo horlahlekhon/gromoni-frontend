@@ -3,6 +3,7 @@
 ==========================**/
 .grid-showcase {
   margin-bottom: -10px;
+
   span {
     display: block;
     border: 1px solid $light-color;
@@ -12,16 +13,19 @@
     background-color: $white;
   }
 }
-.grid-align{
+
+.grid-align {
   margin-bottom: -30px;
-  .row{
+
+  .row {
     padding: 15px 0;
     min-height: 10rem;
-    border: 1px solid  rgba($primary-color, 0.03);
+    border: 1px solid rgba($primary-color, 0.03);
     margin-bottom: 30px;
     background-color: rgba($primary-color, 0.03);
   }
 }
+
 /**=====================
       08. GRID CSS Ends
 ==========================**/

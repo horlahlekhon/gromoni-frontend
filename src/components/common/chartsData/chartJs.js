@@ -2,6 +2,7 @@
                         Default Dashboard
 =================================================================*/
 import configDB from '../../../data/customizer/config'
+
 const secondary = localStorage.getItem('secondary_color') || configDB.data.color.secondary_color;
 
 // LineChart
@@ -26,21 +27,21 @@ export const lineChartData = (canvas) => {
             pointHoverBorderWidth: '3',
             data: [28, 45, 28, 55, 40, 60, 50, 80, 60]
         }]
-}
+    }
 }
 export const lineChartOptions = {
     layout: {
         padding: 10
     },
-    legend: { display: false },
-    
+    legend: {display: false},
+
     responsive: true,
     scales: {
         xAxes: [{
             display: false,
-            gridLines: { color: "transparent", drawTicks: false, }
+            gridLines: {color: "transparent", drawTicks: false,}
         }],
-        yAxes: [{ display: false }]
+        yAxes: [{display: false}]
     },
     plugins: {
         datalabels: {
@@ -65,7 +66,7 @@ export const crmlineChartData = (canvas) => {
     gradient.addColorStop(0.9, 'rgb(71, 154, 255)');
     gradient.addColorStop(1, 'rgb(64, 200, 255)');
     return {
-        labels: ["","2013", "2014", "2015", "2016", "2017", "2018", "2019"],
+        labels: ["", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
         datasets: [{
             fill: false,
             fillColor: "transparent",
@@ -73,12 +74,12 @@ export const crmlineChartData = (canvas) => {
             pointHighlightFill: "#fff",
             pointBorderColor: gradient,
             pointColor: "#fff",
-            borderWidth:3,
-            backgroundColor:"#fff",
-            radius:5,
-            hoverRadius:5,
-            hoverBorderWidth:4,
-            pointHoverBackgroundColor:"#fff",
+            borderWidth: 3,
+            backgroundColor: "#fff",
+            radius: 5,
+            hoverRadius: 5,
+            hoverBorderWidth: 4,
+            pointHoverBackgroundColor: "#fff",
             pointHighlightStroke: gradient,
             data: [5, 0, 15, 0, 5, 0, 10, 0]
         }]
@@ -91,11 +92,11 @@ export const crmlineChartDataOption = {
     scales: {
         xAxes: [{
             display: false,
-            gridLines: { color: "transparent", drawTicks: false, }
+            gridLines: {color: "transparent", drawTicks: false,}
         }],
-        yAxes: [{ display: false }]
+        yAxes: [{display: false}]
     },
-    legend: { display: false },
+    legend: {display: false},
     scaleShowLabels: false,
     responsive: true,
     elements: {
@@ -112,24 +113,24 @@ export const crmlineChartDataOption = {
 }
 
 export const newProjectLineChartData = {
-    labels: ["","2013", "2014", "2015", "2016", "2017", "2018", "2019"],
+    labels: ["", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
     datasets: [
-      {
-        fill: false,
-        fillColor: "transparent",
-        borderColor: secondary,
-        pointBorderColor: secondary,
-        pointHighlightFill: "#fff",
-        pointColor: "#fff",
-        pointHighlightStroke: secondary,
-        borderWidth:3,
-        backgroundColor:"#fff",
-        radius:5,
-        hoverRadius:5,
-        hoverBorderWidth:4,
-        pointHoverBackgroundColor:"#fff",
-        data: [0, 5, 0, 15, 10, 13, 0, 5]
-      }
+        {
+            fill: false,
+            fillColor: "transparent",
+            borderColor: secondary,
+            pointBorderColor: secondary,
+            pointHighlightFill: "#fff",
+            pointColor: "#fff",
+            pointHighlightStroke: secondary,
+            borderWidth: 3,
+            backgroundColor: "#fff",
+            radius: 5,
+            hoverRadius: 5,
+            hoverBorderWidth: 4,
+            pointHoverBackgroundColor: "#fff",
+            data: [0, 5, 0, 15, 10, 13, 0, 5]
+        }
     ]
 }
 
@@ -140,11 +141,11 @@ export const newProjectLineChartOption = {
     scales: {
         xAxes: [{
             display: false,
-            gridLines: { color: "transparent", drawTicks: false, }
+            gridLines: {color: "transparent", drawTicks: false,}
         }],
-        yAxes: [{ display: false }]
+        yAxes: [{display: false}]
     },
-    legend: { display: false },
+    legend: {display: false},
     scaleShowLabels: false,
     responsive: true,
     elements: {
