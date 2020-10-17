@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css';
 
 import { Container, Row, Col, Button, Form, FormGroup, Input, Label} from 'reactstrap'
 
@@ -116,6 +116,29 @@ const CreateBusiness = (props) => {
                                             value={businessMail}
                                             onChange={e => setBusinessMail(e.target.value)} />
                                     </FormGroup>
+                                    <FormGroup className=" input-group-solid">
+                                        <Label for="businessLocation" >Business Location</Label>
+                                        <div style={{position:"relative"}}>
+                                            <i className="map-pin">{mapPin}</i>
+                                            <Input className="form-control input-container business-location" id="businessLocation"
+                                            type="text"
+                                            placeholder="Business Location"
+                                            value={location}
+                                            onChange={e => setLocation({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})} />
+                                        </div>
+                                    </FormGroup>
+                                    <FormGroup className=" m-form__group">
+                                        <Label for="phoneNumber">Phone Number</Label>
+                                        <PhoneInput
+                                            inputStyle={{maxWidth:"400px", width:"100%", height: "44px"}}
+                                            buttonStyle={{backgroundColor: "#d5deee"}}
+                                            id="phoneNumber"
+                                            country={"ng"}
+                                            placeholder="Telephone"
+                                            value={phone}
+                                            onChange={setPhone}
+                                            />      
+                                    </FormGroup>
                                     <FormGroup>
                                         <Label for="companyType">Company Type</Label>
                                         <Input className="custom-select input-container" type="select" placeholder="Company type" id="companyType"
@@ -129,40 +152,14 @@ const CreateBusiness = (props) => {
                                             ))}
                                         </Input>
                                     </FormGroup>
-                                    <FormGroup className=" m-form__group">
-                                        <Label for="phoneNumber">Phone Number</Label>
-                                        <PhoneInput className="form-control input-container" id="phoneNumber"
-                                            type="tel"
-                                            defaultCountry="NG"
-                                            placeholder="Telephone"
-                                            value={phone}
-                                            onChange={setPhone}
-                                            fullWidth/>
-                                    </FormGroup>
-                                    <FormGroup className=" input-group-solid">
-                                        <Label for="businessLocation">Business Location</Label>
-                                        <div style={{position:"relative", }}>
-                                            <i className="mapPin" style={{position: "absolute", zIndex:"2", top:"10px", left:"16px"}}>{mapPin}</i>
-                                            <Input className="form-control input-container" style={{paddingLeft: "40px"}}
-                                            type="select"
-                                            placeholder="Country of operation"
-                                            value={country}
-                                            onChange={e => setCountry(e.target.value)} >
-                                            <option value="">select country</option>
-                                            {countries.map((opt, idx) => (
-                                            <option value={opt} key={idx}>{opt}</option>
-                                            ))}
-                                            </Input>
-                                        </div>
-                                    </FormGroup>
                                     <Row>
                                         <Col xl={`4`}>
-                                            <Button color=" btn-outline-primary" block className=" create-business-btn" style={{ height:"44px", marginTop:"30px"}} onClick={() => props.showMessageAction(false)}>
+                                            <Button color=" btn-outline-primary" block className=" create-business-btn" onClick={() => props.showMessageAction(false)}>
                                                 cancel
                                             </Button>
                                         </Col>
                                         <Col xl={`8`}>
-                                            <Button color="primary " block className=" create-business-btn" style={{ height:"44px", marginTop:"30px"}}
+                                            <Button color="primary " block className=" create-business-btn"
                                                     onClick={e => handleCreateBusiness(e)}
                                             >
                                                 {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}
@@ -171,6 +168,11 @@ const CreateBusiness = (props) => {
                                         </Col>
 
                                     </Row>
+                                    <div className="help-link-cont" style={{}}>
+                                        <div>
+                                            <a href="#" className="help-link" style={{}}>Need Help?</a>
+                                        </div>
+                                    </div>
 
                                 </Form>
                             </div>

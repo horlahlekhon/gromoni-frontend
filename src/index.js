@@ -14,7 +14,7 @@ import NewBusiness from './pages/NewBusiness';
 
 import { CookieUniversalProvider } from '@shopify/react-cookie';
 import AuthenticatedRoute from './components/common/AuthenticatedRoute';
-import WelcomePage from './pages/miscellaneous/WelcomePage';
+import WelcomePage from './pages/welcome/WelcomePage';
 const Root = (props) => {
   const [, setAnim] = useState("");
   const animation = localStorage.getItem("animation") || ConfigDB.data.router_animation || 'fade'

@@ -69,15 +69,37 @@
   height:60pt;
 }
 // createBusiness Styles
+.form-control{
+  background-color: #d5deee !important;
+}
 .main-title{
   margin: 20px 0 40px 0;
   font-weight: 400;
 }
 .input-container{
-  background-color: #d5deee;
   border: 1px solid #d5deee;
   height: 44px;
 }
-// .create-business-btn{
-//   width:179px;
-// }
+.map-pin{
+  position: absolute;
+  z-index:2;
+  top:10px;
+  left:16px;
+}
+.business-location{
+  padding-left: 40px;
+}
+.create-business-btn{
+  height:44px;
+  margin-top:30px;
+}
+.help-link-cont{
+  display: flex;
+  justify-content:flex-end;
+  margin-top:70px;
+}
+.help-link{
+  color:#494757;
+  font-size:12px;
+  font-family:'Quicksand', sans-serif;
+}

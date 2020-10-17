@@ -4,7 +4,6 @@ import { CSSTransition} from "react-transition-group";
 import CreateBusiness from '../../components/CreateBusiness';
 
 import {XSquare} from 'react-feather'
-const xSquare = <XSquare/>
 
 
 const WelcomePage = () => {
@@ -41,12 +40,9 @@ const WelcomePage = () => {
 							onEnter={() => setShowButton(false)}
 							onExited={() => setShowButton(true)}
 							>	
-								<div className="transition-message" dismissible onClose={() => setShowButton(false)}>
-									{/*<i variant="outline-primary" style={{color:"#72b3f9", float:"right", marginRight:"20px"}} onClick={() => setShowMessage(false)}>*/}
-									{/*	{xSquare}*/}
-									{/*</i>*/}
-									<CreateBusiness showMessageAction={setShowMessage}/>
-								</div>
+							<div className="transition-message" dismissible onClose={() => setShowButton(false)}>
+								<CreateBusiness showMessageAction={setShowMessage}/>
+							</div>
 							</CSSTransition>		
 						</div>		
 				</Fragment>
