@@ -18,24 +18,23 @@ const SalesGraph = (props) => {
 
                         <CardHeader className="crypto-header">
                             <Row>
-
-                                <Col xl="12" md="12" sm="12">
+                                <Col xl="12" md="4" sm="4">
                                     <Nav tabs className=" nav-tabs border-tab nav-primary justify-content-center">
-                                        <NavItem>
+                                        <NavItem >
                                             <NavLink className={activeTab === '1' ? 'active' : ''}
                                                      onClick={() => setActiveTab('1')}>
                                                 <span
                                                     className={activeTab === '1' ? 'tab-active' : 'tab-inactive'}>Week</span>
                                             </NavLink>
                                         </NavItem>
-                                        <NavItem>
+                                        <NavItem >
                                             <NavLink className={activeTab === '2' ? 'active' : ''}
                                                      onClick={() => setActiveTab('2')}>
                                                 <span
                                                     className={activeTab === '2' ? 'tab-active' : 'tab-inactive'}>Month</span>
                                             </NavLink>
                                         </NavItem>
-                                        <NavItem>
+                                        <NavItem >
                                             <NavLink className={activeTab === '3' ? 'active' : ''}
                                                      onClick={() => setActiveTab('3')}>
                                                 <span

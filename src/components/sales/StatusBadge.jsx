@@ -49,15 +49,15 @@ const StatusBadges = (props) => {
     return (
         <Fragment>
             <Row  className="m-t-30 m-b-40">
-                <Col xl='4' md="4" className="horizontal-alignmet">
+                <Col xl='4' md="4" className="horizontal-item-alignment">
                     <StatusBadge icon={clearedIcon} text="Cleared" count={props.data.cleared.count}
                                  tip={props.data.cleared.tip}/>
                 </Col>
-                <Col xl='4' md="4" className="horizontal-alignmet">
+                <Col xl='4' md="4" className="horizontal-item-alignment">
                     <StatusBadge icon={pendingIcon} text="Pending" count={props.data.pending.count}
                                  tip={props.data.pending.tip}/>
                 </Col>
-                <Col xl='4' md="4" className="horizontal-alignmet">
+                <Col xl='4' md="4" className="horizontal-item-alignment">
                     <StatusBadge icon={archiveIcon} text="Archived" count={props.data.archive.count}
                                  tip={props.data.archive.tip}/>
                 </Col>

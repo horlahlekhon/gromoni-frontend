@@ -11,8 +11,6 @@ import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import {Button} from "react-bootstrap";
-import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 const Header = ({search, filter, business}) => {
     const [searchValue, setSearchValue] = useState("")
@@ -87,12 +85,6 @@ const Header = ({search, filter, business}) => {
                     />
                 </div>
 
-            </Col>
-            <Col xl="2">
-                <div>
-                    <Link to={`/business/${business}/sales/new`}><Button className='btn-air-primary' color="primary">create
-                        sale </Button></Link>
-                </div>
             </Col>
         </Row>
     )

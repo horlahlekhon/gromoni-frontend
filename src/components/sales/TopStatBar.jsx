@@ -1,27 +1,11 @@
 import React from 'react'
 import {Card, CardBody, Col, Row} from 'reactstrap'
-import {hospitalSmallChartOptions, smallChartListener, visitorSmallChart} from '../common/chartsData/chartist'
-import ChartistGraph from 'react-chartist';
-import {TrendingUp} from 'react-feather'
+import {TrendingDown, TrendingUp} from 'react-feather'
 import '../../assets/images/other-images/salesStatBar.jpg'
 import PropTypes from 'prop-types';
+import {formatMoney} from "../common/utilityFunctions";
 const TopStatBar = (props) => {
 
-    const data = {
-        id: 1,
-        cardBg: '',
-        title: "Total Sale",
-        scorr: '841,162',
-        color: 'primary',
-        bdgeFont: '',
-        bdgeValue: '3.56%',
-        progress: '75%'
-    }
-
-    const overallSales = new Intl.NumberFormat('en-NG', {
-        style: 'currency',
-        currency: 'NGN'
-    }).format(props.data.overallSales)
 
     return (
         <Row>
@@ -33,8 +17,7 @@ const TopStatBar = (props) => {
                                 <div className="media hospital-small-chart">
                                     <div className="small-bar">
                                         <div className="small-chart1 flot-chart-container">
-                                            <ChartistGraph data={visitorSmallChart} listener={smallChartListener}
-                                                           options={hospitalSmallChartOptions} type={'Bar'}/>
+                                        {/*    maintain sanity on small screen*/}
                                         </div>
                                     </div>
                                     <div className="media-body">
@@ -46,24 +29,21 @@ const TopStatBar = (props) => {
                             <Col xl="6" md="6" sm="6" className="b-l-light">
                                 <div className="media hospital-small-chart">
                                     <div className="small-bar">
-                                        <div className="small-chart1 flot-chart-container">
-                                            <ChartistGraph data={visitorSmallChart} listener={smallChartListener}
-                                                           options={hospitalSmallChartOptions} type={'Bar'}/>
+                                        <div className="small-chart1 flot-chart-container p-t-20 text-center" >
+                                            {console.log("datatttata", props.data)}
+                                            <h6  >{formatMoney(props.data.trend ? props.data.trend.amount : 0.0)}</h6>
+                                            {
+                                                props.data.trend.status === "increase" ?
+                                                    <TrendingUp color="red" size={20} style={{width: "20px", height:"20px"}}/>
+                                                    :
+                                                    <TrendingDown color="red" size={20} style={{width: "20px", height:"20px"}}/>
+                                            }
                                         </div>
                                     </div>
                                     <div className="media-body" >
-                                        <h3 className="d-inline-block f-w-600 m-l-10 mb-0 ">{overallSales}</h3>
+                                        <h3 className="d-inline-block f-w-600 m-l-10 mb-0 ">{formatMoney(props.data.overallSales)}</h3>
                                         <h6 className="mb-0 f-w-600 m-l-10">Overall sales</h6>
-
                                     </div>
-                                    <div className="p-l-0 p-t-10 p-b-10 m-t-0">
-                                            <span
-                                                className={`tag-content-${data.color} tag-hover-effect ${data.color === 'light' ? 'tag-light' : ''} m-10`}>
-                                             <TrendingUp color="red"/>
-                                            </span>
-                                        <h6 className="m-10" >N1000</h6>
-                                    </div>
-
                                 </div>
                             </Col>
                         </Row>
@@ -77,7 +57,11 @@ const TopStatBar = (props) => {
 TopStatBar.prototype = {
     data: PropTypes.exact({
         NosOfSales: PropTypes.number,
-        overallSales: PropTypes.number
+        overallSales: PropTypes.number,
+        trend: PropTypes.exact({
+            status: PropTypes.string,
+            amount: PropTypes.number
+        })
     })
 }
 export default TopStatBar

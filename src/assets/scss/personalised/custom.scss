@@ -10,7 +10,7 @@
 
 
   &:hover {
-    color: #30adf2;
+    color: $primary-color;
     cursor: pointer;
   }
 }
@@ -20,7 +20,7 @@
 }
 
 .tab-active {
-  color: #083854 !important;
+  color: $primary-color !important;
 }
 
 .nav-tabs {
@@ -31,7 +31,7 @@
 
 /// Sales stats  badge starts
 .sales-stat-badge {
-  background-color: #FFFFFF;
+  background-color: $primary-color;
   height: 58px;
   width: 212px;
   display: flex;
@@ -67,19 +67,19 @@
 
 .sales-stat-icon-pending {
   background-color: #A80909;
-  color: #F9F9F9;
+  color: $light-color;
   border: 1px solid #FBA2AC
 }
 
 .sales-stat-icon-cleared {
   background-color: #0A7D51;
-  color: #F9F9F9;
+  color: $light-color;
   border: 1px solid
 }
 
 .sales-stat-icon-archive {
-  background-color: #4BB8F2;
-  color: #F9F9F9;
+  background-color:$primary-color;
+  color: $light-color;
   border: 1px solid
 }
 
@@ -127,7 +127,7 @@
 }
 
 .tool::after {
-  background: #F9F9F9;
+  background: $light-color;
   border-radius: .25em;
   top: 92%;
   color: #333333;
@@ -157,12 +157,25 @@
 // tooltip end
 
 
-.horizontal-alignmet {
+.horizontal-item-alignment {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
+.vertical-items-alignment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 .bg-statBar{
   background-image: url(../../images/other-images/salesStatBar.jpg);
+}
+
+.create-sale-button{
+  background-color: $primary-color;
+  color: $light-color;
+  height: 58px;
+  width: 212px;
+  border: 1px solid $light-color;
 }

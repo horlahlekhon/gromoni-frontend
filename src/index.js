@@ -40,7 +40,6 @@ const Root = (props) => {
                         <Switch>
                             <Route exact path={`${process.env.PUBLIC_URL}/`} component={CommingSoon}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/login/`} component={SignInAndRegister}/>
-                            {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
                             <Route exact path={`${process.env.PUBLIC_URL}/business/`} component={NewBusiness}/>
 
                             <Fragment>

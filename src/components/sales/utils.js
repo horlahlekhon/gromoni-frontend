@@ -86,7 +86,7 @@ export const dataOptions = (series, labels, name) => {
                     borderColor: "#f5f8fd", clipMarkers: false, yaxis: {lines: {show: true}}
                 },
             yaxis: {
-                tickAmount: series === undefined ? 5 : Math.max(...series) / 5,
+                tickAmount: series === undefined ? 5 : Math.max(...series) / 10,
                 min: 0,
                 max: series === undefined ? 0 : Math.max(...series),
                 labels: {style: {color: '#6e7e96'}}

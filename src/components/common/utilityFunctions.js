@@ -18,7 +18,20 @@ export function responseErrorParser(payload) {
     }
 }
 
-// export const pathBuilder = ()
-export const convertDateToMonthNames = (dates) => {
-    return dates.map(e => new Date(e).toLocaleString('default', {month: 'long'}))
+export const convertDateToNames = (dates, type) => {
+    switch (type) {
+        case "month":
+            return dates.map(e => new Date(e).toLocaleString('en-NG', {month: 'short'}))
+        case "week":
+            return dates.map(e => new Date(e).toLocaleString('default', {weekday: 'short'}))
+        default:
+            return dates
+    }
+}
+
+export const formatMoney = (money) => {
+    return new Intl.NumberFormat('en-NG', {
+        style: 'currency',
+        currency: 'NGN'
+    }).format(money)
 }

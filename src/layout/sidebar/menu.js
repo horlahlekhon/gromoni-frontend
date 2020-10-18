@@ -19,7 +19,11 @@ export const MENUITEMS = [
     },
 
     {
-        path: `${process.env.PUBLIC_URL}/business/${business}/sales`, title: "Sales", icon: BarChart, type: "link", active: false,
+       title: "Sales", icon: BarChart, type: "sub", active: false, children: [
+            {
+                title: 'Home', path: `${process.env.PUBLIC_URL}/business/${business}/sales`, type: 'link'
+            }
+        ]
     },
 
     {

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
-import creativeLogo from '../assets/images/creative-logo1.png';
+import gromoniLogo from '../assets/images/logo/GrowMoni-logo-dark-137x40.png';
 import Leftbar from './header/Leftbar'
 import Rightbar from './header/Rightbar'
 import {MoreHorizontal} from 'react-feather';
@@ -8,7 +8,7 @@ import {Input, Label} from 'reactstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {MENUITEMS} from './sidebar/menu'
 import {Link} from 'react-router-dom'
-import logo_light from '../assets/images/creative-logo.png'
+// logo_light
 
 export const Header = () => {
 
@@ -123,8 +123,8 @@ export const Header = () => {
             <div className="main-header-right row">
                 <div className="main-header-left d-lg-none">
                     <div className="logo-wrapper header-logo normal"><a href="#javascript">
-                        <img className="normallogo" src={creativeLogo} alt=""/>
-                        <img className="lightlogo" src={logo_light} alt=""/>
+                        <img className="normallogo" src={gromoniLogo} alt=""/>
+                        <img className="lightlogo" src={gromoniLogo} alt=""/>
                     </a></div>
                 </div>
                 <div className="mobile-sidebar d-block">

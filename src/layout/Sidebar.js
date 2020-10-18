@@ -1,8 +1,8 @@
-import logo from '../assets/images/creative-logo.png'
+import logo from '../assets/images/logo/Gromoni-logo-light-137x40.png'
 import React, {Fragment, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux'
-import logo_compact from '../assets/images/logo/compact-logo.png';
-import logo_light from '../assets/images/creative-logo1.png'
+import logo_compact from '../assets/images/logo/GrowMoni-logo-dark-57x42.png';
+import logo_light from '../assets/images/logo/Gromoni-logo-light-137x40.png'
 import {Link} from 'react-router-dom'
 import configDB from '../data/customizer/config';
 import {MENUITEMS} from "./sidebar/menu";
