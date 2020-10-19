@@ -4,39 +4,40 @@
 import {BarChart, Headphones, Home, List, PieChart, Users} from 'react-feather';
 // import {Sack} from 'reactstrap';
 
-const business = localStorage.getItem("__grm__act__biz__")
-export const MENUITEMS = [
-    {
-        path: `${process.env.PUBLIC_URL}/business/${business}/home`, title: "Home", icon: Home, type: "link", active: true,
-    },
+export const getMenuItems = (business) => {
+    return [
+        {
+            path: `${process.env.PUBLIC_URL}/business/${business}/home`, title: "Home", icon: Home, type: "link", active: true,
+        },
 
-    {
-        path: `${process.env.PUBLIC_URL}/business/${business}/customers`, title: "Customers", icon: Users, type: "link", active: false,
-    },
+        {
+            path: `${process.env.PUBLIC_URL}/business/${business}/customers`, title: "Customers", icon: Users, type: "link", active: false,
+        },
 
-    {
-        path: `${process.env.PUBLIC_URL}/business/${business}/products`, title: "Products", icon: List, type: "link", active: false,
-    },
+        {
+            path: `${process.env.PUBLIC_URL}/business/${business}/products`, title: "Products", icon: List, type: "link", active: false,
+        },
 
-    {
-       title: "Sales", icon: BarChart, type: "sub", active: false, children: [
-            {
-                title: 'Home', path: `${process.env.PUBLIC_URL}/business/${business}/sales`, type: 'link'
-            }
-        ]
-    },
+        {
+            title: "Sales", icon: BarChart, type: "sub", active: false, children: [
+                {
+                    title: 'Home', path: `${process.env.PUBLIC_URL}/business/${business}/sales`, type: 'link'
+                }
+            ]
+        },
 
-    {
-        path: `${process.env.PUBLIC_URL}/business/${business}/reports`, title: "Reports", icon: PieChart, type: "link", active: false,
-    },
+        {
+            path: `${process.env.PUBLIC_URL}/business/${business}/reports`, title: "Reports", icon: PieChart, type: "link", active: false,
+        },
 
-    {
-        title: 'Support', icon: Headphones, type: 'sub', active: false, children: [
-            {path: 'http://support.pixelstrap.com/help-center', title: 'Raise Ticket', type: 'exteral_link',},
-        ]
-    },
+        {
+            title: 'Support', icon: Headphones, type: 'sub', active: false, children: [
+                {path: 'http://support.pixelstrap.com/help-center', title: 'Raise Ticket', type: 'exteral_link',},
+            ]
+        },
 
-]
+    ]
+}
 
 // export const menuItems = (business) => {
 //     if(business) {

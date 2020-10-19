@@ -5,11 +5,13 @@ import logo_compact from '../assets/images/logo/GrowMoni-logo-dark-57x42.png';
 import logo_light from '../assets/images/logo/Gromoni-logo-light-137x40.png'
 import {Link} from 'react-router-dom'
 import configDB from '../data/customizer/config';
-import {MENUITEMS} from "./sidebar/menu";
+import {getMenuItems} from "./sidebar/menu";
 
 const Sidebar = () => {
+    const business = localStorage.getItem("__grm__act__biz__")
 
-    const [mainmenu, setMainMenu] = useState(MENUITEMS);
+    const [mainmenu, setMainMenu] = useState(getMenuItems(business));
+    const [MENUITEMS, ] = useState(getMenuItems(business))
     const switchToggle = useSelector(state => state.Common.switchToggle)
     const sidebar_background_color = configDB.data.settings.sidebar_background_setting;
 

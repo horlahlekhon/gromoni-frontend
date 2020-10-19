@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState} from 'react'
 import {Breadcrumb, BreadcrumbItem, Col, Container, Row} from 'reactstrap'
-import {MENUITEMS} from './sidebar/menu'
+import { getMenuItems} from './sidebar/menu'
 
 const Breadcrumbs = (props) => {
     // eslint-disable-next-line
     const [breadcrumb, ] = useState(props);
     // eslint-disable-next-line
-    const [mainmenu, ] = useState(MENUITEMS);
+    const business = localStorage.getItem("__grm__act__biz__")
+    const [mainmenu, ] = useState(getMenuItems(business));
     const [, setSearchValue] = useState('');
     const [, setSearchResult] = useState([]);
     // const [bookmarkSearch, SetBookmarkSearch] = useState(false)
