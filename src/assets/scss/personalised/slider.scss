@@ -31,14 +31,17 @@
   z-index:1; 
   padding-top:2rem;
 }
-.transition-message-btn{
-  margin-left: 15px;
-}
 
 // welcomePage styles
 .welcome-pg-cont{
   padding-left: 72px;
   background-color: #f0e7ff;
+}
+.welcome-pg-first-inner{
+  text-align: center;
+  background: url("../../images/personalised/gromoni-phone2.png") right center no-repeat;
+  background-size: cover;
+  visibility: hidden;
 }
 .welcome-pg-second-inner{
   background-color: #fff;
@@ -47,6 +50,9 @@
 .welcome-pg-second-logo{
   margin: 155.56px auto 63.44px;
   text-align: center;
+}
+.welcome-pg-img{
+  visibility: visible;
 }
 .welcome-pg-second-heading{
   font-size: 42px;
@@ -116,3 +122,47 @@
   font-size:12px;
   font-family:'Quicksand', sans-serif;
 }
+
+@include media-breakpoint-down(sm) {
+  .welcome-pg-cont{
+    position: relative;
+  }
+  .h-md-100{
+    background-color: #f0e7ff;
+    width: 100%;
+    height: 100%;
+  }
+  .welcome-pg-cont{
+    padding: 0 !important;
+  }
+  .welcome-pg-second-logo{
+    display: none;
+  }
+  .welcome-pg-img{
+    visibility: hidden;
+    // height: 100%;
+  }
+  .welcome-pg-first-inner{
+    visibility: visible;
+  }
+  .transition-message{
+    position: absolute;
+    top: -400px;
+    background-color: #f0e7ff;
+    
+  }
+  .create-business-form{
+    padding-left: 20px;
+  }
+  .create-business-btn{
+    width: 105px;
+    text-align: center;
+  }
+  .main-cont{
+    height: 100vh;
+  }
+}
+
+// @include media-breakpoint-only(sm){
+
+// }

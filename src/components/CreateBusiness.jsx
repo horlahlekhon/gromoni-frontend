@@ -154,12 +154,12 @@ const CreateBusiness = (props) => {
                                     </FormGroup>
                                     <Row>
                                         <Col xl={`4`}>
-                                            <Button color=" btn-outline-primary" block className=" create-business-btn cancel-btn" onClick={() => props.showMessageAction(false)}>
+                                            <Button color=" btn-outline-primary" className=" create-business-btn cancel-btn" onClick={() => props.showMessageAction(false)}>
                                                 cancel
                                             </Button>
                                         </Col>
                                         <Col xl={`8`}>
-                                            <Button color="primary " block className=" create-business-btn"
+                                            <Button color="primary " className=" create-business-btn"
                                                     onClick={e => handleCreateBusiness(e)}
                                             >
                                                 {/* {props.requestingCreateBusiness ? 'Loading...' : 'Create business'} */}

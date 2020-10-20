@@ -12,12 +12,12 @@ const WelcomePage = () => {
 		return(
 			<div className='d-md-flex h-md-100 align-items-center welcome-pg-cont'>
 				<Fragment>
-						<div className="col-md-8 p-0 h-md-100">
+						<div className="col-md-8 p-0 h-md-100 welcome-pg-first-inner">
 							<div className="h-100 p-5 text-center">
-								<img width="70%" src="https://res.cloudinary.com/philippa/image/upload/v1601853715/Gromoni/svg_qwe50r.png" alt="welcome page image" />
+								<img className="welcome-pg-img img-fluid" src="https://res.cloudinary.com/philippa/image/upload/v1601853715/Gromoni/svg_qwe50r.png" alt="welcome page image" />
 							</div>
 						</div>
-						<div className="col-md-4 p-0 h-md-100" >
+						<div className="col-md-4 p-0 h-md-100">
 							<div className="welcome-pg-second-inner h-md-100 p-5 ">
 								<h6 class="welcome-pg-second-logo">Gromoni</h6>									
 								<h2 class="welcome-pg-second-heading">Thank you for Signing up!</h2>
