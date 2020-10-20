@@ -16,12 +16,12 @@ export const Header = () => {
     const sidebar_background_color = configDB.settings.sidebar_background_setting;
     // eslint-disable-next-line
     const business = localStorage.getItem("__grm__act__biz__")
-    const [mainmenu, setMainMenu] = useState(getMenuItems(business));
+    const [mainmenu, ] = useState(getMenuItems(business));
     const [searchValue, setsearchValue] = useState('');
     // eslint-disable-next-line
-    const [searchResult, setSearchResult] = useState(false);
+    const [, setSearchResult] = useState(false);
     // eslint-disable-next-line
-    const [searchResultEmpty, setSearchResultEmpty] = useState(false);
+    const [, setSearchResultEmpty] = useState(false);
 
     const dispatch = useDispatch();
     const searchTog = useSelector(state => state.Common.searchToggle)

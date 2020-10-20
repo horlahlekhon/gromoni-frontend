@@ -10,12 +10,11 @@ import {withRouter} from 'react-router';
 import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Register from './Register';
-import {responseErrorParser, validateForm} from './validator';
+import {validateForm} from './validator';
 
 import {useCookie} from '@shopify/react-cookie';
 
 import {Eye} from 'react-feather'
-
 const eye = <Eye />
 
 
@@ -34,6 +33,7 @@ const SignIn = (props) => {
     if(typeof props.location.state === 'object' && props.location.state.isRedirect){
         toast.error(props.location.state.error)
     }
+
     const handleLoginUser = async (e) => {
         e.preventDefault();
         const state = {
@@ -46,14 +46,12 @@ const SignIn = (props) => {
                 errorObj.errors.forEach((errorObj) => toast.error(errorObj.message))
             }, 200)
         } else {
-            const form = new FormData();
-            form.append('username', username);
-            form.append('password', password);
+            const form = {username: username, password: password}
             const res_data = await props.login(form);
-            if (res_data.status) {
-                setAccessToken(res_data.payload.data.access_token)
-                setRefreshToken(res_data.payload.data.refresh_token)
-                const businesses = res_data.payload.data.businesses
+            if (res_data.success) {
+                setAccessToken(res_data.payload.access_token)
+                setRefreshToken(res_data.payload.refresh_token)
+                const businesses = res_data.payload.businesses
                 const currentBusiness = businesses[0]
                 if (businesses.length === 0) {
                     toast.info('Sorry, You currently do not have any business, take time to create one')
@@ -75,9 +73,9 @@ const SignIn = (props) => {
                 }
             } else {
                 const payload = res_data.payload
-                const erro = responseErrorParser(payload)
+                // const erro = responseErrorParser(payload)
                 setTimeout(() => {
-                    erro.forEach(e => toast.error(e.message))
+                    payload.forEach(e => toast.error(e.message))
                 }, 300);
             }
         }
