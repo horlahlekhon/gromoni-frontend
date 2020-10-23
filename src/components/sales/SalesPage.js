@@ -5,7 +5,7 @@ import TopStatBar from '../../components/sales/TopStatBar';
 import SalesGraph from '../../components/sales/SalesGraph';
 import StatusBadges from '../../components/sales/StatusBadge';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
-import SalesTable from '../../components/sales/SalesTable';
+import SalesTable from './SalesTable';
 import {salesDashboardData} from './pageUtility';
 import {useCookie} from "@shopify/react-cookie";
 import {responseErrorParser} from "../../components/common/utilityFUnctions";
@@ -47,11 +47,11 @@ const SalesPage = (props) => {
                 })
 
             if (response.status === 404) {
-                toast.error("Business not found please relogin")
+                toast.error("Business not found please login again")
                 history.push({
                     pathname: "/login",
                     state: {
-                        error: "Business not found please re-login",
+                        error: "Business not found please login again",
                         isRedirect: true,
                         redirectRoute: "/sales/"
                     }
@@ -102,7 +102,7 @@ const SalesPage = (props) => {
 
     }
 
-    console.log(`monthly datatattatta: ${monthlyChartData}`)
+    console.log(`monthly data: ${monthlyChartData}`)
 
     const topBarDataDummy = {NosOfSales: 350, overallSales: 450}
     return (
