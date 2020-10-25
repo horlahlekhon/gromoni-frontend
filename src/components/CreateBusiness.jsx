@@ -130,7 +130,7 @@ const CreateBusiness = (props) => {
                                     <FormGroup className=" m-form__group">
                                         <Label for="phoneNumber">Phone Number</Label>
                                         <PhoneInput
-                                            inputStyle={{maxWidth:"400px", width:"100%", height: "44px", baackgroundColor:"#d5deee"}}
+                                            inputStyle={{maxWidth:"508px", width:"100%", height: "44px", baackgroundColor:"#d5deee"}}
                                             buttonStyle={{backgroundColor: "#d5deee"}}
                                             id="phoneNumber"
                                             country={"ng"}
@@ -152,13 +152,13 @@ const CreateBusiness = (props) => {
                                             ))}
                                         </Input>
                                     </FormGroup>
-                                    <Row>
-                                        <Col xl={`4`}>
+                                    <Row className="btn-cont">
+                                        <Col xl={`4`} sm="6" xs="6">
                                             <Button color=" btn-outline-primary" className=" create-business-btn cancel-btn" onClick={() => props.showMessageAction(false)}>
                                                 cancel
                                             </Button>
                                         </Col>
-                                        <Col xl={`8`}>
+                                        <Col xl={`8`} sm="6" xs="6">
                                             <Button color="primary " className=" create-business-btn"
                                                     onClick={e => handleCreateBusiness(e)}
                                             >
