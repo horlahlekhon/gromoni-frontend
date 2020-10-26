@@ -5,7 +5,7 @@
 $url_0: url("../../images/other-images/auth-layer.png") !important;
 $url_1: url("../../images/other-images/auth-bg-1.jpg") !important;
 
-.auth-minibox{
+.auth-minibox {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,27 +14,31 @@ $url_1: url("../../images/other-images/auth-bg-1.jpg") !important;
 
 .authentication-main {
   margin-top: 80px;
+
   .auth-innerright {
-    .card-body{
-      .theme-form{
+    .card-body {
+      .theme-form {
         width: calc(100% - 290px);
       }
     }
   }
 }
-.auth-minibox1{
+
+.auth-minibox1 {
   width: 460px;
   z-index: 2;
   margin: 0 auto;
 }
 
 .auth-bg {
-  .card-body{
-    .theme-form{
+  .card-body {
+    .theme-form {
       width: calc(100% - 290px);
     }
+
     background-color: $card-body-color;
   }
+
   background: $url_1;
   display: flex;
   align-items: center;
@@ -42,20 +46,24 @@ $url_1: url("../../images/other-images/auth-bg-1.jpg") !important;
   min-height: 100vh;
   padding: 50px 100px;
 }
+
 .auth-bg-video {
-  .card-body{
-    .theme-form{
+  .card-body {
+    .theme-form {
       width: calc(100% - 290px);
     }
+
     background-color: $card-body-color;
     padding: 0;
   }
+
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   background-color: rgba(255, 255, 255, 0.31);
   padding: 50px 0;
+
   video {
     position: fixed;
     top: 50%;
@@ -69,42 +77,52 @@ $url_1: url("../../images/other-images/auth-bg-1.jpg") !important;
     transition: 1s opacity;
   }
 }
+
 .reset-password-box {
   width: 645px;
   z-index: 2;
+
   .card {
     padding: 30px;
   }
+
   .theme-form {
     .form-group {
       label {
         font-size: 12px;
         color: $theme-body-sub-title-color;
       }
+
       .form-control {
         font-size: 18px;
       }
+
       .btn {
         font-size: 18px;
         padding: 6px 24px;
       }
     }
+
     .opt-box {
       background: $light-body-bg-color;
+
       .opt-text {
         font-size: 36px;
         // padding: 25px 0;
       }
     }
   }
+
   .reset-password-link {
     color: $theme-body-sub-title-color;
   }
+
   .reset-password-box h6 {
     letter-spacing: 1px;
     font-size: 16px;
   }
 }
+
 @keyframes rotate-effect {
   0% {
     transform: rotate(0);
@@ -140,15 +158,17 @@ $diffRatio: ($contW - $imgW) / $contW;
   padding: 30px;
   border-radius: 12px;
 }
-.cont{
-  & > div{
-    &:nth-child(1){
-      height:100%;
+
+.cont {
+  & > div {
+    &:nth-child(1) {
+      height: 100%;
       display: flex;
       align-items: center;
     }
   }
 }
+
 .sub-cont {
   overflow: hidden;
   position: absolute;
@@ -162,7 +182,7 @@ $diffRatio: ($contW - $imgW) / $contW;
   width: calc(100% + 260px);
 
   @include signUpActive {
-    transform: translate3d($formW * -1,0,0);
+    transform: translate3d($formW * -1, 0, 0);
   }
 }
 
@@ -188,6 +208,7 @@ $diffRatio: ($contW - $imgW) / $contW;
     background-size: cover;
     transition: transform $switchAT ease-in-out;
   }
+
   &:after {
     content: '';
     position: absolute;
@@ -195,12 +216,12 @@ $diffRatio: ($contW - $imgW) / $contW;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
   }
 
   @include signUpActive {
     &:before {
-      transform: translate3d($formW,0,0);
+      transform: translate3d($formW, 0, 0);
     }
   }
 
@@ -314,15 +335,15 @@ $diffRatio: ($contW - $imgW) / $contW;
   @include signUpActive {
     transition-timing-function: ease-in-out;
     transition-duration: $switchAT;
-    transform: translate3d($formW,0,0);
+    transform: translate3d($formW, 0, 0);
   }
 }
 
 .sign-up {
-  transform: translate3d($contW * -1,0,0);
+  transform: translate3d($contW * -1, 0, 0);
 
   @include signUpActive {
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -337,25 +358,29 @@ $diffRatio: ($contW - $imgW) / $contW;
     right: 5px;
   }
 }
+
 @media only screen and (max-width: 991px) {
   .auth-bg-video {
-    .card-body{
-      .theme-form{
+    .card-body {
+      .theme-form {
         width: calc(100%);
         margin-bottom: 295px;
       }
+
       .s--signup {
-        .theme-form{
+        .theme-form {
           margin-top: 295px;
           margin-bottom: 0;
         }
       }
     }
-    .cont { 
+
+    .cont {
       .img:before {
         transform: translate3d(0, 0px, 0) !important;
-     }
+      }
     }
+
     .theme-form {
       .login-divider, .form-divider {
         &:before {
@@ -370,9 +395,11 @@ $diffRatio: ($contW - $imgW) / $contW;
     transform: translate3d(0, 488px, 0) !important;
     height: calc(100% + 260px);
     width: 100%;
+
     .img {
       width: 100%;
       height: auto;
+
       &:before {
         width: 100%;
       }
@@ -393,6 +420,7 @@ $diffRatio: ($contW - $imgW) / $contW;
     &.m--up {
       transform: translateY(0) !important;
     }
+
     &.m--in {
       transform: translateY(-580px) !important;
       transform: translatX(0px) !important;
@@ -400,20 +428,24 @@ $diffRatio: ($contW - $imgW) / $contW;
   }
   .cont {
     width: 100%;
+
     &.s--signup {
-       .img {
-          &:before {
-            transform: translate3d(0, 0px, 0) !important;
-          }
+      .img {
+        &:before {
+          transform: translate3d(0, 0px, 0) !important;
         }
+      }
+
       .sub-cont {
         transform: translate3d(0, 0, 0) !important;
       }
+
       .img__text {
         &.m--in {
           transform: translateX(0px) !important;
           transform: translateY(0) !important;
         }
+
         &.m--up {
           transform: translateX(0px) !important;
           transform: translateY(-580px) !important;
@@ -426,12 +458,14 @@ $diffRatio: ($contW - $imgW) / $contW;
   }
   .authentication-main {
     padding: 30px;
+
     .auth-innerright {
       .card-body {
         .theme-form {
           margin-bottom: 280px;
           width: 100%;
         }
+
         .s--signup {
           .theme-form {
             margin-top: 280px;
@@ -451,9 +485,11 @@ $diffRatio: ($contW - $imgW) / $contW;
     padding: 15px !important;
   }
 }
+
 @media only screen and (max-width: 575px) {
   .authentication-main {
     margin-top: 10px;
+
     .authentication-box {
       .h-100-d-center {
         padding: 0;
@@ -479,6 +515,7 @@ $diffRatio: ($contW - $imgW) / $contW;
     }
   }
 }
+
 @media only screen and (max-width: 360px) {
   .auth-bg-video {
     .theme-form {
@@ -503,6 +540,7 @@ $diffRatio: ($contW - $imgW) / $contW;
     }
   }
 }
+
 /**=====================
     25. Authentication CSS Ends
 ==========================**/

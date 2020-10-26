@@ -1,13 +1,17 @@
-import { HTTP } from '../../api'
+import {HTTP} from '../../api'
 import configDB from "../../data/customizer/config";
+
 const primary = localStorage.getItem('primary_color') || configDB.data.color.primary_color;
-const secondary = localStorage.getItem('secondary_color') || configDB.data.color.secondary_color;
+const secondary = localStorage.getItem('secondary_color') || configDB.data.color.secondary_color
+
+//TODO refactor call to use getter from the API module
 export const salesDashboardData = (token, business) => {
     return HTTP.growthApi(token)
-        .get(`/report/${business}/dashboards/sales/`)
+        .get(`/report/${business}/dashboards/sales/?page_size=10`)
 }
 
 export const chartOptions = (series, labels) => {
+    // eslint-disable-next-line
     const data = {
         options: {
             chart: {

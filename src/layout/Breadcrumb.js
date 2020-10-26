@@ -1,161 +1,159 @@
-import React, { useState,useCallback,useEffect, Fragment } from 'react'
-import {Row, Col,Input, Container,Breadcrumb,BreadcrumbItem} from 'reactstrap'
-import { Star } from 'react-feather'
-import {MENUITEMS} from './sidebar/menu'
-import {Link} from 'react-router-dom'
-import { Tooltip } from 'reactstrap';
-import TopStatBar from '../components/sales/TopStatBar'
+import React, { useCallback, useEffect, useState} from 'react'
+import {Breadcrumb, BreadcrumbItem, Col, Container, Row} from 'reactstrap'
+import { getMenuItems} from './sidebar/menu'
+
 const Breadcrumbs = (props) => {
-  // eslint-disable-next-line
-  const [breadcrumb, setBreadcrumb] = useState(props);
-  // eslint-disable-next-line
-  const [mainmenu, setMainMenu] = useState(MENUITEMS);
-  const [searchValue, setSearchValue] = useState('');
-  const [searchResult, setSearchResult] = useState(false);
-  const [bookmarkSearch, SetBookmarkSearch] = useState(false)
-  const [bookmarkItems, setBookmarkItems] = useState([]);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  // eslint-disable-next-line
-  const [targetName, setTargetName] = useState('');
+    // eslint-disable-next-line
+    const [breadcrumb, ] = useState(props);
+    // eslint-disable-next-line
+    const business = localStorage.getItem("__grm__act__biz__")
+    const [mainmenu, ] = useState(getMenuItems(business));
+    const [, setSearchValue] = useState('');
+    const [, setSearchResult] = useState([]);
+    // const [bookmarkSearch, SetBookmarkSearch] = useState(false)
+    // const [bookmarkItems, setBookmarkItems] = useState([]);
+    // const [, setTooltipOpen] = useState(false);
+    // eslint-disable-next-line
+    // const [, setTargetName] = useState('');
 
-  const toggle = targetName => {
-    setTooltipOpen()
-    if (!targetName) {
-        setTargetName({
-            ...targetName,
-            targetName: {
-                tooltipOpen: true
-            }
-        });
-    } else {
-        setTargetName({
-            ...targetName,
-            targetName: {
-                tooltipOpen: !targetName.tooltipOpen
-            }
-        });
-    }
-};
+    // const toggle = targetName => {
+    //     setTooltipOpen()
+    //     if (!targetName) {
+    //         setTargetName({
+    //             ...targetName,
+    //             targetName: {
+    //                 tooltipOpen: true
+    //             }
+    //         });
+    //     } else {
+    //         setTargetName({
+    //             ...targetName,
+    //             targetName: {
+    //                 tooltipOpen: !targetName.tooltipOpen
+    //             }
+    //         });
+    //     }
+    // };
 
-  const escFunction = useCallback((event) => {
-    if (event.keyCode === 27) {
-        //Do whatever when esc is pressed
-        setSearchValue('')
-        setSearchResult([])
-        SetBookmarkSearch(false)
-        document.querySelector(".filled-bookmark").classList.remove('is-open');
-        document.querySelector(".page-wrapper").classList.remove("offcanvas-bookmark");
-    }
-}, []);
-
-useEffect(() => {
-    document.addEventListener("keydown", escFunction, false);
-    mainmenu.filter(menuItems => {
-      if (menuItems.bookmark) {
-          setBookmarkItems(bookmarkItems => [...bookmarkItems, menuItems])
-      }
-      return menuItems
-      
-    });
-    return () => {
-        document.removeEventListener("keydown", escFunction, false);
-    };
-}, [mainmenu,escFunction]);
-
-  const handleSearchKeyword = (keyword) => {
-
-    keyword ? addFix() : removeFix()
-    const items = [];
-    setSearchValue(keyword)
-    mainmenu.filter(menuItems => {
-        if (menuItems.title.toLowerCase().includes(keyword) && menuItems.type === 'link') {
-            items.push(menuItems);
+    const escFunction = useCallback((event) => {
+        if (event.keyCode === 27) {
+            //Do whatever when esc is pressed
+            setSearchValue('')
+            setSearchResult([])
+            // SetBookmarkSearch(false)
+            document.querySelector(".filled-bookmark").classList.remove('is-open');
+            document.querySelector(".page-wrapper").classList.remove("offcanvas-bookmark");
         }
-        if (!menuItems.children) return false
-        menuItems.children.filter(subItems => {
-            if (subItems.title.toLowerCase().includes(keyword) && subItems.type === 'link') {
-                subItems.icon = menuItems.icon
-                items.push(subItems);
-            }
-            if (!subItems.children) return false
-            subItems.children.filter(suSubItems => {
-                if (suSubItems.title.toLowerCase().includes(keyword)) {
-                    suSubItems.icon = menuItems.icon
-                    items.push(suSubItems);
-                }
-                return suSubItems
-            })
-            return subItems
-        })
-        checkSearchResultEmpty(items)
-        setSearchResult(items);
-        return menuItems
-    });
-}
+    }, []);
 
-const checkSearchResultEmpty = (items) => {
-  if (!items.length) {
-      document.querySelector(".empty-bookmark").classList.add('is-open');
+    useEffect(() => {
+        document.addEventListener("keydown", escFunction, false);
+        mainmenu.filter(menuItems => {
+            // if (menuItems.bookmark) {
+            //     setBookmarkItems(bookmarkItems => [...bookmarkItems, menuItems])
+            // }
+            return menuItems
 
-  } else {
-      document.querySelector(".empty-bookmark").classList.remove('is-open');
-  }
-}
+        });
+        return () => {
+            document.removeEventListener("keydown", escFunction, false);
+        };
+    }, [mainmenu, escFunction]);
+
+    // const handleSearchKeyword = (keyword) => {
+    //
+    //     keyword ? addFix() : removeFix()
+    //     const items = [];
+    //     setSearchValue(keyword)
+    //     mainmenu.filter(menuItems => {
+    //         if (menuItems.title.toLowerCase().includes(keyword) && menuItems.type === 'link') {
+    //             items.push(menuItems);
+    //         }
+    //         if (!menuItems.children) return false
+    //         menuItems.children.filter(subItems => {
+    //             if (subItems.title.toLowerCase().includes(keyword) && subItems.type === 'link') {
+    //                 subItems.icon = menuItems.icon
+    //                 items.push(subItems);
+    //             }
+    //             if (!subItems.children) return false
+    //             subItems.children.filter(suSubItems => {
+    //                 if (suSubItems.title.toLowerCase().includes(keyword)) {
+    //                     suSubItems.icon = menuItems.icon
+    //                     items.push(suSubItems);
+    //                 }
+    //                 return suSubItems
+    //             })
+    //             return subItems
+    //         })
+    //         checkSearchResultEmpty(items)
+    //         setSearchResult(items);
+    //         return menuItems
+    //     });
+    // }
+
+    // const checkSearchResultEmpty = (items) => {
+    //     if (!items.length) {
+    //         document.querySelector(".empty-bookmark").classList.add('is-open');
+    //
+    //     } else {
+    //         document.querySelector(".empty-bookmark").classList.remove('is-open');
+    //     }
+    // }
 
 
-  const addFix = () => {
-    document.querySelector(".filled-bookmark").classList.add('is-open');
-    document.querySelector(".page-wrapper").classList.add("offcanvas-bookmark");
-}
+    // const addFix = () => {
+    //     document.querySelector(".filled-bookmark").classList.add('is-open');
+    //     document.querySelector(".page-wrapper").classList.add("offcanvas-bookmark");
+    // }
+    //
+    // const removeFix = () => {
+    //     setSearchValue('')
+    //     setSearchResult([])
+    //     document.querySelector(".filled-bookmark").classList.remove('is-open');
+    //     document.querySelector(".page-wrapper").classList.remove("offcanvas-bookmark");
+    // }
+    //
+    // const addToBookmark = (event, items) => {
+    //     const index = bookmarkItems.indexOf(items);
+    //     if (index === -1 && !items.bookmark) {
+    //         items.bookmark = true;
+    //         event.currentTarget.classList.add('starred');
+    //         setBookmarkItems([...bookmarkItems, items])
+    //     } else {
+    //         event.currentTarget.classList.remove('starred');
+    //         bookmarkItems.splice(index, 1);
+    //         setBookmarkItems(bookmarkItems)
+    //         items.bookmark = false;
+    //     }
+    // }
 
-const removeFix = () => {
-    setSearchValue('')
-    setSearchResult([])
-    document.querySelector(".filled-bookmark").classList.remove('is-open');
-    document.querySelector(".page-wrapper").classList.remove("offcanvas-bookmark");
-}
-
-const addToBookmark = (event, items) => {
-  const index = bookmarkItems.indexOf(items);
-  if (index === -1 && !items.bookmark) {
-      items.bookmark = true;
-      event.currentTarget.classList.add('starred');
-      setBookmarkItems([...bookmarkItems, items])
-  } else {
-      event.currentTarget.classList.remove('starred');
-      bookmarkItems.splice(index, 1);
-      setBookmarkItems(bookmarkItems)
-      items.bookmark = false;
-  }
-}
-
-const removeOffcanvas = () => {
-  if (bookmarkSearch) {
-      setSearchValue('')
-      setSearchResult([])
-      document.querySelector(".filled-bookmark").classList.remove('is-open');
-      document.querySelector(".page-wrapper").classList.remove("offcanvas-bookmark");
-  }
-  SetBookmarkSearch(!bookmarkSearch)
-}
-
-const AdditionalBar = <Fragment/> ? !props.additionalBar: props.additionalBar
+    // const removeOffcanvas = () => {
+    //     if (bookmarkSearch) {
+    //         setSearchValue('')
+    //         setSearchResult([])
+    //         document.querySelector(".filled-bookmark").classList.remove('is-open');
+    //         document.querySelector(".page-wrapper").classList.remove("offcanvas-bookmark");
+    //     }
+    //     SetBookmarkSearch(!bookmarkSearch)
+    // }
+    //
+    // const AdditionalBar = <Fragment/> ? !props.additionalBar : props.additionalBar
 
 
     return (
         <Container fluid={true}>
-        <div className="page-header">
-          <Row>
-            <Col lg='6'>
-              <h3>{breadcrumb.title}</h3>
-              <Breadcrumb >
-                <BreadcrumbItem>{breadcrumb.parent}</BreadcrumbItem>
-                <BreadcrumbItem>{breadcrumb.subparent}</BreadcrumbItem>
-                <BreadcrumbItem active>{breadcrumb.title}</BreadcrumbItem>
-              </Breadcrumb>
-              
-            </Col>
-            {/* <Col lg='6'>
+            <div className="page-header">
+                <Row>
+                    <Col lg='6'>
+                        <h3>{breadcrumb.title}</h3>
+                        <Breadcrumb>
+                            <BreadcrumbItem>{breadcrumb.parent}</BreadcrumbItem>
+                            <BreadcrumbItem>{breadcrumb.subparent}</BreadcrumbItem>
+                            <BreadcrumbItem active>{breadcrumb.title}</BreadcrumbItem>
+                        </Breadcrumb>
+
+                    </Col>
+                    {/* <Col lg='6'>
               <div className="bookmark pull-right">
                 <ul>
                 {
@@ -225,9 +223,9 @@ const AdditionalBar = <Fragment/> ? !props.additionalBar: props.additionalBar
                 </ul>
               </div>
             </Col> */}
-          </Row>
-        </div>
-      </Container>
+                </Row>
+            </div>
+        </Container>
     )
 }
 

@@ -1,13 +1,13 @@
-import { 
-        ADD_COSTOMIZER, 
-        ADD_LAYOUT, 
-        ADD_SIDEBAR_TYPES, 
-        ADD_SIDEBAR_SETTINGS, 
-        ADD_COLOR, 
-        ADD_MIX_BACKGROUND_LAYOUT,
-        ADD_SIDEBAR_BACKGROUND,
-        ROUTER_ANIMATION 
-    } from "../../actionTypes";
+import {
+    ADD_COLOR,
+    ADD_COSTOMIZER,
+    ADD_LAYOUT,
+    ADD_MIX_BACKGROUND_LAYOUT,
+    ADD_SIDEBAR_BACKGROUND,
+    ADD_SIDEBAR_SETTINGS,
+    ADD_SIDEBAR_TYPES,
+    ROUTER_ANIMATION
+} from "../../actionTypes";
 import ConfigDB from '../../../data/customizer/config';
 
 const initial_state = {
@@ -18,36 +18,36 @@ const initial_state = {
     settings: '',
     color: {},
     mix_background_layout: '',
-    animation:''
+    animation: ''
 };
 
 export default (state = initial_state, action) => {
     switch (action.type) {
 
         case ADD_COSTOMIZER:
-            return { ...state, loading: false, customizer: ConfigDB.data };
+            return {...state, loading: false, customizer: ConfigDB.data};
 
         case ADD_LAYOUT:
             state.customizer.settings.layout_type = action.payload
             const layoutUpdate = state.customizer.settings.layout_type;
-            return { ...state, loading: true, layout: layoutUpdate };
+            return {...state, loading: true, layout: layoutUpdate};
 
         case ADD_SIDEBAR_TYPES:
             state.customizer.settings.sidebar = action.payload
             const sidebarTypeUpdate = state.customizer.settings.sidebar;
 
-            return { ...state, loading: true, sidebar_types: sidebarTypeUpdate };
+            return {...state, loading: true, sidebar_types: sidebarTypeUpdate};
 
         case ADD_SIDEBAR_SETTINGS:
             state.customizer.settings.sidebar_setting = action.payload
             const settingsUpdate = state.customizer.settings.sidebar_setting;
-            return { ...state, loading: true, settings: settingsUpdate };
+            return {...state, loading: true, settings: settingsUpdate};
 
         case ADD_SIDEBAR_BACKGROUND:
             state.customizer.settings.sidebar_background_setting = action.payload
             const settingsBackgroundUpdate = state.customizer.settings.sidebar_background_setting;
 
-            return { ...state, loading: true, settings: settingsBackgroundUpdate };
+            return {...state, loading: true, settings: settingsBackgroundUpdate};
 
         case ADD_COLOR:
             const colors = action.payload;
@@ -56,20 +56,21 @@ export default (state = initial_state, action) => {
             state.customizer.color.color = colors.color;
             state.customizer.color.layout_version = colors.layout_version;
 
-            return { ...state, color: colors, loading: true };
+            return {...state, color: colors, loading: true};
 
         case ADD_MIX_BACKGROUND_LAYOUT:
             const mix_background_layout = action.payload
             state.customizer.color.mix_background_layout = mix_background_layout;
 
-            return { ...state, mix_background_layout: mix_background_layout, loading: true };
+            return {...state, mix_background_layout: mix_background_layout, loading: true};
 
 
         case ROUTER_ANIMATION:
-           const anim = action.payload
+            const anim = action.payload
             state.customizer.router_animation = anim;
-            return { ...state, animation: anim, loading: true };
+            return {...state, animation: anim, loading: true};
 
-        default: return { ...state };
+        default:
+            return {...state};
     }
 }

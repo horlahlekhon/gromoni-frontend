@@ -1,13 +1,13 @@
-import React, {  useState , useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 
 const Loader = (props) => {
     const [show, setShow] = useState(true);
     useEffect(() => {
         setTimeout(() => {
             setShow(false)
-          }, 3000);
-        
-    },[show]);
+        }, 3000);
+
+    }, [show]);
     return (
         <div className={`loader-wrapper ${show ? '' : 'loderhide'}`}>
             <div className="loader loader-7">

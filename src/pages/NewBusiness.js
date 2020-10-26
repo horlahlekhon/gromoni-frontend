@@ -7,10 +7,10 @@ import CreateBusiness from '../components/CreateBusiness'
 
 
 const NewBusiness = (props) => {
-    return(
+    return (
         <>
-        <ToastContainer/>
-        <CreateBusiness/>
+            <ToastContainer/>
+            <CreateBusiness/>
         </>
     )
 }

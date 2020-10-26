@@ -4,7 +4,7 @@ import Home from '../components/home/Home'
 
 const HomePage = (props) => {
     return (
-        <Home />
+        <Home/>
     )
 }
 
