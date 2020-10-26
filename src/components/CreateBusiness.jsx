@@ -38,7 +38,6 @@ const CreateBusiness = (props) => {
         "Individual": "I",
     }
 
-    const countries = countryList.getNames()
     const fields = {
         business_name: { default: '', message: 'Please enter a unique business name' },
         business_mail: { default: '', message: 'Enter a business mail' },
@@ -170,7 +169,7 @@ const CreateBusiness = (props) => {
                                     </Row>
                                     <div className="help-link-cont">
                                         <div>
-                                            <a href="#" className="help-link" style={{}}>Need Help?</a>
+                                            <a href="http://localhost:3000/help" className="help-link" style={{}}>Need Help?</a>
                                         </div>
                                     </div>
 
