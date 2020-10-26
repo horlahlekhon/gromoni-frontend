@@ -10,7 +10,6 @@ import { Container, Row, Col, Button, Form, FormGroup, Input, Label} from 'react
 import {withRouter} from 'react-router';
 import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux';
-import countryList from 'country-list'
 import {responseErrorParser, validateForm} from '../components/authentication/validator';
 import {createBusiness} from '../redux/actions/businessActions';
 import {useCookie} from '@shopify/react-cookie';
@@ -29,7 +28,7 @@ const CreateBusiness = (props) => {
     const [companyType, setCompanyType] = useState('I')
     const [phone, setPhone] = useState('')
     const [location, setLocation] = useState({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})
-    const [country, setCountry] = useState('Nigeria')
+    const [country, ] = useState('Nigeria')
     const [dateCreated, ] = useState('2020-01-01')
     const [taxPercentage, ] = useState(7.5)
 

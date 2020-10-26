@@ -26,8 +26,8 @@ const fields = {
 
 const SignIn = (props) => {
 		const history = useHistory();
-		const [accessToken, setAccessToken] = useCookie('accessToken');
-		const [refreshToken, setRefreshToken] = useCookie('refreshToken')
+		const [, setAccessToken] = useCookie('accessToken');
+		const [, setRefreshToken] = useCookie('refreshToken')
 		const [username, setUserName] = useState('')
 		const [password, setPassword] = useState('')
 		const [passwordShown, setPasswordShown] = useState(false)
