@@ -10,7 +10,6 @@ import ScrollToTop from './components/common/ScrollToTop';
 // import Register from './pages/auth/Register';
 import CommingSoon from './pages/miscellaneous/CommingSoon'
 import SignInAndRegister from './pages/auth/SignInAndRegister';
-import NewBusiness from './pages/NewBusiness';
 
 import {CookieUniversalProvider} from '@shopify/react-cookie';
 import AuthenticatedRoute from './components/common/AuthenticatedRoute';
@@ -32,19 +31,18 @@ const Root = (props) => {
         // eslint-disable-next-line
     }, []);
 
-  return (
-    <Fragment>
-      <CookieUniversalProvider>
-        <Provider store={store}>
-          <BrowserRouter basename={`/`}>
-            <ScrollToTop />
-            <Switch>
-              <Route exact path={`${process.env.PUBLIC_URL}/`} component={CommingSoon} />
-              <Route exact path={`${process.env.PUBLIC_URL}/login/`} component={SignInAndRegister} />
-              {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
-              {/* <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} /> */}
-              <Route path="/welcomepage"><WelcomePage/></Route>
-              <Route exact path={`${process.env.PUBLIC_URL}/business/`} component={NewBusiness} />
+    return (
+        <Fragment>
+            <CookieUniversalProvider>
+                <Provider store={store}>
+                    <BrowserRouter basename={`/`}>
+                        <ScrollToTop/>
+                        <Switch>
+                            <Route exact path={`${process.env.PUBLIC_URL}/`} component={CommingSoon}/>
+                            <Route exact path={`${process.env.PUBLIC_URL}/login/`} component={SignInAndRegister}/>
+                            {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
+                            {/* <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} /> */}
+                            <Route path={`${process.env.PUBLIC_URL}/business/`}><WelcomePage/></Route>
 
                             <Fragment>
                                 <AuthenticatedRoute/>

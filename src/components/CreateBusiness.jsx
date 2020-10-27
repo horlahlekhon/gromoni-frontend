@@ -7,7 +7,7 @@ import 'react-phone-input-2/lib/style.css';
 
 import { Container, Row, Col, Button, Form, FormGroup, Input, Label} from 'reactstrap'
 
-import {withRouter} from 'react-router';
+import {useLocation, withRouter} from 'react-router';
 import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {responseErrorParser, validateForm} from '../components/authentication/validator';
@@ -21,13 +21,13 @@ const mapPin = <MapPin/>
 const CreateBusiness = (props) => {
     const history = useHistory();
     const [accessToken, ] = useCookie('accessToken')
-
+    const [location, ] = useLocation()
     const [isCreatingBusiness, setIsCreatingBusiness]  = useState(false)
     const [businessName, setBusinessName] = useState('')
     const [businessMail, setBusinessMail] = useState('')
     const [companyType, setCompanyType] = useState('I')
     const [phone, setPhone] = useState('')
-    const [location, setLocation] = useState({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})
+    const [businessLocation, setbusinessLocation] = useState({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})
     const [country, ] = useState('Nigeria')
     const [dateCreated, ] = useState('2020-01-01')
     const [taxPercentage, ] = useState(7.5)
@@ -57,7 +57,7 @@ const CreateBusiness = (props) => {
             business_mail: businessMail,
             company_type: companyType,
             phone: phone,
-            business_location: location, // FIXME hardcoded location until we implement google map
+            business_location: businessLocation, // FIXME hardcoded location until we implement google map
             country: country,
             date_created: dateCreated,
             tax_percetage: taxPercentage
@@ -70,18 +70,26 @@ const CreateBusiness = (props) => {
             }, 400);
         } else {
             const response = await props.createBusiness(accessToken, requestPayload)
+
             if (response.status) {
                 const currentBusiness = response.payload.data.id
                 localStorage.removeItem('__grm__act__biz__')
                 localStorage.setItem('__grm__act__biz__', currentBusiness.toString())
-                history.push('/dashboard')
+                history.push('/dashboard', {previousLocation: location.pathname})
             } else {
-                setIsCreatingBusiness(false)
-                const payload = response.payload
-                const errs = responseErrorParser(payload.data)
-                setTimeout(() => {
-                    errs.forEach(e => toast.error(e.message))
-                }, 400);
+                if (response.statusCode === 401){
+                    history.push('/login')
+                    setTimeout(() => {
+                        toast.error("you are unauthorized, please login")
+                    }, 400);
+                }else {
+                    setIsCreatingBusiness(false)
+                    const payload = response.payload
+                    const errs = responseErrorParser(payload.data)
+                    setTimeout(() => {
+                        errs.forEach(e => toast.error(e.message))
+                    }, 400);
+                }
             }
         }
 
@@ -121,8 +129,8 @@ const CreateBusiness = (props) => {
                                             <Input className="form-control input-container business-location" id="businessLocation"
                                             type="text"
                                             placeholder="Business Location"
-                                            value={location}
-                                            onChange={e => setLocation({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})} />
+                                            value={businessLocation}
+                                            onChange={e => setbusinessLocation({place_name: 'Lagos', longitude: 123.929, latitude: 334.322})} />
                                         </div>
                                     </FormGroup>
                                     <FormGroup className=" m-form__group">

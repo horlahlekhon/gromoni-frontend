@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.5916cc2f.chunk.css",
-    "main.js": "/static/js/main.a4e9e195.chunk.js",
+    "main.css": "/static/css/main.e56db1b0.chunk.css",
+    "main.js": "/static/js/main.94c66112.chunk.js",
     "runtime-main.js": "/static/js/runtime-main.ac739b59.js",
-    "static/css/2.63f40073.chunk.css": "/static/css/2.63f40073.chunk.css",
-    "static/js/2.a9ede515.chunk.js": "/static/js/2.a9ede515.chunk.js",
+    "static/css/2.5c646f46.chunk.css": "/static/css/2.5c646f46.chunk.css",
+    "static/js/2.a8c35094.chunk.js": "/static/js/2.a8c35094.chunk.js",
     "index.html": "/index.html",
-    "precache-manifest.4e5c982fbdf646bd162aa439e6e8e77c.js": "/precache-manifest.4e5c982fbdf646bd162aa439e6e8e77c.js",
+    "precache-manifest.1984cd478e3449d87bfada43a5b3077f.js": "/precache-manifest.1984cd478e3449d87bfada43a5b3077f.js",
     "service-worker.js": "/service-worker.js",
     "static/media/1.jpg": "/static/media/1.fa36dc98.jpg",
     "static/media/1.png": "/static/media/1.7ad52012.png",
@@ -37,11 +37,13 @@
     "static/media/bg_gallery.jpg": "/static/media/bg_gallery.5df01d8f.jpg",
     "static/media/coming-soon-Logo.png": "/static/media/coming-soon-Logo.507b9532.png",
     "static/media/creative-logo1.png": "/static/media/creative-logo1.7921eb0a.png",
+    "static/media/gromoni-phone2.png": "/static/media/gromoni-phone2.063307a5.png",
     "static/media/login-bg.jpg": "/static/media/login-bg.b463a2d3.jpg",
     "static/media/logo-login.png": "/static/media/logo-login.e8bbdc86.png",
     "static/media/maintenance-bg.jpg": "/static/media/maintenance-bg.c53e4774.jpg",
     "static/media/popup.png": "/static/media/popup.cfbfa53c.png",
     "static/media/start-conversion.jpg": "/static/media/start-conversion.f5b00048.jpg",
+    "static/media/welcomepage-phone.png": "/static/media/welcomepage-phone.063307a5.png",
     "static/media/widget.png": "/static/media/widget.180f8885.png"
   }
 }
