@@ -30,7 +30,6 @@ const TopStatBar = (props) => {
                                 <div className="media hospital-small-chart">
                                     <div className="small-bar">
                                         <div className="small-chart1 flot-chart-container p-t-20 text-center" >
-                                            {console.log("datatttata", props.data)}
                                             <h6  >{formatMoney(props.data.trend ? props.data.trend.amount : 0.0)}</h6>
                                             {
                                                 props.data.trend.status === "increase" ?

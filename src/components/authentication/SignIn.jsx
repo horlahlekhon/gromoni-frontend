@@ -15,7 +15,8 @@ import {validateForm} from './validator';
 import {useCookie} from '@shopify/react-cookie';
 
 import {Eye} from 'react-feather'
-const eye = <Eye />
+
+const eye = <Eye/>
 
 
 const fields = {
@@ -55,21 +56,11 @@ const SignIn = (props) => {
                 const currentBusiness = businesses[0]
                 if (businesses.length === 0) {
                     toast.info('Sorry, You currently do not have any business, take time to create one')
-                    history.push('/business/')
+                    history.push('/business')
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
                     toast.info('Welcome back!')
-                    // automatic redirection to the page that was errored is needed, we can create a small function that format the paths and
-                    // add required variables like businessId. i.e if we encounter a business not found on a page, or the user deleted cookies
-                    // we will redirect back to login, and we must also redirect back to where the user was before getting redirected to login.
-                    // so the business id will be injected into the path passed down from the redirecting page, and after we log them in successfully
-                    // we just inject the business variable into the formatted string passed from the redirected page, and redirect the user
-                    // back.
-                    if(typeof props.location.state === 'object' && props.location.state.isRedirect){
-                        history.push(props.location.state.redirectRoute) // change to use the FQP(fully qualified path)
-                    }else{
-                        history.push(`/business/${currentBusiness.id}/dashboard`);
-                    }
+                    history.push(`/business/${currentBusiness.id}/home`);
                 }
             } else {
                 const payload = res_data.payload
@@ -83,7 +74,7 @@ const SignIn = (props) => {
     }
 
     const togglePasswordVisibility = () => {
-        setPasswordShown(passwordShown ? false : true )
+        setPasswordShown(passwordShown ? false : true)
     }
 
     const toggleform = () => {
@@ -91,11 +82,10 @@ const SignIn = (props) => {
     }
 
     return (
-
         <div className="page-wrapper">
             <Container fluid={true} className="p-0">
                 <div className="authentication-main m-0">
-                    
+
                     <Row>
                         <Col md="12">
                             <div className="auth-innerright">
@@ -104,7 +94,7 @@ const SignIn = (props) => {
                                         <div className="cont text-center b-light">
                                             <div>
                                                 <Form className="theme-form" onSubmit={e => e.preventDefault()}>
-                                                    <ToastContainer />
+                                                    <ToastContainer/>
                                                     <h4>SIGN IN</h4>
                                                     <h6>Enter your Username and Password</h6>
                                                     <FormGroup>
@@ -112,25 +102,27 @@ const SignIn = (props) => {
                                                         <Input
                                                             className="form-control" type="text" required=""
                                                             value={username}
-                                                            onChange={e => setUserName(e.target.value)} />
+                                                            onChange={e => setUserName(e.target.value)}/>
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label className="col-form-label">Password</Label>
                                                         <div className="pass-wrapper">
                                                             <Input
-                                                                className="form-control" type={passwordShown ? "text":"password"} required=""
+                                                                className="form-control"
+                                                                type={passwordShown ? "text" : "password"} required=""
                                                                 value={password}
-                                                                onChange={e => setPassword(e.target.value)} />
-                                                            <i className="eye" onClick={togglePasswordVisibility}>{eye}</i>
+                                                                onChange={e => setPassword(e.target.value)}/>
+                                                            <i className="eye"
+                                                               onClick={togglePasswordVisibility}>{eye}</i>
                                                         </div>
                                                     </FormGroup>
                                                     <div className="checkbox p-0">
-                                                        <Input id="checkbox1" type="checkbox" />
+                                                        <Input id="checkbox1" type="checkbox"/>
                                                         <Label for="checkbox1">Remember me</Label>
                                                     </div>
                                                     <FormGroup className="form-row mt-3 mb-0">
                                                         <Button color="primary btn-block"
-                                                            onClick={e => handleLoginUser(e)}
+                                                                onClick={e => handleLoginUser(e)}
                                                         >{props.requestingLog ? 'Loading...' : 'Sign In'}</Button>
                                                     </FormGroup>
                                                     <div className="login-divider"></div>
@@ -146,7 +138,8 @@ const SignIn = (props) => {
                                                                 <Button color="social-btn btn-google">Google + </Button>
                                                             </Col>
                                                             <Col md="3" sm="6">
-                                                                <Button color="social-btn btn-github btn-block">Github</Button>
+                                                                <Button
+                                                                    color="social-btn btn-github btn-block">Github</Button>
                                                             </Col>
                                                         </Row>
                                                     </div>
@@ -160,11 +153,14 @@ const SignIn = (props) => {
                                                     </div>
                                                     <div className="img__text m--in">
                                                         <h2>One of us?</h2>
-                                                        <p>If you already has an account, just sign in. We've missed you!</p>
+                                                        <p>If you already has an account, just sign in. We've missed
+                                                            you!</p>
                                                     </div>
-                                                    <div className="img__btn" onClick={toggleform}><span className="m--up">Sign up</span><span className="m--in">Sign in</span></div>
+                                                    <div className="img__btn" onClick={toggleform}><span
+                                                        className="m--up">Sign up</span><span
+                                                        className="m--in">Sign in</span></div>
                                                 </div>
-                                                <Register />
+                                                <Register/>
                                             </div>
                                         </div>
                                     </CardBody>

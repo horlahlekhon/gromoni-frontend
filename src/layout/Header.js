@@ -16,7 +16,7 @@ export const Header = () => {
     const sidebar_background_color = configDB.settings.sidebar_background_setting;
     // eslint-disable-next-line
     const business = localStorage.getItem("__grm__act__biz__")
-    const [mainmenu, ] = useState(getMenuItems(business));
+    const [mainmenu,] = useState(getMenuItems(business));
     const [searchValue, setsearchValue] = useState('');
     // eslint-disable-next-line
     const [, setSearchResult] = useState(false);

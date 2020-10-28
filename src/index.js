@@ -10,10 +10,10 @@ import ScrollToTop from './components/common/ScrollToTop';
 // import Register from './pages/auth/Register';
 import CommingSoon from './pages/miscellaneous/CommingSoon'
 import SignInAndRegister from './pages/auth/SignInAndRegister';
-import NewBusiness from './pages/NewBusiness';
 
 import {CookieUniversalProvider} from '@shopify/react-cookie';
 import AuthenticatedRoute from './components/common/AuthenticatedRoute';
+import WelcomePage from './pages/welcome/WelcomePage';
 
 const Root = (props) => {
     const [, setAnim] = useState("");
@@ -40,7 +40,9 @@ const Root = (props) => {
                         <Switch>
                             <Route exact path={`${process.env.PUBLIC_URL}/`} component={CommingSoon}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/login/`} component={SignInAndRegister}/>
-                            <Route exact path={`${process.env.PUBLIC_URL}/business/`} component={NewBusiness}/>
+                            {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
+                            {/* <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} /> */}
+                            <Route exact path={`${process.env.PUBLIC_URL}/business/`}><WelcomePage/></Route>
 
                             <Fragment>
                                 <AuthenticatedRoute/>

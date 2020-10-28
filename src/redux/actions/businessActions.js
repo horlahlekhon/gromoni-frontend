@@ -30,9 +30,9 @@ export const createBusiness = (token, data) => dispatch => {
     return HTTP.growthApi(token)
         .post(`/business/new`, data)
         .then((response) => {
-            return {status: response.status === 201 || response.status === 200, payload: response}
+            return {status: response.status === 201 || response.status === 200, payload: response, statusCode: response.status}
         })
         .catch((err) => {
-            return {status: false, payload: err.message}
+            return {status: false, payload: err.message, statusCode: 500}
         })
 }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {handleUserRegister} from '../../redux/actions/userActions';
+import {handleUserRegister} from '../../redux/actions';
 import {Button, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap'
 import {toast} from 'react-toastify';
 import {connect} from 'react-redux'
@@ -17,12 +17,12 @@ const Register = (props) => {
     const [, setAccessToken] = useCookie('accessToken');
     const [, setRefreshToken] = useCookie('refreshToken')
     const [fullName, setFullName] = useState('')
-    const [username, setusername] = useState('')
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [gender, setGender] = useState('')
     const [password1, setPassword1] = useState('')
-    const [password2, setpassword2] = useState('')
+    const [password2, setPassword2] = useState('')
     const [agree, setAgree] = useState(false)
     const [passwordShown, setPasswordShown] = useState(false)
 
@@ -36,7 +36,7 @@ const Register = (props) => {
     // NEW USER REGISTER FORM INPUTS AND ERROR MESSAGE
 
     const fields = {
-        fullName: {default: '', message: 'Please enter your full name seprated by space'},
+        fullName: {default: '', message: 'Please enter your full name separated by space'},
         username: {default: '', message: 'Please enter a username'},
         email: {default: '', message: 'Please enter a valid email address'},
         phone: {default: '', message: 'Please enter a valid phone with standard format'},
@@ -85,7 +85,8 @@ const Register = (props) => {
                 setAccessToken(res_data.payload.access_token)
                 setRefreshToken(res_data.payload.refresh_token)
                 toast.info('Registeration successful')
-                props.history.push('/business');
+                props.history.push('/business', {previousLocation: "/register"});
+
             } else {
                 const payload = res_data.payload
                 setTimeout(() => {
@@ -115,7 +116,7 @@ const Register = (props) => {
                         <FormGroup>
                             <Input className="form-control" type="text" placeholder="username"
                                    value={username}
-                                   onChange={e => setusername(e.target.value)}
+                                   onChange={e => setUsername(e.target.value)}
                                    required
                             />
                         </FormGroup>
@@ -176,7 +177,7 @@ const Register = (props) => {
                             <Input className="form-control" type={passwordShown ? "text" : "password"}
                                    placeholder="verify Password"
                                    value={password2}
-                                   onChange={e => setpassword2(e.target.value)}
+                                   onChange={e => setPassword2(e.target.value)}
                                    required
                             />
                         </FormGroup>
