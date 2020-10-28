@@ -59,7 +59,7 @@ export class GrowthAPI {
         }
     }
 
-    async _makeRequest(data, url, method, options) {
+    async _makeRequest(data, url, method, errorHandler, options) {
         if (typeof url === "undefined" || typeof method === "undefined") {
             throw new Error("Url and method are mandatory")
         }
@@ -72,17 +72,17 @@ export class GrowthAPI {
             if(response.status === 200 || response.status === 201){
                 return {payload: response.data, success: response.status === 200 || response.status === 201}
             }else{
-                return {payload: this._responseErrorParser(response.data), success: false}
+                return {payload: errorHandler === undefined ? this._responseErrorParser(response.data) : errorHandler(response.data), success: false}
             }
         }).catch((error) => this._handleAxiosError(error))
     }
 
-    async login(userName, password) {
-        return await this._makeRequest({username: userName, password: password}, "/users/login/", "POST")
+    async login(userName, password, errorHandler) {
+        return await this._makeRequest({username: userName, password: password}, "/users/login/", "POST", errorHandler)
     }
 
-    async register(data){
-        return await this._makeRequest(data, "/users/register/", "POST")
+    async register(data, errorHandler){
+        return await this._makeRequest(data, "/users/register/", "POST", errorHandler)
     }
 
 }
