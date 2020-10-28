@@ -2,7 +2,7 @@
 import React, { Fragment, useState} from 'react';
 import {Container,  Row, Col ,Card, CardHeader,CardBody,TabContent,TabPane,Nav,NavItem,NavLink,Button,ButtonGroup} from 'reactstrap';
 import Chart from 'react-apexcharts';
-import {HomeCashBalanceChartOptions } from "./homeUtility";
+import {HomeCashBalanceChartOptions} from "./homeUtility";
 // import {} from './pageUtility';
 import {useCookie} from "@shopify/react-cookie";
 import {responseErrorParser} from "../../components/common/utilityFUnctions";
@@ -13,16 +13,19 @@ const currentBusiness = localStorage.getItem("__grm__act__biz__")
 
  const SalesCashBalanceChart = (props) => {
 	// THIS IS USE  TOSWITCH BETWEEN WEEEKLY, MONTHLY AND YEARLY CHARTS
-	const [activeTab, setActiveTab] = useState('1');
+	 const [activeTab, setActiveTab] = useState('1');
 
-    const weeklyCashBalanceChart = HomeCashBalanceChartOptions(props.weeklyCashBalanceChart.series,
-        props.weeklyCashBalanceChart.labels, props.weeklyCashBalanceChart.name);
+    const weeklyCashBalanceChart = HomeCashBalanceChartOptions(props.weeklyCashBalanceChartData.series,
+       
+        props.weeklyCashBalanceChartData.labels);
     
-    const monthlyCashBalanceChart = HomeCashBalanceChartOptions(props.monthlyCashBalanceChart.series,
-        props.monthlyCashBalanceChart.labels, props.monthlyCashBalanceChart.name );
+    const monthlyCashBalanceChart = HomeCashBalanceChartOptions(props.monthlyCashBalanceChartData.series,
+       
+        props.monthlyCashBalanceChartData.labels);
 
-    const yearlyCashBalanceChart = HomeCashBalanceChartOptions(props.yearlyCashBalanceChart.series,
-         props.yearlyCashBalanceChart.labels, props.yearlyCashBalanceChart.name)
+    const yearlyCashBalanceChart = HomeCashBalanceChartOptions(props.yearlyCashBalanceChartData.series,
+        
+        props.yearlyCashBalanceChartData.labels)
 
  return (
         <Fragment style={{ backgroundColor: 'gray'}}  >

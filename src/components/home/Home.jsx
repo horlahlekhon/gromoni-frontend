@@ -4,7 +4,7 @@ import {useHistory,NavLink} from 'react-router-dom';
 import {responseErrorParser} from "../../components/common/utilityFUnctions";
 import {toast} from 'react-toastify';
 import {useCookie} from "@shopify/react-cookie";
-import {HomeCashBalanceChartData,getHomeChartData} from './homeUtility';
+import {HomeCashBalanceChartData,getHomeChartData,ChartExtractor} from './homeUtility';
 import SalesCashBalance from './SalesCashBalance';
 import SalesCashBalanceChart from './SalesCashBalanceChart';
 import CreateNewButtons from './CreateNewButtons';
@@ -14,8 +14,7 @@ const currentBusiness = localStorage.getItem("__grm__act__biz__");
 
 
 const  Home = (props) => {
- const history = useHistory();
-
+  const history = useHistory();
   const [weeklyCashBalanceChartData, setWeeklyCashBalanceChartData] = useState({})
   const [monthlyCashBalanceChartData, setMonthlyCashBalanceChartData] = useState({})
   const [yearlyCashBalanceChartData, setYearlyCashBalanceChartData] = useState({})
@@ -47,38 +46,60 @@ useEffect( () => {
                 setApiError(responseErrorParser(response.data))
             } else {
                 const data = response.data
+                const weekly = ChartExtractor(data.weekly_data)
+                const monthly = ChartExtractor(data.monthly_data)
+                const yearly = ChartExtractor(data.yearly_data)
+                 console.log(weekly)
+                 console.log(monthly)
+                 console.log(yearly)
+                 console.log(monthly.totalSales)
+
                 setWeeklyCashBalanceChartData({
                     labels: data.weekly_data.labels,
-                    series: [{name: "<b>ICU</b> (Weekly Sales CashBalance)", data: data.weekly_data.series}]
+                    series: [{
+                      totalSales: weekly.totalSales,
+                      productSold: weekly.productSold,
+                      debt: weekly.debt
+                    }]
 
                 })
                 setMonthlyCashBalanceChartData({
                     labels: data.monthly_data.labels,
-                    series: [{name: "<b>ICU</b> (Monthly Sales CashBalance)", data: data.monthly_data.series}]
+                    series: [{
+                      totalSales: monthly.totalSales,
+                      productSold: monthly.productSold,
+                      debt: monthly.debt
+                    }]
                 })
                 setYearlyCashBalanceChartData({
                    labels: data.yearly_data.labels,
-                    series:  [{name: "<b>ICU</b> (Yearly Sales CashBalance)", data: data.yearly_data.series}]
+                    series:  [{
+                      totalSales: yearly.totalSales,
+                      productSold: yearly.productSold,
+                      debt: yearly.debt
+                    }]
 
                 })
+
+
+                //console.log(response.data.monthly_data.series[0].sales_total);
             }
 
         }
         getPayload(token, currentBusiness)
 
-
     }, [currentBusiness, token])
-  
+
+
 	
 	return (
 		<div className="homePage">
 
 			<BreadCrumb parent={<NavLink to="/"> Home </NavLink>} subparent={<NavLink to="/">Dashboard</NavLink>} title="Home"/>
 			<SalesCashBalance />
-			<SalesCashBalanceChart weeklyCashBalanceChart={weeklyCashBalanceChartData}
-									monthlyCashBalanceChart={monthlyCashBalanceChartData}
-                            		yearlyCashBalanceChart={yearlyCashBalanceChartData}
-            />
+			<SalesCashBalanceChart	weeklyCashBalanceChartData 
+									monthlyCashBalanceChartData 
+									yearlyCashBalanceChartData/>
 			<CreateNewButtons />
 		</div>
 	)

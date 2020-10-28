@@ -17,68 +17,46 @@ export const getHomeChartData = (token, business) => {
         .get(`/report/${currentBusiness}/dashboards/business/`)
 }
 
-export const HomeCashBalanceChartData = (props) => {
-  const history = useHistory()
-  const [weeklyCashBalanceChartData, setWeeklyCashBalanceChartData] = useState({})
-  const [monthlyCashBalanceChartData, setMonthlyCashBalanceChartData] = useState({})
-  const [yearlyCashBalanceChartData, setYearlyCashBalanceChartData] = useState({})
-  const [apiError, setApiError] = useState([])
-  const [token, setToken] = useCookie("accessToken")
-  const [loading, setLoading] = useState(true)
 
 
-useEffect( () => {
-        async function getPayload(token, currentBusiness) {
-            const response = await getHomeChartData(token, currentBusiness)
-                .catch((error) => {
-                    setLoading(false)
-                    setApiError(responseErrorParser(error.message))
-                })
+export const ChartExtractor = (period) => {
+  var totalSales = []
+  var productSold = []
+  var debt = []
 
-            if (response.status === 404) {
-                toast.error("Business not found please login again")
-                history.push({
-                    pathname: "/login",
-                    state: {
-                        error: "Business not found please login again",
-                        isRedirect: true,
-                        redirectRoute: "/home/"
-                    }
-                })
-            } else if (response.status !== 200) {
-                setLoading(false)
-                setApiError(responseErrorParser(response.data))
-            } else {
-                const data = response.data
-                setWeeklyCashBalanceChartData({
-                    labels: data.weekly_data.labels,
-                    series: [{name: "<b>ICU</b> (Weekly Sales CashBalance)", data: data.weekly_data.series}]
+  for(let index = 0;index < period.series.length;index++){
+     totalSales.push(period.series[index].sales_total)
+     productSold.push(period.series[index].product_sold)
+     debt.push(period.series[index].debt)
+     
+  }
 
-                })
-                setMonthlyCashBalanceChartData({
-                    labels: data.monthly_data.labels,
-                    series: [{name: "<b>ICU</b> (Monthly Sales CashBalance)", data: data.monthly_data.series}]
-                })
-                setYearlyCashBalanceChartData({
-                   labels: data.yearly_data.labels,
-                    series:  [{name: "<b>ICU</b> (Yearly Sales CashBalance)", data: data.yearly_data.series}]
+  return {
+    totalSales,
+    productSold,
+    debt
+  };
+}
 
-                })
-                // setChartData(response.data.analytics)
-            }
+// export const HomeCashBalanceChartData = (props) => {
 
-        }
-        getPayload(token, currentBusiness)
+//   const history = useHistory()
+//   const [weeklyCashBalanceChartData, setWeeklyCashBalanceChartData] = useState({})
+//   const [monthlyCashBalanceChartData, setMonthlyCashBalanceChartData] = useState({})
+//   const [yearlyCashBalanceChartData, setYearlyCashBalanceChartData] = useState({})
+//   const [apiError, setApiError] = useState([])
+//   const [token, setToken] = useCookie("accessToken")
+//   const [loading, setLoading] = useState(true)
 
-
-
-    }, [currentBusiness, token])
   
-  return ;
-};
+// };
 
+export const HomeCashBalanceChartOptions = (series, labels) => {
 
-export const HomeCashBalanceChartOptions = (series, labels, name) => {
+  //     for(let index = 0;index < series.length;index++){
+  //   console.log(series[index].sales_total);
+  //   total_sales = series[index].sales_total
+  // }
 
   return {
 
@@ -100,11 +78,11 @@ export const HomeCashBalanceChartOptions = (series, labels, name) => {
         }] : [{
 
           name: "Total Sales",
-          data: series.sales_total
+          data: series.totalSales
         }, {
 
           name: "Product Sold",
-          data: series.product_sold
+          data: series.productSold
         }, {
 
           name: "Debt",
@@ -136,7 +114,7 @@ export const HomeCashBalanceChartOptions = (series, labels, name) => {
           categories: labels === undefined ? [0] : labels,
           tickPlacement: 'on',
                 labels: {
-                    low: labels === undefined ? 0 : labels[0],
+                    low: labels === undefined ? 0 : labels,
                     offsetX: 0, show: labels !== undefined
                 }
         },
@@ -158,5 +136,5 @@ export const HomeCashBalanceChartOptions = (series, labels, name) => {
       },
     
   }
-    };
+};
  
