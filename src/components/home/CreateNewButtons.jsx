@@ -32,6 +32,9 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
             </Col>
 
+            <Col className="d-sm-hidden sm-hidden" xl="1">
+            </Col>
+
 
 	        <Col sm="12" xl="3">
 		  		<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allsales`}>
@@ -52,7 +55,8 @@ const CreateNewButtons = (props) => {
 		        </NavLink>
 	        </Col>
 
-
+	        <Col className="d-sm-none sm-hidden" xl="1">
+            </Col>
 
 	      	<Col sm="12" xl="3">
 		      	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allproducts`}>
@@ -73,7 +77,9 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
         	</Col>
 
+        </Row>
 
+        <Row>
 	        <Col sm="12" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addsale`}>
 		            <Card className="o-hidden">
@@ -93,6 +99,8 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
 	        </Col>
 
+	        <Col className="d-sm-hidden sm-hidden" xl="1">
+            </Col>
 
           	<Col sm="12" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addcustomer`}>
@@ -111,6 +119,9 @@ const CreateNewButtons = (props) => {
 		                </CardBody>
 		            </Card>
 	            </NavLink>
+            </Col>
+
+            <Col className="d-sm-hidden sm-hidden" xl="1">
             </Col>
 
             <Col sm="12" xl="3">
