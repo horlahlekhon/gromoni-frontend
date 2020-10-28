@@ -39,7 +39,7 @@ const CreateNewButtons = (props) => {
 	        <Col sm="12" xl="3">
 		  		<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allsales`}>
 		            <Card className="o-hidden">
-		              <CardBody className="bg-secondary b-r-4 card-body">
+		              <CardBody className="bg-primary b-r-4 card-body">
 		                <div className="media static-top-widget">
 		                  <div className="align-self-center text-center">
 		                  	<ShoppingBag/>
@@ -55,7 +55,7 @@ const CreateNewButtons = (props) => {
 		        </NavLink>
 	        </Col>
 
-	        <Col className="d-sm-none sm-hidden" xl="1">
+	         <Col className="d-sm-hidden sm-hidden" xl="1">
             </Col>
 
 	      	<Col sm="12" xl="3">
@@ -83,7 +83,7 @@ const CreateNewButtons = (props) => {
 	        <Col sm="12" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addsale`}>
 		            <Card className="o-hidden">
-		                <CardBody className="bg-primary b-r-4">
+		                <CardBody className="bg-default b-r-4">
 		                <div className="media static-top-widget">
 		                    <div className="align-self-center text-center">
 		                    	<ShoppingCart/>
@@ -99,13 +99,13 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
 	        </Col>
 
-	        <Col className="d-sm-hidden sm-hidden" xl="1">
+	         <Col className="d-sm-hidden sm-hidden" xl="1">
             </Col>
 
           	<Col sm="12" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addcustomer`}>
 		            <Card className="o-hidden">
-		                <CardBody className="bg-primary b-r-4">
+		                <CardBody className="bg-default b-r-4">
 		                <div className="media static-top-widget">
 		                    <div className="align-self-center text-center">
 		                    	<UserPlus/>
@@ -121,13 +121,13 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
             </Col>
 
-            <Col className="d-sm-hidden sm-hidden" xl="1">
+             <Col className="d-sm-hidden sm-hidden" xl="1">
             </Col>
 
             <Col sm="12" xl="3">
 	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addproduct`}>
 		            <Card className="o-hidden">
-		                <CardBody className="bg-primary b-r-4">
+		                <CardBody className="bg-default b-r-4">
 		                <div className="media static-top-widget">
 		                    <div className="align-self-center text-center">
 		                    	<Layers/>
