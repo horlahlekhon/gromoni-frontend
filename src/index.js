@@ -42,7 +42,7 @@ const Root = (props) => {
                             <Route exact path={`${process.env.PUBLIC_URL}/login/`} component={SignInAndRegister}/>
                             {/* <Route exact path={`${process.env.PUBLIC_URL}/signup`} component={Register} /> */}
                             {/* <Route exact path={`${process.env.PUBLIC_URL}/user/business/`} component={NewBusiness} /> */}
-                            <Route path={`${process.env.PUBLIC_URL}/business/`}><WelcomePage/></Route>
+                            <Route exact path={`${process.env.PUBLIC_URL}/business/`}><WelcomePage/></Route>
 
                             <Fragment>
                                 <AuthenticatedRoute/>

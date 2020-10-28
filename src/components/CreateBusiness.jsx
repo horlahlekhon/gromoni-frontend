@@ -21,7 +21,7 @@ const mapPin = <MapPin/>
 const CreateBusiness = (props) => {
     const history = useHistory();
     const [accessToken, ] = useCookie('accessToken')
-    const [location, ] = useLocation()
+    const location = useLocation()
     const [isCreatingBusiness, setIsCreatingBusiness]  = useState(false)
     const [businessName, setBusinessName] = useState('')
     const [businessMail, setBusinessMail] = useState('')
@@ -73,12 +73,11 @@ const CreateBusiness = (props) => {
 
             if (response.status) {
                 const currentBusiness = response.payload.data.id
-                localStorage.removeItem('__grm__act__biz__')
                 localStorage.setItem('__grm__act__biz__', currentBusiness.toString())
-                history.push('/dashboard', {previousLocation: location.pathname})
+                history.push(`/business/${currentBusiness.toString()}/home`, {previousLocation: location.pathname})
             } else {
                 if (response.statusCode === 401){
-                    history.push('/login')
+                    history.push('/login', {previousLocation: location.pathname})
                     setTimeout(() => {
                         toast.error("you are unauthorized, please login")
                     }, 400);

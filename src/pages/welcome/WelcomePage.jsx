@@ -10,9 +10,8 @@ const WelcomePage = () => {
 
     const [showButton, setShowButton] = useState(true);
     const [showMessage, setShowMessage] = useState(false)
-
-	if(history.location.state.previousLocation !== "/register"){
-		history.push("/login", {previousLocation: history.location.state.previousLocation})
+	if (history.location.state === undefined || history.location.state.previousLocation !== "/register"){
+		history.push("/login", {previousLocation: "/business"})
 	}
     return (
         <div className='d-md-flex h-md-100 align-items-center welcome-pg-cont'>
