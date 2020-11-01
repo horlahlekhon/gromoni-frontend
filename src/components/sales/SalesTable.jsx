@@ -1,9 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {toast, ToastContainer} from 'react-toastify';
 import DataTable from 'react-data-table-component'
-import {useCookie} from "@shopify/react-cookie";
-import {HTTP} from '../../api'
-import {responseErrorParser} from "../common/utilityFunctions";
+import {useCookies} from "react-cookie";
 import {parseData} from "./utils";
 import {CardBody} from "reactstrap";
 import Row from "react-bootstrap/Row";
@@ -12,6 +10,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import PropTypes from 'prop-types';
+import {GrowthAPI} from "../../api/http";
+
 const Header = ({search, filter, business}) => {
     const [searchValue, setSearchValue] = useState("")
     const [startDate, setStartDate] = useState(null)
@@ -100,10 +100,11 @@ const SalesTable = (props) => {
     const [totalRows, setTotalRows] = useState(props.data.totalRow);
     const [apiError, setApiError] = useState(undefined)
     const [perPage,] = useState(10);
-    const [accessToken,] = useCookie("accessToken")
+    const [cookies,] = useCookies(["accessToken"])
     const [searchResult,] = useState([])
     // const [filterStartDate, setFilterStartDate] = useState(null)
     // const [filterDateDate, setFilterEndDate] = useState(null)
+    const accessToken = cookies.accessToken
     const initialResults = parseData(props.data.results)
     const currentBusiness = localStorage.getItem("__grm__act__biz__")
     const tableColumns = [
@@ -146,26 +147,24 @@ const SalesTable = (props) => {
     ]
 
 
+
     // eslint-disable-next-line
     async function fetchData(page, currentBusiness, token, perPage) {
         setLoading(true)
-        //TODO refactor call to use getter from the API module
-        const responseP = HTTP.growthApi(accessToken)
-
-        const response = await responseP
-            .get(`/business/${currentBusiness}/sales/?page=${page}&page_size=${perPage}`)
+        const api = new GrowthAPI(accessToken, currentBusiness)
+        const response = await api
+            .allSales({pageSize: perPage, page})
             .catch((error) => {
                 setLoading(false)
-                const parsedError = responseErrorParser(error.message)
-                setApiError(parsedError)
+                setApiError(error.payload)
             })
         if (!apiError) {
-            if (response.status === 200) {
-                setData(parseData(response.data.results))
-                setTotalRows(response.data.count)
+            if (response.statusCode === 200) {
+                setData(parseData(response.payload.results))
+                setTotalRows(response.payload.count)
                 setLoading(false)
             } else {
-                const error = responseErrorParser(response.data)
+                const error = response.payload
                 setApiError(error)
                 error.forEach(e => toast.error(e.message))
             }
@@ -182,23 +181,23 @@ const SalesTable = (props) => {
     }
 
     useEffect(() => {
-        async function fetchData(currentBusiness, accessToken) {
+        async function fetchData() {
+            const api = new GrowthAPI(accessToken, currentBusiness)
+            const perPage = 10
             setLoading(true)
-            //TODO refactor call to use getter from the API module
-            const response = await HTTP.growthApi(accessToken)
-                .get(`/business/${currentBusiness}/sales/?page=${1}&page_size=${10}`)
+            const response = await api
+                .allSales({pageSize: perPage, page: 1})
                 .catch((error) => {
                     setLoading(false)
-                    const parsedError = responseErrorParser(error.message)
-                    setApiError(parsedError)
+                    setApiError(error.payload)
                 })
-            if (!apiError) {
-                if (response.status === 200) {
-                    setData(parseData(response.data.results))
-                    setTotalRows(response.data.count)
+            if (apiError === undefined) {
+                if (response.statusCode === 200) {
+                    setData(parseData(response.payload.results))
+                    setTotalRows(response.payload.count)
                     setLoading(false)
                 } else {
-                    const error = responseErrorParser(response.data)
+                    const error = response.payload
                     setApiError(error)
                     error.forEach(e => toast.error(e.message))
                 }
@@ -207,8 +206,8 @@ const SalesTable = (props) => {
             }
         }
 
-        fetchData(currentBusiness, accessToken)
-    }, [currentBusiness, accessToken, apiError])
+        fetchData()
+    }, [accessToken, currentBusiness, apiError])
 
 
     // const handleRowSelected = useCallback(state => {
@@ -244,8 +243,9 @@ const SalesTable = (props) => {
     }
     return (
         <Fragment>
+            {console.log("api err", apiError)}
             <ToastContainer/>
-            {apiError === undefined ? '' : apiError.forEach(e => toast.error(e.message))}
+            {/*{apiError ? apiError.foreach(e => toast.error(e.message)) : ''}*/}
             <CardBody>
                 <Header
                     search={e => handleSearch(e)}

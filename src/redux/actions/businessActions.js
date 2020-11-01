@@ -1,38 +1,29 @@
 import {type} from '../actionTypes'
 
-import {HTTP} from '../../api'
+import {GrowthAPI} from "../../api";
 
-// TODO apparently we need to change this action name because this cant be as a default action for frtching a business
-export const getBusiness = (token, thisBusiness) => dispatch => {
-
-    if (thisBusiness === undefined || thisBusiness === null) {
+export const getBusiness = (token, business) => async dispatch => {
+    if (business === undefined || business === null) {
         return Promise.resolve({status: false, payload: 'User does not have any business '})
     } else {
-        return HTTP.growthApi(token)
-            .get(`/business/${thisBusiness}/`)
+        const api = new GrowthAPI(token, business)
+        return api.getBusiness()
             .then((response) => {
                 dispatch({type: type.GET_SINGLE_BUSINESS, payload: response.data})
                 return {
-                    status: response.status === 200,
+                    status: response.success,
                     payload: response,
-                    errorMsg: response.data.detail ? response.data : undefined
+                    errorMsg: !response.success ? response.payload : []
                 }
-            })
-            .catch((error) => {
-                dispatch({type: type.ERROR_GETTING_USER_BUSINESS, payload: error.message})
-                return {status: false, payload: error.message, errorMsg: error.message}
             })
     }
 }
 
 export const createBusiness = (token, data) => dispatch => {
     dispatch({type: type.CREATE_BUSINESS})
-    return HTTP.growthApi(token)
-        .post(`/business/new`, data)
+    const api = new GrowthAPI(token)
+    return api.createBusiness(data)
         .then((response) => {
-            return {status: response.status === 201 || response.status === 200, payload: response, statusCode: response.status}
-        })
-        .catch((err) => {
-            return {status: false, payload: err.message, statusCode: 500}
+            return {status: response.success, payload: response.payload, statusCode: response.statusCode}
         })
 }

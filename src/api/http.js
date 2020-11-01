@@ -1,27 +1,12 @@
 import axios from "axios";
 
-/**
- * @name
- * @description  function initates axios instances  and passes their default values
- * @type {{growthApi:{Promise<{axios: AxiosInstance<Function}>}}
- * @return {Object}
- */
-export default (() => {
-    const growthApi = (token = false) => axios.create({
-        baseURL: 'https://growthapi-staging.herokuapp.com/api/v1',
-        timeout: 10000,
-        [token ? 'headers' : '']: token ? {Authorization: `Bearer ${token}`} : '',
-        validateStatus: function () {
-            return true;
-        }
-    });
-    return {
-        growthApi
-    }
-})();
-
+/*
+* class for making api request, wrap around axios calls to return api requests as getters and setters
+* */
 export class GrowthAPI {
 
+    /*
+    * initialize the api with authentication token, and an optional business id*/
     constructor(token, business) {
         this.token = token
         this.business = business
@@ -35,10 +20,13 @@ export class GrowthAPI {
         })
     }
 
-     _responseErrorParser(payload) {
+    _responseErrorParser(payload) {
         if (typeof payload === 'undefined') {
-            return [{message: 'Sorry, an unexpected error occured, please Check your Internet Network or contact support center'}]
+            return [{message: 'Sorry, an unexpected error occurred, please Check your Internet Network or contact support center'}]
         } else if (typeof payload === 'object') {
+            if (payload.detail) {
+                return [{message: payload.detail}]
+            }
             const keys = Object.keys(payload)
             const errors = []
             keys.forEach(e => {
@@ -53,6 +41,7 @@ export class GrowthAPI {
 
     _handleAxiosError(error) {
         if (error.isAxiosError) {
+            console.log("axios error", error)
             return {success: false, payload: [{message: "An unexpected error occur kindly reload the page"}]}
         } else {
             return {success: false, payload: [error.message]}
@@ -69,24 +58,62 @@ export class GrowthAPI {
             method: method,
             ...options
         }).then((response) => {
-            if(response.status === 200 || response.status === 201){
-                return {payload: response.data, success: response.status === 200 || response.status === 201}
-            }else{
-                return {payload: errorHandler === undefined ? this._responseErrorParser(response.data) : errorHandler(response.data), success: false}
+            if (response.status === 200 || response.status === 201) {
+                return {
+                    payload: response.data,
+                    success: response.status === 200 || response.status === 201,
+                    statusCode: response.status
+                }
+            } else {
+                return {
+                    payload: errorHandler === undefined ? this._responseErrorParser(response.data) : errorHandler(response.data),
+                    success: false,
+                    statusCode: 500
+                }
             }
         }).catch((error) => this._handleAxiosError(error))
     }
 
     async login(userName, password, errorHandler) {
-        return await this._makeRequest({data: {username: userName, password: password}, url: "/users/login/", method: "POST", errorHandler:errorHandler})
+        return await this._makeRequest({
+            data: {username: userName, password: password},
+            url: "/users/login/",
+            method: "POST",
+            errorHandler: errorHandler
+        })
     }
 
-    async register(data, errorHandler){
-        return await this._makeRequest({data: data, url: "/users/register/", method: "POST", errorHandler:errorHandler})
+    async register(data, errorHandler) {
+        return await this._makeRequest({
+            data: data,
+            url: "/users/register/",
+            method: "POST",
+            errorHandler: errorHandler
+        })
     }
 
-    async getBusiness(errorHandler){
-        return await this._makeRequest({url: `/business/${this.business}/`,method:  "GET", errorHandler: errorHandler})
+    async getBusiness(errorHandler) {
+        return await this._makeRequest({url: `/business/${this.business}/`, method: "GET", errorHandler: errorHandler})
+    }
+
+    async createBusiness(data, errorHandler) {
+        return await this._makeRequest({data: data, url: `/business/new`, method: "POST", errorHandler: errorHandler})
+    }
+
+    async saleDashboard(errorHandler) {
+        return await this._makeRequest({
+            url: `/report/${this.business}/dashboards/sales/`,
+            method: "GET",
+            errorHandler: errorHandler
+        })
+    }
+
+    async allSales({pageSize, page}, errorHandler) {
+        return await this._makeRequest({
+            url: `/business/${this.business}/sales/?page_size=${pageSize ? pageSize : 10}&page=${page ? page : 1}`,
+            method: "GET",
+            errorHandler: errorHandler
+        })
     }
 
 }

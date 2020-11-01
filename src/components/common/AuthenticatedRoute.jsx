@@ -6,19 +6,19 @@ import {Redirect, Route, useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router';
 import {toast} from 'react-toastify';
-import {useCookie} from '@shopify/react-cookie';
+import { useCookies } from 'react-cookie';
 import App from '../../components/app';
 
 const AuthenticatedRoute = (props) => {
     const thisBusiness = localStorage.getItem('__grm__act__biz__')
-    const [accessToken, ] = useCookie('accessToken');
+    const [cookies, ] = useCookies(['accessToken']);
     const history = useHistory()
     if (thisBusiness) {
-        props.getBusiness(accessToken, thisBusiness)
+        props.getBusiness(cookies.accessToken, thisBusiness)
         .then((business) => {
             if (!business.status) {
                 history.push(`${process.env.PUBLIC_URL}/login`)
-                toast.error(business.errorMsg)
+                business.errorMsg.map(e =>  toast.error(e.message))
             }
         })
     }else {

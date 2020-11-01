@@ -6,16 +6,17 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router';
 import {useHistory} from 'react-router-dom'
 import { validateForm} from './validator';
-import {useCookie} from '@shopify/react-cookie';
 
 import {Eye} from 'react-feather'
+import {useCookies} from "react-cookie";
 
 const eye = <Eye/>
 
 const Register = (props) => {
     useHistory();
-    const [, setAccessToken] = useCookie('accessToken');
-    const [, setRefreshToken] = useCookie('refreshToken')
+
+    const [, setAccessToken] = useCookies(['accessToken']);
+    const [, setRefreshToken] = useCookies(['refreshToken']);
     const [fullName, setFullName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -82,8 +83,8 @@ const Register = (props) => {
             }
             const res_data = await props.register(data);
             if (res_data.success) {
-                setAccessToken(res_data.payload.access_token)
-                setRefreshToken(res_data.payload.refresh_token)
+                setAccessToken("accessToken", res_data.payload.access_token, {path: "/"})
+                setRefreshToken("refreshToken", res_data.payload.refresh_token, {path: "/"})
                 toast.info('Registeration successful')
                 props.history.push('/business', {previousLocation: "/register"});
 

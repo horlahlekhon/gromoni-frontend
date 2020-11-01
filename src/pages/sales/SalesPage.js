@@ -2,12 +2,12 @@ import React, {Fragment, useEffect, useState} from 'react'
 import BreadCrumb from '../../layout/Breadcrumb'
 import {SalesGraph, SalesTable, StatusBadges, TopStatBar} from '../../components/sales'
 import {Card, Col, Container, Row} from 'reactstrap';
-import {salesDashboardData} from './pageUtility'
-import {useCookie} from "@shopify/react-cookie";
-import {convertDateToNames, responseErrorParser} from "../../components/common/utilityFunctions";
+import {useCookies} from "react-cookie";
+import {convertDateToNames} from "../../components/common/utilityFunctions";
 import {toast, ToastContainer} from 'react-toastify';
 import {Link, useHistory} from 'react-router-dom'
 import {Plus} from "react-feather";
+import {GrowthAPI} from "../../api/http";
 
 const SalesPage = () => {
     const history = useHistory()
@@ -25,19 +25,22 @@ const SalesPage = () => {
     })
     const [, setLoading] = useState(true)
     const [apiError, setApiError] = useState([])
-    const [token,] = useCookie("accessToken")
+    const [cookies,] = useCookies(["accessToken"])
     const currentBusiness = localStorage.getItem("__grm__act__biz__")
-
+    const token = cookies.accessToken
     useEffect(() => {
-        async function getPayload(token, currentBusiness) {
-            const response = await salesDashboardData(token, currentBusiness)
+        async function getPayload() {
+            const api = new GrowthAPI(token, currentBusiness)
+            const response = await api.saleDashboard()
                 .catch((error) => {
                     setLoading(false)
-                    setApiError(responseErrorParser(error.message))
+                    setApiError(error.payload ? error.payload : [])
                 })
 
-            if (response.status === 404) {
+            if (response.statusCode === 404) {
                 toast.error("Business not found please relogin")
+                //TODO redirecting should be aware of the outgoing page... what bthis means is that for example here that we are redirecting to login
+                // TODO whe the user logs in again, we should coe back to this page.
                 history.push({
                     pathname: "/login",
                     state: {
@@ -46,45 +49,46 @@ const SalesPage = () => {
                         redirectRoute: "/sales/"
                     }
                 })
-            } else if (response.status !== 200) {
-                setLoading(false)
-                setApiError(responseErrorParser(response.data))
-            } else {
+            } else if (response.statusCode === 200 || response.statusCode === 201) {
                 setWeeklyChartData({
                     labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
-                    series: response.data.analytics.weekly_data.series,
+                    series: response.payload.analytics.weekly_data.series,
                     name: "<b>sales</b> (Sales for the Day)"
                 })
                 setMonthlyChartData({
-                    labels: convertDateToNames(response.data.analytics.monthly_data.labels, "month"),
-                    series: response.data.analytics.monthly_data.series,
+                    labels: convertDateToNames(response.payload.analytics.monthly_data.labels, "month"),
+                    series: response.payload.analytics.monthly_data.series,
                     name: "<b>sales</b> (Sales for the Month)"
                 })
                 setYearlyChartData({
-                    labels: response.data.analytics.yearly_data.labels,
-                    series: response.data.analytics.yearly_data.series,
+                    labels: response.payload.analytics.yearly_data.labels,
+                    series: response.payload.analytics.yearly_data.series,
                     name: "<b>sales</b> (Sales for the Year)"
                 })
-                setSavedSales(response.data.analytics.saved)
-                setPendingSales(response.data.analytics.pending)
-                setClearedSales(response.data.analytics.cleared)
+                setSavedSales(response.payload.analytics.saved)
+                setPendingSales(response.payload.analytics.pending)
+                setClearedSales(response.payload.analytics.cleared)
                 setTopBarData({
-                    NosOfSales: response.data.analytics.sales_total_count,
-                    overallSales: response.data.analytics.overall_sales_amount,
+                    NosOfSales: response.payload.analytics.sales_total_count,
+                    overallSales: response.payload.analytics.overall_sales_amount,
                     trend: {amount: 1000, status: "increase"}
                 })
                 setSalesTableData({
-                    results: response.data.results,
-                    totalRow: response.data.count,
+                    results: response.payload.results,
+                    totalRow: response.payload.count,
                 })
-            }
 
+            } else {
+                console.log("errrrs:", response.payload)
+                setLoading(false)
+                setApiError(response.payload ? response.payload : [])
+            }
         }
 
-        getPayload(token, currentBusiness)
+        getPayload()
 
 
-    }, [currentBusiness, token, history])
+    }, [token, currentBusiness, history])
 
     const salesUpdateStatDummy = {
         pending: {
@@ -111,15 +115,16 @@ const SalesPage = () => {
                 {apiError.length > 0 ? apiError.forEach(e => toast.error(e.message)) : ''}
                 <TopStatBar data={topBarData}/>
                 <Row>
-                    <Col xl={{size: 4, offset: 4}}    className="text-center horizontal-item-alignment ">
-                            <Link to={`/business/${currentBusiness}/sales/new`}>
-                                   <div className="mb-4 b-r-10 shadow shadow-showcase create-sale-button vertical-items-alignment ">
-                                       <div className="horizontal-item-alignment " >
-                                       <p className="m-b-0">Create sale</p>
-                                       <Plus/>
-                                   </div>
-                               </div>
-                            </Link>
+                    <Col xl={{size: 4, offset: 4}} className="text-center horizontal-item-alignment ">
+                        <Link to={`/business/${currentBusiness}/sales/new`}>
+                            <div
+                                className="mb-4 b-r-10 shadow shadow-showcase create-sale-button vertical-items-alignment ">
+                                <div className="horizontal-item-alignment ">
+                                    <p className="m-b-0">Create sale</p>
+                                    <Plus/>
+                                </div>
+                            </div>
+                        </Link>
                     </Col>
                 </Row>
 

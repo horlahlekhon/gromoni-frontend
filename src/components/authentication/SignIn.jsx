@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {handleUserLogin} from '../../redux/actions/userActions';
-
+import {handleUserLogin} from '../../redux/actions';
+import {useCookies} from 'react-cookie';
 import {Button, CardBody, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap'
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,8 +11,6 @@ import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Register from './Register';
 import {validateForm} from './validator';
-
-import {useCookie} from '@shopify/react-cookie';
 
 import {Eye} from 'react-feather'
 
@@ -26,14 +24,16 @@ const fields = {
 
 const SignIn = (props) => {
     const history = useHistory();
-    const [, setAccessToken] = useCookie('accessToken');
-    const [, setRefreshToken] = useCookie('refreshToken')
+    const [, setCookie] = useCookies(['accessToken']);
+    // const [, setRefreshToken] = useCookies(['refreshToken']);
+
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordShown, setPasswordShown] = useState(false)
-    if(typeof props.location.state === 'object' && props.location.state.isRedirect){
+    if (typeof props.location.state === 'object' && props.location.state.isRedirect) {
         toast.error(props.location.state.error)
     }
+
 
     const handleLoginUser = async (e) => {
         e.preventDefault();
@@ -50,8 +50,8 @@ const SignIn = (props) => {
             const form = {username: username, password: password}
             const res_data = await props.login(form);
             if (res_data.success) {
-                setAccessToken(res_data.payload.access_token)
-                setRefreshToken(res_data.payload.refresh_token)
+                setCookie("accessToken", res_data.payload.access_token, {path: "/"})
+                setCookie("refreshToken", res_data.payload.refresh_token, {path: "/"})
                 const businesses = res_data.payload.businesses
                 const currentBusiness = businesses[0]
                 if (businesses.length === 0) {

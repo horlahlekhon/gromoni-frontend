@@ -6,11 +6,11 @@ const secondary = localStorage.getItem('secondary_color') || configDB.data.color
 
 export const decideStatus = (status) => {
     switch (status) {
-        case "PENDING":
-            return <span className={`badge badge-pill pill-badge-info`}>Pending</span>
-        case "CREDITED":
+        // case "PENDING":
+        //     return <span className={`badge badge-pill pill-badge-info`}>Pending</span>
+        case "A":
             return <span className={`badge badge-pill pill-badge-danger`}>Credited</span>
-        case "CLEARED":
+        case "I":
             return <span className={`badge badge-pill pill-badge-success`}>Cleared</span>
         default:
             return ""
@@ -28,7 +28,7 @@ export const parseData = (data) => {
                     currency: 'NGN'
                 }).format(payload.sales_order.total_cost),
                 discount: `${payload.product.discount.percentage_discounted}%`,
-                status: decideStatus(payload.sales_order.status),
+                status: decideStatus(payload.credit_status),
                 ts_created: payload.ts_created
             }
         })
