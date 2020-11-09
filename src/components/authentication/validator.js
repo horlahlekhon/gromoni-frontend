@@ -26,6 +26,30 @@ const validateForm = (state, fields) => {
         return { isErrors: true, errors };
     }
 }
+
+// validating createNewSales Form
+const validateCreateNewSaleForm = (state, fields) => {
+    let errors = [];
+    Object.keys(fields).map(e => {
+       
+        if (state[e] === fields[e].default || !regexForCreateNewSale(e, state[e])) {
+            return errors.push({ item: e, message: fields[e].message })
+
+        }
+    });
+
+     
+//  CHECKING IF ANY ERROR OCCURRED
+    if (errors.length <= 0) {
+
+        return { isErrors: false, errors: [] }
+
+    } else {
+
+        return { isErrors: true, errors };
+    }
+}
+
 // use the one in ../common/utitilityFunctions
 function responseErrorParser(payload) {
     if (typeof payload === 'undefined') {
@@ -44,7 +68,8 @@ function responseErrorParser(payload) {
 
 export {
     validateForm,
-    responseErrorParser
+    responseErrorParser,
+    validateCreateNewSaleForm
 }
 
 function regexValidate(type, data) {
@@ -61,3 +86,12 @@ function regexValidate(type, data) {
 
 }
 
+function regexForCreateNewSale(type, data){
+    const numericRegex = /^[0-9\b]+$/;
+    switch (type) {
+        case 'number':
+            return numericRegex.test(data)
+        default:
+            return true;
+    }
+}

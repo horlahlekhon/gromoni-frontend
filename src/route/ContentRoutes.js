@@ -3,6 +3,7 @@ import SalesPage from '../pages/sales/SalesPage'
 import ProductsPage from '../pages/ProductsPage'
 import ReportsPage from '../pages/ReportsPage'
 import CustomersPage from '../pages/CustomersPage'
+import CreateNewSale from '../pages/sales/CreateNewSales'
 // import Samplepage from '../pages/samplepage'
 
 export const routes = (biz) => {
@@ -10,6 +11,7 @@ export const routes = (biz) => {
         { path:`/business/${biz}/home`, Component: HomePage },
         { path:`/business/${biz}/customers`, Component: CustomersPage },
         { path:`/business/${biz}/sales`, Component: SalesPage },
+        { path: `/business/${biz}/sales/new`, Component: CreateNewSale},
         { path:`/business/${biz}/products`, Component: ProductsPage },
         { path:`/business/${biz}/reports`, Component: ReportsPage },
         // { path:"/starter-kit/sample-page", Component: Samplepage },
