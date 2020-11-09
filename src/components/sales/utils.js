@@ -29,7 +29,8 @@ export const parseData = (data) => {
                 }).format(payload.sales_order.total_cost),
                 discount: `${payload.product.discount.percentage_discounted}%`,
                 status: decideStatus(payload.credit_status),
-                ts_created: payload.ts_created
+                ts_created: new Date(payload.ts_created),
+                date: new Date(payload.ts_created).toDateString()
             }
         })
         return res

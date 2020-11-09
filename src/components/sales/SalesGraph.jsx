@@ -3,6 +3,7 @@ import {Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row, TabContent,
 import Chart from 'react-apexcharts'
 import {dataOptions} from "./utils";
 import PropTypes from 'prop-types';
+
 const SalesGraph = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
@@ -12,6 +13,7 @@ const SalesGraph = (props) => {
 
     return (
         <Fragment>
+            {console.log("sales chart renders.......")}
             <Row>
                 <Col sm="12 box-col-6">
                     <Card>
@@ -20,21 +22,21 @@ const SalesGraph = (props) => {
                             <Row>
                                 <Col xl="12" md="4" sm="4">
                                     <Nav tabs className=" nav-tabs border-tab nav-primary justify-content-center">
-                                        <NavItem >
+                                        <NavItem>
                                             <NavLink className={activeTab === '1' ? 'active' : ''}
                                                      onClick={() => setActiveTab('1')}>
                                                 <span
                                                     className={activeTab === '1' ? 'tab-active' : 'tab-inactive'}>Week</span>
                                             </NavLink>
                                         </NavItem>
-                                        <NavItem >
+                                        <NavItem>
                                             <NavLink className={activeTab === '2' ? 'active' : ''}
                                                      onClick={() => setActiveTab('2')}>
                                                 <span
                                                     className={activeTab === '2' ? 'tab-active' : 'tab-inactive'}>Month</span>
                                             </NavLink>
                                         </NavItem>
-                                        <NavItem >
+                                        <NavItem>
                                             <NavLink className={activeTab === '3' ? 'active' : ''}
                                                      onClick={() => setActiveTab('3')}>
                                                 <span
@@ -88,18 +90,36 @@ SalesGraph.prototype = {
     salesWeeklyChart: PropTypes.exact({
         labels: PropTypes.array,
         series: PropTypes.array,
-        name:PropTypes.string
+        name: PropTypes.string
     }),
     salesMonthlyChart: PropTypes.exact({
         labels: PropTypes.array,
         series: PropTypes.array,
-        name:PropTypes.string
+        name: PropTypes.string
     }),
     salesYearlyChart: PropTypes.exact({
         labels: PropTypes.array,
         series: PropTypes.array,
-        name:PropTypes.string
+        name: PropTypes.string
     })
+}
+SalesGraph.defaultProps = {
+    salesWeeklyChart: {
+        labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
+        series: [0, 0, 0, 0, 0, 0, 0],
+        name: "<b>sales</b> (Sales for the Day)"
+    },
+    salesMonthlyChart: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
+        series: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        name: "<b>sales</b> (Sales for the month)"
+    },
+    salesYearlyChart: {
+        labels: ["2020"],
+        series: [0],
+        name: "<b>sales</b> (Sales for the year)"
+    },
+
 }
 
 export default SalesGraph

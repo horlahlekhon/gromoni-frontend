@@ -7,22 +7,12 @@ import {convertDateToNames} from "../../components/common/utilityFunctions";
 import {toast, ToastContainer} from 'react-toastify';
 import {Link, useHistory} from 'react-router-dom'
 import {Plus} from "react-feather";
-import {GrowthAPI} from "../../api/http";
+import {GrowthAPI} from "../../api";
+import TableHeader from "../../components/sales/TableHeader";
 
 const SalesPage = () => {
     const history = useHistory()
-    const [pendingSales, setPendingSales] = useState(0)
-    const [clearedSales, setClearedSales] = useState(0)
-    const [savedSales, setSavedSales] = useState(0)
-    const [weeklyChartData, setWeeklyChartData] = useState({})
-    const [monthlyChartData, setMonthlyChartData] = useState({})
-    const [yearlyChartData, setYearlyChartData] = useState({})
-    const [salesTableData, setSalesTableData] = useState({})
-    const [topBarData, setTopBarData] = useState({
-        NosOfSales: 0,
-        overallSales: 0,
-        trend: {amount: 1000, status: "increase"}
-    })
+    const [pageState, setPageState] = useState({})
     const [, setLoading] = useState(true)
     const [apiError, setApiError] = useState([])
     const [cookies,] = useCookies(["accessToken"])
@@ -36,7 +26,6 @@ const SalesPage = () => {
                     setLoading(false)
                     setApiError(error.payload ? error.payload : [])
                 })
-
             if (response.statusCode === 404) {
                 toast.error("Business not found please relogin")
                 //TODO redirecting should be aware of the outgoing page... what bthis means is that for example here that we are redirecting to login
@@ -50,36 +39,38 @@ const SalesPage = () => {
                     }
                 })
             } else if (response.statusCode === 200 || response.statusCode === 201) {
-                setWeeklyChartData({
-                    labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
-                    series: response.payload.analytics.weekly_data.series,
-                    name: "<b>sales</b> (Sales for the Day)"
-                })
-                setMonthlyChartData({
-                    labels: convertDateToNames(response.payload.analytics.monthly_data.labels, "month"),
-                    series: response.payload.analytics.monthly_data.series,
-                    name: "<b>sales</b> (Sales for the Month)"
-                })
-                setYearlyChartData({
-                    labels: response.payload.analytics.yearly_data.labels,
-                    series: response.payload.analytics.yearly_data.series,
-                    name: "<b>sales</b> (Sales for the Year)"
-                })
-                setSavedSales(response.payload.analytics.saved)
-                setPendingSales(response.payload.analytics.pending)
-                setClearedSales(response.payload.analytics.cleared)
-                setTopBarData({
-                    NosOfSales: response.payload.analytics.sales_total_count,
-                    overallSales: response.payload.analytics.overall_sales_amount,
-                    trend: {amount: 1000, status: "increase"}
-                })
-                setSalesTableData({
-                    results: response.payload.results,
-                    totalRow: response.payload.count,
-                })
+                setPageState({
+                    weeklyChartData: {
+                        labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
+                        series: response.payload.analytics.weekly_data.series,
+                        name: "<b>sales</b> (Sales for the Day)"
+                    },
+                    monthlyChartData: {
+                        labels: convertDateToNames(response.payload.analytics.monthly_data.labels, "month"),
+                        series: response.payload.analytics.monthly_data.series,
+                        name: "<b>sales</b> (Sales for the Month)"
+                    },
+                    yearlyChartData: {
+                        labels: response.payload.analytics.yearly_data.labels,
+                        series: response.payload.analytics.yearly_data.series,
+                        name: "<b>sales</b> (Sales for the Year)"
+                    },
+                    savedSales: response.payload.analytics.saved,
+                    pendingSales: response.payload.analytics.pending,
+                    clearedSales: response.payload.analytics.cleared,
+                    topBarData: {
+                        NosOfSales: response.payload.analytics.sales_total_count,
+                        overallSales: response.payload.analytics.overall_sales_amount,
+                        trend: {amount: 1000, status: "increase"}
+                    },
+                    salesTableData: {
+                        results: response.payload.results,
+                        totalRow: response.payload.count,
+                    },
 
+                })
+                console.log("use effect data: ", pageState)
             } else {
-                console.log("errrrs:", response.payload)
                 setLoading(false)
                 setApiError(response.payload ? response.payload : [])
             }
@@ -92,15 +83,15 @@ const SalesPage = () => {
 
     const salesUpdateStatDummy = {
         pending: {
-            count: pendingSales,
+            count: pageState.pendingSales,
             tip: "This contains all sales that has NOT been paid for."
         },
         cleared: {
-            count: clearedSales,
+            count: pageState.clearedSales,
             tip: "This contains all sales that have been paid for."
         },
         archive: {
-            count: savedSales,
+            count: pageState.savedSales,
             tip: "This contains all sales that have been saved, automatically empties after 14 days"
         },
 
@@ -113,7 +104,7 @@ const SalesPage = () => {
             <Container fluid={true}>
                 <ToastContainer/>
                 {apiError.length > 0 ? apiError.forEach(e => toast.error(e.message)) : ''}
-                <TopStatBar data={topBarData}/>
+                <TopStatBar data={pageState.topBarData}/>
                 <Row>
                     <Col xl={{size: 4, offset: 4}} className="text-center horizontal-item-alignment ">
                         <Link to={`/business/${currentBusiness}/sales/new`}>
@@ -127,19 +118,25 @@ const SalesPage = () => {
                         </Link>
                     </Col>
                 </Row>
-
                 <SalesGraph
-                    salesWeeklyChart={weeklyChartData}
-                    salesMonthlyChart={monthlyChartData}
-                    salesYearlyChart={yearlyChartData}
+                    salesWeeklyChart={pageState.weeklyChartData}
+                    salesMonthlyChart={pageState.monthlyChartData}
+                    salesYearlyChart={pageState.yearlyChartData}
                 />
                 <StatusBadges
                     data={salesUpdateStatDummy}
                 />
                 <Row>
                     <Col sm="12">
+                        {console.log("Sales dashboard renders.....")}
                         <Card>
-                            <SalesTable title="History" data={salesTableData}/>
+                            <SalesTable
+                                title="History"
+                                // data={salesTableData}
+                                tableHeader={TableHeader}
+                                currentBusiness={currentBusiness}
+                                accessToken={token}
+                            />
                         </Card>
                     </Col>
                 </Row>

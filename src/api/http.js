@@ -12,7 +12,7 @@ export class GrowthAPI {
         this.business = business
         this.api = axios.create({
             baseURL: 'https://growthapi-staging.herokuapp.com/api/v1',
-            timeout: 5000,
+            timeout: 10000,
             [token ? 'headers' : '']: token ? {Authorization: `Bearer ${token}`} : '',
             validateStatus: function () {
                 return true;
@@ -116,4 +116,11 @@ export class GrowthAPI {
         })
     }
 
+    async allProducts({pageSize, page}, errorHandler) {
+        return await this._makeRequest({
+            url: `/business/${this.business}/products/?page_size=${pageSize ? pageSize : 10}&page=${page ? page : 1}`,
+            method: "GET",
+            errorHandler: errorHandler
+        })
+    }
 }

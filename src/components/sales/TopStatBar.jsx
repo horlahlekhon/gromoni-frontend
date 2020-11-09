@@ -63,4 +63,16 @@ TopStatBar.prototype = {
         })
     })
 }
+
+TopStatBar.defaultProps = {
+    data: {
+        NosOfSales: 0,
+        overallSales: 0,
+        trend: {
+            status: "increase",
+            amount: 0
+        }
+    }
+}
+
 export default TopStatBar
