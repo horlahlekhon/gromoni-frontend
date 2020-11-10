@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import {Form, FormGroup, Container, Label, Input, Card, Col, Row, CardBody, Button} from 'reactstrap';
+import {Form, FormGroup, Label, Input, Card, Col, Row, CardBody, Button, ButtonGroup, Table} from 'reactstrap';
 import {toast} from 'react-toastify';
 import { Typeahead } from 'react-bootstrap-typeahead';
-import {useLocation, withRouter} from 'react-router';
-import {useHistory} from 'react-router-dom';
+import { withRouter} from 'react-router';
+// import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {validateCreateNewSaleForm, responseErrorParser} from "../../components/authentication/validator"
@@ -12,39 +12,43 @@ import {validateCreateNewSaleForm, responseErrorParser} from "../../components/a
 
 import ProductCard from '../../components/sales/ProductCard'
 
+import {Trash2} from 'react-feather'
+const trash2 = <Trash2/>
 
 const CreateNewSale = (props) => {
 
-  const [isCreatingNewSale, setIsCreatingNewSale]  = useState(false)
-  const [singleSelections, setSingleSelections] = useState([]);
+  const [, setIsCreatingNewSale]  = useState(false)
+  // const [singleSelections, setSingleSelections] = useState([]);
 
   // from the productCard.js 
 
-  const [newProductValues, setNewProductValues] = React.useState([{
+  const [newProductValues, setNewProductValues] = useState([{
     discount: "",
     price: "",
     amountPaid: "",
     quantity: "1",
-    productName: "",
+    productName: [],
   }]);
 
-  const [customerName, setCustomerName] = useState('')
+  const [customerName, setCustomerName] = useState([])
   const [date, setDate] = useState('')
   const [dueDate, setDueDate] = useState('')
   const [vat, setVat] = useState('')
+  // const [visible, setVisible] = useState(false)
 
-  const handleChange = (index, event) => {
+  const handleChange = (event, index) => {
     console.log( event )
     const values = [...newProductValues];
     values[index][event.target.name] = event.target.value
+    console.log('=======================>', values)
     setNewProductValues(values);
-    // setNewProductValues({
-    //   ...newProductValues,
+    // setnewProductValue({
+    //   ...newProductValue,
     //   [event.target.name]: event.target.value
     // });
   }
 
-  const handleAddFields = () => {
+  const handleAddFields = (e) => {
     setNewProductValues([...newProductValues, {discount:"", price: "",
     amountPaid: "",
     quantity: "1",
@@ -110,86 +114,110 @@ const CreateNewSale = (props) => {
 
   return(
     <Fragment>
-      <Container>
-        <Form>
-          <Card>
-            <CardBody>
-              <FormGroup>
-                <Label>Customer Name</Label>
-                <Typeahead
-                  id="basic-typeahead"
-                  labelKey="name"
-                  onChange={e => setCustomerName(e.target.value)}
-                  options={customerOptions}
-                  selected={singleSelections}
-                  value={customerName}
-                  name="customerName"
-                />
-              </FormGroup>
-            </CardBody>
-          </Card>
-          { newProductValues.map((newProductValue, index) => (
-            <div>
-              <Card key ={index}>
-                <CardBody>
-                  <ProductCard handleChange={handleChange} value={newProductValue} />
-                </CardBody>
-              </Card>
-            </div>  
-          ))}
-            <Row>
-              <Col>
-                <Button onClick={() => handleAddFields()}>Add</Button>
-              </Col>
-              <Col>
-                <Button onClick={() => handleRemoveFields()}>Remove</Button>
-              </Col>
-            </Row>
-          <Card>
-            <CardBody>
-              <FormGroup>
-                <div className="form-row">
-                  <Col>
-                    <Label for="date">Date</Label>
-                    <Input className="form-control digits" type="date" defaultValue="2018-01-01" value={date} onChange={e => setDate(e.target.value)}/>
-                  </Col>
-                  <Col>
-                    <Label for="dueDate">Due Date</Label>
-                    <Input className="form-control digits" type="Date" defaultValue="2018-01-01" value={dueDate} onChange={e => setDueDate(e.target.value)} />
-                  </Col>
-                </div>
-              </FormGroup>
-              <FormGroup>
-                <div className="form-row">
-                  <Col>
-                    <Label for="vat">VAT %</Label>
-                    <Input type="text" id="vat" value={vat} onChange={e => setVat(e.target.value)} />
-                  </Col>
-                </div>
-              </FormGroup>
+      <div style={{display:"flex", fontFamily:"'Poppins', sans-serif"}}>
+        <div className="col-lg-10"  style={{margin: "0 auto", maxWidth:"500px", width:"100%"}}>
+          <Form>
+            <Card>
+              <CardBody>
+                <FormGroup>
+                  <Label>Customer Name</Label>
+                  <Typeahead
+                    id="basic-typeahead"
+                    labelKey="name"
+                    onChange={setCustomerName}
+                    options={customerOptions}
+                    selected={customerName}
+                    value={customerName}
+                    name="customerName"
+                    style={{backgroundColor:"#d5deee"}}
+                  />
+                </FormGroup>
+              </CardBody>
+            </Card>
+            { newProductValues.map((newProductValue, index) => (
               <div>
-                <p>Only click cleared if this sales have been paid in full</p>
-                <Row>
-                  <Col>
-                    <Button>Cleared</Button>
-                  </Col>
-                  <Col>
-                    <Button>Not Cleared</Button>
-                  </Col>
-                </Row>
-              </div>
-              <Row className="m-t-25">
+                <Card key={index}>
+                  <CardBody>
+                    <Col style={{textAlign: "right"}}>
+                      <i onClick={() => handleRemoveFields()} >{trash2}</i>
+                    </Col>
+                    <ProductCard index={index} handleChange={handleChange} value={newProductValue} />
+                  </CardBody>
+                </Card>
+              </div>  
+            ))}
+              <Row>
                 <Col>
-                  <Button>SAVE</Button>
-                </Col>
-                <Col>
-                  <Button onClick={e => handleCreateNewSale(e)}>CREATE</Button>
+                  <p onClick={() => handleAddFields()} style={{marginLeft:"20px"}}> <span style={{fontSize:"18px"}}>+</span> Add another product</p>
                 </Col>
               </Row>
+            <Card>
+              <CardBody>
+                <FormGroup>
+                  <div className="form-row">
+                    <Col>
+                      <Label for="date">Date</Label>
+                      <Input className="form-control digits" type="date" defaultValue="2018-01-01" value={date} onChange={e => setDate(e.target.value)} id="date" name="date" style={{backgroundColor:"#d5deee"}} />
+                    </Col>
+                    <Col>
+                      <Label for="dueDate">Due Date</Label>
+                      <Input className="form-control digits" type="date" defaultValue="2018-01-01" value={dueDate} onChange={e => setDueDate(e.target.value)} id="dueDate" name="dueDate" style={{backgroundColor:"#d5deee"}} />
+                    </Col>
+                  </div>
+                </FormGroup>
+                <FormGroup>
+                  <div className="form-row">
+                    <Col>
+                      <Label for="vat">VAT %</Label>
+                      <Input type="text" id="vat" value={vat} onChange={e => setVat(e.target.value)} style={{backgroundColor:"#d5deee"}} />
+                    </Col>
+                  </div>
+                </FormGroup>
+                <div style={{margin:"0 auto", textAlign:"center"}}>
+                  <p style={{fontSize:"12px"}}>Only click cleared if this sales have been paid in full</p>
+                  <Row>
+                    <Col>
+                      <ButtonGroup>
+                        <Button outline color="primary" type="button">Cleared</Button>
+                        <Button outline color="primary" type="button">Not Cleared</Button>
+                      </ButtonGroup>
+                    </Col>
+                  </Row>
+                </div>
+                <Row className="m-t-50">
+                  <Col lg={`6`}>
+                    <Button outline color="primary" size="lg" style={{maxWidth:"200px", width:"100%"}}>SAVE</Button>
+                  </Col>
+                  <Col lg={`6`}>
+                    <Button color="primary" size="lg" onClick={e => handleCreateNewSale(e)} style={{maxWidth:"200px", width:"100%"}}>CREATE</Button>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Form>
+        </div>false)
+        <div className="col-lg-2" style={{backgroundColor:"#eaf6fd", position:"fixed", right:0, height:"100%",}}>
+          <Card className="m-t-50">
+            <CardBody>
+              <div>You have added <span>0</span> products</div>              
             </CardBody>
           </Card>
-        </Form>
-      </Container>
+          <div className="table-responsive">
+            <Table borderless>
+              <tbody>
+                <tr>
+                  <td className="bd-t-none">Sub Total</td>
+                  <td>000 000 000</td>
+                </tr>
+                <tr style={{fontWeight:"bold"}}>
+                  <td className="bd-t-none">Total</td>
+                  <td>000 000 000</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </div>
     </Fragment>
   )
 }

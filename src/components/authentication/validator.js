@@ -36,6 +36,7 @@ const validateCreateNewSaleForm = (state, fields) => {
             return errors.push({ item: e, message: fields[e].message })
 
         }
+        return[]
     });
 
      
