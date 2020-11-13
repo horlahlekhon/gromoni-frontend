@@ -14,8 +14,6 @@ const ProductCard = (props) => {
 
   const ProductOptions = [{id:1,name: "Clothes"}, {id:2,name:"Services"}, {id:3,name:"Shows"}, {id:4,name: "Peace"}] //dummy date  //res_data.payload.data.product
 
-  // const [singleSelections, setSingleSelections] = useState([]);
-  // from quantityIncrement.js
   const [count, setCount] = useState(1)
 
   const decrement = () => {
@@ -36,14 +34,13 @@ const ProductCard = (props) => {
         <Label>Product Name</Label>
         <Typeahead
           id="basic-typeahead"
-          labelKey="name"
-          onChange={(e) => props.handleChange(e, props.index)}
-          // onInputChange={props.setProductName}
+          labelKey= "name"
+          onInputChange={(e) => props.handleChange(e, props.index)}
           options={ProductOptions}
+          name="productName" 
           selected={props.value.productName}
-          // value={props.value.productName}
-          name="productName"
           style={{backgroundColor:"#d5deee"}}
+          value={props.value.productName}
         />
       </FormGroup>
       <FormGroup>
@@ -57,7 +54,7 @@ const ProductCard = (props) => {
           </Col>
           <Col>
             <Label for="discount">Discount</Label>
-            <Input type="text" id="discount" onChange={(e) => props.handleChange(e, props.index)} value={props.value.discount} name="discount" style={{backgroundColor:"#d5deee"}} />
+            <Input type="text" id="discount" onChange = {(e) => props.handleChange(e, props.index)} value={props.value.discount} name="discount" style={{backgroundColor:"#d5deee"}} />
           </Col>
         </div>
       </FormGroup>
