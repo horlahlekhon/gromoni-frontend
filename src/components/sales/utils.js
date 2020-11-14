@@ -128,3 +128,22 @@ export const dataOptions = (series, labels, name) => {
 
     }
 }
+
+
+export const validateProductForm = (defaults, data) => {
+    let ers = []
+    console.log("defaults", defaults, "data", data)
+    Object.keys(defaults).map(e => {
+            if (data[e] === defaults[e].default) {
+                ers.push({field: e, msg: defaults[e].message})
+                return ers
+            }
+            return []
+        }
+    )
+    if (ers.length <= 0) {
+        return {isErrors: false, errors: []}
+    } else {
+        return {isErrors: true, errors: ers};
+    }
+}
