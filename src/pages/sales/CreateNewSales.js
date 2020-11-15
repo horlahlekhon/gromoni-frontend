@@ -1,20 +1,24 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {Button, ButtonGroup, Card, CardBody, Col, Form, FormGroup, Input, Label, Row, Table} from 'reactstrap';
 import {toast} from 'react-toastify';
 import {Typeahead} from 'react-bootstrap-typeahead';
-import {withRouter} from 'react-router';
-import {connect} from 'react-redux';
 
 import {validateCreateNewSaleForm,} from "../../components/authentication/validator"
 
 import ProductCard from '../../components/sales/ProductCard'
 
 import {Trash2} from 'react-feather'
+import {useCookies} from "react-cookie";
+import {GrowthAPI} from "../../api";
 
 const trash2 = <Trash2/>
 
 const CreateNewSale = () => {
+    const [cookies,] = useCookies(["accessToken"])
+    const currentBusiness = localStorage.getItem("__grm__act__biz__")
+    const token = cookies.accessToken
 
+    const api = new GrowthAPI(token, currentBusiness)
     const [, setIsCreatingNewSale] = useState(false)
 
     const [newProductValues, setNewProductValues] = useState([{
@@ -29,10 +33,12 @@ const CreateNewSale = () => {
     const [date, setDate] = useState(new Date())
     const [dueDate, setDueDate] = useState('')
     const [vat, setVat] = useState(0.0)
-    const [saleStatus, setSaleStatus] = useState()
-    const handleEventChange = (e) => {
-        console.log("onCHange event", e)
-    }
+    //const [saleStatus, setSaleStatus] = useState() // TODO use this to convey the status of the sales, in case the sales is to be SAVED or CLEARED
+    // const [loading, setLoading]  = useState(false)
+    const [apiError, setApiError] = useState([])
+    const [products, setProducts] = useState([]) // product list from the API to be shown in product typeahead
+    const [customers, setCustomers] = useState([])// customer list from api
+
     const handleChange = (index) => {
         return (payload) => {
             const productValues = newProductValues
@@ -56,11 +62,6 @@ const CreateNewSale = () => {
         setNewProductValues(values);
     }
 
-    const customerOptions = [{id: 1, name: "Olalekan"}, {id: 2, name: "Michael"}, {id: 3, name: "Emeka"}, {
-        id: 4,
-        name: "Glory"
-    }] //dummy data  //res_data.payload.data.customer
-
     const fields = {
         customer_name: {default: "", message: 'Please enter an already created customer name'},
         date: {default: '', message: 'Please enter date'},
@@ -68,7 +69,6 @@ const CreateNewSale = () => {
     }
 
     const handleCreateNewSale = async (e) => {
-        console.log("product values", newProductValues)
         e.preventDefault()
         setIsCreatingNewSale(true);
         const responsePayload = {
@@ -93,11 +93,46 @@ const CreateNewSale = () => {
                     payment: e.amountPaid
                 }
             })
-            delete responsePayload.due_date
-            console.log({...responsePayload, sales})
-            /// call API and send value
+
+            const {due_date, ...rest} = responsePayload;
+            const data = {...rest, sales}
+            // TODO call API and send value and handle errors returned from the APi
+            // setLoading(true)
+            const response = await api.createSalesOrder({data}, undefined)
+                .catch((error) => {
+                    // setLoading(false)
+                    setApiError(error.payload)
+                })
+            if (response.success === true) {
+                // TODO sales successfully created, redirect them to the invoice modal, using the data returned from the response
+                // const invoiceData = response.payload
+            } else {
+                // TODO handle the errors returned by parsing it and retaining the form state
+                setTimeout(() => {
+                    response.payload.forEach(e => toast.error(e.message))
+                }, 400);
+            }
+
+
         }
     }
+
+    useEffect(() => {
+        async function getInitData() {
+            const response = await api.getProductsAndCustomers(undefined)
+                .catch((error) => {
+                    setApiError(error.payload)
+                })
+            if (response.success === true) {
+                setProducts(response.payload.products)
+                setCustomers(response.payload.customers)
+            } else {
+                apiError.forEach(e => toast.error(e.message))
+            }
+        }
+
+        getInitData()
+    }, [apiError, api])
 
     const handleCustomerName = (e) => {
         if (e[0] !== undefined) {
@@ -107,10 +142,7 @@ const CreateNewSale = () => {
         }
     }
 
-    const productOptions = [{id: 1, name: "Clothes"}, {id: 2, name: "Services"}, {id: 3, name: "Shows"}, {
-        id: 4,
-        name: "Peace"
-    }] //dummy date  //res_data.payload.data.product
+
     return (
         <Fragment>
             <div style={{display: "flex", fontFamily: "'Poppins', sans-serif"}}>
@@ -124,7 +156,7 @@ const CreateNewSale = () => {
                                         id="basic-typeahead"
                                         labelKey="name"
                                         onChange={e => handleCustomerName(e)}
-                                        options={customerOptions}
+                                        options={customers.map(e => e.name)}
                                         value={customerName}
                                         name="customerName"
                                         style={{backgroundColor: "#d5deee"}}
@@ -145,8 +177,7 @@ const CreateNewSale = () => {
                                         <ProductCard
                                             index={index}
                                             handleChange={handleChange(index)}
-                                            onInputChange={handleEventChange} value={newProductValue}
-                                            productOptions={productOptions}
+                                            productOptions={products.map(e => e.name)}
                                         />
                                     </CardBody>
                                 </Card>
@@ -238,7 +269,6 @@ const CreateNewSale = () => {
         </Fragment>
     )
 }
-
 
 
 export default CreateNewSale

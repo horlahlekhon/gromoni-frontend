@@ -19,9 +19,9 @@ export const Header = () => {
     const [mainmenu,] = useState(getMenuItems(business));
     const [searchValue, setsearchValue] = useState('');
     // eslint-disable-next-line
-    const [searchResult, setSearchResult] = useState(false);
+    const [, setSearchResult] = useState(false);
     // eslint-disable-next-line
-    const [searchResultEmpty, setSearchResultEmpty] = useState(false);
+    const [, setSearchResultEmpty] = useState(false);
 
     const dispatch = useDispatch();
     const searchTog = useSelector(state => state.Common.searchToggle)

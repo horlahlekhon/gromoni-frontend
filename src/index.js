@@ -10,12 +10,9 @@ import ScrollToTop from './components/common/ScrollToTop';
 // import Register from './pages/auth/Register';
 import CommingSoon from './pages/miscellaneous/CommingSoon'
 import SignInAndRegister from './pages/auth/SignInAndRegister';
-
-import {CookieUniversalProvider} from '@shopify/react-cookie';
 import AuthenticatedRoute from './components/common/AuthenticatedRoute';
 import WelcomePage from './pages/welcome/WelcomePage';
-
-
+import { CookiesProvider } from 'react-cookie';
 const Root = (props) => {
     const [, setAnim] = useState("");
     const animation = localStorage.getItem("animation") || ConfigDB.data.router_animation || 'fade'
@@ -34,7 +31,7 @@ const Root = (props) => {
 
     return (
         <Fragment>
-            <CookieUniversalProvider>
+            <CookiesProvider>
                 <Provider store={store}>
                     <BrowserRouter basename={`/`}>
                         <ScrollToTop/>
@@ -52,7 +49,7 @@ const Root = (props) => {
                         </Switch>
                     </BrowserRouter>
                 </Provider>
-            </CookieUniversalProvider>
+            </CookiesProvider>
 
         </Fragment>
     )

@@ -5,17 +5,18 @@ import {toast} from 'react-toastify';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router';
 import {useHistory} from 'react-router-dom'
-import {responseErrorParser, validateForm} from './validator';
-import {useCookie} from '@shopify/react-cookie';
+import { validateForm} from './validator';
 
 import {Eye} from 'react-feather'
+import {useCookies} from "react-cookie";
 
 const eye = <Eye/>
 
 const Register = (props) => {
     useHistory();
-    const [, setAccessToken] = useCookie('accessToken');
-    const [, setRefreshToken] = useCookie('refreshToken')
+
+    const [, setAccessToken] = useCookies(['accessToken']);
+    const [, setRefreshToken] = useCookies(['refreshToken']);
     const [fullName, setFullName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -69,28 +70,28 @@ const Register = (props) => {
                 errorObj.errors.forEach((errorObj) => toast.error(errorObj.message))
             }, 3000)
         } else {
-            const form = new FormData();
             const name = fullName.split(' ');
-            form.append('first_name', name[0]);
-            form.append('last_name', name[1] ? name[1] : '');
-            form.append('username', username);
-            form.append('phone', phone);
-            form.append('gender', gender);
-            form.append('password1', password1);
-            form.append('password2', password2);
-            form.append('email', email);
-            const res_data = await props.register(form);
-            if (res_data.status) {
-                setAccessToken(res_data.payload.data.access_token)
-                setRefreshToken(res_data.payload.data.refresh_token)
+            const data = {
+                first_name: name[0],
+                last_name: name[1] ? name[1] : '',
+                username: username,
+                phone: phone,
+                gender: gender,
+                password1: password1,
+                password2: password2,
+                email: email
+            }
+            const res_data = await props.register(data);
+            if (res_data.success) {
+                setAccessToken("accessToken", res_data.payload.access_token, {path: "/"})
+                setRefreshToken("refreshToken", res_data.payload.refresh_token, {path: "/"})
                 toast.info('Registeration successful')
                 props.history.push('/business', {previousLocation: "/register"});
 
             } else {
                 const payload = res_data.payload
-                const errs = responseErrorParser(payload.data)
                 setTimeout(() => {
-                    errs.forEach(e => toast.error(e.message))
+                    payload.forEach(e => toast.error(e.message))
                 }, 400);
             }
         }

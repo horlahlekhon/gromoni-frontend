@@ -106,7 +106,7 @@ const ProductCard = (props) => {
                         <Col>
                             <Label for="price">Price</Label>
                             <Input type="text" id="price" onChange={(e) => setPrice(e.target.value)}
-                                   value={props.value.price}
+                                   value={price}
                                    name="price" style={{backgroundColor: "#d5deee"}}/>
                         </Col>
                         <Col>

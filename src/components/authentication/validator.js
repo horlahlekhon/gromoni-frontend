@@ -105,12 +105,12 @@ function regexValidate(type, data) {
 
 }
 
-function regexForCreateNewSale(type, data) {
-    const numericRegex = /^[0-9\b]+$/;
-    switch (type) {
-        case 'number':
-            return numericRegex.test(data)
-        default:
-            return true;
-    }
-}
+// function regexForCreateNewSale(type, data) {
+//     const numericRegex = /^[0-9\b]+$/;
+//     switch (type) {
+//         case 'number':
+//             return numericRegex.test(data)
+//         default:
+//             return true;
+//     }
+// }

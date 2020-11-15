@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {handleUserLogin} from '../../redux/actions/userActions';
-
+import {handleUserLogin} from '../../redux/actions';
+import {useCookies} from 'react-cookie';
 import {Button, CardBody, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap'
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,9 +10,7 @@ import {withRouter} from 'react-router';
 import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Register from './Register';
-import {responseErrorParser, validateForm} from './validator';
-
-import {useCookie} from '@shopify/react-cookie';
+import {validateForm} from './validator';
 
 import {Eye} from 'react-feather'
 
@@ -26,11 +24,16 @@ const fields = {
 
 const SignIn = (props) => {
     const history = useHistory();
-    const [, setAccessToken] = useCookie('accessToken');
-    const [, setRefreshToken] = useCookie('refreshToken')
+    const [, setCookie] = useCookies(['accessToken']);
+    // const [, setRefreshToken] = useCookies(['refreshToken']);
+
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordShown, setPasswordShown] = useState(false)
+    if (typeof props.location.state === 'object' && props.location.state.isRedirect) {
+        toast.error(props.location.state.error)
+    }
+
 
     const handleLoginUser = async (e) => {
         e.preventDefault();
@@ -44,14 +47,12 @@ const SignIn = (props) => {
                 errorObj.errors.forEach((errorObj) => toast.error(errorObj.message))
             }, 200)
         } else {
-            const form = new FormData();
-            form.append('username', username);
-            form.append('password', password);
+            const form = {username: username, password: password}
             const res_data = await props.login(form);
-            if (res_data.status) {
-                setAccessToken(res_data.payload.data.access_token)
-                setRefreshToken(res_data.payload.data.refresh_token)
-                const businesses = res_data.payload.data.businesses
+            if (res_data.success) {
+                setCookie("accessToken", res_data.payload.access_token, {path: "/"})
+                setCookie("refreshToken", res_data.payload.refresh_token, {path: "/"})
+                const businesses = res_data.payload.businesses
                 const currentBusiness = businesses[0]
                 if (businesses.length === 0) {
                     toast.info('Sorry, You currently do not have any business, take time to create one')
@@ -63,9 +64,9 @@ const SignIn = (props) => {
                 }
             } else {
                 const payload = res_data.payload
-                const erro = responseErrorParser(payload)
+                // const erro = responseErrorParser(payload)
                 setTimeout(() => {
-                    erro.forEach(e => toast.error(e.message))
+                    payload.forEach(e => toast.error(e.message))
                 }, 300);
             }
         }

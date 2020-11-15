@@ -1,4 +1,4 @@
 export {
-    default as HTTP
+     GrowthAPI
 }
     from "./http";
