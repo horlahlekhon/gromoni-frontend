@@ -25,9 +25,9 @@ export const ChartExtractor = (period) => {
   var debt = []
 
   for(let index = 0;index < period.series.length;index++){
-     totalSales.push(period.series[index].sales_total)
+     totalSales.push(parseFloat(period.series[index].sales_total))
      productSold.push(period.series[index].product_sold)
-     debt.push(period.series[index].debt)
+     debt.push(parseFloat(period.series[index].debt))
      
   }
 
@@ -37,6 +37,12 @@ export const ChartExtractor = (period) => {
     debt
   };
 }
+
+
+export const convertDateToMonthNames = (dates) => {
+    return dates.map(e => new Date(e).toLocaleString('default', {month: 'long'}))
+}
+
 
 // export const HomeCashBalanceChartData = (props) => {
 
@@ -59,9 +65,7 @@ export const HomeCashBalanceChartOptions = (series, labels) => {
   // }
 
   return {
-
-
-
+    
      series: series === undefined ? [{
             name: "Total Sales",
             data: [0, 0, 0, 0, 0, 0, 0, 0]

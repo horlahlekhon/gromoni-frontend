@@ -13,7 +13,11 @@ const CreateNewButtons = (props) => {
 		<Fragment >
 			<Container fluid={true}>
 	      <Row >
-            <Col sm="12" xl="3">
+
+	       <Col className="d-xl-none xl-hidden" sm="2">
+            </Col>
+
+            <Col sm="8" xl="3">
 	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allcustomers`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-primary b-r-4">
@@ -32,11 +36,11 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
             </Col>
 
-            <Col className="d-sm-hidden sm-hidden" xl="1">
+            <Col sm="2" xl="1">
             </Col>
 
 
-	        <Col sm="12" xl="3">
+	        <Col sm="8" xl="3">
 		  		<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allsales`}>
 		            <Card className="o-hidden">
 		              <CardBody className="bg-primary b-r-4 card-body">
@@ -55,10 +59,9 @@ const CreateNewButtons = (props) => {
 		        </NavLink>
 	        </Col>
 
-	         <Col className="d-sm-hidden sm-hidden" xl="1">
+	          <Col sm="2" xl="1">
             </Col>
-
-	      	<Col sm="12" xl="3">
+	      	<Col sm="8" xl="3">
 		      	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/allproducts`}>
 		            <Card className="o-hidden">
 		              <CardBody className="bg-primary b-r-4 card-body">
@@ -80,7 +83,11 @@ const CreateNewButtons = (props) => {
         </Row>
 
         <Row>
-	        <Col sm="12" xl="3">
+
+        	<Col className="d-xl-none xl-hidden" sm="2">
+            </Col>
+
+	        <Col sm="8" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addsale`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-default b-r-4">
@@ -99,10 +106,10 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
 	        </Col>
 
-	         <Col className="d-sm-hidden sm-hidden" xl="1">
+	        <Col sm="2" xl="1">
             </Col>
 
-          	<Col sm="12" xl="3">
+          	<Col sm="8" xl="3">
 	          	<NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addcustomer`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-default b-r-4">
@@ -121,10 +128,10 @@ const CreateNewButtons = (props) => {
 	            </NavLink>
             </Col>
 
-             <Col className="d-sm-hidden sm-hidden" xl="1">
+            <Col sm="2" xl="1">
             </Col>
 
-            <Col sm="12" xl="3">
+            <Col sm="8" xl="3">
 	            <NavLink to={`${process.env.PUBLIC_URL}/business/${businessID}/addproduct`}>
 		            <Card className="o-hidden">
 		                <CardBody className="bg-default b-r-4">

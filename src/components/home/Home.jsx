@@ -4,7 +4,7 @@ import {useHistory,NavLink} from 'react-router-dom';
 import {responseErrorParser} from "../../components/common/utilityFUnctions";
 import {toast} from 'react-toastify';
 import {useCookie} from "@shopify/react-cookie";
-import {HomeCashBalanceChartData,getHomeChartData,ChartExtractor} from './homeUtility';
+import {HomeCashBalanceChartData,getHomeChartData,ChartExtractor,convertDateToMonthNames} from './homeUtility';
 import SalesCashBalance from './SalesCashBalance';
 import SalesCashBalanceChart from './SalesCashBalanceChart';
 import CreateNewButtons from './CreateNewButtons';
@@ -49,10 +49,7 @@ useEffect( () => {
                 const weekly = ChartExtractor(data.weekly_data)
                 const monthly = ChartExtractor(data.monthly_data)
                 const yearly = ChartExtractor(data.yearly_data)
-                 console.log(weekly)
-                 console.log(monthly)
-                 console.log(yearly)
-                 console.log(monthly.totalSales)
+                const monthsName = convertDateToMonthNames(data.monthly_data.labels)
 
                 setWeeklyCashBalanceChartData({
                     labels: data.weekly_data.labels,
@@ -64,7 +61,7 @@ useEffect( () => {
 
                 })
                 setMonthlyCashBalanceChartData({
-                    labels: data.monthly_data.labels,
+                    labels: monthsName,
                     series: [{
                       totalSales: monthly.totalSales,
                       productSold: monthly.productSold,
@@ -81,8 +78,15 @@ useEffect( () => {
 
                 })
 
-
-                //console.log(response.data.monthly_data.series[0].sales_total);
+              console.log(weeklyCashBalanceChartData)
+              console.log(weeklyCashBalanceChartData.labels)
+              console.log(weeklyCashBalanceChartData.series.productSold)
+              console.log(monthlyCashBalanceChartData.series.debt)
+              console.log(monthlyCashBalanceChartData.labels)
+              console.log(yearlyCashBalanceChartData)
+              console.log(yearlyCashBalanceChartData.labels)
+              console.log(yearlyCashBalanceChartData.series.totalSales)
+              
             }
 
         }

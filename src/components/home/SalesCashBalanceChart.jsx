@@ -3,7 +3,6 @@ import React, { Fragment, useState} from 'react';
 import {Container,  Row, Col ,Card, CardHeader,CardBody,TabContent,TabPane,Nav,NavItem,NavLink,Button,ButtonGroup} from 'reactstrap';
 import Chart from 'react-apexcharts';
 import {HomeCashBalanceChartOptions} from "./homeUtility";
-// import {} from './pageUtility';
 import {useCookie} from "@shopify/react-cookie";
 import {responseErrorParser} from "../../components/common/utilityFUnctions";
 
@@ -16,19 +15,16 @@ const currentBusiness = localStorage.getItem("__grm__act__biz__")
 	 const [activeTab, setActiveTab] = useState('1');
 
     const weeklyCashBalanceChart = HomeCashBalanceChartOptions(props.weeklyCashBalanceChartData.series,
-       
         props.weeklyCashBalanceChartData.labels);
     
     const monthlyCashBalanceChart = HomeCashBalanceChartOptions(props.monthlyCashBalanceChartData.series,
-       
         props.monthlyCashBalanceChartData.labels);
 
     const yearlyCashBalanceChart = HomeCashBalanceChartOptions(props.yearlyCashBalanceChartData.series,
-        
         props.yearlyCashBalanceChartData.labels)
 
  return (
-        <Fragment style={{ backgroundColor: 'gray'}}  >
+        <Fragment >
       
             <Container fluid={true} >
             
@@ -46,17 +42,17 @@ const currentBusiness = localStorage.getItem("__grm__act__biz__")
                                 <TabContent activeTab={activeTab}>
                                     <TabPane tabId="1">
                                         <div id="column-chart">
-						               		 <Chart options={weeklyCashBalanceChart.options} series={weeklyCashBalanceChart.series} type="bar" height={400} />
+						               		 <Chart options={weeklyCashBalanceChart.options} series={weeklyCashBalanceChart.series} type="bar" height={400} type="bar"/>
 						                </div>
                                     </TabPane>
                                     <TabPane tabId="2">
                                         <div id="column-chart">
-						               		 <Chart options={monthlyCashBalanceChart.options} series={monthlyCashBalanceChart.series} type="bar" height={400} />
+						               		 <Chart options={monthlyCashBalanceChart.options} series={monthlyCashBalanceChart.series} type="bar" height={400} type="bar"/>
 						                </div>
                                     </TabPane>
                                     <TabPane tabId="3">
                                         <div id="column-chart">
-						               		 <Chart options={yearlyCashBalanceChart.options} series={yearlyCashBalanceChart.series} type="bar" height={400} />
+						               		 <Chart options={yearlyCashBalanceChart.options} series={yearlyCashBalanceChart.series} type="bar" height={400} type="bar"/>
 						                </div>
                                     </TabPane>
                                 </TabContent>
