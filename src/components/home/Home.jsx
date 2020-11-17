@@ -53,40 +53,33 @@ useEffect( () => {
 
                 setWeeklyCashBalanceChartData({
                     labels: data.weekly_data.labels,
-                    series: [{
-                      totalSales: weekly.totalSales,
-                      productSold: weekly.productSold,
-                      debt: weekly.debt
-                    }]
+                    series: {
+                        totalSales: weekly.totalSales,
+                        productSold: weekly.productSold,
+                        debt: weekly.debt
+                    }
+                   
 
                 })
                 setMonthlyCashBalanceChartData({
                     labels: monthsName,
-                    series: [{
-                      totalSales: monthly.totalSales,
-                      productSold: monthly.productSold,
-                      debt: monthly.debt
-                    }]
+                    series: {
+                        totalSales: monthly.totalSales,
+                        productSold: monthly.productSold,
+                        debt: monthly.debt
+                    }
+                   
                 })
                 setYearlyCashBalanceChartData({
                    labels: data.yearly_data.labels,
-                    series:  [{
-                      totalSales: yearly.totalSales,
-                      productSold: yearly.productSold,
-                      debt: yearly.debt
-                    }]
+                    series: {
+                        totalSales: yearly.totalSales,
+                        productSold: yearly.productSold,
+                        debt: yearly.debt
+                    }
+                  
 
-                })
-
-              console.log(weeklyCashBalanceChartData)
-              console.log(weeklyCashBalanceChartData.labels)
-              console.log(weeklyCashBalanceChartData.series.productSold)
-              console.log(monthlyCashBalanceChartData.series.debt)
-              console.log(monthlyCashBalanceChartData.labels)
-              console.log(yearlyCashBalanceChartData)
-              console.log(yearlyCashBalanceChartData.labels)
-              console.log(yearlyCashBalanceChartData.series.totalSales)
-              
+                })  
             }
 
         }
@@ -94,16 +87,15 @@ useEffect( () => {
 
     }, [currentBusiness, token])
 
-
-	
 	return (
 		<div className="homePage">
 
 			<BreadCrumb parent={<NavLink to="/"> Home </NavLink>} subparent={<NavLink to="/">Dashboard</NavLink>} title="Home"/>
 			<SalesCashBalance />
-			<SalesCashBalanceChart	weeklyCashBalanceChartData 
-									monthlyCashBalanceChartData 
-									yearlyCashBalanceChartData/>
+			<SalesCashBalanceChart	weeklyCashBalanceChartData = {weeklyCashBalanceChartData} 
+									monthlyCashBalanceChartData = {monthlyCashBalanceChartData} 
+									yearlyCashBalanceChartData = {yearlyCashBalanceChartData}
+        />
 			<CreateNewButtons />
 		</div>
 	)

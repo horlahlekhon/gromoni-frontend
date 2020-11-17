@@ -1,5 +1,5 @@
 // SALES CASH BALANCE VIEW CHART 
-import React, { Fragment, useState} from 'react';
+import React, { Fragment, useState, useEffect} from 'react';
 import {Container,  Row, Col ,Card, CardHeader,CardBody,TabContent,TabPane,Nav,NavItem,NavLink,Button,ButtonGroup} from 'reactstrap';
 import Chart from 'react-apexcharts';
 import {HomeCashBalanceChartOptions} from "./homeUtility";
@@ -22,6 +22,10 @@ const currentBusiness = localStorage.getItem("__grm__act__biz__")
 
     const yearlyCashBalanceChart = HomeCashBalanceChartOptions(props.yearlyCashBalanceChartData.series,
         props.yearlyCashBalanceChartData.labels)
+
+        useEffect(() => console.log(props.monthlyCashBalanceChartData.series), [props.monthlyCashBalanceChartData.series])
+
+        // console.log(monthlyCashBalanceChart.series)
 
  return (
         <Fragment >

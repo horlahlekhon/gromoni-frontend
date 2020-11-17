@@ -43,26 +43,7 @@ export const convertDateToMonthNames = (dates) => {
     return dates.map(e => new Date(e).toLocaleString('default', {month: 'long'}))
 }
 
-
-// export const HomeCashBalanceChartData = (props) => {
-
-//   const history = useHistory()
-//   const [weeklyCashBalanceChartData, setWeeklyCashBalanceChartData] = useState({})
-//   const [monthlyCashBalanceChartData, setMonthlyCashBalanceChartData] = useState({})
-//   const [yearlyCashBalanceChartData, setYearlyCashBalanceChartData] = useState({})
-//   const [apiError, setApiError] = useState([])
-//   const [token, setToken] = useCookie("accessToken")
-//   const [loading, setLoading] = useState(true)
-
-  
-// };
-
 export const HomeCashBalanceChartOptions = (series, labels) => {
-
-  //     for(let index = 0;index < series.length;index++){
-  //   console.log(series[index].sales_total);
-  //   total_sales = series[index].sales_total
-  // }
 
   return {
     
