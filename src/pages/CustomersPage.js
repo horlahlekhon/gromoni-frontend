@@ -1,12 +1,11 @@
-import React, {useHistory} from 'react'
+import React from 'react'
 // import Home from '../components/home/Home'
 
 
-
- const CustomersPage = (props) => {
+const CustomersPage = (props) => {
     return (
-    	<div>
-    		<h1> this is customers page </h1>
+        <div>
+            <h1> this is customers page </h1>
         </div>
     )
 }

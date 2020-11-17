@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import BreadCrumb from '../../layout/Breadcrumb'
-import {Container,Row,Col,Card,CardHeader,CardBody} from 'reactstrap';
+import {Card, CardBody, CardHeader, Col, Container, Row} from 'reactstrap';
 
 const Samplepage = (props) =>  {
     return (

@@ -1,7 +1,15 @@
 /**=====================
     44. Tabs CSS Start
 ==========================**/
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+
 .tab-content {
   .tab-pane {
     &.active {
@@ -9,18 +17,20 @@
     }
   }
 }
+
 .nav-pills {
   .nav-link.active, .show > .nav-link {
     background-color: $primary-color;
   }
 }
-.nav{
-  i{
+
+.nav {
+  i {
     margin-right: 10px;
   }
 }
 
-$nav-name:theme,
+$nav-name: theme,
 primary,
 secondary,
 success,
@@ -29,7 +39,7 @@ info,
 light,
 dark,
 warning;
-$nav-color:$primary-color,
+$nav-color: $primary-color,
 $primary-color,
 $secondary-color,
 $success-color,
@@ -40,79 +50,92 @@ $dark-color,
 $warning-color;
 @each $var in $nav-name {
   $i: index($label-name, $var);
-  .nav-#{$var} , .nav-pills.nav-#{$var} {
-    .nav-link{
+  .nav-#{$var}, .nav-pills.nav-#{$var} {
+    .nav-link {
       color: nth($nav-color, $i);
     }
+
     .nav-link.active, .show > .nav-link {
       background-color: nth($nav-color, $i);
       color: $white;
     }
   }
 }
-.nav-right{
+
+.nav-right {
   justify-content: flex-end;
 }
+
 .nav-pills {
   border-bottom: none;
+
   .nav-link {
     &:hover, &:focus {
       border: none;
     }
   }
 }
+
 .nav-tabs.nav-bottom {
   .nav-item {
-    .nav-link.active,.nav-link.focus,.nav-link.hover{
+    .nav-link.active, .nav-link.focus, .nav-link.hover {
       border-color: $white #dee2e6 #dee2e6;
     }
   }
 }
-.tab-content{
-  ~ .nav-tabs{
+
+.tab-content {
+  ~ .nav-tabs {
     &.border-tab {
       margin-bottom: 0;
       margin-top: 30px;
     }
   }
 }
+
 // Material style css
-.border-tab.nav-tabs{
+.border-tab.nav-tabs {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   margin-bottom: 30px;
   border-bottom: none;
-  .nav-item{
-    .nav-link{
+
+  .nav-item {
+    .nav-link {
       font-size: 16px;
       color: $dark-color;
       text-align: center;
-      padding:10px 25px;
+      padding: 10px 25px;
       border: none;
       border-bottom: 2px solid $transparent-color;
       transition: 0.3s;
+
       &.active, &.show, &:focus, &:hover {
         color: $primary-color;
       }
+
       &.active, &.show, &:focus {
         border-bottom: 2px solid $primary-color;
       }
     }
   }
 }
+
 .nav-pills {
   .nav-link {
     border: none;
   }
 }
-.border-tab.nav-left{
-  .nav-link{
+
+.border-tab.nav-left {
+  .nav-link {
     border-left: 2px solid transparent;
     transition: all 0.3s ease;
     color: $dark-color;
   }
-  .nav-link.active,.show > .nav-link{
+
+  .nav-link.active, .show > .nav-link {
     background-color: transparent;
     border-left-color: $primary-color;
     border-bottom: none;
@@ -121,14 +144,16 @@ $warning-color;
     transition: all 0.3s ease;
   }
 }
-.border-tab.nav-right{
-  .nav-link{
+
+.border-tab.nav-right {
+  .nav-link {
     border-right: 2px solid transparent;
     transition: all 0.3s ease;
     color: $dark-color;
     text-align: right;
   }
-  .nav-link.active,.show > .nav-link{
+
+  .nav-link.active, .show > .nav-link {
     background-color: transparent;
     border-right-color: $primary-color;
     color: $primary-color;
@@ -136,7 +161,8 @@ $warning-color;
     transition: all 0.3s ease;
   }
 }
-$m-nav-name:theme,
+
+$m-nav-name: theme,
 primary,
 secondary,
 success,
@@ -145,7 +171,7 @@ info,
 light,
 dark,
 warning;
-$nav-color:$primary-color,
+$nav-color: $primary-color,
 $primary-color,
 $secondary-color,
 $success-color,
@@ -157,23 +183,26 @@ $warning-color;
 @each $var in $m-nav-name {
   $i: index($label-name, $var);
   .border-tab.nav-#{$var} {
-    .nav-link.active,.nav-item.show,.nav-link:focus,.nav-link:hover {
+    .nav-link.active, .nav-item.show, .nav-link:focus, .nav-link:hover {
       color: nth($nav-color, $i);
       background-color: transparent;
     }
+
     .nav-item {
       .nav-link {
         transition: 0.3s;
+
         &.active, &.show, &:focus {
           border-bottom: 2px solid nth($nav-color, $i);
         }
+
         &.active, &.show, &:focus, &:hover {
           color: nth($nav-color, $i);
         }
       }
     }
   }
-  .border-tab.nav-left.nav-#{$var}{
+  .border-tab.nav-left.nav-#{$var} {
     .nav-item {
       .nav-link {
         &.active, &.show, &:focus {
@@ -181,13 +210,14 @@ $warning-color;
         }
       }
     }
-    .nav-link.active,.show > .nav-link{
+
+    .nav-link.active, .show > .nav-link {
       border-left-color: nth($nav-color, $i);
       color: nth($nav-color, $i);
       border-bottom: none;
     }
   }
-  .border-tab.nav-right.nav-#{$var}{
+  .border-tab.nav-right.nav-#{$var} {
     .nav-item {
       .nav-link {
         &.active, &.show, &:focus {
@@ -195,24 +225,29 @@ $warning-color;
         }
       }
     }
-    .nav-link.active,.show > .nav-link{
+
+    .nav-link.active, .show > .nav-link {
       border-right-color: nth($nav-color, $i);
       color: nth($nav-color, $i);
       border-bottom: none;
     }
   }
 }
-.tabbed-card{
-  ul{
+
+.tabbed-card {
+  ul {
     position: absolute;
     right: 15px;
     top: 22px;
-    &.border-tab{
-      &.nav-tabs{
+
+    &.border-tab {
+      &.nav-tabs {
         top: 0;
-        .nav-item{
+
+        .nav-item {
           float: right;
-          .nav-link{
+
+          .nav-link {
             padding: 28px 15px;
           }
         }
@@ -220,6 +255,7 @@ $warning-color;
     }
   }
 }
+
 .nac-pills {
   .tab-list-bottom {
     display: inline;

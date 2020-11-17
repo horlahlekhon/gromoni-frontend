@@ -1,22 +1,20 @@
-import React, { useState } from 'react'
-import { handleUserLogin } from '../../redux/actions/userActions';
-
-import { Container, Row, Col, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import React, {useState} from 'react'
+import {handleUserLogin} from '../../redux/actions';
+import {useCookies} from 'react-cookie';
+import {Button, CardBody, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap'
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom'
-import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
+import {useHistory} from 'react-router-dom'
+import {connect} from 'react-redux';
 import Register from './Register';
-import { validateForm, responseErrorParser } from './validator';
-
-import {useCookie} from '@shopify/react-cookie';
+import {validateForm} from './validator';
 
 import {Eye} from 'react-feather'
 
-const eye = <Eye />
+const eye = <Eye/>
 
 
 const fields = {
@@ -26,15 +24,19 @@ const fields = {
 
 const SignIn = (props) => {
     const history = useHistory();
-    const [accessToken, setAccessToken] = useCookie('accessToken');
-    const [refreshToken, setRefreshToken] = useCookie('refreshToken')
+    const [, setCookie] = useCookies(['accessToken']);
+    // const [, setRefreshToken] = useCookies(['refreshToken']);
+
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordShown, setPasswordShown] = useState(false)
+    if (typeof props.location.state === 'object' && props.location.state.isRedirect) {
+        toast.error(props.location.state.error)
+    }
+
 
     const handleLoginUser = async (e) => {
         e.preventDefault();
-        console.log(`Username: ${username}, pass:${password} `)
         const state = {
             username,
             password,
@@ -45,28 +47,26 @@ const SignIn = (props) => {
                 errorObj.errors.forEach((errorObj) => toast.error(errorObj.message))
             }, 200)
         } else {
-            const form = new FormData();
-            form.append('username', username);
-            form.append('password', password);
+            const form = {username: username, password: password}
             const res_data = await props.login(form);
-            if (res_data.status) {
-                setAccessToken(res_data.payload.data.access_token)
-                setRefreshToken(res_data.payload.data.refresh_token)
-                const businesses = res_data.payload.data.businesses
+            if (res_data.success) {
+                setCookie("accessToken", res_data.payload.access_token, {path: "/"})
+                setCookie("refreshToken", res_data.payload.refresh_token, {path: "/"})
+                const businesses = res_data.payload.businesses
                 const currentBusiness = businesses[0]
                 if (businesses.length === 0) {
                     toast.info('Sorry, You currently do not have any business, take time to create one')
-                    history.push('/user/business/')
+                    history.push('/business')
                 } else {
                     localStorage.setItem('__grm__act__biz__', currentBusiness.id.toString())
-                    toast.info('Welcom back!')
-                    history.push(`/business/${currentBusiness.id}/dashboard`);
+                    toast.info('Welcome back!')
+                    history.push(`/business/${currentBusiness.id}/home`);
                 }
             } else {
                 const payload = res_data.payload
-                const erro = responseErrorParser(payload)
+                // const erro = responseErrorParser(payload)
                 setTimeout(() => {
-                    erro.forEach(e => toast.error(e.message))
+                    payload.forEach(e => toast.error(e.message))
                 }, 300);
             }
         }
@@ -74,7 +74,7 @@ const SignIn = (props) => {
     }
 
     const togglePasswordVisibility = () => {
-        setPasswordShown(passwordShown ? false : true )
+        setPasswordShown(passwordShown ? false : true)
     }
 
     const toggleform = () => {
@@ -85,7 +85,7 @@ const SignIn = (props) => {
         <div className="page-wrapper">
             <Container fluid={true} className="p-0">
                 <div className="authentication-main m-0">
-                    
+
                     <Row>
                         <Col md="12">
                             <div className="auth-innerright">
@@ -94,7 +94,7 @@ const SignIn = (props) => {
                                         <div className="cont text-center b-light">
                                             <div>
                                                 <Form className="theme-form" onSubmit={e => e.preventDefault()}>
-                                                    <ToastContainer />
+                                                    <ToastContainer/>
                                                     <h4>SIGN IN</h4>
                                                     <h6>Enter your Username and Password</h6>
                                                     <FormGroup>
@@ -102,25 +102,27 @@ const SignIn = (props) => {
                                                         <Input
                                                             className="form-control" type="text" required=""
                                                             value={username}
-                                                            onChange={e => setUserName(e.target.value)} />
+                                                            onChange={e => setUserName(e.target.value)}/>
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label className="col-form-label">Password</Label>
                                                         <div className="pass-wrapper">
                                                             <Input
-                                                                className="form-control" type={passwordShown ? "text":"password"} required=""
+                                                                className="form-control"
+                                                                type={passwordShown ? "text" : "password"} required=""
                                                                 value={password}
-                                                                onChange={e => setPassword(e.target.value)} />
-                                                            <i className="eye" onClick={togglePasswordVisibility}>{eye}</i>
+                                                                onChange={e => setPassword(e.target.value)}/>
+                                                            <i className="eye"
+                                                               onClick={togglePasswordVisibility}>{eye}</i>
                                                         </div>
                                                     </FormGroup>
                                                     <div className="checkbox p-0">
-                                                        <Input id="checkbox1" type="checkbox" />
+                                                        <Input id="checkbox1" type="checkbox"/>
                                                         <Label for="checkbox1">Remember me</Label>
                                                     </div>
                                                     <FormGroup className="form-row mt-3 mb-0">
                                                         <Button color="primary btn-block"
-                                                            onClick={e => handleLoginUser(e)}
+                                                                onClick={e => handleLoginUser(e)}
                                                         >{props.requestingLog ? 'Loading...' : 'Sign In'}</Button>
                                                     </FormGroup>
                                                     <div className="login-divider"></div>
@@ -136,7 +138,8 @@ const SignIn = (props) => {
                                                                 <Button color="social-btn btn-google">Google + </Button>
                                                             </Col>
                                                             <Col md="3" sm="6">
-                                                                <Button color="social-btn btn-github btn-block">Github</Button>
+                                                                <Button
+                                                                    color="social-btn btn-github btn-block">Github</Button>
                                                             </Col>
                                                         </Row>
                                                     </div>
@@ -150,11 +153,14 @@ const SignIn = (props) => {
                                                     </div>
                                                     <div className="img__text m--in">
                                                         <h2>One of us?</h2>
-                                                        <p>If you already has an account, just sign in. We've missed you!</p>
+                                                        <p>If you already has an account, just sign in. We've missed
+                                                            you!</p>
                                                     </div>
-                                                    <div className="img__btn" onClick={toggleform}><span className="m--up">Sign up</span><span className="m--in">Sign in</span></div>
+                                                    <div className="img__btn" onClick={toggleform}><span
+                                                        className="m--up">Sign up</span><span
+                                                        className="m--in">Sign in</span></div>
                                                 </div>
-                                                <Register />
+                                                <Register/>
                                             </div>
                                         </div>
                                     </CardBody>

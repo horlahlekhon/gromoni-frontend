@@ -1,0 +1,234 @@
+.pass-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.eye {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+
+
+  &:hover {
+    color: $primary-color;
+    cursor: pointer;
+  }
+}
+
+.tab-inactive {
+  color: #A9C3DB !important;
+}
+
+.tab-active {
+  color: $primary-color !important;
+}
+
+.nav-tabs {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+/// Sales stats  badge starts
+.sales-stat-badge {
+  background-color: $primary-color;
+  height: 58px;
+  width: 212px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid #FFFFFF;
+}
+
+.sales-stat-badge-icon-name-grp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sales-stat-badge-icon-name-grp > :first-child {
+  // background-color: #4BFFC2;
+  // border: 1px solid;
+  // border-radius: 10px;
+  height: 33px;
+  width: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sales-stat-icon-wrapper {
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.sales-stat-icon-pending {
+  background-color: #A80909;
+  color: $light-color;
+  border: 1px solid #FBA2AC
+}
+
+.sales-stat-icon-cleared {
+  background-color: #0A7D51;
+  color: $light-color;
+  border: 1px solid
+}
+
+.sales-stat-icon-archive {
+  background-color:$primary-color;
+  color: $light-color;
+  border: 1px solid
+}
+
+.sales-stat-icon-cleared > :first-child {
+  border-radius: 100%;
+}
+
+.sales-stat-icon-pending > :first-child {
+  border-radius: 100%;
+  background-color: #A80909;
+}
+
+
+/// Sales stats  badge ends
+
+/*== start of code for tooltips ==*/
+.tool {
+  cursor: help;
+  position: relative;
+}
+
+
+/*== common styles for both parts of tool tip ==*/
+.tool::before,
+.tool::after {
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  z-index: -100;
+}
+
+.tool:hover::before,
+.tool:focus::before,
+.tool:hover::after,
+.tool:focus::after {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  z-index: 100;
+}
+
+.tool:hover::before,
+.tool:focus::before {
+  transition: all .65s ease-in .2s;
+  transform-origin: top;
+}
+
+.tool::after {
+  background: $light-color;
+  border-radius: .25em;
+  top: 92%;
+  color: #333333;
+  content: attr(data-tip);
+  margin-left: -50%;
+  padding: 1em;
+  transition: all .65s ease-in .2s;
+  transform: scale(1, 0);
+  transform-origin: top;
+  width: 100%;
+}
+
+.tool:hover::after,
+.tool:focus::after {
+  transition: all .65s ease-in;
+  transform-origin: top;
+}
+
+@media (max-width: 768px) {
+  .tool::after {
+    font-size: .75em;
+    // margin-left: -5em;
+    // width: 10em;
+  }
+}
+
+// tooltip end
+
+
+.horizontal-item-alignment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.vertical-items-alignment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.bg-statBar{
+  background-image: url(../../images/other-images/salesStatBar.jpg);
+}
+
+.create-sale-button{
+  background-color: $primary-color;
+  color: $light-color;
+  height: 58px;
+  width: 212px;
+  border: 1px solid $light-color;
+}
+
+// creating new sales page
+.main-cont{
+  width: 100%;
+}
+
+.section1{
+  width: 80%
+}
+
+.section2{
+  background-color: #eaf6fd;
+  position: fixed;
+  right: 0;
+  height: 100%;
+  width: 20%
+}
+
+.product-count{
+  display: block;
+}
+
+.button{
+  width: 100%;
+}
+
+// breakpoints
+@include media-breakpoint-down(xs) { 
+  .main-cont{
+    flex-direction: column !important;
+    width: 100%;
+    padding-left: 40px;
+  }
+
+  .section1{
+    width: 85% !important;
+  }
+
+  .section2{
+    position: static !important;
+    width: 85% !important;
+    background-color: white !important;
+    padding-left: 20px;
+  }
+
+  .product-count{
+    display: none;
+  }
+  .button{
+    font-size: 13pt;
+    text-transform: lowercase;
+  }
+}

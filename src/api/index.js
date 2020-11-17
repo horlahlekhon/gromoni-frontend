@@ -1,2 +1,4 @@
-export { default as HTTP }
-from "./http";
+export {
+     GrowthAPI
+}
+    from "./http";

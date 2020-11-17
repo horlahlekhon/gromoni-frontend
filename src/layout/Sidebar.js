@@ -1,14 +1,17 @@
-import logo from '../assets/images/creative-logo.png'
-import React, { Fragment, useState, useEffect } from 'react';
+import logo from '../assets/images/logo/Gromoni-logo-light-137x40.png'
+import React, {Fragment, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux'
-import logo_compact from '../assets/images/logo/compact-logo.png';
-import logo_light from '../assets/images/creative-logo1.png'
-import { MENUITEMS } from './sidebar/menu';
+import logo_compact from '../assets/images/logo/GrowMoni-logo-dark-57x42.png';
+import logo_light from '../assets/images/logo/Gromoni-logo-light-137x40.png'
 import {Link} from 'react-router-dom'
 import configDB from '../data/customizer/config';
+import {getMenuItems} from "./sidebar/menu";
 
 const Sidebar = () => {
-    const [mainmenu, setMainMenu] = useState(MENUITEMS);
+    const business = localStorage.getItem("__grm__act__biz__")
+
+    const [mainmenu, setMainMenu] = useState(getMenuItems(business));
+    const [MENUITEMS, ] = useState(getMenuItems(business))
     const switchToggle = useSelector(state => state.Common.switchToggle)
     const sidebar_background_color = configDB.data.settings.sidebar_background_setting;
 
@@ -23,11 +26,10 @@ const Sidebar = () => {
                     setNavActive(subItems)
                 if (!subItems.children) return false
                 subItems.children.filter(subSubItems => {
-                    if (subSubItems.path === currentUrl){
+                    if (subSubItems.path === currentUrl) {
                         setNavActive(subSubItems)
                         return true
-                    }
-                    else{
+                    } else {
                         return false
                     }
                 })
@@ -51,8 +53,7 @@ const Sidebar = () => {
                         menuItem.active = true
                         submenuItems.active = true
                         return true
-                    }
-                    else{
+                    } else {
                         return false
                     }
                 })
@@ -60,11 +61,11 @@ const Sidebar = () => {
             return menuItem
         })
         item.active = !item.active
-        setMainMenu({ mainmenu: MENUITEMS })
+        setMainMenu({mainmenu: MENUITEMS})
     }
 
     // Click Toggle menu
-    const toggletNavActive = (item) => {        
+    const toggletNavActive = (item) => {
         if (!item.active) {
             MENUITEMS.forEach(a => {
                 if (MENUITEMS.includes(item))
@@ -84,40 +85,44 @@ const Sidebar = () => {
             });
         }
         item.active = !item.active
-        setMainMenu({ mainmenu: MENUITEMS })
+        setMainMenu({mainmenu: MENUITEMS})
     }
 
-  
+
     return (
         <Fragment>
-            <div className={`page-sidebar ${switchToggle? 'open': sidebar_background_color}`}>
+            <div className={`page-sidebar ${switchToggle ? 'open' : sidebar_background_color}`}>
                 <div className="main-header-left d-none d-lg-block">
                     <div className="logo-wrapper compactLogo">
                         <Link to={`${process.env.PUBLIC_URL}/starter-kit/sample-page`}>
-                            <img className="blur-up lazyloaded light" src={logo_light}  alt="" />
-                            <img className="blur-up lazyloaded compactlogo" src={logo_compact}  alt="" />
-                            <img className="blur-up lazyloaded logo" src={logo}  alt="" />
+                            <img className="blur-up lazyloaded light" src={logo_light} alt=""/>
+                            <img className="blur-up lazyloaded compactlogo" src={logo_compact} alt=""/>
+                            <img className="blur-up lazyloaded logo" src={logo} alt=""/>
                         </Link>
                     </div>
                 </div>
                 <div className="sidebar custom-scrollbar">
                     <ul className="sidebar-menu">
-                         {
-                            MENUITEMS.map((menuItem, i) => 
-                               
+                        {
+                            MENUITEMS.map((menuItem, i) =>
+
                                 <li className={`${menuItem.active ? 'active' : ''}`} key={i}>
-                                    {(menuItem.sidebartitle) ? <div className="sidebar-title">{menuItem.sidebartitle}</div>
+                                    {(menuItem.sidebartitle) ?
+                                        <div className="sidebar-title">{menuItem.sidebartitle}</div>
                                         : ''}
                                     {(menuItem.type === 'sub') ?
-                                        <a className="sidebar-header" href="#javascript" onClick={() => toggletNavActive(menuItem)}>
-                                            <menuItem.icon />
-                                    <span>{menuItem.title}</span>
+                                        <a className="sidebar-header" href="#javascript"
+                                           onClick={() => toggletNavActive(menuItem)}>
+                                            <menuItem.icon/>
+                                            <span>{menuItem.title}</span>
                                             <i className="fa fa-angle-right pull-right"></i>
                                         </a>
                                         : ''}
                                     {(menuItem.type === 'link') ?
-                                        <Link className={`sidebar-header ${menuItem.active ? 'active' :''}`}  onClick={() => toggletNavActive(menuItem)} to={menuItem.path}>
-                                            <menuItem.icon /><span>{menuItem.title}</span>
+                                        <Link className={`sidebar-header ${menuItem.active ? 'active' : ''}`}
+                                              onClick={() => toggletNavActive(menuItem)} to={menuItem.path}>
+                                            <menuItem.icon/>
+                                            <span>{menuItem.title}</span>
                                             {menuItem.children ?
                                                 <i className="fa fa-angle-right pull-right"></i> : ''}
                                         </Link>
@@ -125,33 +130,41 @@ const Sidebar = () => {
                                     {menuItem.children ?
                                         <ul
                                             className={`sidebar-submenu ${menuItem.active ? 'menu-open' : ''}`}
-                                            style={menuItem.active ? { opacity: 1, transition: 'opacity 500ms ease-in' } : {}}
+                                            style={menuItem.active ? {
+                                                opacity: 1,
+                                                transition: 'opacity 500ms ease-in'
+                                            } : {}}
                                         >
                                             {menuItem.children.map((childrenItem, index) =>
-                                                <li key={index} className={childrenItem.children ? childrenItem.active ? 'active' : '' : ''}>
+                                                <li key={index}
+                                                    className={childrenItem.children ? childrenItem.active ? 'active' : '' : ''}>
                                                     {(childrenItem.type === 'sub') ?
-                                                        <a href={childrenItem.path} onClick={() => toggletNavActive(childrenItem)} >
-                                                            <i className="fa fa-circle"></i>{childrenItem.title} <i className="fa fa-angle-down pull-right"></i></a>
+                                                        <a href={childrenItem.path}
+                                                           onClick={() => toggletNavActive(childrenItem)}>
+                                                            <i className="fa fa-circle"></i>{childrenItem.title} <i
+                                                            className="fa fa-angle-down pull-right"></i></a>
                                                         : ''}
 
                                                     {(childrenItem.type === 'link') ?
-                                                        <Link className={childrenItem.active ? 'active' : ''} onClick={() => toggletNavActive(childrenItem)} to={childrenItem.path}>
+                                                        <Link className={childrenItem.active ? 'active' : ''}
+                                                              onClick={() => toggletNavActive(childrenItem)}
+                                                              to={childrenItem.path}>
                                                             <i className="fa fa-circle"></i>{childrenItem.title}
                                                         </Link>
                                                         : ''}
-                                                     {(childrenItem.type === 'exteral_link') ?                      
-                                                        <a href={childrenItem.path}  className={childrenItem.active ? 'active' : ''} >{childrenItem.title}</a>
+                                                    {(childrenItem.type === 'exteral_link') ?
+                                                        <a href={childrenItem.path}
+                                                           className={childrenItem.active ? 'active' : ''}>{childrenItem.title}</a>
                                                         : ''}
                                                 </li>
                                             )}
-                                            
-                                        </ul>
-                                        : ''}   
-                                </li>
 
+                                        </ul>
+                                        : ''}
+                                </li>
                             )
                         }
-                   </ul>
+                    </ul>
                 </div>
             </div>
         </Fragment>

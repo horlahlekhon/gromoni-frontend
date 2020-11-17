@@ -15,6 +15,7 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
   margin-top: 15px;
   line-height: 70px;
 }
+
 %chart-2 {
   width: 35px;
   height: 35px;
@@ -22,6 +23,7 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
   margin-top: 7.5px;
   line-height: 35px;
 }
+
 %chart-3 {
   width: 20px;
   height: 20px;
@@ -35,15 +37,18 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
   canvas {
     width: 100% !important;
   }
+
   .chart-overflow {
     overflow: hidden;
     text-align: center;
   }
 }
+
 .candidcahrt {
   width: 100%;
   height: 470px;
 }
+
 .amcharts-export-canvas {
   position: absolute;
   display: none;
@@ -53,38 +58,47 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
   bottom: 0;
   left: 0;
   background-color: $white;
+
   .canvas-container {
     transition: opacity .5s ease-out;
   }
+
   &.active {
     display: block;
   }
+
   &.dropbox .canvas-container {
     opacity: .5;
   }
 }
+
 .flot-chart-container {
   //Instead of the line below you could use @include box-sizing($bs)
   box-sizing: border-box;
   width: 100%;
   height: 400px;
+
   #toggling-series-flot {
     width: 79% !important;
   }
 }
+
 .flot-chart-placeholder {
   width: 100%;
   height: 100%;
   font-size: 14px;
   line-height: 1.2em;
   text-align: center;
+
   .legend table {
     border-spacing: 5px;
   }
 }
+
 .morris-hover {
   position: absolute;
   z-index: 8;
+
   &.morris-default-style {
     border-radius: 10px;
     padding: 6px;
@@ -94,16 +108,19 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
     font-family: $font-serif;
     font-size: 12px;
     text-align: center;
+
     .morris-hover-row-label {
       font-weight: bold;
       margin: 0.25em 0;
     }
+
     .morris-hover-point {
       white-space: nowrap;
       margin: 0.1em 0;
     }
   }
 }
+
 .chart-sparkline {
   position: absolute;
   left: 0;
@@ -120,12 +137,14 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
   box-sizing: content-box;
   z-index: 10000;
   border-radius: 5px;
+
   .jqsfield {
     color: $white;
     font: 10px $font-work-sans, $font-serif;
     text-align: left;
   }
 }
+
 .radial-bar {
   position: relative;
   display: inline-block;
@@ -137,6 +156,7 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
   font-size: 18px;
   font-family: $font-work-sans, $font-serif;
   background-clip: content-box;
+
   &:after {
     display: inline-block;
     position: absolute;
@@ -155,6 +175,7 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
     margin-top: 12px;
     line-height: 56px;
   }
+
   > img {
     display: inline-block;
     position: absolute;
@@ -172,66 +193,79 @@ $url-4: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAQCAYAAADNo/U5AA
     line-height: 56px;
   }
 }
-.pieLabel{
+
+.pieLabel {
   div {
     color: $white !important;
+
     input[type=checkbox] {
       margin: 7px;
     }
   }
 }
+
 // knob chart css
-.knob-chart{
+.knob-chart {
   min-height: 255px;
-  .chart-clock-main{
-    position:relative;
-    width:200px;
-    margin:45px auto;
-    .clock-large{
-      position:absolute;
-      left:-48px;
-      top:-45px;
+
+  .chart-clock-main {
+    position: relative;
+    width: 200px;
+    margin: 45px auto;
+
+    .clock-large {
+      position: absolute;
+      left: -48px;
+      top: -45px;
     }
-    .clock-medium{
-      position:absolute;
-      left:2px;
-      top:5px;
+
+    .clock-medium {
+      position: absolute;
+      left: 2px;
+      top: 5px;
     }
-    .clock-small{
-      position:absolute;
-      left:15px;
-      top:55px;
+
+    .clock-small {
+      position: absolute;
+      left: 15px;
+      top: 55px;
     }
   }
 }
+
 // peity chart css
 .peity-charts {
   svg {
     width: 100%;
     height: 250px;
   }
-  &.peity-chart-primary{
-    svg{
-      polygon{
+
+  &.peity-chart-primary {
+    svg {
+      polygon {
         fill: rgba(21, 141, 247, 0.5);
       }
-      polyline{
+
+      polyline {
         stroke: $primary-color;
       }
     }
   }
 }
-p{
-  &.data-attributes{
-    svg{
+
+p {
+  &.data-attributes {
+    svg {
       margin-right: 10px;
     }
   }
 }
+
 // knob chart
 .knob-block {
   position: relative;
-  input{
+
+  input {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -242,84 +276,103 @@ p{
     margin-left: 0 !important;
     margin-top: -3px !important;
   }
+
   div {
     canvas {
-      position:  relative !important;
+      position: relative !important;
     }
   }
 }
+
 // apex chart
 .apex-chart {
   margin: 0 auto;
 }
+
 .apexcharts-menu-item {
   width: 110px;
 }
-.word-tree{
+
+.word-tree {
   height: 400px;
 }
-.basicmap
-{
+
+.basicmap {
   height: 100%;
   width: 100%;
 }
+
 // chartist chart color
 .ct-series-a {
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: $primary-color;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: $primary-color;
   }
 }
+
 .ct-series-b {
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: $secondary-color;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: $secondary-color;
   }
 }
+
 .ct-series-c {
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: $success-color;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: $success-color;
   }
 }
+
 .ct-series-d {
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: $info-color;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: $info-color;
   }
 }
+
 .ct-series-e {
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: $warning-color;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: $warning-color;
   }
 }
+
 .ct-series-f {
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: $danger-color;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: $danger-color;
   }
 }
+
 .ct-series-g {
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: $light-color;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: $light-color;
   }
 }
+
 /**=====================
      41. Chart CSS End
 ==========================**/

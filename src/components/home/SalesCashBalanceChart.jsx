@@ -1,16 +1,16 @@
-// SALES CASH BALANCE VIEW CHART 
+// SALES CASH BALANCE VIEW CHART
 
-import React, {useState} from 'react';
+import React from 'react';
 
 
- const SalesCashBalanceChart = (props) => {
-	
+const SalesCashBalanceChart = (props) => {
 
-	return (
-		<div>
-			<h1> This is sales cash balance Chart</h1>
-		</div>
-	)
-} 
+
+    return (
+        <div>
+            <h1> This is sales cash balance Chart</h1>
+        </div>
+    )
+}
 
 export default SalesCashBalanceChart;
