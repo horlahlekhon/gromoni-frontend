@@ -179,3 +179,56 @@
   width: 212px;
   border: 1px solid $light-color;
 }
+
+// creating new sales page
+.main-cont{
+  width: 100%;
+}
+
+.section1{
+  width: 80%
+}
+
+.section2{
+  background-color: #eaf6fd;
+  position: fixed;
+  right: 0;
+  height: 100%;
+  width: 20%
+}
+
+.product-count{
+  display: block;
+}
+
+.button{
+  width: 100%;
+}
+
+// breakpoints
+@include media-breakpoint-down(xs) { 
+  .main-cont{
+    flex-direction: column !important;
+    width: 100%;
+    padding-left: 40px;
+  }
+
+  .section1{
+    width: 85% !important;
+  }
+
+  .section2{
+    position: static !important;
+    width: 85% !important;
+    background-color: white !important;
+    padding-left: 20px;
+  }
+
+  .product-count{
+    display: none;
+  }
+  .button{
+    font-size: 13pt;
+    text-transform: lowercase;
+  }
+}

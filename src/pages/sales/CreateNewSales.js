@@ -22,7 +22,7 @@ const CreateNewSale = () => {
     const [, setIsCreatingNewSale] = useState(false)
 
     const [newProductValues, setNewProductValues] = useState([{
-        productName: "",
+        productName: [],
         discount: "",
         price: "",
         amountPaid: "",
@@ -145,9 +145,12 @@ const CreateNewSale = () => {
 
     return (
         <Fragment>
-            <div style={{display: "flex", fontFamily: "'Poppins', sans-serif"}}>
-                <div className="col-lg-10" style={{maxWidth: "500px", width: "100%"}}>
-                    <Form>
+            <div style={{fontFamily: "'Poppins', sans-serif", padding:"10px 0 0 10px"}}>
+                <h4 >Add new sales</h4>
+            </div>
+            <div style={{display:"flex", fontFamily: "'Poppins', sans-serif", }} className="main-cont">
+                <div  style={{marginLeft:"280px"}}>
+                    <Form style={{maxWidth: "500px", width: "85%",}}>
                         <Card>
                             <CardBody>
                                 <FormGroup>
@@ -193,13 +196,13 @@ const CreateNewSale = () => {
                             <CardBody>
                                 <FormGroup>
                                     <div className="form-row">
-                                        <Col>
+                                        <Col xs={`6`}>
                                             <Label for="date">Date</Label>
                                             <Input className="form-control digits" type="date" defaultValue="2018-01-01"
                                                    value={date} onChange={e => setDate(e.target.value)} id="date"
                                                    name="date" style={{backgroundColor: "#d5deee"}}/>
                                         </Col>
-                                        <Col>
+                                        <Col xs={`6`}>
                                             <Label for="dueDate">Due Date</Label>
                                             <Input className="form-control digits" type="date" defaultValue="2018-01-01"
                                                    value={dueDate} onChange={e => setDueDate(e.target.value)}
@@ -230,22 +233,22 @@ const CreateNewSale = () => {
                                     </Row>
                                 </div>
                                 <Row className="m-t-50">
-                                    <Col lg={`6`}>
-                                        <Button outline color="primary" size="lg"
-                                                style={{maxWidth: "200px", width: "100%"}}>SAVE</Button>
+                                    <Col xs={`6`} lg={`6`}>
+                                        <Button outline color="primary" size="lg" className="button"
+                                                style={{maxWidth: "200px",}}>SAVE</Button>
                                     </Col>
-                                    <Col lg={`6`}>
-                                        <Button color="primary" size="lg" onClick={e => handleCreateNewSale(e)}
-                                                style={{maxWidth: "200px", width: "100%"}}>CREATE</Button>
+                                    <Col xs={`6`} lg={`6`}>
+                                        <Button color="primary" size="lg" className="button" onClick={e => handleCreateNewSale(e)}
+                                                style={{maxWidth: "200px", }}>CREATE</Button>
                                     </Col>
                                 </Row>
                             </CardBody>
                         </Card>
                     </Form>
                 </div>
-                <div className="col-lg-2"
+                <div className="section2"
                      style={{backgroundColor: "#eaf6fd", position: "fixed", right: 0, height: "100%",}}>
-                    <Card className="m-t-50">
+                    <Card className="m-t-50 product-count">
                         <CardBody>
                             <div>You have added <span>0</span> products</div>
                         </CardBody>
