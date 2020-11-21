@@ -100,6 +100,14 @@ export class GrowthAPI {
         return await this._makeRequest({data: data, url: `/business/new`, method: "POST", errorHandler: errorHandler})
     }
 
+    async getHomePageChart( errorHandler) {
+        return await this._makeRequest({
+            url: `/report/${this.business}/dashboards/business/`,
+            method: "GET",
+            errorHandler: errorHandler
+        })
+    }
+
     async saleDashboard(errorHandler) {
         return await this._makeRequest({
             url: `/report/${this.business}/dashboards/sales/`,
@@ -115,5 +123,7 @@ export class GrowthAPI {
             errorHandler: errorHandler
         })
     }
+
+    
 
 }

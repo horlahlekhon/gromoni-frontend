@@ -1,5 +1,5 @@
 // this includes all the menu in the left side bar also the main navigation component
-// this is can contain a nexted array,  which are the sub menus
+// this can contain a nexted array,  which are the sub menus
 
 import {BarChart, Headphones, Home, List, PieChart, Users} from 'react-feather';
 // import {Sack} from 'reactstrap';
