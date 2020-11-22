@@ -108,6 +108,15 @@ export class GrowthAPI {
         })
     }
 
+
+     async getHomePageChart(errorHandler) {
+        return await this._makeRequest({
+            url: /report/${currentBusiness}/dashboards/business/`,
+            method: "GET",
+            errorHandler: errorHandler
+        })
+    }
+
     async allSales({pageSize, page}, errorHandler) {
         return await this._makeRequest({
             url: `/business/${this.business}/sales/?page_size=${pageSize ? pageSize : 10}&page=${page ? page : 1}`,
