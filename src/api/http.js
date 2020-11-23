@@ -111,7 +111,7 @@ export class GrowthAPI {
 
      async getHomePageChart(errorHandler) {
         return await this._makeRequest({
-            url: /report/${currentBusiness}/dashboards/business/`,
+            url: `/report/${this.business}/dashboards/business/`,
             method: "GET",
             errorHandler: errorHandler
         })

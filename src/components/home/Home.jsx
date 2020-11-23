@@ -30,6 +30,12 @@ const  Home = (props) => {
     const [weeklyCashBalanceChartData, setWeeklyCashBalanceChartData] = useState({})
     const [monthlyCashBalanceChartData, setMonthlyCashBalanceChartData] = useState({})
     const [yearlyCashBalanceChartData, setYearlyCashBalanceChartData] = useState({})
+    
+    const [numberOfCustomers, setNumberOfCustomers] = useState(0)
+    const [numberOfProducts, setNumberOfProducts] = useState(0)
+
+    // TODO NUMBER OF SUCCESFULL SALES TRANSACTION CURRENTLY A DUMMY DATA
+	const [numberOfSales,] = useState("COMING SOON!")
 
 
 useEffect( () => {
@@ -60,6 +66,8 @@ useEffect( () => {
 	                const yearly = ChartExtractor(data.yearly_data)
 	                const monthsName = convertDateToNames(data.monthly_data.labels, 'month')
 
+	                console.log(data)
+
 	                setWeeklyCashBalanceChartData({
 	                    labels: data.weekly_data.labels,
 	                    series: {
@@ -83,7 +91,20 @@ useEffect( () => {
 	                        productSold: yearly.productSold,
 	                        debt: yearly.debt
 	                    }
-	                })  
+	                })
+
+	                setNumberOfCustomers({
+	                	data: data.customer
+	                })
+
+	                setNumberOfProducts({
+	                	data: data.products
+	                })
+
+	                // TODO NUMMBER OF SUCCESFUL SALES
+	                // setNumberOfSales({
+	                // 	data: data.sales
+	                // })
 	            } else {
 	                const error = response.payload
 	                setApiError(error)
@@ -109,8 +130,12 @@ useEffect( () => {
 			<SalesCashBalanceChart	weeklyCashBalanceChartData = {weeklyCashBalanceChartData} 
 									monthlyCashBalanceChartData = {monthlyCashBalanceChartData} 
 									yearlyCashBalanceChartData = {yearlyCashBalanceChartData}
-        />
-			<CreateNewButtons />
+        	/>
+			<CreateNewButtons	numberOfCustomers = {numberOfCustomers}
+								numberOfProducts = {numberOfProducts}
+								numberOfSales = {numberOfSales}
+			/>
+
 		</div>
 	)
 }
