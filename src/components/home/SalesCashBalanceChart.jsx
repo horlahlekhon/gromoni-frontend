@@ -29,7 +29,7 @@ import {HomeCashBalanceChartOptions} from "./homeUtility";
             <Container fluid={true} >
             
                 <Row >
-                    <Col sm="12">
+                    <Col sm="12" d-xs-hidden>
                         <div className="text-center">
                             <ButtonGroup >
                                 <Button className={ activeTab === '1' ? 'active' : ''} 
@@ -53,22 +53,22 @@ import {HomeCashBalanceChartOptions} from "./homeUtility";
                                 <TabContent activeTab={activeTab}>
                                     <TabPane tabId="1">
                                     	<div  className="apex-chart-container chart-data">
-                                        	<div id="stepline">
-						               			<Chart options={weeklyCashBalanceChart.options} series={weeklyCashBalanceChart.series} height={400} type="line" />
+                                        	<div id="column-chart">
+						               			<Chart options={weeklyCashBalanceChart.options} series={weeklyCashBalanceChart.series} height={400} type="bar" />
 						                	</div>
 						                </div>
                                     </TabPane>
                                     <TabPane tabId="2">
                                     	<div  className="apex-chart-container chart-data">
-                                        	<div id="stepline">
-						               			<Chart options={monthlyCashBalanceChart.options} series={monthlyCashBalanceChart.series} height={400} type="line" />
+                                        	<div id="column-chart">
+						               			<Chart options={monthlyCashBalanceChart.options} series={monthlyCashBalanceChart.series} height={400} type="bar" />
 						                	</div>
 						                </div>
                                     </TabPane>
                                     <TabPane tabId="3">
                                     	<div  className="apex-chart-container chart-data">
-	                                        <div id="stepline">
-							               		 <Chart options={yearlyCashBalanceChart.options} series={yearlyCashBalanceChart.series} height={400} type="line" />
+	                                        <div id="column-chart">
+							               		 <Chart options={yearlyCashBalanceChart.options} series={yearlyCashBalanceChart.series} height={400} type="bar" />
 							                </div>
 						                </div>
                                     </TabPane>

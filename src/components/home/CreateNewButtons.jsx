@@ -25,15 +25,15 @@ const CreateNewButtons = (props) => {
         async function buttonLogic() {
 
 				//LOGIC FOR DISPLAYOS CUSTOMERS BUTTON
-				if (numberOfCustomers === 0 || null || undefined) {
+				if (numberOfCustomers === 0 || null || undefined || "undefined") {
 
 					setCustomerButton({
 
 						link:"addcustomer",
+						bgColor:"bg-default b-r-4 card-body",
 						icon:<UserPlus className='icon-bg'/>,
 						text:"Add Customer",
 						number:0,
-						bgColor:"bg-default"
 
 					})
 
@@ -41,7 +41,7 @@ const CreateNewButtons = (props) => {
 
 					setCustomerButton({
 						link: "allcustomers",
-						bgColor: "bg-primary",
+						bgColor: "bg-primary b-r-4 card-body",
 						icon: <Users className='icon-bg'/>,
 						text: "Customers",
 						number: numberOfCustomers
@@ -51,13 +51,13 @@ const CreateNewButtons = (props) => {
 
 
 				//LOGIC FOR DISPLAYOS OF PRODUCTS BUTTON
-	            if (numberOfSales === 0 || null || undefined) {
+	            if (numberOfSales === 0 || null || undefined || "undefined") {
 
 	            	setSalesButton({
-	            		link: "addproduct",
-						bgColor: "bg-default",
+	            		link: "addsale",
+						bgColor: "bg-default b-r-4 card-body",
 						icon: <ShoppingCart className='icon-bg'/>,
-						text: "Create Product",
+						text: "Add Sale",
 						number: 0
 	            	})
 
@@ -65,7 +65,7 @@ const CreateNewButtons = (props) => {
 
 	            	setSalesButton({
 						link: "allsales",
-						bgColor: "bg-primary",
+						bgColor: "bg-primary b-r-4 card-body",
 						icon: <ShoppingBag className='icon-bg'/>,
 						text: "Sales",
 						number: numberOfSales
@@ -76,21 +76,21 @@ const CreateNewButtons = (props) => {
 
 			    
 			    //LOGIC FOR DISPLAYOS OF PRODUCTS BUTTON
-			    if (numberOfProducts === 0 || null || undefined) {
+			    if (numberOfProducts === 0 || null || undefined || "undefined") {
 
 			    	setProductButton({
 			    		link:"allcustomers",
+						bgColor:"bg-default b-r-4 card-body",
 						icon:<Database className='icon-bg'/>,
 						text:"Create Product",
-						number:0,
-						bgColor:"bg-default"
+						number:0
 			    	})
 
 			    } else {
 
 	      			setProductButton({
 						link: "allproducts",
-						bgColor: "bg-primary",
+						bgColor: "bg-primary b-r-4 card-body",
 						icon: <Layers className='icon-bg' />,
 						text: "Product",
 						number: numberOfProducts
@@ -114,9 +114,9 @@ const CreateNewButtons = (props) => {
 
 
             <Col sm="8" xl="3">
-            	<NavLink to={`${process.env.PUBLIC_URL}/business/${currentBusiness}/{customerButton.link}`}>
+            	<NavLink to={`${process.env.PUBLIC_URL}/business/${currentBusiness}/${customerButton.link}`}>
 		            <Card className="o-hidden">
-		                <CardBody className={`{customerButton.bgColor} b-r-4 card-body`}>
+		                <CardBody className={customerButton.bgColor}>
 		                <div className="media static-top-widget">
 		                    <div className="align-self-center text-center">
 		                    	{customerButton.icon}
@@ -137,9 +137,9 @@ const CreateNewButtons = (props) => {
             	
 
 	        <Col sm="8" xl="3">
-	        	<NavLink to={`${process.env.PUBLIC_URL}/business/${currentBusiness}/{salesButton.link}`}>
+	        	<NavLink to={`${process.env.PUBLIC_URL}/business/${currentBusiness}/${salesButton.link}`}>
 		            <Card className="o-hidden">
-		              <CardBody className={`{salesButton.bgColor} b-r-4 card-body`}>
+		              <CardBody className={salesButton.bgColor}>
 		                <div className="media static-top-widget">
 		                  <div className="align-self-center text-center">
 		                  	{salesButton.icon}
@@ -159,9 +159,9 @@ const CreateNewButtons = (props) => {
             </Col>
 	      	<Col sm="8" xl="3">
 
-	      		<NavLink to={`${process.env.PUBLIC_URL}/business/${currentBusiness}/{productButton.link}`}>
+	      		<NavLink to={`${process.env.PUBLIC_URL}/business/${currentBusiness}/${productButton.link}`}>
 		            <Card className="o-hidden">
-		              <CardBody className={`{productButton.bgColor} b-r-4 card-body`}>
+		              <CardBody className={productButton.bgColor}>
 		                <div className="media static-top-widget">
 		                  <div className="align-self-center text-center">
 		                  	{productButton.icon}

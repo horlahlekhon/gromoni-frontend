@@ -35,7 +35,7 @@ const  Home = (props) => {
     const [numberOfProducts, setNumberOfProducts] = useState(0)
 
     // TODO NUMBER OF SUCCESFULL SALES TRANSACTION CURRENTLY A DUMMY DATA
-	const [numberOfSales,] = useState("COMING SOON!")
+	const [numberOfSales, setNumberOfSales] = useState(0)
 
 
 useEffect( () => {
@@ -65,8 +65,6 @@ useEffect( () => {
 	                const monthly = ChartExtractor(data.monthly_data)
 	                const yearly = ChartExtractor(data.yearly_data)
 	                const monthsName = convertDateToNames(data.monthly_data.labels, 'month')
-
-	                console.log(data)
 
 	                setWeeklyCashBalanceChartData({
 	                    labels: data.weekly_data.labels,
@@ -102,9 +100,9 @@ useEffect( () => {
 	                })
 
 	                // TODO NUMMBER OF SUCCESFUL SALES
-	                // setNumberOfSales({
-	                // 	data: data.sales
-	                // })
+	                setNumberOfSales({
+	                	data: "Incoming"
+	                })
 	            } else {
 	                const error = response.payload
 	                setApiError(error)

@@ -56,20 +56,21 @@ export const HomeCashBalanceChartOptions = (series, labels) => {
         }],
       options: {
         chart: {
+          toolbar: {show: false},
           type: 'bar',
-          height: 350
+          height: 500
         },
+        colors:['#51bc25', primary, '#f10342'],
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: '55%',
+            columnWidth: '45%',
             endingShape: 'rounded'
           },
         },
         dataLabels: {
           enabled: false
         },
-        colors:['#51bc25', primary, '#f10342'],
         stroke: {
           show: true,
           width: 2,
@@ -99,6 +100,35 @@ export const HomeCashBalanceChartOptions = (series, labels) => {
           }
         }
       },
+      responsive: [
+        {
+          breakpoint: 992,
+          options: {
+              stroke: {
+                  width: 5
+              },
+              chart: {
+                  height: 200
+              }
+          }
+        },
+        {
+          breakpoint: 480,
+          options: {
+              stroke: {
+                  width: 1
+              }
+          }
+        },
+        {
+          breakpoint: 420,
+          options: {
+              stroke: {
+                  width: 1
+              }
+          }
+        }
+    ]
     
   }
 };
