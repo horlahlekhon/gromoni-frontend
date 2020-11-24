@@ -13,7 +13,7 @@ const CreateNewButtons = (props) => {
 	const numberOfProducts = props.numberOfProducts.data
 	const numberOfSales = props.numberOfSales.data
 
-	console.log(numberOfCustomers)
+	// console.log(numberOfCustomers)
 
 	const [customerButton,setCustomerButton] = useState({})
 

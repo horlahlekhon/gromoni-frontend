@@ -17,7 +17,6 @@ import CreateNewButtons from './CreateNewButtons';
 
 
 
-
 const  Home = (props) => {
 	const currentBusiness = localStorage.getItem("__grm__act__biz__");
     const history = useHistory();
@@ -35,7 +34,7 @@ const  Home = (props) => {
     const [numberOfProducts, setNumberOfProducts] = useState(0)
 
     // TODO NUMBER OF SUCCESFULL SALES TRANSACTION CURRENTLY A DUMMY DATA
-	const [numberOfSales, setNumberOfSales] = useState(0)
+	const [numberOfSales,] = useState(0)
 
 
 useEffect( () => {
@@ -65,9 +64,15 @@ useEffect( () => {
 	                const monthly = ChartExtractor(data.monthly_data)
 	                const yearly = ChartExtractor(data.yearly_data)
 	                const monthsName = convertDateToNames(data.monthly_data.labels, 'month')
+	                const weekDays = data.weekly_data.labels
+	                const shortenedDays = weekDays.map( (e) => {
+	                	return e.slice(0, 3)
+	                })
+
+	                // console.log(shortenedDays)
 
 	                setWeeklyCashBalanceChartData({
-	                    labels: data.weekly_data.labels,
+	                    labels: shortenedDays,
 	                    series: {
 	                        totalSales: weekly.totalSales,
 	                        productSold: weekly.productSold,
@@ -100,9 +105,9 @@ useEffect( () => {
 	                })
 
 	                // TODO NUMMBER OF SUCCESFUL SALES
-	                setNumberOfSales({
-	                	data: "Incoming"
-	                })
+	                // setNumberOfSales({
+	                // 	data: "Incoming"
+	                // })
 	            } else {
 	                const error = response.payload
 	                setApiError(error)
@@ -117,7 +122,7 @@ useEffect( () => {
 
         getPayload(token, currentBusiness)
 
-}, [token, currentBusiness, apiError, history])
+}, [token, currentBusiness, apiError, history, props])
 
 
 	return (

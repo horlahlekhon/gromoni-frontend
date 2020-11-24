@@ -29,7 +29,7 @@ import {HomeCashBalanceChartOptions} from "./homeUtility";
             <Container fluid={true} >
             
                 <Row >
-                    <Col sm="12" d-xs-hidden>
+                    <Col sm="12" d-xs-hidden="true" d-xs-none="true" className="d-xs-none">
                         <div className="text-center">
                             <ButtonGroup >
                                 <Button className={ activeTab === '1' ? 'active' : ''} 
