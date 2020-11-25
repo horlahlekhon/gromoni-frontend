@@ -34,7 +34,7 @@ const  Home = (props) => {
     const [numberOfProducts, setNumberOfProducts] = useState(0)
 
     // TODO NUMBER OF SUCCESFULL SALES TRANSACTION CURRENTLY A DUMMY DATA
-	const [numberOfSales,] = useState(0)
+	const [numberOfSales, setNumberOfSales] = useState("")
 
 
 useEffect( () => {
@@ -69,7 +69,7 @@ useEffect( () => {
 	                	return e.slice(0, 3)
 	                })
 
-	                // console.log(shortenedDays)
+	                console.log(data)
 
 	                setWeeklyCashBalanceChartData({
 	                    labels: shortenedDays,
@@ -95,19 +95,13 @@ useEffect( () => {
 	                        debt: yearly.debt
 	                    }
 	                })
+	                	console.log(data.customer)
+	                setNumberOfCustomers(data.customer)
 
-	                setNumberOfCustomers({
-	                	data: data.customer
-	                })
-
-	                setNumberOfProducts({
-	                	data: data.products
-	                })
+	                setNumberOfProducts(data.products)
 
 	                // TODO NUMMBER OF SUCCESFUL SALES
-	                // setNumberOfSales({
-	                // 	data: "Incoming"
-	                // })
+	                setNumberOfSales("Incoming")
 	            } else {
 	                const error = response.payload
 	                setApiError(error)

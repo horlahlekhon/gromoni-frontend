@@ -9,23 +9,33 @@ import {UserPlus,ShoppingBag,ShoppingCart,Users,Database,Layers} from 'react-fea
 const CreateNewButtons = (props) => {
 	const currentBusiness = localStorage.getItem('__grm__act__biz__');
 
-	const numberOfCustomers = props.numberOfCustomers.data
-	const numberOfProducts = props.numberOfProducts.data
-	const numberOfSales = props.numberOfSales.data
+	const numberOfCustomers = props.numberOfCustomers
+	const numberOfProducts = props.numberOfProducts
+	const numberOfSales = props.numberOfSales
 
 	// console.log(numberOfCustomers)
 
 	const [customerButton,setCustomerButton] = useState({})
-
 	const [productButton, setProductButton] = useState({})
-
 	const [salesButton, setSalesButton] = useState({})
 
 	useEffect( () => {
         async function buttonLogic() {
-
 				//LOGIC FOR DISPLAYOS CUSTOMERS BUTTON
-				if (numberOfCustomers === 0 || null || undefined || "undefined") {
+				if (numberOfCustomers !== 0 || null || undefined || "undefined") {
+
+					
+					setCustomerButton({
+						link: "allcustomers",
+						bgColor: "bg-primary b-r-4 card-body",
+						icon: <Users className='icon-bg'/>,
+						text: "Customers",
+						number: numberOfCustomers
+					})
+        			
+        			console.log(numberOfCustomers)
+
+				} else {
 
 					setCustomerButton({
 
@@ -37,21 +47,22 @@ const CreateNewButtons = (props) => {
 
 					})
 
-				} else {
-
-					setCustomerButton({
-						link: "allcustomers",
-						bgColor: "bg-primary b-r-4 card-body",
-						icon: <Users className='icon-bg'/>,
-						text: "Customers",
-						number: numberOfCustomers
-					})
-
 				}
 
 
 				//LOGIC FOR DISPLAYOS OF PRODUCTS BUTTON
-	            if (numberOfSales === 0 || null || undefined || "undefined") {
+	            if (numberOfSales !== 0 || null || undefined || "undefined") {
+
+	            	
+	            	setSalesButton({
+						link: "allsales",
+						bgColor: "bg-primary b-r-4 card-body",
+						icon: <ShoppingBag className='icon-bg'/>,
+						text: "Sales",
+						number: numberOfSales
+					})
+
+	            } else {
 
 	            	setSalesButton({
 	            		link: "addsale",
@@ -61,23 +72,22 @@ const CreateNewButtons = (props) => {
 						number: 0
 	            	})
 
-	            } else {
-
-	            	setSalesButton({
-						link: "allsales",
-						bgColor: "bg-primary b-r-4 card-body",
-						icon: <ShoppingBag className='icon-bg'/>,
-						text: "Sales",
-						number: numberOfSales
-					})
-
 			  		
 				}
 
 			    
 			    //LOGIC FOR DISPLAYOS OF PRODUCTS BUTTON
-			    if (numberOfProducts === 0 || null || undefined || "undefined") {
+			    if (numberOfProducts !== 0 || null || undefined || "undefined") {
 
+			    	setProductButton({
+						link: "allproducts",
+						bgColor: "bg-primary b-r-4 card-body",
+						icon: <Layers className='icon-bg' />,
+						text: "Product",
+						number: numberOfProducts
+					})
+
+			    } else {
 			    	setProductButton({
 			    		link:"allcustomers",
 						bgColor:"bg-default b-r-4 card-body",
@@ -86,15 +96,7 @@ const CreateNewButtons = (props) => {
 						number:0
 			    	})
 
-			    } else {
-
-	      			setProductButton({
-						link: "allproducts",
-						bgColor: "bg-primary b-r-4 card-body",
-						icon: <Layers className='icon-bg' />,
-						text: "Product",
-						number: numberOfProducts
-					})
+	      			
 	      			
 			    }
 	}

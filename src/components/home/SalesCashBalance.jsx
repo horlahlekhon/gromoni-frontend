@@ -3,10 +3,49 @@
 
 import React, { Fragment } from 'react';
 import {Container,Row,Col,Card,CardBody} from "reactstrap";
-import {TrendingUp} from 'react-feather'
+import {TrendingUp, Square} from 'react-feather'
+
+import {formatMoney} from "../common/utilityFunctions";
 
 const SalesCashBalance = (props) => {
 
+	const trendingCash = {
+		color: "#51bc25",
+		height: "18px",
+		width: "18px"
+	}
+
+	const trendingProduct = {
+		color: "rgb(21, 141, 247)",
+		height: "18px",
+		width: "18px"
+	}
+
+	const trendingDebt = {
+		color: "#f10342",
+		height: "18px",
+		width: "18px"
+	}
+
+	const squreCash = { 
+		fill: "#51bc25",
+		color: "#51bc25",
+		height: "10px",
+		width: "10px"
+	}
+	const squreProduct = { 
+		fill: "rgb(21, 141, 247)",
+		color: "rgb(21, 141, 247)",
+		height: "10px",
+		width: "10px"
+	}
+	const squreDebt = { 
+		fill: "#f10342",
+		color: "#f10342",
+		height: "10px",
+		width: "10px"
+		
+	}
 
 	return(
 		 <Fragment  >
@@ -18,21 +57,24 @@ const SalesCashBalance = (props) => {
 
 
 					<Col xl="4" sm="8">
-			                <Card className="o-hidden text-center">
+			            <Card className="o-hidden text-center">
 				  			<CardBody className="crypto-current">
 						        <div className="current-balance">
+						        	<h4 >
+						        		<span className="f-12 f-w-600">
+						        			TOTAL SALES CASH
+						        		</span>
 
-						        	<h4 className="f-12 f-w-600">Total Sales Cash</h4>
-						          <div>
-						          	<span className="mr-2">
-						          		<i className="icofont icofont-pound"></i>
-						          	</span>
-						          	<h3>3,459 909.2124</h3>
-						          </div>
+						        		< Square style={squreCash}/>
+
+						        	</h4>
+						          	<h3>
+						          		{formatMoney(3459909.2124)}
+						          	</h3>
 
 						          <div>
-						          	<span> <TrendingUp /> </span>
-						          	<span> 23456,23445 </span>
+						          	<span style={trendingCash}> <TrendingUp /> </span>
+						          	<span> {formatMoney(2345623)} </span>
 						          </div>
 						          
 						        </div>
@@ -51,13 +93,18 @@ const SalesCashBalance = (props) => {
 			                <Card className="o-hidden text-center">
 				  			<CardBody className="crypto-current">
 						        <div className="current-balance">
-						        	<span className="f-12 f-w-600">Product Sold</span>
-						          <h2>
-						          	<span className="mr-2">
-						          		<i className="icofont icofont-pound"></i>
-						          	</span>
-						          	<p>3,459 909.2124</p>
-						          </h2>
+						        	<h4>
+							        	<span className="f-12 f-w-600">Product Sold</span>
+							          	< Square style={squreProduct}/>
+						          	</h4>
+						          	<h3>
+						          		3459
+						          	</h3>
+
+						          <div>
+						          	<span style={trendingProduct}> <TrendingUp /> </span>
+						          	<span> 45</span>
+						          </div>
 						          
 						        </div>
 						 	</CardBody>
@@ -71,13 +118,18 @@ const SalesCashBalance = (props) => {
 			                <Card className="o-hidden text-center">
 				  			<CardBody className="crypto-current">
 						        <div className="current-balance text-center">
-						        	<span className="f-12 f-w-600">Debt</span>
-						          <h2>
-						          	<span className="mr-2">
-						          		<i className="icofont icofont-pound"></i>
-						          	</span>
-						          	<p>3,459 909.2124</p>
-						          </h2>
+						        	<h4>
+						        		<span className="f-12 f-w-600">Debt</span>
+						        		< Square style={squreDebt}/>
+						          	</h4>
+						          	<h3>
+						          		{formatMoney(3459909.2124)}
+						          	</h3>
+
+						          <div>
+						          	<span style={trendingDebt}> <TrendingUp /> </span>
+						          	<span> {formatMoney(2345623)} </span>
+						          </div>
 						          
 						        </div>
 						 	</CardBody>
