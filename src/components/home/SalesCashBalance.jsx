@@ -12,13 +12,13 @@ import '../../assets/images/other-images/salesStatBar.jpg'
 const SalesCashBalance = (props) => {
 
 	const trendingCash = {
-		color: "#51bc25",
+		color: "#c3c60a",
 		height: "18px",
 		width: "18px"
 	}
 
 	const trendingProduct = {
-		color: "rgb(21, 141, 247)",
+		color: "#dc07eb",
 		height: "18px",
 		width: "18px"
 	}
@@ -30,14 +30,15 @@ const SalesCashBalance = (props) => {
 	}
 
 	const squreCash = { 
-		fill: "#51bc25",
-		color: "#51bc25",
+		fill: "#c3c60a",
+		color: "#c3c60a",
 		height: "10px",
 		width: "10px"
 	}
 	const squreProduct = { 
-		fill: "rgb(21, 141, 247)",
-		color: "rgb(21, 141, 247)",
+		fill: "#dc07eb",
+		color: "#dc07eb",
+		// color: "rgb(21, 141, 247)",
 		height: "10px",
 		width: "10px"
 	}
