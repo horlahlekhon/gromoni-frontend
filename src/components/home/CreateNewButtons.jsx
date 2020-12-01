@@ -32,8 +32,6 @@ const CreateNewButtons = (props) => {
 						text: "Customers",
 						number: numberOfCustomers
 					})
-        			
-        			console.log(numberOfCustomers)
 
 				} 
 				if (numberOfCustomers === 0 ) {

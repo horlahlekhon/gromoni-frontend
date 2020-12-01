@@ -24,11 +24,11 @@ import {HomeCashBalanceChartOptions} from "./homeUtility";
         // console.log(monthlyCashBalanceChart.series)
 
  return (
-        <Fragment className="m-2 m-20">
+        <Fragment >
       
             <Container fluid={true} >
             
-                <Row >
+                <Row className="m-2 m-20">
                     <Col sm="12" d-xs-hidden="true" d-xs-none="true" className="d-xs-none">
                          <Row>
                             <Col xl="12" md="4" sm="4">

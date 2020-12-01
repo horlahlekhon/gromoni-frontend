@@ -69,8 +69,6 @@ useEffect( () => {
 	                	return e.slice(0, 3)
 	                })
 
-	                console.log(data)
-
 	                setWeeklyCashBalanceChartData({
 	                    labels: shortenedDays,
 	                    series: {
@@ -95,7 +93,7 @@ useEffect( () => {
 	                        debt: yearly.debt
 	                    }
 	                })
-	                	console.log(data.customer)
+	                
 	                setNumberOfCustomers(data.customer)
 
 	                setNumberOfProducts(data.products)
