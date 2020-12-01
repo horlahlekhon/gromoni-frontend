@@ -1,7 +1,7 @@
-// SALES CASH BALANCE VIEW CHART 
+ // SALES CASH BALANCE VIEW CHART 
 import React, { Fragment, useState} from 'react';
 import Chart from 'react-apexcharts';
-import {Container,  Row, Col,TabPane,TabContent,Button,ButtonGroup} from 'reactstrap';
+import {Container,  Row, Col,TabPane,TabContent,Nav, NavItem, NavLink,} from 'reactstrap';
 
 import {HomeCashBalanceChartOptions} from "./homeUtility";
 
@@ -24,30 +24,39 @@ import {HomeCashBalanceChartOptions} from "./homeUtility";
         // console.log(monthlyCashBalanceChart.series)
 
  return (
-        <Fragment >
+        <Fragment className="m-2 m-20">
       
             <Container fluid={true} >
             
                 <Row >
                     <Col sm="12" d-xs-hidden="true" d-xs-none="true" className="d-xs-none">
-                        <div className="text-center">
-                            <ButtonGroup >
-                                <Button className={ activeTab === '1' ? 'active' : ''} 
-                                	onClick={() => setActiveTab('1')} 
-                                	color="light" >Weekly
-                                </Button>
-
-                                <Button className={activeTab === '2' ? 'active' : ''}
-                                	onClick={() => setActiveTab('2')}
-                                	color="light">Monthly
-                                </Button>
-
-                                <Button className={activeTab === '3' ? 'active' : ''}
-                                	onClick={() => setActiveTab('3')}
-                                	color="light">Yearly
-                                </Button>
-                            </ButtonGroup>
-                        </div>
+                         <Row>
+                            <Col xl="12" md="4" sm="4">
+                                <Nav tabs className=" nav-tabs border-tab nav-primary justify-content-center">
+                                    <NavItem >
+                                        <NavLink className={activeTab === '1' ? 'active' : ''}
+                                                 onClick={() => setActiveTab('1')}>
+                                            <span
+                                                className={activeTab === '1' ? 'tab-active' : 'tab-inactive'}>Week</span>
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem >
+                                        <NavLink className={activeTab === '2' ? 'active' : ''}
+                                                 onClick={() => setActiveTab('2')}>
+                                            <span
+                                                className={activeTab === '2' ? 'tab-active' : 'tab-inactive'}>Month</span>
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem >
+                                        <NavLink className={activeTab === '3' ? 'active' : ''}
+                                                 onClick={() => setActiveTab('3')}>
+                                            <span
+                                                className={activeTab === '3' ? 'tab-active' : 'tab-inactive'}>Year</span>
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
+                            </Col>
+                            </Row>
                         <div className="tabbed-card">
                                
                                 <TabContent activeTab={activeTab}>

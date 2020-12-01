@@ -1,4 +1,4 @@
-//create new sales Button, NEW PRODUCTS BUTTON, NEW CUSTOMER BUTTON
+ //create new sales Button, NEW PRODUCTS BUTTON, NEW CUSTOMER BUTTON
 
 import React, {Fragment, useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
@@ -22,7 +22,7 @@ const CreateNewButtons = (props) => {
 	useEffect( () => {
         async function buttonLogic() {
 				//LOGIC FOR DISPLAYOS CUSTOMERS BUTTON
-				if (numberOfCustomers !== 0 || null || undefined || "undefined") {
+				if (numberOfCustomers !== 0) {
 
 					
 					setCustomerButton({
@@ -35,7 +35,8 @@ const CreateNewButtons = (props) => {
         			
         			console.log(numberOfCustomers)
 
-				} else {
+				} 
+				if (numberOfCustomers === 0 ) {
 
 					setCustomerButton({
 
@@ -51,7 +52,7 @@ const CreateNewButtons = (props) => {
 
 
 				//LOGIC FOR DISPLAYOS OF PRODUCTS BUTTON
-	            if (numberOfSales !== 0 || null || undefined || "undefined") {
+	            if (numberOfSales !== 0) {
 
 	            	
 	            	setSalesButton({
@@ -62,7 +63,8 @@ const CreateNewButtons = (props) => {
 						number: numberOfSales
 					})
 
-	            } else {
+	            }
+	            if (numberOfSales === 0 ) {
 
 	            	setSalesButton({
 	            		link: "addsale",
@@ -77,7 +79,7 @@ const CreateNewButtons = (props) => {
 
 			    
 			    //LOGIC FOR DISPLAYOS OF PRODUCTS BUTTON
-			    if (numberOfProducts !== 0 || null || undefined || "undefined") {
+			    if (numberOfProducts !== 0) {
 
 			    	setProductButton({
 						link: "allproducts",
@@ -87,7 +89,8 @@ const CreateNewButtons = (props) => {
 						number: numberOfProducts
 					})
 
-			    } else {
+			    }
+			    if (numberOfProducts === 0) {
 			    	setProductButton({
 			    		link:"allcustomers",
 						bgColor:"bg-default b-r-4 card-body",

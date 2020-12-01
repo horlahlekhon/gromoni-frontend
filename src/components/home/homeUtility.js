@@ -1,4 +1,4 @@
-import configDB from '../../data/customizer/config';
+ import configDB from '../../data/customizer/config';
 
 const primary = localStorage.getItem('primary_color') || configDB.data.color.primary_color;
 

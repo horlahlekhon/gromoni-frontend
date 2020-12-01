@@ -6,6 +6,8 @@ import {Container,Row,Col,Card,CardBody} from "reactstrap";
 import {TrendingUp, Square} from 'react-feather'
 
 import {formatMoney} from "../common/utilityFunctions";
+ 
+import '../../assets/images/other-images/salesStatBar.jpg'
 
 const SalesCashBalance = (props) => {
 
@@ -57,10 +59,11 @@ const SalesCashBalance = (props) => {
 
 
 					<Col xl="4" sm="8">
-			            <Card className="o-hidden text-center">
+			            <Card className="o-hidden text-center bg-statBar">
 				  			<CardBody className="crypto-current">
 						        <div className="current-balance">
-						        	<h4 >
+						        	
+					        		<h4 >
 						        		<span className="f-12 f-w-600">
 						        			TOTAL SALES CASH
 						        		</span>
@@ -90,7 +93,7 @@ const SalesCashBalance = (props) => {
 	                </Col>
 	                
 					<Col xl="4" sm="8">
-			                <Card className="o-hidden text-center">
+			                <Card className="o-hidden text-center bg-statBar">
 				  			<CardBody className="crypto-current">
 						        <div className="current-balance">
 						        	<h4>
@@ -115,7 +118,7 @@ const SalesCashBalance = (props) => {
 	                </Col>
 
 					<Col xl="4" sm="8">
-			                <Card className="o-hidden text-center">
+			                <Card className="o-hidden text-center bg-statBar">
 				  			<CardBody className="crypto-current">
 						        <div className="current-balance text-center">
 						        	<h4>
