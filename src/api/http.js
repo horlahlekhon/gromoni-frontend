@@ -125,4 +125,12 @@ export class GrowthAPI {
         })
     }
 
+    async getCustomersData(errorHandler) {
+        return await this._makeRequest({
+            url: `/business/${this.business}/customers/`,
+            method: "GET",
+            errorHandler: errorHandler
+        })
+    }
+
 }

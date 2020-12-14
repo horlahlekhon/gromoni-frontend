@@ -1,8 +1,3 @@
- import configDB from '../../data/customizer/config';
-
-const primary = localStorage.getItem('primary_color') || configDB.data.color.primary_color;
-
-
 // EXTRACTS DATA FOR PARTICULAR FILEDS FROM THE PULLED API RESOURCES
 export const ChartExtractor = (period) => {
   var totalSales = []

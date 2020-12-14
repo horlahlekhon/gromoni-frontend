@@ -16,6 +16,7 @@ const Header = ({search, filter, business}) => {
     const [searchValue, setSearchValue] = useState("")
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null);
+    
     const handleChange = (key) => {
         setSearchValue(key)
         if (searchValue !== "" || search !== undefined) {
