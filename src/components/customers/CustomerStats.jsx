@@ -1,13 +1,13 @@
 import React, {Fragment} from 'react';
 import {NavLink} from 'react-router-dom';
-import {Container,Row, Col, Card, CardBody} from 'reactstrap';
+import {Container,Row, Col, Card, CardBody,Button} from 'reactstrap';
 import {Users,TrendingUp,UserPlus} from 'react-feather';
 
  const CustomerStats = (props) => {
 
 	return (
 		<Fragment>
-			<Container fluid={true} >
+			<Container fluid={true} className="m-b-20" >
 				<Row>
 					{/**/}
 					{/* TOTAL NUMBER OF CUSTOMERS*/}
@@ -149,20 +149,18 @@ import {Users,TrendingUp,UserPlus} from 'react-feather';
 	        	</Row>
 
 	        	{/* ADD NEW CUSTOMER BUTTON*/}
-	        	<Row className="text-center">
+	        	<Row className="text-center m-t-10">
 	        		<Col sm="2" md="3" xl="4">
 	        		</Col>
 	        		<Col sm='8' md='6' xl='4'>
-	        			<Card>
-	        				<NavLink to='./' className="btn-pill btn-air-warning" size="lg" color="warning">
-	        					<span>
-	        						<UserPlus />
-	        					</span>
-	        					<span>
-	        						Add New Customer
-	        					</span>
-	        				</NavLink>
-	        			</Card>
+        				<Button className="btn-pill btn-air-info sm-8 md-6 xl-4" size="lg" color="info">
+        					<span>
+	    						<UserPlus />
+	    					</span>
+	    					<span>
+	    						Add New Customer
+	    					</span>
+        				</Button>
 	        		</Col>
 	        	</Row>
 	        </Container>

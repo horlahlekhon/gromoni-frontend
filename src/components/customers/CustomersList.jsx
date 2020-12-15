@@ -150,8 +150,8 @@ const CustomersList = (props) => {
                     clearSelectedRows={toggleCleared}
                     paginationServerOptions={paging}
                     paginationTotalRows={totalRows}
-                    //onChangePage={handlePageChange}
-                    //onChangeRowsPerPage={handlePerRowsChange}
+                    onChangePage={handlePageChange}
+                    onChangeRowsPerPage={handlePerRowsChange}
                 />
             </CardBody>
         </Fragment>
