@@ -55,7 +55,7 @@ export const HomeCashBalanceChartOptions = (series, labels) => {
           type: 'bar',
           height: 500
         },
-        colors:['#c3c60a', '#dc07eb', '#f10342'],
+        colors:['#52aa5e', '#dc07eb', '#f10342'],
         plotOptions: {
           bar: {
             horizontal: false,

@@ -57,7 +57,7 @@ import {Users,TrendingUp,UserPlus} from 'react-feather';
 
 					{/* CUSTOMERS WITH DEBTS*/}
 					<Col xs="12" md="4">
-		              <Card className="bg-secondary">
+		              <Card className="bg-danger">
 		                <CardBody className="tag-card">
 		                  <div className="progressbar-widgets">
 		                    <div className="media media-widgets">
@@ -78,7 +78,8 @@ import {Users,TrendingUp,UserPlus} from 'react-feather';
 
 		                      </div>
 		                      	<span className="badge flat-badge-light font-secondary">
-		                      		25<i className="fa fa-caret-up"></i>
+		                      		<i className="font-primary">25</i>
+		                      		<i className="fa fa-caret-up font-primary"></i>
 		                      	</span>
 		                    </div>
 
@@ -93,7 +94,7 @@ import {Users,TrendingUp,UserPlus} from 'react-feather';
 		                      </div>
 		                    	</div>
 		                    */}
-	                    	<span className="tag-content-secondary tag-hover-effect tag-light">
+	                    	<span className="tag-content-light tag-hover-effect tag-light">
 	                    		<TrendingUp />
 	                    	</span>
 		                  </div>
