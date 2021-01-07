@@ -1,15 +1,14 @@
- import configDB from '../../data/customizer/config';
 
-const primary = localStorage.getItem('primary_color') || configDB.data.color.primary_color;
+// const primary = localStorage.getItem('primary_color') || configDB.data.color.primary_color;
 
 
 // EXTRACTS DATA FOR PARTICULAR FILEDS FROM THE PULLED API RESOURCES
 export const ChartExtractor = (period) => {
-  var totalSales = []
-  var productSold = []
-  var debt = []
+  const totalSales = []
+    const productSold = [];
+    const debt = [];
 
-  for(let index = 0;index < period.series.length;index++){
+    for(let index = 0;index < period.series.length;index++){
      totalSales.push(parseFloat(period.series[index].sales_total))
      productSold.push(period.series[index].product_sold)
      debt.push(parseFloat(period.series[index].debt))

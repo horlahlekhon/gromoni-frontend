@@ -12,7 +12,7 @@ export class GrowthAPI {
         this.business = business
         this.api = axios.create({
             baseURL: 'https://growthapi-staging.herokuapp.com/api/v1',
-            timeout: 5000,
+            timeout: 10000,
             [token ? 'headers' : '']: token ? {Authorization: `Bearer ${token}`} : '',
             validateStatus: function () {
                 return true;
@@ -41,7 +41,6 @@ export class GrowthAPI {
 
     _handleAxiosError(error) {
         if (error.isAxiosError) {
-            console.log("axios error", error)
             return {success: false, payload: [{message: "An unexpected error occur kindly reload the page"}]}
         } else {
             return {success: false, payload: [error.message]}

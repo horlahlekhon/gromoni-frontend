@@ -243,7 +243,6 @@ const SalesTable = (props) => {
     }
     return (
         <Fragment>
-            {console.log("api err", apiError)}
             <ToastContainer/>
             {/*{apiError ? apiError.foreach(e => toast.error(e.message)) : ''}*/}
             <CardBody>
