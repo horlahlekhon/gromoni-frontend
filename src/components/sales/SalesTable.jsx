@@ -24,7 +24,7 @@ const Header = ({search, filter, business}) => {
     }
     const handleDatePickerChange = (startDatePicked, endDatePicked) => {
         setStartDate(startDatePicked)
-        setEndDate(endDatePicked)
+        setEndDate(endDatePicked) 
         if (startDatePicked !== null) {
             filter({startDate: startDatePicked, endDate: endDatePicked})
         } else {

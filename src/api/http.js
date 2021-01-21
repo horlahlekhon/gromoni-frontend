@@ -124,4 +124,13 @@ export class GrowthAPI {
         })
     }
 
+
+    async getCustomerQueryData({pageSize, page}, errorHandler) {
+        return await this._makeRequest({
+            url: `/business/${this.business}/customers/?page_size=${pageSize ? pageSize : 10}&page=${page ? page : 1}`,
+            method: "GET",
+            errorHandler: errorHandler
+        })
+    }
+
 }

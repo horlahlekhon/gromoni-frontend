@@ -5,24 +5,27 @@ import {useCookies} from "react-cookie";
 import differenceBy from 'lodash/differenceBy';
 import { toast } from 'react-toastify';
 
-import {paging,handleSearch,filter} from './CustomersUtility'
+import {parseData,paging,handleSearch,handleRowSelected,handlePerRowsChange,handlePageChange}
+    from './CustomersUtility';
 import DataTable from 'react-data-table-component';
 import CustomersListQuery from './CustomersListQuery'
-//import CustomersUtility from './CustomersUtility'
+
 
 const CustomersList = (props) => {
 
     const currentBusiness = localStorage.getItem("__grm__act__biz__");
 	const [toggleCleared,setToggleCleared] = useState(false);
     const [selectedRows, setSelectedRows] = useState([]);
-    const [data, setData] = useState([]) //(parseData(props.data.results));
-    //const [, setLoading] = useState(false); // would be used for handling errors in table
-    const [totalRows, setTotalRows] = useState(10) //(props.data.totalRow);
-    //const [apiError, setApiError] = useState(undefined)
+    const [data, setData] = useState(props.data);
+    const [, setLoading] = useState(false);
+    const [totalRows, setTotalRows] = useState(10);
+    const [apiError, setApiError] = useState(undefined)
     const [perPage,] = useState(10);
     const [cookies,] = useCookies(["accessToken"])
+    const accessToken = cookies.accessToken
     const [searchResult,] = useState([])
-    const initialResults = "good" //parseData(props.data.results)
+    const initialResults = props.data.customers
+    //const [data, setData] = useState(tableData);
 
 	const tableColumns = [
         {
@@ -38,26 +41,14 @@ const CustomersList = (props) => {
             center: true,
         },
         {
-            name: 'Status',
-            selector: 'status',
-            sortable: true,
-            center: true,
-        },
-        {
-            name: 'Transactions',
-            selector: 'transactions',
-            sortable: true,
-            center: true,
-        },
-         {
-            name: 'Date of Last Trans',
-            selector: 'last_trans',
+            name: 'phone',
+            selector: 'phone',
             sortable: true,
             center: true,
         },
         {
             name: 'Amount Owed',
-            selector: 'discount',
+            selector: 'amount_owed',
             sortable: true,
             center: true,
         },
@@ -67,38 +58,14 @@ const CustomersList = (props) => {
             sortable: true,
             center: true,
         },
+        {
+            name: 'Location',
+            selector: 'Country',
+            sortable: true,
+            center: true,
+        }
     ]
 
-
-     const paging = {persistSelectedOnPageChange: false, persistSelectedOnSort: false}
-
-        // TODO this is not done yet, should be changed to use api search endpoint which is presumable yet to be created.*sigh*
-     const handleSearch = (searchKey) => {
-            const res = typeof searchKey !== 'string' || !searchKey ? searchResult : initialResults.filter(e => e.name.toLowerCase().includes(searchKey.toLocaleLowerCase()))
-            setData(res)
-    }
-
-     const filter = (filters) => {
-            // handle filtering the data by date
-            const startDate = filters.startDate
-            const endDate = filters.endDate ? filters.endDate : new Date()
-            const result = startDate === null ? initialResults : initialResults.filter(e => e.date >= startDate && e.date <= endDate)
-            setData(result)
-    }
-
-    const handlePageChange = (page) => {
-        // fetchData(page, currentBusiness, accessToken, perPage)
-
-        return {}
-    }
-    const handlePerRowsChange = async (newPerPage, page) => {
-        // await fetchData(page, currentBusiness, accessToken, newPerPage)
-        return {}
-    }
-
-    const handleRowSelected = useCallback(state => {
-      setSelectedRows(state.selectedRows);
-    }, []);
     const contextActions = useMemo(() => {
       const handleDelete = () => {
         
@@ -110,7 +77,7 @@ const CustomersList = (props) => {
       };
   
       return (
-            <div>
+            <div className="m-t-2">
                 <button key='reminder'className="btn btn-info m-r-10">
                     <span className="m-r-5">
                         <i className="fa fa-send"></i>
@@ -129,24 +96,23 @@ const CustomersList = (props) => {
             <CardBody>
                <CustomersListQuery
                     search={e => handleSearch(e)}
-                    filter={e => filter(e)}
                     business={currentBusiness}
                 />
                 <DataTable
-                   // data={data}
+                    data={data}
                     columns={tableColumns}
                     striped={true}
                     center={true}
-                    fixedHeader={true}
+                    //fixedHeader={true}
                     highlightOnHover={true}
                     selectableRows
                     persistTableHead
                     pagination
                     paginationServer
-                    noHeader
+                    //noHeader
                     selectsRange
                     contextActions={contextActions}
-                    onSelectedRowsChange={handleRowSelected}
+                    onSelectedRowsChange={contextActions}
                     clearSelectedRows={toggleCleared}
                     paginationServerOptions={paging}
                     paginationTotalRows={totalRows}
