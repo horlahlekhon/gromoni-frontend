@@ -79,7 +79,6 @@ const SalesPage = () => {
                 })
 
             } else {
-                console.log("errrrs:", response.payload)
                 setLoading(false)
                 setApiError(response.payload ? response.payload : [])
             }
