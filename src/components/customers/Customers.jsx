@@ -11,7 +11,7 @@ import {parseData} from './CustomersUtility'
 
 const Customers = () => {
 	const currentBusiness = localStorage.getItem("__grm__act__biz__");
-    const history = useHistory();
+    //const history = useHistory();
     const [cookie,] = useCookies(["accessToken"]);
     const token = cookie.accessToken;
     const [data, setData] = useState();
@@ -25,7 +25,7 @@ const Customers = () => {
             const perPage = 10
             setLoading(true)
             const response = await api
-                .allSales({pageSize: perPage, page: 1})
+                .getCustomerQueryData({pageSize: perPage, page: 1})
                 .catch((error) => {
                     setLoading(false)
                     setApiError(error.payload)
@@ -34,7 +34,7 @@ const Customers = () => {
                 if (response.statusCode === 200 ||201) {
                     setData(
                     	{
-                    		customers: parseData(response.payload.results),
+                    		customers: response.payload.results,
                     		totalRows: response.payload.count
                     	}
 
@@ -55,7 +55,7 @@ const Customers = () => {
 	return (
 		<Fragment>
 			<CustomerStats />
-			<CustomersList data={data}/>
+			<CustomersList data={data} />
 		</Fragment>
 	)
 }

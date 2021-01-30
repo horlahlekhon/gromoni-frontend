@@ -5,10 +5,11 @@ import {useCookies} from "react-cookie";
 import differenceBy from 'lodash/differenceBy';
 import { toast } from 'react-toastify';
 
-import {parseData,paging,handleSearch,handleRowSelected,handlePerRowsChange,handlePageChange}
-    from './CustomersUtility';
+//import {parseData,paging,handleRowSelected,handlePerRowsChange,handlePageChange}
+   // from './CustomersUtility';
 import DataTable from 'react-data-table-component';
 import CustomersListQuery from './CustomersListQuery'
+import {GrowthAPI} from "../../api/http";
 
 
 const CustomersList = (props) => {
@@ -16,9 +17,9 @@ const CustomersList = (props) => {
     const currentBusiness = localStorage.getItem("__grm__act__biz__");
 	const [toggleCleared,setToggleCleared] = useState(false);
     const [selectedRows, setSelectedRows] = useState([]);
-    const [data, setData] = useState(props.data);
+    const [data, setData] = useState(props.data.customers);
     const [, setLoading] = useState(false);
-    const [totalRows, setTotalRows] = useState(10);
+    const [totalRows, setTotalRows] = useState(props.data.totalRows);
     const [apiError, setApiError] = useState(undefined)
     const [perPage,] = useState(10);
     const [cookies,] = useCookies(["accessToken"])
@@ -29,7 +30,7 @@ const CustomersList = (props) => {
 
 	const tableColumns = [
         {
-            name: 'Customer aNme',
+            name: 'Customer Name',
             selector: 'name',
             sortable: true,
             center: true,
@@ -37,13 +38,13 @@ const CustomersList = (props) => {
         {
             name: 'Email',
             selector: 'email',
-            sortable: true,
+            sortable: false,
             center: true,
         },
         {
-            name: 'phone',
+            name: 'Phone',
             selector: 'phone',
-            sortable: true,
+            sortable: false,
             center: true,
         },
         {
@@ -53,8 +54,8 @@ const CustomersList = (props) => {
             center: true,
         },
         {
-            name: 'Total Spending',
-            selector: 'Total_spending',
+            name: 'Spendings',
+            selector: 'Total_spent',
             sortable: true,
             center: true,
         },
@@ -65,6 +66,53 @@ const CustomersList = (props) => {
             center: true,
         }
     ]
+
+     // eslint-disable-next-line
+     async function getQueriedData(page, currentBusiness, token, perPage) {
+        setLoading(true)
+        const api = new GrowthAPI(accessToken, currentBusiness)
+        const response = await api
+            .getCustomerQueryData({pageSize: perPage, page})
+            .catch((error) => {
+                setLoading(false)
+                setApiError(error.payload)
+            })
+        if (!apiError) {
+            if (response.statusCode === 200) {
+                setData(response.payload.results)
+                setTotalRows(response.payload.count)
+                setLoading(false)
+            } else {
+                const error = response.payload
+                setApiError(error)
+                error.forEach(e => toast.error(e.message))
+            }
+        } else {
+            apiError.forEach(e => toast.error(e.message))
+        }
+    }
+    
+
+
+    const paging = {persistSelectedOnPageChange: false, persistSelectedOnSort: false}
+
+    const handlePageChange = (page) => {
+        getQueriedData(page, currentBusiness, accessToken, perPage)
+    }
+
+    const handlePerRowsChange = async (newPerPage, page) => {
+        await getQueriedData(page, currentBusiness, accessToken, newPerPage)
+    }
+
+    const handleRowSelected = useCallback(state => {
+      setSelectedRows(state.selectedRows);
+    }, []);
+
+
+    const handleSearch = (searchKey,initialResults) => {
+         const res = typeof searchKey !== 'string' || !searchKey ? searchResult : initialResults.filter(e => e.name.toLowerCase().includes(searchKey.toLocaleLowerCase()))
+         setData(res)
+    }
 
     const contextActions = useMemo(() => {
       const handleDelete = () => {
